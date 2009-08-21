@@ -23,14 +23,14 @@ use constant UA_ROBOT       => ++$OID; # Is this a robot?
 use constant UA_WAP         => ++$OID; # unimplemented
 use constant UA_MOBILE      => ++$OID; # unimplemented
 use constant UA_PARSER      => ++$OID; # the parser name
+use constant UA_DEVICE      => ++$OID; # the name of the mobile device
 use constant MAXID          =>   $OID;
 
 use constant RE_FIREFOX_NAMES => qr{Firefox|Iceweasel|Firebird|Phoenix}xms;
 
-use overload
-    '""',    => 'name',
-    '0+',    => 'version',
-    fallback => 1,
+use overload '""',    => 'name',
+             '0+',    => 'version',
+             fallback => 1,
 ;
 use version;
 use Carp qw( croak );
@@ -61,6 +61,7 @@ BEGIN {
                         UA_WAP
                         UA_MOBILE
                         UA_PARSER
+                        UA_DEVICE
                         MAXID
                     )],
 );
@@ -392,7 +393,7 @@ sub _parse_safari {
     my $self = shift;
     my($moz, $thing, $extra, @others) = @_;
     $self->[UA_NAME]         = 'Safari';
-    my($version, undef)      = split m{\s+}xms, pop @others;
+    my($version, @junk)      = split m{\s+}xms, pop @others;
     (undef, $version)        = split m{/}xms, $version;
     $self->[UA_NAME]         = 'Safari';
     $self->[UA_VERSION_RAW]  = $version;
@@ -401,11 +402,16 @@ sub _parse_safari {
     $self->[UA_OS]           = length $thing->[-1] > 1 ? pop @{ $thing }
                                                        : shift @{$thing}
                              ;
+    $self->[UA_DEVICE]       = shift @{$thing} if $thing->[0] eq 'iPhone';
     $self->[UA_EXTRAS]       = [ @{$thing}, @others ];
+
     if ( length($self->[UA_OS]) == 1 ) {
         push @{$self->[UA_EXTRAS]}, $self->[UA_EXTRAS];
         $self->[UA_OS] = undef;
     }
+
+    push @{$self->[UA_EXTRAS]}, @junk if @junk;
+
     return;
 }
 
