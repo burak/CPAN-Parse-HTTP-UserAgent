@@ -1,0 +1,638 @@
+# Some of the below strings are taken from:
+#     HTTP::BrowserDetect
+#     HTML::ParseBrowser
+#     HTTP::DetectUserAgent
+# test suites, others from various web sites and the rest from the logs.
+
+# ------[ Microsoft Internet Explorer
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022; InfoPath.2)
+
+'parser'      => 'msie',
+'os'          => 'Windows XP',
+'extras'      => [ 'InfoPath.2' ],
+'version_raw' => '7.0',
+'version'     => '7.000000',
+'name'        => 'MSIE',
+'dotnet'      => ['1.1.4322','2.0.50727','3.0.04506.30','3.0.04506.648','3.5.21022'],
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Q312461; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Alexa Toolbar)
+
+'parser'      => 'msie',
+'os'          => 'Windows XP',
+'extras'      => ['Q312461','Alexa Toolbar'],
+'version_raw' => '6.0',
+'version'     => '6.000000',
+'name'        => 'MSIE',
+'dotnet'      => ['1.0.3705','1.1.4322'],
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; AOL 9.0; Windows NT 5.1; YComp 5.0.0.0; .NET CLR 1.0.3705)
+
+'parser'      => 'msie',
+'os'          => 'Windows XP',
+'extras'      => ['AOL 9.0','YComp 5.0.0.0'],
+'version_raw' => '6.0',
+'version'     => '6.000000',
+'name'        => 'MSIE',
+'dotnet'      => ['1.0.3705'],
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; AOL 9.0; Windows NT 5.1; .NET CLR 1.0.3705)
+
+'parser'      => 'msie',
+'os'          => 'Windows XP',
+'extras'      => ['AOL 9.0'],
+'version_raw' => '6.0',
+'version'     => '6.000000',
+'name'        => 'MSIE',
+'dotnet'      => ['1.0.3705'],
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; AT&T WNS5.0; AT&T CSM7.0)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.0; Windows NT)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0; T312461; .NET CLR 1.0.3705)
+
+[AGENT]
+
+Mozilla/2.0 (compatible; MSIE 3.01; Windows 95)
+
+[AGENT]
+
+Mozilla/2.0 (compatible; MSIE 3.01; Windows NT)
+
+[AGENT]
+
+Mozilla/2.0 (compatible; MSIE 3.0; AOL 3.0; Windows 95)
+
+[AGENT]
+
+Mozilla/2.0 (compatible; MSIE 4.0; Windows 95)
+
+[AGENT]
+
+Mozilla/3.0 (compatible; MSIE 4.0; Windows 95)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 4.01; Windows 95)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.0b2; Windows NT)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.0; Win32)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.0b1; Windows NT 5.0)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.0; Mac_PowerPC)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Google Wireless Transcoder;)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Tesco; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Media Center PC 4.0; .NET CLR 2.0.50727)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Supplied by Tesco.net; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tesco; .NET CLR 1.1.4322)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Sky Broadband; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506; Tesco)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Supplied by Tesco.net; YPC 3.2.0; SV1; yplus 5.3.04b)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tesco; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Supplied by Tesco.net)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tesco; YPC 3.2.0; .NET CLR 1.1.4322; yplus 5.3.04b)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.21; Mac_PowerPC)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 4.0; .NET CLR 1.0.3705)
+
+[AGENT]
+
+Mozilla/2.0 (compatible; MSIE 3.0; Windows 3.1)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.0.3705; .NET CLR 1.1.4322)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.22; Mac_PowerPC)
+
+
+# ------[ firefox]
+
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; tr; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3
+
+[AGENT]
+
+Mozilla/5.0 (compatible; SnapPreviewBot; en-US; rv:1.8.0.9) Gecko/20061206 Firefox/1.5.0.9
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.12) Gecko/20080129 Iceweasel/2.0.0.12 (Debian-2.0.0.12-1)
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.7) Gecko/20040619 Firefox/0.9
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7) Gecko/20040614 Firefox/0.9
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.8a) Gecko/20040416 Firefox/0.8.0+
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; Linux i686; de-DE; rv:1.6) Gecko/20040207 Firefox/0.8
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.5) Gecko/20031007 Firebird/0.7
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.5a) Gecko/20031002 Mozilla Firebird/0.6.1
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; WinNT4.0; en-US; rv:1.3a) Gecko/20021207 Phoenix/0.5
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.2b) Gecko/20020923 Phoenix/0.1
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.2b) Gecko/20021001 Phoenix/0.2
+
+[AGENT]
+
+
+# ------[ netscape]
+
+
+[AGENT]
+
+Mozilla/2.02Gold (WinNT; I)
+
+[AGENT]
+
+Mozilla/4.79 [en] (Win95; U)
+
+[AGENT]
+
+Mozilla/4.8 (Macintosh; U; PPC)
+
+[AGENT]
+
+Mozilla/4.08 [en] (WinNT; I ;Nav)
+
+[AGENT]
+
+Mozilla/4.8 (Macintosh; U; PPC)
+
+[AGENT]
+
+Mozilla/4.79 [en] (X11; U; Linux 2.4.18-4GB i686)
+
+[AGENT]
+
+Mozilla/4.79 [en]C-CCK-MCD {SillyDog} (Windows NT 5.0; U)
+
+[AGENT]
+
+Mozilla/1.1 (Windows 3.0; I)
+
+[AGENT]
+
+Mozilla/1.1 (Windows 3.1; I)
+
+[AGENT]
+
+Mozilla/2.0 (Win95; I)
+
+[AGENT]
+
+Mozilla/3.0 (Macintosh; I; PPC)
+
+[AGENT]
+
+Mozilla/4.06 [en] (Win98; I ;Nav)
+
+[AGENT]
+
+Mozilla/4.5 [en] (X11; I; FreeBSD 2.2.7-RELEASE i386)
+
+[AGENT]
+
+Mozilla/3.03Gold (Win95; I)
+
+[AGENT]
+
+Mozilla/9.876 (X11; U; Linux 2.2.12-20 i686, en) Gecko/25250101 Netscape/5.432b1 (C-MindSpring)
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0 (CK-SillyDog)
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:0.9.4) Gecko/20011128 Netscape6/6.2.1 (CK-SillyDog)
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.2) Gecko/20030208 Netscape/7.02
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.2) Gecko/20010726 Netscape6/6.1
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:0.9.4.1) Gecko/20020508 Netscape6/6.2.3
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; U; PPC; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0
+
+# ------[ mozilla]
+
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.1) Gecko/20020909
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.2a) Gecko/20020910
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.1) Gecko/20020826
+# is this mozilla?
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; Linux i686; en-US; SkipStone 0.8.3) Gecko/20020913
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; Linux 2.4.3-20mdk i586; en-US; rv:0.9.1) Gecko/20010611
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; WinNT4.0; en-US; rv:1.2a) Gecko/20020910
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; WinNT4.0; en-US; rv:1.0.1) Gecko/20020826
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Win95; en-US; rv:1.1b) Gecko/20020721
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; WinNT; en; Stable) Gecko/20020911 Beonex/0.8.1-stable
+
+[AGENT]
+
+Mozilla/5.001 (windows; U; NT4.0; en-us) Gecko/25250101
+
+# ------[ seamonkey]
+# just the mozilla suite
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1b1pre) Gecko/20080915000512 SeaMonkey/2.0a1pre
+
+# ------[ opera]
+
+# edge case
+#Mozilla/4.0 (compatible; Opera/3.0; Windows 4.10) 3.50
+
+[AGENT]
+
+Opera/9.62 (Windows NT 5.1; U; tr) Presto/2.1.1
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; X11; Linux i686) Opera 7.21 [pl]
+
+[AGENT]
+
+Mozilla/5.0 (Windows 98; U) Opera 6.0 [en]
+
+[AGENT]
+
+Opera/v5.12 (EPOC; U) [en]
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.0; Windows XP) Opera 6.05 [en]
+
+[AGENT]
+
+Mozilla/5.0 (Windows NT 6.0; U; en; rv:1.8.1) Gecko/20061208 Firefox/2.0.0 Opera 9.51
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; en) Opera 9.51
+
+[AGENT]
+
+Mozilla/4.78 (Windows XP; U) Opera 6.05 [en]
+
+[AGENT]
+
+Mozilla/5.0 (Windows XP; U) Opera 6.05 [en]
+
+[AGENT]
+
+Opera/6.05 (Windows XP; U) [en]
+
+[AGENT]
+
+Opera/6.03 (Linux 2.4.18-4GB i686; U) [en]
+
+# ------[ safari]
+
+# this is a mobile agent
+
+[AGENT]
+
+Mozilla/5.0 (SymbianOS/9.1; U; en-us) AppleWebKit/413 (KHTML, like Gecko) Safari/413 UP.Link/6.3.1.15.0
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.27.1 (KHTML, like Gecko) Version/3.2.1 Safari/525.27.1
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124 (KHTML, like Gecko) Safari/125.1
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/106.2 (KHTML, like Gecko) Safari/100.1
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/74 (KHTML, like Gecko) Safari/74
+
+[AGENT]
+
+
+Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3
+
+# ------[ chrome]
+
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13
+
+# ------[ tinybrowser]
+
+
+[AGENT]
+
+TinyBrowser/2.0 (TinyBrowser Comment) Gecko/20201231
+
+[AGENT]
+
+TinyBrowser/2.0 (TinyBrowser Comment) Gecko/20201231
+
+# ------[ camino]
+
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.7.2) Gecko/20040825 Camino/0.8.1
+
+# ------[ robot]
+
+
+[AGENT]
+
+Wget/1.4.5
+
+[AGENT]
+
+libwww-perl/5.11
+
+[AGENT]
+
+GetRight/3.2.1
+
+[AGENT]
+
+Googlebot/1.0 (googlebot@googlebot.com http://googlebot.com/)
+
+
+# ------[ sleipnir]
+
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.1) Sleipnir/2.8.0
+
+
+# ------[ lunascape]
+
+[AGENT]
+
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; Lunascape 4.7.3)
+
+
+
+
+
+
+
+
+
+# ------[ various]
+
+
+[AGENT]
+
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.14eol) Gecko/20070505 (Debian-1.8.0.15~pre080323b-0etch2) Epiphany/2.14
+
+[AGENT]
+
+Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)
+
+
+
+# konqueror
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Konqueror/3; Linux 2.4.18-4GB; X11; i686; en_US)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Konqueror/3; Linux)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Konqueror/2.2.2; Linux 2.4.18; X11; i686; en) LindowsOS (Lindows.com, Inc.)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Konqueror/3; Darwin)
+
+[AGENT]
+
+Konqueror/1.1.2
+
+[AGENT]
+
+
+Lynx/2.8.4rel.1 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.6c
+
+[AGENT]
+
+Links (0.96; Unix)
+
+[AGENT]
+
+Lynx/2.8.3rel.1 libwww-FM/2.14
+
+[AGENT]
+
+
+# HotJava
+Mozilla/3.0 (x86 [en] Windows NT 5.1; Sun)
+
+
+[AGENT]
+
+fetch/1.0 FreeBSD/4.0-CURRENT (i386)
+
+[AGENT]
+
+BlackBerry7730/3.7.1 UP.Link/5.1.2.5
+
+[AGENT]
+
+
+# name/version
+
+UP.Browser/4.1.2a-XXXX
+
+[AGENT]
+
+Wapalizer/1.0
+
+[AGENT]
+
+YourWap/1.16
+
+[AGENT]
+
+Nokia-WAP-Toolkit/1.3beta
+
+[AGENT]
+
+
+# name/version (foo)
+
+
+[AGENT]
+
+Emacs-W3/2.1.105 URL/1.267 ((Unix?) ; TTY ; sparc-sun-solaris2.3)
+
+[AGENT]
+
+AmigaVoyager/3.3.50 (AmigaOS/PPC)
+
+[AGENT]
+
+AmigaVoyager (compatible; AmigaVoyager; AmigaOS)
+
+[AGENT]
+
+AvantGo 3.2 (compatible; AvantGo 3.2)
+
+[AGENT]
+
+Nokia7110/1.0 (30.05)
+
+[AGENT]
+
+iCab/Pre2.0 (Macintosh; I; PPC)
