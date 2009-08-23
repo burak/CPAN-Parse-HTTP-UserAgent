@@ -27,7 +27,7 @@ foreach my $test ( split RE_SEPTOR, $tests ) {
     my $parsed = Parse::HTTP::UserAgent->new( $string );
     my %got    = $parsed->as_hash;
     if ( ! $frozen ) {
-       die "No data? Expected something matches with these:\n$string\n\n"
+       die "No data in the test result set? Expected something matches with these:\n$string\n\n"
            . do { delete $got{string}; Dumper(\%got) };
     }
     my %expected = thaw( $frozen );
