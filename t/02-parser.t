@@ -27,14 +27,16 @@ foreach my $test ( split RE_SEPTOR, $tests ) {
     my $parsed = Parse::HTTP::UserAgent->new( $string );
     my %got    = $parsed->as_hash;
     if ( ! $frozen ) {
-       die "No data in the test result set? Expected something matches with these:\n$string\n\n"
-           . do { delete $got{string}; Dumper(\%got) };
+       die "No data in the test result set? Expected something matches "
+          ."with these:\n$string\n\n"
+          . do { delete $got{string}; Dumper(\%got) };
     }
     my %expected = thaw( $frozen );
-    is( delete $got{string}, $string, 'Ok got the string back for ' . $got{name} );
+    is( delete $got{string}, $string, "Ok got the string back for $got{name}" );
     # remove undefs, so that we can extend the test data with less headache
     %got = map { $_ => $got{ $_ } } grep { defined $got{$_} } keys %got;
-    is_deeply( \%got, \%expected, 'Frozen data matches parse result for ' . $got{name} );
+    is_deeply( \%got, \%expected,
+               "Frozen data matches parse result for $got{name}" );
 }
 
 sub thaw {
