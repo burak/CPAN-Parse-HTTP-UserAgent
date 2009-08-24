@@ -1644,6 +1644,7 @@ Nokia7110/1.0 (30.05)
 [AGENT]
 
 iCab/Pre2.0 (Macintosh; I; PPC)
+
 'parser'      => 'generic_moz_thing',
 'strength'    => 'I',
 'os'          => 'Macintosh',
