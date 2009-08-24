@@ -1334,6 +1334,29 @@ Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.7.2) Gecko/20040825 
 
 # ------[ ROBOT
 
+[AGENT]
+# googlebot
+#TODO: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+
+[AGENT]
+# googlebot mobile
+#TODO: DoCoMo/1.0/N505i/c20/TB/W20H10 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)
+
+[AGENT]
+# Yahoo! Slurp
+#TODO: Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
+
+[AGENT]
+# Baiduspider
+#TODO: Baiduspider+(+http://help.baidu.jp/system/05.html)
+
+[AGENT]
+# msnbot
+#TODO: msnbot/1.1 (+http://search.msn.com/msnbot.htm)
+
+[AGENT]
+# Twiceler
+#TODO: Mozilla/5.0 (Twiceler-0.9 http://www.cuill.com/twiceler/robot.html)
 
 [AGENT]
 
