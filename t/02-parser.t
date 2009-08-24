@@ -18,12 +18,22 @@ GetOptions(\my %opt, qw(
 use Parse::HTTP::UserAgent -all;
 
 my $tests = trim( slurp() );
+my %seen;
+my @todo;
+
+END {
+    if ( @todo ) {
+        diag "Tests marked as TODO are listed below";
+        diag "'$_'" for @todo;
+    }
+}
 
 foreach my $test ( split RE_SEPTOR, $tests ) {
     next if ! $test;
     my $raw = trim( strip_comments( $test ) ) || next;
     my($string, $frozen) = split m{ \n }xms, $raw, 2;
     die "No string?" if ! $string;
+    die "Already tested '$string'!" if $seen{ $string }++;
     my $parsed = Parse::HTTP::UserAgent->new( $string );
     my %got    = $parsed->as_hash;
     if ( ! $frozen ) {
@@ -36,7 +46,7 @@ foreach my $test ( split RE_SEPTOR, $tests ) {
     # remove undefs, so that we can extend the test data with less headache
     %got = map { $_ => $got{ $_ } } grep { defined $got{$_} } keys %got;
     is_deeply( \%got, \%expected,
-               "Frozen data matches parse result for $got{name}" );
+               "Frozen data matches parse result for '$string' -> $got{parser}" );
 }
 
 sub thaw {
@@ -62,7 +72,12 @@ sub strip_comments {
     foreach my $line ( split m{ \n }xms, $s ) {
         chomp $line;
         next if ! $line;
-        next if $line =~ m{ \A [#] }xms;
+        if ( my @m = $line =~ m{ \A [#] (.+?) \z }xms ) {
+            if ( my @n = $m[0] =~ m{ \A TODO: \s? (.+?) \z }xms ) {
+                push @todo, $n[0];
+            }
+            next;
+        }
         $buf .= $line . "\n";
     }
     return $buf;

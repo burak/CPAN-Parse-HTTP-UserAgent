@@ -24,6 +24,7 @@ use constant UA_WAP         => ++$OID; # unimplemented
 use constant UA_MOBILE      => ++$OID; # unimplemented
 use constant UA_PARSER      => ++$OID; # the parser name
 use constant UA_DEVICE      => ++$OID; # the name of the mobile device
+use constant UA_ORIGINAL_NAME => ++$OID; # the name of the mobile device
 use constant MAXID          =>   $OID;
 
 use constant RE_FIREFOX_NAMES => qr{Firefox|Iceweasel|Firebird|Phoenix}xms;
@@ -62,6 +63,7 @@ BEGIN {
                         UA_MOBILE
                         UA_PARSER
                         UA_DEVICE
+                        UA_ORIGINAL_NAME
                         MAXID
                     )],
 );
@@ -70,6 +72,9 @@ BEGIN {
 
 my %OSFIX = (
     'WinNT4.0'       => 'Windows NT 4.0',
+    'WinNT'          => 'Windows NT',
+    'Win95'          => 'Windows 95',
+    'Win98'          => 'Windows 98',
     'Windows NT 5.0' => 'Windows 2000',
     'Windows NT 5.1' => 'Windows XP',
     'Windows NT 5.2' => 'Windows Server 2003',
@@ -156,6 +161,15 @@ sub dotnet {
     return @{ $self->[UA_DOTNET] };
 }
 
+sub trim {
+    my $self = shift;
+    my $s    = shift;
+    return $s if ! $s;
+    $s =~ s{ \A \s+    }{}xms;
+    $s =~ s{    \s+ \z }{}xms;
+    return $s;
+}
+
 sub _extend {
     my $class = shift;
     (my $mod  = shift) =~ tr/-//d;
@@ -170,7 +184,8 @@ sub _extend {
 sub _is_strength {
     my $self = shift;
     my $s    = shift || return;
-    return $s eq 'U' || $s eq 'I' || $s eq 'N';
+       $s    = $self->trim( $s );
+    return $s if $s eq 'U' || $s eq 'I' || $s eq 'N';
 }
 
 sub _numify {
@@ -369,16 +384,19 @@ sub _parse_msie {
     # "Microsoft Internet Explorer";
 
     my($extras,$dotnet) = $self->_extract_dotnet( $thing, $extra );
-    my @e = @{$extras};
 
-    if ( @e == 2 && index($e[1],"Lunascape") != -1 ) {
-        ($name, $version) = split m{[/\s]}xms, pop @e;
+    if ( @{$extras} == 2 && index( $extras->[1], 'Lunascape' ) != -1 ) {
+        ($name, $version) = split m{[/\s]}xms, pop @{ $extras };
     }
 
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version;
-    $self->[UA_DOTNET] = [ @{$dotnet} ] if @{$dotnet};
-    $self->[UA_EXTRAS] = [ @e ];
+    $self->[UA_DOTNET]      = [ @{ $dotnet } ] if @{$dotnet};
+    $self->[UA_EXTRAS]      = [ @{ $extras } ];
+    my $e = $self->[UA_EXTRAS];
+    if ( $e->[0] && $e->[0] eq 'Mac_PowerPC' ) {
+        $self->[UA_OS] = shift @{ $self->[UA_EXTRAS] };
+    }
     return;
 }
 

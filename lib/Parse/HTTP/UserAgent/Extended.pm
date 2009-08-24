@@ -62,50 +62,70 @@ sub _is_netscape {
 sub _parse_gecko {
     my $self = shift;
     my($moz, $thing, $extra, @others) = @_;
-        $self->_parse_mozilla_family($moz, $thing, $extra, @others);
-        # we got some name & version
-        if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
-            # Change SeaMonkey too?
-            warn "DDDDDD:" . $self->[UA_NAME] . "\n";
-            $self->[UA_NAME]   = 'Netscape' if $self->[UA_NAME] eq 'Netscape6';
-            $self->[UA_NAME]   = 'Mozilla'  if $self->[UA_NAME] eq 'Beonex';
-            $self->[UA_PARSER] = 'mozilla_family -> generic';
-            return 1 ;
-        }
-        if ( $self->[UA_TK] && $self->[UA_TK][0] eq 'Gecko' ) {
-            ($self->[UA_NAME], $self->[UA_VERSION_RAW]) = split m{/}xms, $moz;
-            if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
-                $self->[UA_PARSER] = 'mozilla_family -> gecko';
-                return 1;
-            }
-        }
-    return;
-}
-
-sub _parse_netscape {
-    my $self = shift;
-    my($moz, $thing) = @_;
-
-        my($mozx, $junk)     = split m{ \s+ }xms, $moz;
-        my(undef, $version) = split m{ /   }xms, $mozx;
+    $self->_parse_mozilla_family($moz, $thing, $extra, @others);
+    # we got some name & version
+    if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
+        # Change SeaMonkey too?
+        my $before = $self->[UA_NAME];
+        $self->[UA_NAME]   = 'Netscape' if $self->[UA_NAME] eq 'Netscape6';
+        $self->[UA_NAME]   = 'Mozilla'  if $self->[UA_NAME] eq 'Beonex';
+        $self->[UA_PARSER] = 'mozilla_family:generic';
         my @buf;
-        foreach my $e ( @{ $thing } ) {
-            if ( $self->_is_strength($e) ) {
-                $self->[UA_STRENGTH] = $e;
+        foreach my $e ( @{ $self->[UA_EXTRAS] } ) {
+            next if ! $e;
+            if ( my $s = $self->_is_strength($e) ) {
+                $self->[UA_STRENGTH] = $s;
+                next;
+            }
+            if ( $e =~ m{ \s i\d86 }xms ) {
+                my($os,$lang) = split m{[,]}xms, $e;
+                $self->[UA_OS]   = $os   if $os;
+                $self->[UA_LANG] = $self->trim($lang) if $lang;
+                next;
+            }
+            if ( $e =~ m{ \A [a-z]{2} \z }xms ) {
+                $self->[UA_LANG] = $e;
                 next;
             }
             push @buf, $e;
         }
-        $self->[UA_VERSION_RAW] = $version;
-        $self->[UA_OS]   = shift @buf;
-        $self->[UA_NAME] = 'Netscape';
-        if ( $junk ) {
-            $junk =~ s{ \[ (.+?) \] .* \z}{$1}xms;
-            $self->[UA_LANG] = $junk if $junk;
+        $self->[UA_EXTRAS] = [ @buf ];
+        $self->[UA_ORIGINAL_NAME] = $before if $before ne $self->[UA_NAME];
+        return 1 ;
+    }
+    if ( $self->[UA_TK] && $self->[UA_TK][0] eq 'Gecko' ) {
+        ($self->[UA_NAME], $self->[UA_VERSION_RAW]) = split m{/}xms, $moz;
+        if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
+            $self->[UA_PARSER] = 'mozilla_family:gecko';
+            return 1;
         }
-        $self->[UA_PARSER] = 'netscape';
-        return 1;
+    }
+    return;
+}
 
+sub _parse_netscape {
+    my $self            = shift;
+    my($moz, $thing)    = @_;
+    my($mozx, $junk)    = split m{ \s+ }xms, $moz;
+    my(undef, $version) = split m{ /   }xms, $mozx;
+    my @buf;
+    foreach my $e ( @{ $thing } ) {
+        if ( my $s = $self->_is_strength($e) ) {
+            $self->[UA_STRENGTH] = $s;
+            next;
+        }
+        push @buf, $e;
+    }
+    $self->[UA_VERSION_RAW] = $version;
+    $self->[UA_OS]          = $buf[0] eq 'X11' ? pop @buf : shift @buf;
+    $self->[UA_NAME]        = 'Netscape';
+    $self->[UA_EXTRAS]      = [ @buf ];
+    if ( $junk ) {
+        $junk =~ s{ \[ (.+?) \] .* \z}{$1}xms;
+        $self->[UA_LANG] = $junk if $junk;
+    }
+    $self->[UA_PARSER] = 'netscape';
+    return 1;
 }
 
 sub _generic_moz_thing {
