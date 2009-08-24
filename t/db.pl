@@ -1,4 +1,5 @@
 use strict;
+use vars qw( $SILENT );
 use IO::File;
 use File::Spec;
 use constant DATABASE  => File::Spec->catfile(qw( t data parse.dat ));
@@ -8,7 +9,7 @@ use Test::More;
 my @todo;
 
 END {
-    if ( @todo ) {
+    if ( @todo && ! $SILENT ) {
         diag( "Tests marked as TODO are listed below" );
         diag("'$_'") for @todo;
     }

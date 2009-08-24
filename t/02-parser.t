@@ -1,6 +1,6 @@
 #!/usr/bin/env perl -w
 use strict;
-use vars qw( $VERSION );
+use vars qw( $VERSION $SILENT );
 use Test::More qw( no_plan );
 use File::Spec;
 use Data::Dumper;
