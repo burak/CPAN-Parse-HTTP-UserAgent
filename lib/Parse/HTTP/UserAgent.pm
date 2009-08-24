@@ -5,34 +5,38 @@ use vars qw( $VERSION @ISA $OID @EXPORT @EXPORT_OK %EXPORT_TAGS );
 $VERSION = '0.10';
 
 BEGIN { $OID = -1 }
-use constant UA_STRING      => ++$OID; # just for information
-use constant IS_PARSED      => ++$OID; # _parse() happened or not
-use constant UA_UNKNOWN     => ++$OID; # failed to detect?
-use constant UA_GENERIC     => ++$OID; # parsed with a generic parser.
-use constant UA_NAME        => ++$OID; # The identifier of the ua
-use constant UA_VERSION_RAW => ++$OID; # the parsed version
-use constant UA_VERSION     => ++$OID; # used for numerical ops. via qv()
-use constant UA_OS          => ++$OID; # Operating system
-use constant UA_LANG        => ++$OID; # the language of the ua interface
-use constant UA_TK          => ++$OID; # [Opera] ua toolkit
-use constant UA_EXTRAS      => ++$OID; # Extra stuff (Toolbars?). non parsable junk
-use constant UA_DOTNET      => ++$OID; # [MSIE] List of .NET CLR versions
-use constant UA_STRENGTH    => ++$OID; # [MSIE] List of .NET CLR versions
-use constant UA_MOZILLA     => ++$OID; # [Firefox] Mozilla revision
-use constant UA_ROBOT       => ++$OID; # Is this a robot?
-use constant UA_WAP         => ++$OID; # unimplemented
-use constant UA_MOBILE      => ++$OID; # unimplemented
-use constant UA_PARSER      => ++$OID; # the parser name
-use constant UA_DEVICE      => ++$OID; # the name of the mobile device
+use constant UA_STRING        => ++$OID; # just for information
+use constant IS_PARSED        => ++$OID; # _parse() happened or not
+use constant UA_UNKNOWN       => ++$OID; # failed to detect?
+use constant UA_GENERIC       => ++$OID; # parsed with a generic parser.
+use constant UA_NAME          => ++$OID; # The identifier of the ua
+use constant UA_VERSION_RAW   => ++$OID; # the parsed version
+use constant UA_VERSION       => ++$OID; # used for numerical ops. via qv()
+use constant UA_OS            => ++$OID; # Operating system
+use constant UA_LANG          => ++$OID; # the language of the ua interface
+use constant UA_TK            => ++$OID; # [Opera] ua toolkit
+use constant UA_EXTRAS        => ++$OID; # Extra stuff (Toolbars?) non parsable junk
+use constant UA_DOTNET        => ++$OID; # [MSIE] List of .NET CLR versions
+use constant UA_STRENGTH      => ++$OID; # [MSIE] List of .NET CLR versions
+use constant UA_MOZILLA       => ++$OID; # [Firefox] Mozilla revision
+use constant UA_ROBOT         => ++$OID; # Is this a robot?
+use constant UA_WAP           => ++$OID; # unimplemented
+use constant UA_MOBILE        => ++$OID; # unimplemented
+use constant UA_PARSER        => ++$OID; # the parser name
+use constant UA_DEVICE        => ++$OID; # the name of the mobile device
 use constant UA_ORIGINAL_NAME => ++$OID; # the name of the mobile device
-use constant MAXID          =>   $OID;
+use constant MAXID            =>   $OID;
 
 use constant RE_FIREFOX_NAMES => qr{Firefox|Iceweasel|Firebird|Phoenix}xms;
+use constant RE_DOTNET        => qr{ \A [.]NET \s+ CLR \s+ (.+?) \z }xms;
+use constant RE_WINDOWS_OS    => qr{ \A Win(?:dows|NT|[0-9]+)? }xmsi;
+use constant RE_SLASH         => qr{ / }xms;
 
 use overload '""',    => 'name',
              '0+',    => 'version',
              fallback => 1,
 ;
+
 use version;
 use Carp qw( croak );
 use Exporter ();
@@ -43,29 +47,35 @@ BEGIN {
 
 @ISA         = qw( Exporter );
 %EXPORT_TAGS = (
-    object_ids =>   [qw(
-                        IS_PARSED
-                        UA_STRING
-                        UA_UNKNOWN
-                        UA_GENERIC
-                        UA_NAME
-                        UA_VERSION_RAW
-                        UA_VERSION
-                        UA_OS
-                        UA_LANG
-                        UA_TK
-                        UA_EXTRAS
-                        UA_DOTNET
-                        UA_MOZILLA
-                        UA_STRENGTH
-                        UA_ROBOT
-                        UA_WAP
-                        UA_MOBILE
-                        UA_PARSER
-                        UA_DEVICE
-                        UA_ORIGINAL_NAME
-                        MAXID
-                    )],
+    object_ids => [qw(
+        IS_PARSED
+        UA_STRING
+        UA_UNKNOWN
+        UA_GENERIC
+        UA_NAME
+        UA_VERSION_RAW
+        UA_VERSION
+        UA_OS
+        UA_LANG
+        UA_TK
+        UA_EXTRAS
+        UA_DOTNET
+        UA_MOZILLA
+        UA_STRENGTH
+        UA_ROBOT
+        UA_WAP
+        UA_MOBILE
+        UA_PARSER
+        UA_DEVICE
+        UA_ORIGINAL_NAME
+        MAXID
+    )],
+    re => [qw(
+        RE_FIREFOX_NAMES
+        RE_DOTNET
+        RE_WINDOWS_OS
+        RE_SLASH
+    )],
 );
 
 @EXPORT_OK = map { @{ $_ } } values %EXPORT_TAGS;
@@ -82,10 +92,11 @@ my %OSFIX = (
 );
 
 sub import {
-    my $class = shift;
-    my @args;
+    my $class  = shift;
     my %extend = map { $_ => 0 } qw( -dumper -extended ); # -probe
     my $all    = 0;
+    my @args;
+
     foreach my $e ( @_ ) {
         $extend{$e}++, next if exists $extend{ $e };
         $all++       , next if $e eq '-all';
@@ -109,8 +120,6 @@ sub new {
     $self->_parse;
     $self;
 }
-
-sub _object_ids { grep { m{ \A UA_ }xms } @{ $EXPORT_TAGS{object_ids} } }
 
 sub as_hash {
     my $self   = shift;
@@ -168,6 +177,10 @@ sub trim {
     $s =~ s{ \A \s+    }{}xms;
     $s =~ s{    \s+ \z }{}xms;
     return $s;
+}
+
+sub _object_ids {
+    return grep { m{ \A UA_ }xms } @{ $EXPORT_TAGS{object_ids} }
 }
 
 sub _extend {
@@ -231,18 +244,18 @@ sub _parse {
     my $self = shift;
     return $self if $self->[IS_PARSED];
 
-    my $ua   = $self->[UA_STRING];
+    my $ua = $self->[UA_STRING];
     my($moz, $thing, $extra, @others) = split m{\s?[()]\s?}xms, $ua;
-    $thing   = $thing ? [ split m{;\s?}xms, $thing ] : [];
-    $extra   = [ split m{ \s+}xms, $extra ] if $extra;
+    $thing = $thing ? [ split m{;\s?}xms, $thing ] : [];
+    $extra = [ split m{ \s+}xms, $extra ] if $extra;
 
-    $self->_debug_pre_parse($moz, $thing, $extra, @others) if DEBUG;
-
+    $self->_debug_pre_parse( $moz, $thing, $extra, @others ) if DEBUG;
     $self->_do_parse($moz, $thing, $extra, @others);
     $self->[IS_PARSED]  = 1;
+
     return $self if $self->[UA_UNKNOWN];
 
-    $self->[UA_VERSION] = $self->_numify($self->[UA_VERSION_RAW])
+    $self->[UA_VERSION] = $self->_numify( $self->[UA_VERSION_RAW] )
         if $self->[UA_VERSION_RAW];
 
     my @buf;
@@ -255,12 +268,14 @@ sub _parse {
     }
     $self->[UA_EXTRAS] = [ @buf ];
 
-    push @{ $self->[UA_TK] }, $self->_numify($self->[UA_TK][1]) if $self->[UA_TK];
+    if ( $self->[UA_TK] ) {
+        push @{ $self->[UA_TK] }, $self->_numify( $self->[UA_TK][1] );
+    }
 
     if( $self->[UA_MOZILLA] ) {
         $self->[UA_MOZILLA] =~ tr/a-z://d;
         $self->[UA_MOZILLA] = [ $self->[UA_MOZILLA],
-                                $self->_numify($self->[UA_MOZILLA]) ];
+                                $self->_numify( $self->[UA_MOZILLA] ) ];
     }
 
     if ( $self->[UA_OS] ) {
@@ -301,7 +316,7 @@ sub _do_parse {
     return $self->_extended_probe($m, $t, $e, $c, @o)
                 if $self->can('_extended_probe');
 
-    $self->[UA_UNKNOWN] = 1;
+    $self->[UA_UNKNOWN] = 1; # give up
     return;
 }
 
@@ -363,11 +378,11 @@ sub _extract_dotnet {
     my(@extras,@dotnet);
 
     foreach my $e ( @raw ) {
-        if ( my @match = $e =~ m{ \A [.]NET \s+ CLR \s+ (.+?) \z }xms ) {
+        if ( my @match = $e =~ RE_DOTNET ) {
             push @dotnet, $match[0];
             next;
         }
-        if ( $e =~ m{ \A Win(?:dows|NT|[0-9]+)? }xmsi ) {
+        if ( $e =~ RE_WINDOWS_OS ) {
             $self->[UA_OS] = $e;
             next;
         }
@@ -412,10 +427,10 @@ sub _parse_safari {
     my($moz, $thing, $extra, @others) = @_;
     $self->[UA_NAME]         = 'Safari';
     my($version, @junk)      = split m{\s+}xms, pop @others;
-    (undef, $version)        = split m{/}xms, $version;
+    (undef, $version)        = split RE_SLASH, $version;
     $self->[UA_NAME]         = 'Safari';
     $self->[UA_VERSION_RAW]  = $version;
-    $self->[UA_TK]           = [ split m{/}, $extra->[0] ];
+    $self->[UA_TK]           = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_LANG]         = pop @{ $thing };
     $self->[UA_OS]           = length $thing->[-1] > 1 ? pop @{ $thing }
                                                        : shift @{$thing}
@@ -440,7 +455,7 @@ sub _parse_chrome {
     my($chrome, $safari)     = split m{\s}xms, $chx;
     push @others, $safari;
     $self->_parse_safari($moz, $thing, $extra, @others);
-    my($name, $version)      = split m{/}xms, $chrome;
+    my($name, $version)      = split RE_SLASH, $chrome;
     $self->[UA_NAME]         = $name;
     $self->[UA_VERSION_RAW]  = $version;
     return;
@@ -448,18 +463,16 @@ sub _parse_chrome {
 
 sub _parse_opera_pre {
     # opera 5,9
-    my $self                 = shift;
-    my($moz, $thing, $extra) = @_;
-    my($name, $version)      = split m{/}xms, $moz;
-    my $faking_ff = index($thing->[-1], "rv:") != -1 ? pop @{$thing} : 0;
-    $self->[UA_NAME]         = $name;
-    $self->[UA_VERSION_RAW]  = $version;
-   ($self->[UA_LANG]         = pop @{$extra}) =~ tr/[]//d if $extra;
-
-    $self->[UA_LANG]       ||= pop @{$thing} if $faking_ff;
+    my($self, $moz, $thing, $extra) = @_;
+    my($name, $version)     = split RE_SLASH, $moz;
+    my $faking_ff           = index($thing->[-1], "rv:") != -1 ? pop @{$thing} : 0;
+    $self->[UA_NAME]        = $name;
+    $self->[UA_VERSION_RAW] = $version;
+   ($self->[UA_LANG]        = pop @{$extra}) =~ tr/[]//d if $extra;
+    $self->[UA_LANG]      ||= pop @{$thing} if $faking_ff;
 
     if ( qv($version) >= 9 && length($self->[UA_LANG]) > 5 ) {
-        $self->[UA_TK]   = [ split m{/}, $self->[UA_LANG] ];
+        $self->[UA_TK]   = [ split RE_SLASH, $self->[UA_LANG] ];
        ($self->[UA_LANG] = pop @{$thing}) =~ tr/[]//d if $extra;
     }
 
@@ -473,8 +486,7 @@ sub _parse_opera_pre {
 
 sub _parse_opera_post {
     # opera 5,6,7
-    my $self = shift;
-    my($moz, $thing, $extra, $compatible) = @_;
+    my($self, $moz, $thing, $extra, $compatible) = @_;
     shift @{ $thing } if $compatible;
     $self->[UA_NAME]        = shift @{$extra};
     $self->[UA_VERSION_RAW] = shift @{$extra};
@@ -487,20 +499,19 @@ sub _parse_opera_post {
 }
 
 sub _parse_mozilla_family {
-    my $self = shift;
-    my($moz, $thing, $extra, @extras) = @_;
+    my($self, $moz, $thing, $extra, @extras) = @_;
     # firefox variation or just mozilla itself
-    my($name, $version)      = split m{/}xms, defined $extra->[1] ? $extra->[1]
-                             :                                      $moz
+    my($name, $version)      = split RE_SLASH, defined $extra->[1] ? $extra->[1]
+                             :                                       $moz
                              ;
     $self->[UA_NAME]         = $name;
-    $self->[UA_TK]           = [ split m{/}xms, $extra->[0] ];
+    $self->[UA_TK]           = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_VERSION_RAW]  = $version;
 
     if ( index($thing->[-1], 'rv:') != -1 ) {
-        $self->[UA_MOZILLA] = pop @{ $thing };
-        $self->[UA_LANG]    = pop @{ $thing };
-        $self->[UA_OS]      = pop @{ $thing };
+        $self->[UA_MOZILLA]  = pop @{ $thing };
+        $self->[UA_LANG]     = pop @{ $thing };
+        $self->[UA_OS]       = pop @{ $thing };
     }
 
     $self->[UA_EXTRAS] = [ @{ $thing }, @extras ];

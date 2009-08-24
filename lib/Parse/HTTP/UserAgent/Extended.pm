@@ -2,7 +2,7 @@ package Parse::HTTP::UserAgent::Extended;
 use strict;
 use vars qw( $VERSION );
 use Carp qw( croak    );
-use Parse::HTTP::UserAgent qw(:object_ids);
+use Parse::HTTP::UserAgent qw(:object_ids RE_SLASH );
 use constant RE_ROBOTS => qr{
     \A
         (
@@ -22,8 +22,8 @@ sub _extended_probe {
     my $self = shift;
     my($moz, $thing, $extra, $compatible, @others) = @_;
 
-    return if $self->_is_gecko        && $self->_parse_gecko(@_);
-    return if $self->_is_netscape(@_) && $self->_parse_netscape(@_);
+    return if $self->_is_gecko        && $self->_parse_gecko( @_ );
+    return if $self->_is_netscape(@_) && $self->_parse_netscape( @_ );
     return if $self->_is_robot;
     return if $self->_is_generic(@_);
 
@@ -32,13 +32,11 @@ sub _extended_probe {
 }
 
 sub _is_gecko {
-    my $self = shift;
-    return index($self->[UA_STRING], 'Gecko/') != -1;
+    return index(shift->[UA_STRING], 'Gecko/') != -1;
 }
 
 sub _is_generic {
     my $self = shift;
-#    local $Data::Dumper::Indent = 0;use Data::Dumper; warn Dumper(\@_).Dumper([$mname, $mversion, @remainder])."\n";
     return 1 if $self->_generic_name_version(@_) ||
                 $self->_generic_compatible(@_)   ||
                 $self->_generic_moz_thing(@_);
@@ -63,6 +61,7 @@ sub _parse_gecko {
     my $self = shift;
     my($moz, $thing, $extra, @others) = @_;
     $self->_parse_mozilla_family($moz, $thing, $extra, @others);
+
     # we got some name & version
     if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
         # Change SeaMonkey too?
@@ -71,6 +70,7 @@ sub _parse_gecko {
         $self->[UA_NAME]   = 'Mozilla'  if $self->[UA_NAME] eq 'Beonex';
         $self->[UA_PARSER] = 'mozilla_family:generic';
         my @buf;
+
         foreach my $e ( @{ $self->[UA_EXTRAS] } ) {
             next if ! $e;
             if ( my $s = $self->_is_strength($e) ) {
@@ -89,17 +89,20 @@ sub _parse_gecko {
             }
             push @buf, $e;
         }
-        $self->[UA_EXTRAS] = [ @buf ];
+
+        $self->[UA_EXTRAS]        = [ @buf ];
         $self->[UA_ORIGINAL_NAME] = $before if $before ne $self->[UA_NAME];
         return 1 ;
     }
+
     if ( $self->[UA_TK] && $self->[UA_TK][0] eq 'Gecko' ) {
-        ($self->[UA_NAME], $self->[UA_VERSION_RAW]) = split m{/}xms, $moz;
+        ($self->[UA_NAME], $self->[UA_VERSION_RAW]) = split RE_SLASH, $moz;
         if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
             $self->[UA_PARSER] = 'mozilla_family:gecko';
             return 1;
         }
     }
+
     return;
 }
 
@@ -107,7 +110,7 @@ sub _parse_netscape {
     my $self            = shift;
     my($moz, $thing)    = @_;
     my($mozx, $junk)    = split m{ \s+ }xms, $moz;
-    my(undef, $version) = split m{ /   }xms, $mozx;
+    my(undef, $version) = split RE_SLASH, $mozx;
     my @buf;
     foreach my $e ( @{ $thing } ) {
         if ( my $s = $self->_is_strength($e) ) {
@@ -156,7 +159,7 @@ sub _generic_name_version {
 
     my @moz = split m{\s}xms, $moz;
     if ( @moz == 1 ) {
-        my($name, $version) = split m{/}xms, $moz;
+        my($name, $version) = split RE_SLASH, $moz;
         if ($name && $version) {
             $self->[UA_NAME]        = $name;
             $self->[UA_VERSION_RAW] = $version;
@@ -188,7 +191,7 @@ sub _generic_compatible {
 
     if ( $name eq 'MSIE') {
         if ( $extra ) { # Sleipnir?
-            ($name, $version) = split m{/}xms, pop @{$extra};
+            ($name, $version) = split RE_SLASH, pop @{$extra};
             my($extras,$dotnet) = $self->_extract_dotnet( $thing, $extra );
             $self->[UA_DOTNET] = [ @{$dotnet} ] if @{$dotnet};
             @extras = (@{ $extras }, @others);
