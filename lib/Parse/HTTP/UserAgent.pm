@@ -565,10 +565,15 @@ structure dumper, useful for debugging.
 
 =head1 SEE ALSO
 
-L<HTTP::BrowserDetect>, L<HTML::ParseBrowser>,
-L<HTTP::DetectUserAgent>, 
+=head2 Similar Functionality
+
+L<HTTP::BrowserDetect>, L<HTML::ParseBrowser>, L<HTTP::DetectUserAgent>.
+
+=head2 Resources
+
 L<http://en.wikipedia.org/wiki/User_agent>,
 L<http://www.zytrax.com/tech/web/browser_ids.htm>,
+L<http://www.zytrax.com/tech/web/mobile_ids.html>,
 L<http://www.webaim.org/blog/user-agent-string-history/>.
 
 =cut
