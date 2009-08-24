@@ -5,7 +5,7 @@
 # test suites.
 # Others were taken from various web sites and the rest from the logs.
 
-# ------[ Microsoft Internet Explorer
+# ----[ CATEGORY: Microsoft Internet Explorer
 
 [AGENT]
 #MSIE6 + MRA
@@ -425,7 +425,7 @@ Mozilla/4.0 (compatible; MSIE 5.22; Mac_PowerPC)
 'version'     => '5.022000',
 'name'        => 'MSIE',
 
-# ------[ firefox]
+# ----[ CATEGORY: Firefox
 
 [AGENT]
 
@@ -606,7 +606,7 @@ Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.2b) Gecko/20021001 Phoenix/
 'name'        => 'Firefox',
 'tk'          => ['Gecko','20021001','20021001.000000']
 
-# ------[ netscape
+# ----[ CATEGORY: Netscape
 
 [AGENT]
 
@@ -892,7 +892,7 @@ Mozilla/5.0 (Macintosh; U; PPC; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0
 'name'        => 'Netscape',
 'tk'          => ['Gecko','20020823','20020823.000000']
 
-# ------[ mozilla]
+# ----[ CATEGORY: Mozilla]
 
 [AGENT]
 
@@ -1038,7 +1038,8 @@ Mozilla/5.001 (windows; U; NT4.0; en-us) Gecko/25250101
 'name'        => 'Mozilla',
 'tk'          => ['Gecko','25250101','25250101.000000']
 
-# ------[ seamonkey]
+# ----[ CATEGORY: Seamonkey
+
 # just the mozilla suite
 
 [AGENT]
@@ -1056,7 +1057,7 @@ Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1b1pre) Gecko/20080915000512 SeaM
 'name'        => 'SeaMonkey',
 'tk'          => ['Gecko','20080915000512','2147483647.000000']
 
-# ------[ opera]
+# ----[ CATEGORY: Opera
 
 [AGENT]
 # Opera Mini. Not very innovative UA-string eh?
@@ -1207,7 +1208,7 @@ Opera/6.03 (Linux 2.4.18-4GB i686; U) [en]
 'version'     => '6.003000',
 'name'        => 'Opera'
 
-# ------[ safari]
+# ----[ CATEGORY: Safari
 
 [AGENT]
 
@@ -1296,8 +1297,7 @@ Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gec
 'device'      => 'iPhone',
 'tk'          => ['AppleWebKit','420+','420.000000']
 
-# ------[ chrome]
-
+# ----[ CATEGORY: Chrome
 
 [AGENT]
 
@@ -1313,7 +1313,7 @@ Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like 
 'name'        => 'Chrome',
 'tk'          => ['AppleWebKit','525.13','525.013000']
 
-# ------[ tinybrowser]
+# ----[ CATEGORY:  TinyBrowser
 
 
 [AGENT]
@@ -1327,7 +1327,7 @@ TinyBrowser/2.0 (TinyBrowser Comment) Gecko/20201231
 'name'        => 'TinyBrowser',
 'tk'          => ['Gecko','20201231','20201231.000000']
 
-# ------[ camino
+# ----[ CATEGORY: Camino
 
 
 [AGENT]
@@ -1345,7 +1345,7 @@ Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.7.2) Gecko/20040825 
 'name'        => 'Camino',
 'tk'          => ['Gecko','20040825','20040825.000000']
 
-# ------[ ROBOT
+# ----[ CATEGORY: ROBOT
 
 [AGENT]
 # googlebot
@@ -1421,7 +1421,7 @@ Googlebot/1.0 (googlebot@googlebot.com http://googlebot.com/)
 'version'     => '1.000000',
 'name'        => 'Googlebot'
 
-# ------[ sleipnir
+# ----[ CATEGORY: Sleipnir
 
 [AGENT]
 
@@ -1437,7 +1437,7 @@ Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET 
 'dotnet'      => ['1.1.4322','2.0.50727'],
 'generic'     => 1
 
-# ------[ lunascape]
+# ----[ CATEGORY: Lunascape
 
 [AGENT]
 
@@ -1451,7 +1451,7 @@ Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET 
 'name'        => 'Lunascape',
 'dotnet'      => ['1.1.4322','2.0.50727']
 
-# ------[ various]
+# ----[ CATEGORY: Various
 
 [AGENT]
 
@@ -1609,7 +1609,7 @@ Nokia-WAP-Toolkit/1.3beta
 'name'        => 'Nokia-WAP-Toolkit',
 'generic'     => 1
 
-#----[ name/version (foo)
+# ----[ CATEGORY: name/version (foo)
 
 [AGENT]
 
