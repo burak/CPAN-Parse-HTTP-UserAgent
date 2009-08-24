@@ -31,6 +31,7 @@ use constant RE_FIREFOX_NAMES => qr{Firefox|Iceweasel|Firebird|Phoenix}xms;
 use constant RE_DOTNET        => qr{ \A [.]NET \s+ CLR \s+ (.+?) \z }xms;
 use constant RE_WINDOWS_OS    => qr{ \A Win(?:dows|NT|[0-9]+)? }xmsi;
 use constant RE_SLASH         => qr{ / }xms;
+use constant RE_SPLIT_PARSE   => qr{ \s? [()] \s? }xms;
 
 use overload '""',    => 'name',
              '0+',    => 'version',
@@ -245,7 +246,7 @@ sub _parse {
     return $self if $self->[IS_PARSED];
 
     my $ua = $self->[UA_STRING];
-    my($moz, $thing, $extra, @others) = split m{\s?[()]\s?}xms, $ua;
+    my($moz, $thing, $extra, @others) = split RE_SPLIT_PARSE, $ua;
     $thing = $thing ? [ split m{;\s?}xms, $thing ] : [];
     $extra = [ split m{ \s+}xms, $extra ] if $extra;
 
