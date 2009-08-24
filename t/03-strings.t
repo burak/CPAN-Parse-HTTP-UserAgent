@@ -3,45 +3,30 @@ use strict;
 use vars qw( $VERSION );
 use Test::More qw( no_plan );
 use File::Spec;
-use IO::File;
 use Getopt::Long;
-use constant DATABASE => File::Spec->catfile(qw( t data ua.txt ));
+use Parse::HTTP::UserAgent -all;
 
-$VERSION = '0.10';
+require_ok( File::Spec->catfile( t => 'db.pl' ) );
 
 GetOptions(\my %opt, qw(
     dump
     debug
 ));
 
-use Parse::HTTP::UserAgent -all;
-
-my(%test);
-init();
-
 my(@todo,@wrong);
-
-foreach my $id ( sort keys %test ) {
-    foreach my $str ( @{ $test{ $id } } ) {
+RUN: {
+    foreach my $test ( database() ) {
+        my $str = $test->{string};
         SKIP: {
             my $ua = Parse::HTTP::UserAgent->new( $str );
             ok( defined $ua, "We got an object");
             my $oops;
+            $oops = 1 if $ua->unknown;
 
-            if ( $ua->unknown ) {
-                if ( $id eq 'various' ) {
-                    push @todo, $str;
-                    skip("Skipping unknown string: $str");
-                }
-                else {
-                    $oops = 1;
-                }
-            }
-
-            if ( ! $ua->robot && ! $ua->generic && ( $oops || $ua->name !~ m{ \b $id \b}xmsi ) ) {
+            if ( ! $ua->robot && ! $ua->generic && $oops ) {
                 my $e = sprintf qq{%s instead of %s\t'%s'},
                                 $oops ? 'unknown' : lc $ua->name,
-                                lc $id,
+                                '???',
                                 $str;
                 push @wrong, $e;
                 fail("Bogus parse result! $e");
@@ -51,9 +36,9 @@ foreach my $id ( sort keys %test ) {
 
             # interface
             ok( $ua->name, "It has name" );
-            ok( defined $ua->version, "It has version - $str" );
+            ok( defined $ua->version       , "It has version - $str" );
             ok( defined $ua->version('raw'), "It has raw version" );
-            if ( $id eq 'msie' ) {
+            if ( $ua->name eq 'MSIE' ) {
                 my @net = $ua->dotnet;
                 @net ? ok( scalar @net, "We got .NET CLR: @net")
                      : $opt{debug} && diag("No .NET identifier in the MSIE Agent: $str");
@@ -92,25 +77,3 @@ if ( @wrong ) {
     diag "BOGUS parse results:";
     diag $_ for @wrong;
 }
-
-sub init {
-    my $FH = IO::File->new;
-    $FH->open( DATABASE, 'r')
-        or die sprintf("Can not open DB @ %s: %s", DATABASE, $!);
-    my $id;
-    while ( my $line = readline $FH ) {
-        chomp $line;
-        next if ! $line || $line =~ m{ \A \# }xms; # ignore comments and empty lines
-        if ( $line =~ m{ \A \[ ([a-zA-Z0-9_]+?) \] \z }xms ) {
-            $id = $1;
-            $test{$id} = [];
-            next;
-        }
-        die "No id?!?!?!?!?!????" if not $id;
-        push @{ $test{$id} }, $line;
-    }
-    $FH->close;
-}
-
-__END__
-
