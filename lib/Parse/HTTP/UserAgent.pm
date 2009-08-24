@@ -561,12 +561,6 @@ structure dumper, useful for debugging.
 
 =head2 accessors
 
-=head1 AUTHOR
-
-Burak Gursoy <burakE<64>cpan.org>.
-
-=head1 LICENSE
-
 
 
 =head1 SEE ALSO
