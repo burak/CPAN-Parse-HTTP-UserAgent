@@ -94,3 +94,17 @@ $EXPORT_TAGS{all} = [ @EXPORT_OK ];
 1;
 
 __END__
+
+=head1 NAME
+
+Parse::HTTP::UserAgent::Constants - Various constants
+
+=head1 DESCRIPTION
+
+Internal module
+
+=head1 SEE ALSO
+
+L<Parse::HTTP::UserAgent>.
+
+=cut

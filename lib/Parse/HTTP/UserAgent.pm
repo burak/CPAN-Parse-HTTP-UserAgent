@@ -4,10 +4,6 @@ use vars qw( $VERSION );
 
 $VERSION = '0.10';
 
-BEGIN {
-    *DEBUG = sub () { 0 } if not defined &DEBUG;
-}
-
 use base qw(
     Parse::HTTP::UserAgent::IS
     Parse::HTTP::UserAgent::Parsers
@@ -20,6 +16,10 @@ use overload '""',    => 'name',
 use version;
 use Parse::HTTP::UserAgent::Constants qw(:all);
 use Carp qw( croak );
+
+BEGIN {
+    constant->import( DEBUG => 0 ) if not defined &DEBUG;
+}
 
 my %OSFIX = (
     'WinNT4.0'       => 'Windows NT 4.0',
@@ -39,7 +39,7 @@ sub new {
     my $self  = [ map { undef } 0..MAXID ];
     bless $self, $class;
     $self->[UA_STRING] = $ua;
-    $self->parse;
+    $self->_parse;
     $self;
 }
 
@@ -86,6 +86,7 @@ sub dotnet {
     return @{ $self->[UA_DOTNET] };
 }
 
+#TODO: new accessors
 #strength
 #wap
 #mobile
@@ -114,7 +115,7 @@ sub trim {
     return $s;
 }
 
-sub parse {
+sub _parse {
     my $self = shift;
     return $self if $self->[IS_PARSED];
     $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != -1;
@@ -297,11 +298,48 @@ structure dumper, useful for debugging.
 
 =head1 METHODS
 
-=head2 new
+=head2 new STRING
+
+Constructor. Takes the user agent string as the only parameter and returns
+an object based on the parsed structure.
+
+=head2 trim STRING
+
+Trims the string.
+
+=head2 as_hash
+
+Returns a hash representation of the parsed structure.
 
 =head2 accessors
 
+Ther methods can be used to access the various parts of the parsed structure.
 
+=head3 dotnet
+
+=head3 extras
+
+=head3 generic
+
+=head3 lang
+
+=head3 mozilla
+
+=head3 name
+
+=head3 original_name
+
+=head3 original_version
+
+=head3 os
+
+=head2 robot
+
+=head2 toolkit
+
+=head2 unknown
+
+=head2 version
 
 =head1 SEE ALSO
 

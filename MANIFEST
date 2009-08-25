@@ -2,6 +2,15 @@ builder/Build.pm
 Build.PL
 Changes
 MANIFEST
-SPEC
 README
-TODO
+SPEC
+eg/dump.pl
+lib/Parse/HTTP/UserAgent.pm
+lib/Parse/HTTP/UserAgent/Constants.pm
+lib/Parse/HTTP/UserAgent/Dumper.pm
+lib/Parse/HTTP/UserAgent/IS.pm
+lib/Parse/HTTP/UserAgent/Parsers.pm
+t/02-parser.t
+t/03-strings.t
+t/data/parse.dat
+t/db.pl

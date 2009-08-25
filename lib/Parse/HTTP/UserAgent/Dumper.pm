@@ -90,3 +90,24 @@ sub _dumper_dumper {
 1;
 
 __END__
+
+=head1 NAME
+
+Parse::HTTP::UserAgent::Dumper - Base class to dump parsed structure
+
+=head1 DESCRIPTION
+
+The parsed structure can be dumped to a text table for debugging.
+
+=head1 METHODS
+
+=head2 dumper
+
+    my $ua = Parse::HTTP::UserAgent::Dumper->new( $string );
+    print $ua->dumper;
+
+=head1 SEE ALSO
+
+L<Parse::HTTP::UserAgent>.
+
+=cut

@@ -94,3 +94,17 @@ sub _is_strength {
 1;
 
 __END__
+
+=head1 NAME
+
+Parse::HTTP::UserAgent::IS - Base class
+
+=head1 DESCRIPTION
+
+Internal module.
+
+=head1 SEE ALSO
+
+L<Parse::HTTP::UserAgent>.
+
+=cut

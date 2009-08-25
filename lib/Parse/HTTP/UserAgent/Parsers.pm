@@ -390,3 +390,17 @@ sub _generic_compatible {
 1;
 
 __END__
+
+=head1 NAME
+
+Parse::HTTP::UserAgent::Parsers - Base class
+
+=head1 DESCRIPTION
+
+Internal module.
+
+=head1 SEE ALSO
+
+L<Parse::HTTP::UserAgent>.
+
+=cut
