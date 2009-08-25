@@ -267,6 +267,15 @@ __END__
 
 Parse::HTTP::UserAgent - Parser for the User Agent string
 
+=head1 SYNOPSIS
+
+   use Parse::HTTP::UserAgent;
+   my $ua = Parse::HTTP::UserAgent->new( $str );
+   die "Unable to parse!" if $ua->unknown;
+   print $ua->name;
+   print $ua->version;
+   print $ua->os;
+
 =head1 DESCRIPTION
 
 Quoting L<http://www.webaim.org/blog/user-agent-string-history/>:
