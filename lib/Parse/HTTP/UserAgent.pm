@@ -7,6 +7,7 @@ $VERSION = '0.10';
 BEGIN { $OID = -1 }
 use constant UA_STRING        => ++$OID; # just for information
 use constant IS_PARSED        => ++$OID; # _parse() happened or not
+use constant IS_MAXTHON       => ++$OID; # Is this the dumb IE faker?
 use constant UA_UNKNOWN       => ++$OID; # failed to detect?
 use constant UA_GENERIC       => ++$OID; # parsed with a generic parser.
 use constant UA_NAME          => ++$OID; # The identifier of the ua
@@ -24,14 +25,25 @@ use constant UA_WAP           => ++$OID; # unimplemented
 use constant UA_MOBILE        => ++$OID; # unimplemented
 use constant UA_PARSER        => ++$OID; # the parser name
 use constant UA_DEVICE        => ++$OID; # the name of the mobile device
-use constant UA_ORIGINAL_NAME => ++$OID; # the name of the mobile device
+use constant UA_ORIGINAL_NAME => ++$OID; # original name if this is some variation
+use constant UA_ORIGINAL_VERSION => ++$OID; # original version if this is some variation
 use constant MAXID            =>   $OID;
 
 use constant RE_FIREFOX_NAMES => qr{Firefox|Iceweasel|Firebird|Phoenix}xms;
 use constant RE_DOTNET        => qr{ \A [.]NET \s+ CLR \s+ (.+?) \z }xms;
-use constant RE_WINDOWS_OS    => qr{ \A Win(?:dows|NT|[0-9]+)? }xmsi;
+use constant RE_WINDOWS_OS    => qr{ \A Win(dows|NT|[0-9]+)? }xmsi;
 use constant RE_SLASH         => qr{ / }xms;
 use constant RE_SPLIT_PARSE   => qr{ \s? [()] \s? }xms;
+
+use constant LIST_ROBOTS      => qw(
+    Wget
+    curl
+    libwww-perl
+    GetRight
+    Googlebot
+    Baiduspider+
+    msnbot
+), 'Yahoo! Slurp';
 
 use overload '""',    => 'name',
              '0+',    => 'version',
@@ -69,6 +81,7 @@ BEGIN {
         UA_PARSER
         UA_DEVICE
         UA_ORIGINAL_NAME
+        UA_ORIGINAL_VERSION
         MAXID
     )],
     re => [qw(
@@ -90,27 +103,8 @@ my %OSFIX = (
     'Windows NT 5.1' => 'Windows XP',
     'Windows NT 5.2' => 'Windows Server 2003',
     'Windows NT 6.0' => 'Windows Vista / Server 2008',
+    'Windows NT 6.1' => 'Windows 7',
 );
-
-sub import {
-    my $class  = shift;
-    my %extend = map { $_ => 0 } qw( -dumper -extended ); # -probe
-    my $all    = 0;
-    my @args;
-
-    foreach my $e ( @_ ) {
-        $extend{$e}++, next if exists $extend{ $e };
-        $all++       , next if $e eq '-all';
-        push @args, $e;
-    }
-
-    foreach my $mod ( keys %extend ) {
-        next if ! $extend{ $mod } && ! $all;
-        $class->_extend( $mod );
-    }
-
-    return $class->export_to_level(1, $class, @args);
-}
 
 sub new {
     my $class = shift;
@@ -139,6 +133,9 @@ sub generic { shift->[UA_GENERIC] || '' }
 sub os      { shift->[UA_OS]      || '' }
 sub lang    { shift->[UA_LANG]    || '' }
 sub robot   { shift->[UA_ROBOT]   || 0  }
+
+sub original_name    { shift->[UA_ORIGINAL_NAME]    || '' }
+sub original_version { shift->[UA_ORIGINAL_VERSION] || '' }
 
 sub version {
     my $self = shift;
@@ -182,17 +179,6 @@ sub trim {
 
 sub _object_ids {
     return grep { m{ \A UA_ }xms } @{ $EXPORT_TAGS{object_ids} }
-}
-
-sub _extend {
-    my $class = shift;
-    (my $mod  = shift) =~ tr/-//d;
-    $mod = __PACKAGE__ . '::' . ucfirst($mod);
-    return if $class->isa( $mod );
-    (my $file = $mod) =~ s{::}{/}xmsg;
-    require $file . '.pm';
-    push @ISA, $mod;
-    return 1;
 }
 
 sub _is_strength {
@@ -244,6 +230,7 @@ sub _debug_pre_parse {
 sub _parse {
     my $self = shift;
     return $self if $self->[IS_PARSED];
+    $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != -1;
 
     my $ua = $self->[UA_STRING];
     my($moz, $thing, $extra, @others) = split RE_SPLIT_PARSE, $ua;
@@ -283,6 +270,13 @@ sub _parse {
         $self->[UA_OS] = $OSFIX{ $self->[UA_OS] } || $self->[UA_OS];
     }
 
+    foreach my $robo ( LIST_ROBOTS ) {
+        if ( lc($robo) eq lc($self->[UA_NAME]) ) {
+            $self->[UA_ROBOT] = 1;
+            last;
+        }
+    }
+
     return;
 }
 
@@ -291,7 +285,7 @@ sub _do_parse {
     my($m, $t, $e, @o) = @_;
     my $c = $t->[0] && $t->[0] eq 'compatible';
 
-    if ( $c && shift @{$t} && ! $e ) {
+    if ( $c && shift @{$t} && ! $e && ! $self->[IS_MAXTHON] ) {
         my($n, $v) = split /\s+/, $t->[0];
         if ( $n eq 'MSIE' && index($m, ' ') == -1 ) {
             $self->[UA_PARSER] = 'msie';
@@ -305,6 +299,7 @@ sub _do_parse {
             : $self->_is_ff($e)          ? [firefox    => $m, $t, $e, @o       ]
             : $self->_is_safari($e, \@o) ? [safari     => $m, $t, $e, @o       ]
             : $self->_is_chrome($e, \@o) ? [chrome     => $m, $t, $e, @o       ]
+            : $self->[IS_MAXTHON]        ? [maxthon    => $m, $t, $e, @o       ]
             : undef;
 
     if ( $rv ) {
@@ -383,7 +378,7 @@ sub _extract_dotnet {
             push @dotnet, $match[0];
             next;
         }
-        if ( $e =~ RE_WINDOWS_OS ) {
+        if ( $e =~ RE_WINDOWS_OS && $1 ne '64' ) {
             $self->[UA_OS] = $e;
             next;
         }
@@ -391,6 +386,50 @@ sub _extract_dotnet {
     }
 
     return [@extras], [@dotnet];
+}
+
+sub _parse_maxthon {
+    my($self, $moz, $thing, $extra, @others) = @_;
+    my @omap = grep { $_ } map { split m{;\s+?}xms, $_ } @others;
+    my($maxthon, $engine, $msie);
+    my @buf;
+    foreach my $e ( @omap, @{$thing} ) { # $extra -> junk
+        if ( index(uc $e, 'MAXTHON') != -1 ) {
+            $maxthon = $e;
+            next;
+        }
+        if ( index(uc $e, 'MSIE') != -1 ) {
+            $msie = $e;
+            next;
+        }
+        if ( index(uc $e, 'TRIDENT') != -1 ) {
+            $engine = $e;
+            next;
+        }
+        push @buf, $e;
+    }
+
+    # make this a warning after development?
+    die "Unable to extract Maxthon version from Maxthon UA-string" if ! $maxthon;
+    die "Unable to extract MSIE from Maxthon UA-string" if ! $msie;
+
+    $self->_parse_msie($moz, [ undef, @buf ], undef, split /\s+/, $msie);
+
+    $self->[UA_TK] = [ split RE_SLASH, $engine ] if $engine;
+
+    my(undef, $mv) = split m{ \s+ }xms, $maxthon;
+    $self->[UA_ORIGINAL_VERSION] = $mv || do {
+        $maxthon ? '1.0' : die "Unable to extract Maxthon version?"
+    };
+    $self->[UA_ORIGINAL_NAME]    = 'Maxthon';
+
+return;
+    use Data::Dumper; die $self->dumper . Dumper( [$moz, $thing, $extra,
+                                  \@buf, $maxthon, $msie, $engine,
+[
+ ZUBACCINHO => $moz, \@buf, undef, split /\s+/, $msie
+]]);
+
 }
 
 sub _parse_msie {
@@ -472,7 +511,7 @@ sub _parse_opera_pre {
    ($self->[UA_LANG]        = pop @{$extra}) =~ tr/[]//d if $extra;
     $self->[UA_LANG]      ||= pop @{$thing} if $faking_ff;
 
-    if ( qv($version) >= 9 && length($self->[UA_LANG]) > 5 ) {
+    if ( qv($version) >= 9 && $self->[UA_LANG] && length($self->[UA_LANG]) > 5 ) {
         $self->[UA_TK]   = [ split RE_SLASH, $self->[UA_LANG] ];
        ($self->[UA_LANG] = pop @{$thing}) =~ tr/[]//d if $extra;
     }
@@ -482,7 +521,7 @@ sub _parse_opera_pre {
                        ;
 
     $self->[UA_EXTRAS] = [ @{ $thing }, ( $extra ? @{$extra} : () ) ];
-    return;
+    return $self->_fix_opera;
 }
 
 sub _parse_opera_post {
@@ -496,7 +535,7 @@ sub _parse_opera_post {
                             :                                     pop   @{$thing}
                             ;
     $self->[UA_EXTRAS]      = [ @{ $thing }, ( $extra ? @{$extra} : () ) ];
-    return;
+    return $self->_fix_opera;
 }
 
 sub _parse_mozilla_family {
@@ -517,6 +556,322 @@ sub _parse_mozilla_family {
 
     $self->[UA_EXTRAS] = [ @{ $thing }, @extras ];
     return;
+}
+
+sub _fix_opera {
+    my $self = shift;
+    return if ! $self->[UA_EXTRAS];
+    my @buf;
+    foreach my $e ( @{ $self->[UA_EXTRAS] } ) {
+        if ( $e =~ m{ \A (Opera \s+ Mini) / (.+?) \z }xms ) {
+            $self->[UA_ORIGINAL_NAME]    = $1;
+            $self->[UA_ORIGINAL_VERSION] = $2;
+            next;
+        }
+        push @buf, $e;
+    }
+    $self->[UA_EXTRAS] = [ @buf ];
+    return;
+}
+
+sub _extended_probe {
+    my $self = shift;
+    my($moz, $thing, $extra, $compatible, @others) = @_;
+
+    return if $self->_is_gecko        && $self->_parse_gecko( @_ );
+    return if $self->_is_netscape(@_) && $self->_parse_netscape( @_ );
+    return if $self->_is_generic(@_);
+
+    $self->[UA_UNKNOWN] = 1;
+    return;
+}
+
+sub _is_gecko {
+    return index(shift->[UA_STRING], 'Gecko/') != -1;
+}
+
+sub _is_generic {
+    my $self = shift;
+    return 1 if $self->_generic_name_version(@_) ||
+                $self->_generic_compatible(@_)   ||
+                $self->_generic_moz_thing(@_);
+    return;
+}
+
+sub _is_netscape {
+    my $self = shift;
+    my($moz, $thing, $extra, $compatible, @others) = @_;
+
+    my $rv = index($moz, 'Mozilla/') != -1 &&
+             $moz ne 'Mozilla/4.0'         &&
+             ! $compatible                 &&
+             ! $extra                      &&
+             ! @others                     &&
+             $thing->[-1] ne 'Sun'         && # hotjava
+             index($thing->[0], 'http://') == -1 # robot
+             ;
+    return $rv;
+}
+
+sub _parse_gecko {
+    my $self = shift;
+    my($moz, $thing, $extra, @others) = @_;
+    $self->_parse_mozilla_family($moz, $thing, $extra, @others);
+
+    # we got some name & version
+    if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
+        # Change SeaMonkey too?
+        my $before = $self->[UA_NAME];
+        $self->[UA_NAME]   = 'Netscape' if $self->[UA_NAME] eq 'Netscape6';
+        $self->[UA_NAME]   = 'Mozilla'  if $self->[UA_NAME] eq 'Beonex';
+        $self->[UA_PARSER] = 'mozilla_family:generic';
+        my @buf;
+
+        foreach my $e ( @{ $self->[UA_EXTRAS] } ) {
+            next if ! $e;
+            if ( my $s = $self->_is_strength($e) ) {
+                $self->[UA_STRENGTH] = $s;
+                next;
+            }
+            if ( $e =~ m{ \s i\d86 }xms ) {
+                my($os,$lang) = split m{[,]}xms, $e;
+                $self->[UA_OS]   = $os   if $os;
+                $self->[UA_LANG] = $self->trim($lang) if $lang;
+                next;
+            }
+            if ( $e =~ m{ \A [a-z]{2} \z }xms ) {
+                $self->[UA_LANG] = $e;
+                next;
+            }
+            push @buf, $e;
+        }
+
+        $self->[UA_EXTRAS]        = [ @buf ];
+        $self->[UA_ORIGINAL_NAME] = $before if $before ne $self->[UA_NAME];
+        return 1 ;
+    }
+
+    if ( $self->[UA_TK] && $self->[UA_TK][0] eq 'Gecko' ) {
+        ($self->[UA_NAME], $self->[UA_VERSION_RAW]) = split RE_SLASH, $moz;
+        if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
+            $self->[UA_PARSER] = 'mozilla_family:gecko';
+            return 1;
+        }
+    }
+
+    return;
+}
+
+sub _parse_netscape {
+    my $self            = shift;
+    my($moz, $thing)    = @_;
+    my($mozx, $junk)    = split m{ \s+ }xms, $moz;
+    my(undef, $version) = split RE_SLASH, $mozx;
+    my @buf;
+    foreach my $e ( @{ $thing } ) {
+        if ( my $s = $self->_is_strength($e) ) {
+            $self->[UA_STRENGTH] = $s;
+            next;
+        }
+        push @buf, $e;
+    }
+    $self->[UA_VERSION_RAW] = $version;
+    $self->[UA_OS]          = $buf[0] eq 'X11' ? pop @buf : shift @buf;
+    $self->[UA_NAME]        = 'Netscape';
+    $self->[UA_EXTRAS]      = [ @buf ];
+    if ( $junk ) {
+        $junk =~ s{ \[ (.+?) \] .* \z}{$1}xms;
+        $self->[UA_LANG] = $junk if $junk;
+    }
+    $self->[UA_PARSER] = 'netscape';
+    return 1;
+}
+
+sub _generic_moz_thing {
+    my $self = shift;
+    my($moz, $thing, $extra, $compatible, @others) = @_;
+    return if ! @{ $thing };
+    my($mname, $mversion, @remainder) = split m{[/\s]}xms, $moz;
+    return if $mname eq 'Mozilla';
+
+    $self->[UA_NAME]        = $mname;
+    $self->[UA_VERSION_RAW] = $mversion || ( $mname eq 'Links' ? shift @{$thing} : 0 );
+    $self->[UA_OS]          = @remainder ? join(' ', @remainder)
+                            : $thing->[0] && $thing->[0] !~ m{\d+[.]?\d} ? shift @{$thing}
+                            :              undef;
+    my @extras = (@{$thing}, $extra ? @{$extra} : (), @others );
+
+
+    $self->_fix_generic(
+        \$self->[UA_OS], \$self->[UA_NAME], \$self->[UA_VERSION_RAW], \@extras
+    );
+
+    $self->[UA_EXTRAS]      = [ @extras ] if @extras;
+    $self->[UA_GENERIC]     = 1;
+    $self->[UA_PARSER]      = 'generic_moz_thing';
+
+    return 1;
+}
+
+sub _generic_name_version {
+    my $self = shift;
+    my($moz, $thing, $extra, $compatible, @others) = @_;
+    my $ok = $moz && ! @{$thing} && ! $extra && ! $compatible && ! @others;
+    return if not $ok;
+
+    my @moz = split m{\s}xms, $moz;
+    if ( @moz == 1 ) {
+        my($name, $version) = split RE_SLASH, $moz;
+        if ($name && $version) {
+            $self->[UA_NAME]        = $name;
+            $self->[UA_VERSION_RAW] = $version;
+            $self->[UA_GENERIC]     = 1;
+            $self->[UA_PARSER]      = 'generic_name_version';
+            return 1;
+        }
+    }
+    return;
+}
+
+sub _generic_compatible {
+    my $self = shift;
+    my($moz, $thing, $extra, $compatible, @others) = @_;
+
+    return if ! ( $compatible && @{$thing} );
+
+    my($mname, $mversion) = split m{[/\s]}xms, $moz;
+    my($name, $version)   = $mname eq 'Mozilla'
+                          ? split( m{[/\s]}xms, shift @{ $thing } )
+                          : ($mname, $mversion)
+                          ;
+    my $junk   = shift @{$thing}
+                    if  $thing->[0] &&
+                      ( $thing->[0] eq $name || $thing->[0] eq $moz);
+    my $os     = shift @{$thing};
+    my $lang   = pop   @{$thing};
+    my @extras;
+
+    if ( $name eq 'MSIE') {
+        if ( $extra ) { # Sleipnir?
+            ($name, $version) = split RE_SLASH, pop @{$extra};
+            my($extras,$dotnet) = $self->_extract_dotnet( $thing, $extra );
+            $self->[UA_DOTNET] = [ @{$dotnet} ] if @{$dotnet};
+            @extras = (@{ $extras }, @others);
+        }
+        else {
+            return if index($moz, ' ') != -1; # WebTV
+        }
+    }
+
+    @extras = (@{$thing}, $extra ? @{$extra} : (), @others ) if ! @extras;
+
+    $self->_fix_generic( \$os, \$name, \$version, \@extras );
+
+    $self->[UA_NAME]        = $name;
+    $self->[UA_VERSION_RAW] = $version || 0;
+    $self->[UA_OS]          = $os;
+    $self->[UA_LANG]        = $lang;
+    $self->[UA_EXTRAS]      = [ @extras ] if @extras;
+    $self->[UA_GENERIC]     = 1;
+    $self->[UA_PARSER]      = 'generic_compatible';
+
+    return 1;
+}
+
+sub _fix_generic {
+    my($self, $os_ref, $name_ref, $v_ref, $e_ref) = @_;
+    if ( $$v_ref && $$v_ref !~ m{[0-9]}xms) {
+        $$name_ref .= ' ' . $$v_ref;
+        $$v_ref = undef;
+    }
+
+    if ( $$os_ref && $$os_ref =~ m{ http:// }xms ) {
+        $$os_ref =~ s{ \A \+ }{}xms;
+        push @{ $e_ref }, $$os_ref;
+        $$os_ref = undef;
+    }
+    return;
+}
+
+sub dumper {
+    my $self = shift;
+    my %opt  = @_ % 2 ? () : (@_);
+    %opt = (
+        type      => 'dumper',
+        format    => 'none',
+        interpret => 0,
+        %opt
+    );
+    my $meth = '_dumper_' . lc($opt{type});
+    croak "Don't know how to dump with $opt{type}" if ! $self->can( $meth );
+    my $buf = $self->$meth( \%opt );
+    return $buf if defined wantarray;
+    print $buf ."\n";
+}
+
+sub _dump_to_struct {
+    my %struct    = shift->as_hash;
+    $struct{$_} ||= [] for qw( dotnet mozilla extras tk );
+    $struct{$_} ||= 0  for qw( unknown );
+    return \%struct;
+}
+
+sub _dumper_json {
+    my $self = shift;
+    my $opt  = shift;
+    require JSON;
+    JSON::to_json( $self->_dump_to_struct, { pretty => $opt->{format} eq 'pretty' });
+}
+
+sub _dumper_xml {
+    my $self = shift;
+    my $opt  = shift;
+    require XML::Simple;
+    XML::Simple::XMLout(
+        $self->_dump_to_struct,
+        RootName => 'ua',
+        NoIndent => $opt->{format} ne 'pretty',
+    );
+}
+
+sub _dumper_yaml {
+    my $self = shift;
+    my $opt  = shift;
+    require YAML;
+    YAML::Dump( $self->_dump_to_struct );
+}
+
+sub _dumper_dumper {
+    my $self = shift;
+    my $opt  = shift;
+    my @ids  = $opt->{args} ?  @{ $opt->{args} } : $self->_object_ids;
+    my $args = $opt->{args} ?                  1 : 0;
+    my $max  = 0;
+    map { my $l = length $_; $max = $l if $l > $max; } @ids;
+    my @titles = qw( FIELD VALUE );
+    my $buf  = sprintf "%s%s%s\n%s%s%s\n", $titles[0],
+                                   (' ' x (2 + $max - length $titles[0])),
+                                   $titles[1],
+                                   '-' x $max, ' ' x 2, '-' x ($max*2);
+    require Data::Dumper;
+    foreach my $id ( @ids ) {
+        my $name = $args ? $id->{name} : $id;
+        my $val  = $args ? $id->{value} : $self->[ $self->$id() ];
+        $val = do {
+                    my $d = Data::Dumper->new([$val]);
+                    $d->Indent(0);
+                    my $rv = $d->Dump;
+                    $rv =~ s{ \$VAR1 \s+ = \s+ }{}xms;
+                    $rv =~ s{ ; }{}xms;
+                    $rv eq '[]' ? '' : $rv;
+                } if $val && ref $val;
+        $buf .= sprintf "%s%s%s\n",
+                        $name,
+                        (' ' x (2 + $max - length $name)),
+                        defined $val ? $val : ''
+                        ;
+    }
+    return $buf;
 }
 
 1;
