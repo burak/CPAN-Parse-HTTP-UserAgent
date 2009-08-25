@@ -4,11 +4,14 @@ use vars qw( $VERSION );
 
 $VERSION = '0.10';
 
+BEGIN {
+    *DEBUG = sub () { 0 } if not defined &DEBUG;
+}
+
 use base qw(
     Parse::HTTP::UserAgent::IS
     Parse::HTTP::UserAgent::Parsers
     Parse::HTTP::UserAgent::Dumper
-    
 );
 use overload '""',    => 'name',
              '0+',    => 'version',
@@ -17,10 +20,6 @@ use overload '""',    => 'name',
 use version;
 use Parse::HTTP::UserAgent::Constants qw(:all);
 use Carp qw( croak );
-
-BEGIN {
-    *DEBUG = sub () { 0 } if not defined &DEBUG;
-}
 
 my %OSFIX = (
     'WinNT4.0'       => 'Windows NT 4.0',
@@ -40,20 +39,11 @@ sub new {
     my $self  = [ map { undef } 0..MAXID ];
     bless $self, $class;
     $self->[UA_STRING] = $ua;
-    $self->_parse;
+    $self->parse;
     $self;
 }
 
-sub as_hash {
-    my $self   = shift;
-    my @ids    = $self->_object_ids;
-    my %struct = map {
-                    my $id = $_;
-                    $id =~ s{ \A UA_ }{}xms;
-                    lc $id, $self->[ $self->$_() ]
-                 } @ids;
-    return %struct;
-}
+#------------------------------------------------------------------------------#
 
 sub name    { shift->[UA_NAME]    || '' }
 sub unknown { shift->[UA_UNKNOWN] || '' }
@@ -96,6 +86,25 @@ sub dotnet {
     return @{ $self->[UA_DOTNET] };
 }
 
+#strength
+#wap
+#mobile
+#parser
+#device
+
+#------------------------------------------------------------------------------#
+
+sub as_hash {
+    my $self   = shift;
+    my @ids    = $self->_object_ids;
+    my %struct = map {
+                    my $id = $_;
+                    $id =~ s{ \A UA_ }{}xms;
+                    lc $id, $self->[ $self->$_() ]
+                 } @ids;
+    return %struct;
+}
+
 sub trim {
     my $self = shift;
     my $s    = shift;
@@ -105,7 +114,7 @@ sub trim {
     return $s;
 }
 
-sub _parse {
+sub parse {
     my $self = shift;
     return $self if $self->[IS_PARSED];
     $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != -1;
