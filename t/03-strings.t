@@ -11,11 +11,12 @@ require_ok( File::Spec->catfile( t => 'db.pl' ) );
 GetOptions(\my %opt, qw(
     dump
     debug
+    supported
 ));
 
 $SILENT = 1;
 
-my(@todo,@wrong);
+my(@todo,@wrong, %supported);
 RUN: {
     foreach my $test ( database() ) {
         my $str = $test->{string};
@@ -64,6 +65,7 @@ RUN: {
             # dump the parsed structure
             ok( my $dump = $ua->dumper, "It can dump");
             diag $dump if $opt{dump};
+            $supported{ $ua->original_name || $ua->name }++ if $opt{supported};
         }
     }
 }
@@ -78,4 +80,11 @@ if ( @wrong ) {
     diag "-" x 80;
     diag "BOGUS parse results:";
     diag $_ for @wrong;
+}
+
+if ( $opt{supported} ) {
+    diag "Supported user agents are:";
+    foreach my $name ( sort { lc $a cmp lc $b } keys %supported ) {
+        diag "\t$name";
+    }
 }
