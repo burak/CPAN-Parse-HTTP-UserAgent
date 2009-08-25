@@ -278,7 +278,7 @@ Parse::HTTP::UserAgent - Parser for the User Agent string
    print $ua->version;
    print $ua->os;
    # or just dump for debugging:
-   print $ua->dump;
+   print $ua->dumper;
 
 =head1 DESCRIPTION
 
