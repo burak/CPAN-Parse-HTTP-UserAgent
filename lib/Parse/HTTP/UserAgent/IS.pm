@@ -95,6 +95,8 @@ sub _is_strength {
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Parse::HTTP::UserAgent::IS - Base class

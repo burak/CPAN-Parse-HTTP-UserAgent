@@ -263,6 +263,8 @@ sub _debug_pre_parse {
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Parse::HTTP::UserAgent - Parser for the User Agent string
@@ -275,6 +277,8 @@ Parse::HTTP::UserAgent - Parser for the User Agent string
    print $ua->name;
    print $ua->version;
    print $ua->os;
+   # or just dump for debugging:
+   print $ua->dump;
 
 =head1 DESCRIPTION
 

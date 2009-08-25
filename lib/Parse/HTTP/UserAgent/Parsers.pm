@@ -391,6 +391,8 @@ sub _generic_compatible {
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Parse::HTTP::UserAgent::Parsers - Base class

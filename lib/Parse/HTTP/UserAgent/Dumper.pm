@@ -91,6 +91,8 @@ sub _dumper_dumper {
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Parse::HTTP::UserAgent::Dumper - Base class to dump parsed structure

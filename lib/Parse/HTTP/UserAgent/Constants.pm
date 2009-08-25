@@ -95,6 +95,8 @@ $EXPORT_TAGS{all} = [ @EXPORT_OK ];
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Parse::HTTP::UserAgent::Constants - Various constants
