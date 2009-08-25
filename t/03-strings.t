@@ -4,7 +4,7 @@ use vars qw( $VERSION $SILENT );
 use Test::More qw( no_plan );
 use File::Spec;
 use Getopt::Long;
-use Parse::HTTP::UserAgent -all;
+use Parse::HTTP::UserAgent;
 
 require_ok( File::Spec->catfile( t => 'db.pl' ) );
 
