@@ -345,13 +345,13 @@ Ther methods can be used to access the various parts of the parsed structure.
 
 =head3 os
 
-=head2 robot
+=head3 robot
 
-=head2 toolkit
+=head3 toolkit
 
-=head2 unknown
+=head3 unknown
 
-=head2 version
+=head3 version
 
 =head1 SEE ALSO
 
