@@ -304,10 +304,9 @@ case). However, browser sniffing for client-side coding is considered a bad
 habit.
 
 This module implements a rules-based parser and tries to identify
-MSIE, FireFox, Opera, Safari & Chrome first. If enabled, the extended
-interface tries to identify Mozilla, Netscape, Robots and the rest will
-be tried with a generic parser. The extended interface also includes a
-structure dumper, useful for debugging.
+MSIE, FireFox, Opera, Safari & Chrome first. It then tries to identify Mozilla,
+Netscape, Robots and the rest will be tried with a generic parser. There is
+also a structure dumper, useful for debugging.
 
 =head1 METHODS
 
