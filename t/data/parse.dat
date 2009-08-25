@@ -3,17 +3,366 @@
 #     HTML::ParseBrowser
 #     HTTP::DetectUserAgent
 # test suites.
-# Others were taken from various web sites and the rest from the logs.
+# Others were taken from various web sites (like useragentstring.com)
+# and the rest from the logs.
+
+# ----[ CATEGORY: Maxthon v2
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; .NET CLR 1.1.4322; .NET CLR 2.0.50727; MAXTHON 2.0)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [
+              'Mozilla/4.0'
+            ],
+'version_raw' => '8.0',
+'version' => '8.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '1.1.4322',
+              '2.0.50727'
+            ],
+'original_version' => '2.0',
+'tk' => [
+          'Trident',
+          '4.0',
+          '4.000000'
+        ]
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30618; MAXTHON 2.0)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows Vista / Server 2008',
+'extras' => [
+              'SLCC1',
+              'Media Center PC 5.0'
+            ],
+'version_raw' => '8.0',
+'version' => '8.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '2.0.50727',
+              '3.5.30729',
+              '3.0.30618'
+            ],
+'original_version' => '2.0',
+'tk' => [
+          'Trident',
+          '4.0',
+          '4.000000'
+        ]
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.2; Trident/4.0; MAXTHON 2.0)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows Server 2003',
+'extras' => [],
+'version_raw' => '8.0',
+'version' => '8.000000',
+'name' => 'MSIE',
+'original_version' => '2.0',
+'tk' => [
+          'Trident',
+          '4.0',
+          '4.000000'
+        ]
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30618; MAXTHON 2.0)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows Vista / Server 2008',
+'extras' => [
+              'SLCC1',
+              'Media Center PC 5.0',
+              'Mozilla/4.0'
+            ],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '2.0.50727',
+              '3.5.30729',
+              '3.0.30618'
+            ],
+'original_version' => '2.0'
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; FunWebProducts; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; Alexa Toolbar; .NET CLR 3.5.30729; .NET CLR 3.0.30618; MAXTHON 2.0)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows Vista / Server 2008',
+'extras' => [
+              'FunWebProducts',
+              'SLCC1',
+              'Media Center PC 5.0',
+              'Alexa Toolbar'
+            ],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '2.0.50727',
+              '3.5.30729',
+              '3.0.30618'
+            ],
+'original_version' => '2.0'
+
+# ----[ CATEGORY: Maxthon v1
+
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Maxthon; Win64; x64; Trident/4.0)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows 7',
+'extras' => [
+              'Win64',
+              'x64'
+            ],
+'version_raw' => '8.0',
+'version' => '8.000000',
+'name' => 'MSIE',
+'original_version' => '1.0',
+'tk' => [
+          'Trident',
+          '4.0',
+          '4.000000'
+        ]
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Trident/4.0; Maxthon; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 1.1.4322; .NET CLR 3.5.21022; .NET CLR 3.0.30618; .NET CLR 3.5.30729; OfficeLiveConnector.1.3; OfficeLivePatch.0.0)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows Vista / Server 2008',
+'extras' => [
+              'SLCC1',
+              'Media Center PC 5.0',
+              'OfficeLiveConnector.1.3',
+              'OfficeLivePatch.0.0'
+            ],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '2.0.50727',
+              '1.1.4322',
+              '3.5.21022',
+              '3.0.30618',
+              '3.5.30729'
+            ],
+'original_version' => '1.0',
+'tk' => [
+          'Trident',
+          '4.0',
+          '4.000000'
+        ]
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; Maxthon; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506; .NET CLR 1.1.4322; InfoPath.2)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows Vista / Server 2008',
+'extras' => [
+              'SLCC1',
+              'Media Center PC 5.0',
+              'InfoPath.2',
+              'Mozilla/4.0'
+            ],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '2.0.50727',
+              '3.0.04506',
+              '1.1.4322'
+            ],
+'original_version' => '1.0'
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; Maxthon 2)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '2.0.50727',
+              '3.0.04506.30',
+              '3.0.4506.2152',
+              '3.5.30729'
+            ],
+'original_version' => '2',
+'tk' => [
+          'Trident',
+          '4.0',
+          '4.000000'
+        ]
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; Maxthon; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [
+              'SV1'
+            ],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '1.1.4322',
+              '2.0.50727'
+            ],
+'original_version' => '1.0'
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; FunWebProducts; Maxthon; FDM)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [
+              'SV1',
+              'FunWebProducts',
+              'FDM'
+            ],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'original_version' => '1.0'
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; Maxthon; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [
+              'Mozilla/4.0'
+            ],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '1.1.4322',
+              '2.0.50727',
+              '3.0.4506.2152',
+              '3.5.30729'
+            ],
+'original_version' => '1.0'
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Maxthon; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; InfoPath.1)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [
+              'InfoPath.1',
+              'Mozilla/4.0'
+            ],
+'version_raw' => '7.0',
+'version' => '7.000000',
+'name' => 'MSIE',
+'original_version' => '1.0'
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Maxthon; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Media Center PC 4.0; .NET CLR 2.0.50727; InfoPath.1)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [
+              'SV1',
+              'Media Center PC 4.0',
+              'InfoPath.1'
+            ],
+'version_raw' => '6.0',
+'version' => '6.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '1.0.3705',
+              '1.1.4322',
+              '2.0.50727'
+            ],
+'original_version' => '1.0'
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; iOpus-I-M; SV1; Maxthon; .NET CLR 1.0.3705; .NET CLR 1.1.4322)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [
+              'iOpus-I-M',
+              'SV1'
+            ],
+'version_raw' => '6.0',
+'version' => '6.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '1.0.3705',
+              '1.1.4322'
+            ],
+'original_version' => '1.0'
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Maxthon; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows 2000',
+'extras' => [
+              'Mozilla/4.0'
+            ],
+'version_raw' => '6.0',
+'version' => '6.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '1.1.4322',
+              '2.0.50727'
+            ],
+'original_version' => '1.0'
+
+[AGENT]
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Maxthon; MRA 4.6 (build 01425); Maxthon; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+
+'original_name' => 'Maxthon',
+'parser' => 'maxthon',
+'os' => 'Windows XP',
+'extras' => [
+              'SV1',
+              'MRA 4.6'
+            ],
+'version_raw' => '6.0',
+'version' => '6.000000',
+'name' => 'MSIE',
+'dotnet' => [
+              '1.1.4322',
+              '2.0.50727'
+            ],
+'original_version' => '1.0'
 
 # ----[ CATEGORY: Microsoft Internet Explorer
-
-[AGENT]
-#MSIE6 + MRA
-#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Maxthon; MRA 4.6 (build 01425); Maxthon; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
-
-[AGENT]
-#MSIE6 + MRA
-#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; GTB6; (R1 1.6))
 
 [AGENT]
 
@@ -1057,15 +1406,83 @@ Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1b1pre) Gecko/20080915000512 SeaM
 'name'        => 'SeaMonkey',
 'tk'          => ['Gecko','20080915000512','2147483647.000000']
 
+#------------------------------------------------------------------------------#
+
+# ----[ CATEGORY: Opera Mini
+
+# Opera Mini. Not very innovative UA-string eh?
+
+[AGENT]
+Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/298; U; en)
+
+'original_name' => 'Opera Mini',
+'parser' => 'opera_pre',
+'strength' => 'U',
+'os' => 'en',
+'extras' => [
+              'J2ME/MIDP'
+            ],
+'version_raw' => '9.50',
+'version' => '9.050000',
+'name' => 'Opera',
+'original_version' => '4.0.10031/298'
+
+[AGENT]
+Opera/9.60 (J2ME/MIDP; Opera Mini/4.2.13337/504; U; en) Presto/2.2.0
+
+'original_name' => 'Opera Mini',
+'parser' => 'opera_pre',
+'strength' => 'U',
+'os' => 'J2ME/MIDP',
+'extras' => [],
+'version_raw' => '9.60',
+'lang' => 'en',
+'version' => '9.060000',
+'name' => 'Opera',
+'original_version' => '4.2.13337/504',
+'tk' => [
+          'Presto',
+          '2.2.0',
+          '2.002000'
+        ]
+
+[AGENT]
+Opera/8.01 (J2ME/MIDP; Opera Mini/1.0.1479/HiFi; SonyEricsson P900; no; U; ssr)
+
+'original_name' => 'Opera Mini',
+'parser' => 'opera_pre',
+'strength' => 'U',
+'os' => 'ssr',
+'extras' => [
+              'J2ME/MIDP',
+              'SonyEricsson P900',
+              'no'
+            ],
+'version_raw' => '8.01',
+'version' => '8.001000',
+'name' => 'Opera',
+'original_version' => '1.0.1479/HiFi'
+
+#------------------------------------------------------------------------------#
+
 # ----[ CATEGORY: Opera
 
 [AGENT]
-# Opera Mini. Not very innovative UA-string eh?
-#TODO: Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/298; U; en)
 
-[AGENT]
 # edge case
-#TODO: Mozilla/4.0 (compatible; Opera/3.0; Windows 4.10) 3.50
+#TODO:
+
+Mozilla/4.0 (compatible; Opera/3.0; Windows 4.10) 3.50
+
+'parser' => 'generic_compatible',
+'os' => 'Windows 4.10',
+'extras' => [
+              '3.50'
+            ],
+'version_raw' => '3.0',
+'version' => '3.000000',
+'name' => 'Opera',
+'generic' => 1
 
 [AGENT]
 
@@ -1349,7 +1766,16 @@ Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.7.2) Gecko/20040825 
 
 [AGENT]
 # googlebot
-#TODO: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+
+Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+
+'parser' => 'generic_compatible',
+'extras' => ['http://www.google.com/bot.html'],
+'version_raw' => '2.1',
+'version' => '2.001000',
+'name' => 'Googlebot',
+'generic' => 1,
+robot => 1,
 
 [AGENT]
 # googlebot mobile
@@ -1357,69 +1783,125 @@ Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.7.2) Gecko/20040825 
 
 [AGENT]
 # Yahoo! Slurp
-#TODO: Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
+Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
+
+'parser' => 'generic_compatible',
+'extras' => ['http://help.yahoo.com/help/us/ysearch/slurp'],
+'version_raw' => 0,
+'name' => 'Yahoo! Slurp',
+'generic' => 1,
+robot => 1,
 
 [AGENT]
-# Baiduspider
-#TODO: Baiduspider+(+http://help.baidu.jp/system/05.html)
+
+Baiduspider+(+http://help.baidu.jp/system/05.html)
+
+'parser' => 'generic_moz_thing',
+'extras' => [
+              '+http://help.baidu.jp/system/05.html'
+            ],
+'version_raw' => 0,
+'name' => 'Baiduspider+',
+'generic' => 1,
+robot => 1,
 
 [AGENT]
-# msnbot
-#TODO: msnbot/1.1 (+http://search.msn.com/msnbot.htm)
+msnbot/1.1 (+http://search.msn.com/msnbot.htm)
+
+'parser' => 'generic_moz_thing',
+'extras' => [
+              'http://search.msn.com/msnbot.htm'
+            ],
+'version_raw' => '1.1',
+'version' => '1.001000',
+'name' => 'msnbot',
+'generic' => 1,
+robot => 1,
 
 [AGENT]
 # Twiceler
 #TODO: Mozilla/5.0 (Twiceler-0.9 http://www.cuill.com/twiceler/robot.html)
 
 [AGENT]
-#TODO: curl/7.13.0 (i686-suse-linux) libcurl/7.13.0 OpenSSL/0.9.7e zlib/1.2.2
+
+curl/7.13.0 (i686-suse-linux) libcurl/7.13.0 OpenSSL/0.9.7e zlib/1.2.2
+
+'parser' => 'generic_moz_thing',
+'extras' => [
+              'i686-suse-linux',
+              'libcurl/7.13.0',
+              'OpenSSL/0.9.7e',
+              'zlib/1.2.2'
+            ],
+'version_raw' => '7.13.0',
+'version' => '7.013000',
+'name' => 'curl',
+'generic' => 1,
+robot => 1,
 
 [AGENT]
-#TODO: Links (2.1pre15; Linux 2.4.26-vc4 i586; x)
+
+Links (2.1pre15; Linux 2.4.26-vc4 i586; x)
+
+'parser' => 'generic_moz_thing',
+'extras' => [
+              'Linux 2.4.26-vc4 i586',
+              'x'
+            ],
+'version_raw' => '2.1pre15',
+'version' => '2.115000',
+'name' => 'Links',
+'generic' => 1
 
 [AGENT]
 
 Wget/1.4.5
 
-'parser'      => 'robot',
-'extras'      => [],
+'parser' => 'generic_name_version',
+'extras' => [],
 'version_raw' => '1.4.5',
-'robot'       => 1,
-'version'     => '1.004005',
-'name'        => 'Wget'
+'version' => '1.004005',
+'name' => 'Wget',
+'generic' => 1,
+robot => 1,
 
 [AGENT]
 
 libwww-perl/5.11
 
-'parser'      => 'robot',
-'extras'      => [],
+'parser' => 'generic_name_version',
+'extras' => [],
 'version_raw' => '5.11',
-'robot'       => 1,
-'version'     => '5.011000',
-'name'        => 'libwww-perl'
+'version' => '5.011000',
+'name' => 'libwww-perl',
+'generic' => 1,
+robot => 1,
 
 [AGENT]
 
 GetRight/3.2.1
 
-'parser'      => 'robot',
-'extras'      => [],
+'parser' => 'generic_name_version',
+'extras' => [],
 'version_raw' => '3.2.1',
-'robot'       => 1,
-'version'     => '3.002001',
-'name'        => 'GetRight'
+'version' => '3.002001',
+'name' => 'GetRight',
+'generic' => 1,
+robot => 1,
 
 [AGENT]
 
 Googlebot/1.0 (googlebot@googlebot.com http://googlebot.com/)
 
-'parser'      => 'robot',
-'extras'      => [],
+'parser' => 'generic_moz_thing',
+'extras' => [
+              'googlebot@googlebot.com http://googlebot.com/'
+            ],
 'version_raw' => '1.0',
-'robot'       => 1,
-'version'     => '1.000000',
-'name'        => 'Googlebot'
+'version' => '1.000000',
+'name' => 'Googlebot',
+'generic' => 1,
+robot => 1,
 
 # ----[ CATEGORY: Sleipnir
 
