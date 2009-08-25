@@ -264,7 +264,7 @@ __END__
 
 =head1 NAME
 
-Parse::HTTP::UserAgent - Parse The User Agent String
+Parse::HTTP::UserAgent - Parser for the User Agent string
 
 =head1 DESCRIPTION
 
