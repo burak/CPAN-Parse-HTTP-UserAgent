@@ -2,5 +2,8 @@ Revision history for Perl extension Parse::HTTP::UserAgent.
 
 Time zone is UTC+2.
 
+0.11 Wed Aug 26 08:43:04 2009
+   => Add Trident detection to msie parser. remove duplicate from maxthon.
+
 0.10 Tue Aug 25 09:39:48 2009
    => First release.

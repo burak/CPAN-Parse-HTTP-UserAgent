@@ -60,21 +60,12 @@ sub _fix_generic {
 sub _parse_maxthon {
     my($self, $moz, $thing, $extra, @others) = @_;
     my @omap = grep { $_ } map { split m{;\s+?}xms, $_ } @others;
-    my($maxthon, $engine, $msie);
+    my($maxthon, $msie);
+
     my @buf;
     foreach my $e ( @omap, @{$thing} ) { # $extra -> junk
-        if ( index(uc $e, 'MAXTHON') != -1 ) {
-            $maxthon = $e;
-            next;
-        }
-        if ( index(uc $e, 'MSIE') != -1 ) {
-            $msie = $e;
-            next;
-        }
-        if ( index(uc $e, 'TRIDENT') != -1 ) {
-            $engine = $e;
-            next;
-        }
+        if ( index(uc $e, 'MAXTHON') != -1 ) { $maxthon = $e; next; }
+        if ( index(uc $e, 'MSIE'   ) != -1 ) { $msie    = $e; next; }
         push @buf, $e;
     }
 
@@ -83,8 +74,6 @@ sub _parse_maxthon {
     die "Unable to extract MSIE from Maxthon UA-string" if ! $msie;
 
     $self->_parse_msie($moz, [ undef, @buf ], undef, split /\s+/, $msie);
-
-    $self->[UA_TK] = [ split RE_SLASH, $engine ] if $engine;
 
     my(undef, $mv) = split m{ \s+ }xms, $maxthon;
     $self->[UA_ORIGINAL_VERSION] = $mv || do {
@@ -109,11 +98,20 @@ sub _parse_msie {
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version;
     $self->[UA_DOTNET]      = [ @{ $dotnet } ] if @{$dotnet};
-    $self->[UA_EXTRAS]      = [ @{ $extras } ];
-    my $e = $self->[UA_EXTRAS];
-    if ( $e->[0] && $e->[0] eq 'Mac_PowerPC' ) {
-        $self->[UA_OS] = shift @{ $self->[UA_EXTRAS] };
+
+    if ( $extras->[0] && $extras->[0] eq 'Mac_PowerPC' ) {
+        $self->[UA_OS] = shift @{ $extras };
     }
+
+    my @buf;
+    foreach my $e ( @{ $extras } ) {
+        if ( $e =~ m{ \A (Trident) / (.+?) \z }xmsi ) {
+            $self->[UA_TK] = [ $1, $2 ];
+            next;
+        }
+        push @buf, $e;
+    }
+    $self->[UA_EXTRAS] = [ @buf ];
     return;
 }
 
