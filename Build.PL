@@ -3,6 +3,7 @@ use lib qw( builder );
 use Build;
 
 my $mb = Build->new;
+$mb->build_monolith(1);
 $mb->change_versions(1);
 $mb->copyright_first_year( 2009 );
 $mb->add_pod_author_copyright_license(1);
