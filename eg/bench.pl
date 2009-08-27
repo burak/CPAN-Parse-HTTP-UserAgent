@@ -1,5 +1,8 @@
 use strict;
 use warnings;
+
+my $count = 100;
+
 use HTTP::BrowserDetect;
 use Parse::HTTP::UserAgent;
 use HTTP::DetectUserAgent;
@@ -15,13 +18,13 @@ my @tests = map { $_->{string} } database({ thaw => 1 });
 
 printf "*** The data integrity is not checked in this run.\n";
 printf "*** This is a benchmark for parser speeds.\n";
-printf "*** Testing %d User Agent strings on each module.\n\n", scalar @tests;
+printf "*** Testing %d User Agent strings on each module with $count iterations.\n\n", scalar @tests;
 
 print "This may take a while. Please stand by ...\n\n";
 
 my $start = Benchmark->new;
 
-cmpthese( 100, {
+cmpthese( $count, {
     'HTML::ParseBrowser'     => sub { foreach my $s (@tests) { my $ua = html_parsebrowser($s)    } },
     'HTTP::BrowserDetect'    => sub { foreach my $s (@tests) { my $ua = http_browserdetect($s)   } },
     'HTTP::DetectUserAgent'  => sub { foreach my $s (@tests) { my $ua = http_detectuseragent($s) } },
