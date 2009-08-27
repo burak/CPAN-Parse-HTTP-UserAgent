@@ -5,15 +5,21 @@ use Parse::HTTP::UserAgent::Constants qw(:all);
 
 $VERSION = '0.11';
 
-sub name    { shift->[UA_NAME]    || '' }
-sub unknown { shift->[UA_UNKNOWN] || '' }
-sub generic { shift->[UA_GENERIC] || '' }
-sub os      { shift->[UA_OS]      || '' }
-sub lang    { shift->[UA_LANG]    || '' }
-sub robot   { shift->[UA_ROBOT]   || 0  }
+#TODO: new accessors
+#wap
+#mobile
+#device
 
+sub name             { shift->[UA_NAME]             || '' }
+sub unknown          { shift->[UA_UNKNOWN]          || '' }
+sub generic          { shift->[UA_GENERIC]          || '' }
+sub os               { shift->[UA_OS]               || '' }
+sub lang             { shift->[UA_LANG]             || '' }
+sub strength         { shift->[UA_STRENGTH]         || '' }
+sub parser           { shift->[UA_PARSER]           || '' }
 sub original_name    { shift->[UA_ORIGINAL_NAME]    || '' }
 sub original_version { shift->[UA_ORIGINAL_VERSION] || '' }
+sub robot            { shift->[UA_ROBOT]            || 0  }
 
 sub version {
     my $self = shift;
@@ -46,13 +52,6 @@ sub dotnet {
     return @{ $self->[UA_DOTNET] };
 }
 
-#TODO: new accessors
-#strength
-#wap
-#mobile
-#parser
-#device
-
 1;
 
 __END__
@@ -71,38 +70,44 @@ Parse::HTTP::UserAgent::Accessors - Available accessors
    print $ua->name;
    print $ua->version;
    print $ua->os;
-   # or just dump for debugging:
-   print $ua->dumper;
 
 =head1 DESCRIPTION
 
 Ther methods can be used to access the various parts of the parsed structure.
 
-=head3 dotnet
+=head1 ACCESSORS
 
-=head3 extras
+The parts of the parsed structure can be accessed using these methods:
 
-=head3 generic
+=head2 dotnet
 
-=head3 lang
+=head2 extras
 
-=head3 mozilla
+=head2 generic
 
-=head3 name
+=head2 lang
 
-=head3 original_name
+=head2 mozilla
 
-=head3 original_version
+=head2 name
 
-=head3 os
+=head2 original_name
 
-=head3 robot
+=head2 original_version
 
-=head3 toolkit
+=head2 os
 
-=head3 unknown
+=head2 parser
 
-=head3 version
+=head2 robot
+
+=head2 strength
+
+=head2 toolkit
+
+=head2 unknown
+
+=head2 version
 
 =head1 SEE ALSO
 

@@ -3,6 +3,7 @@ use strict;
 use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
 use version;
+use Carp qw(croak);
 
 $VERSION = '0.10';
 
@@ -70,22 +71,21 @@ sub _parse_maxthon {
     }
 
     # make this a warning after development?
-    die "Unable to extract Maxthon version from Maxthon UA-string" if ! $maxthon;
-    die "Unable to extract MSIE from Maxthon UA-string" if ! $msie;
+    croak "Unable to extract Maxthon version from Maxthon UA-string" if ! $maxthon;
+    croak "Unable to extract MSIE from Maxthon UA-string" if ! $msie;
 
     $self->_parse_msie($moz, [ undef, @buf ], undef, split /\s+/, $msie);
 
     my(undef, $mv) = split m{ \s+ }xms, $maxthon;
-    $self->[UA_ORIGINAL_VERSION] = $mv || do {
-        $maxthon ? '1.0' : die "Unable to extract Maxthon version?"
-    };
+    $self->[UA_ORIGINAL_VERSION] = $mv || (
+        $maxthon ? '1.0' : croak "Unable to extract Maxthon version?"
+    );
     $self->[UA_ORIGINAL_NAME] = 'Maxthon';
     return;
 }
 
 sub _parse_msie {
-    my $self = shift;
-    my($moz, $thing, $extra, $name, $version) = @_;
+    my($self, $moz, $thing, $extra, $name, $version) = @_;
     my $junk = shift @{ $thing }; # already used
     # "Microsoft Internet Explorer";
 
@@ -125,18 +125,18 @@ sub _parse_firefox {
 sub _parse_safari {
     my $self = shift;
     my($moz, $thing, $extra, @others) = @_;
-    $self->[UA_NAME]         = 'Safari';
-    my($version, @junk)      = split m{\s+}xms, pop @others;
-    (undef, $version)        = split RE_SLASH, $version;
-    $self->[UA_NAME]         = 'Safari';
-    $self->[UA_VERSION_RAW]  = $version;
-    $self->[UA_TOOLKIT]      = [ split RE_SLASH, $extra->[0] ];
-    $self->[UA_LANG]         = pop @{ $thing };
-    $self->[UA_OS]           = length $thing->[-1] > 1 ? pop @{ $thing }
-                                                       : shift @{$thing}
-                             ;
-    $self->[UA_DEVICE]       = shift @{$thing} if $thing->[0] eq 'iPhone';
-    $self->[UA_EXTRAS]       = [ @{$thing}, @others ];
+    $self->[UA_NAME]        = 'Safari';
+    my($version, @junk)     = split m{\s+}xms, pop @others;
+    (undef, $version)       = split RE_SLASH, $version;
+    $self->[UA_NAME]        = 'Safari';
+    $self->[UA_VERSION_RAW] = $version;
+    $self->[UA_TOOLKIT]     = [ split RE_SLASH, $extra->[0] ];
+    $self->[UA_LANG]        = pop @{ $thing };
+    $self->[UA_OS]          = length $thing->[-1] > 1 ? pop @{ $thing }
+                                                      : shift @{$thing}
+                            ;
+    $self->[UA_DEVICE]      = shift @{$thing} if $thing->[0] eq 'iPhone';
+    $self->[UA_EXTRAS]      = [ @{$thing}, @others ];
 
     if ( length($self->[UA_OS]) == 1 ) {
         push @{$self->[UA_EXTRAS]}, $self->[UA_EXTRAS];
@@ -217,7 +217,6 @@ sub _parse_mozilla_family {
     $self->[UA_EXTRAS] = [ @{ $thing }, @extras ];
     return;
 }
-
 
 sub _parse_gecko {
     my $self = shift;

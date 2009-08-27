@@ -33,14 +33,17 @@ sub _dumper_json {
     my $self = shift;
     my $opt  = shift;
     require JSON;
-    JSON::to_json( $self->_dump_to_struct, { pretty => $opt->{format} eq 'pretty' });
+    return  JSON::to_json(
+                $self->_dump_to_struct,
+                { pretty => $opt->{format} eq 'pretty' }
+            );
 }
 
 sub _dumper_xml {
     my $self = shift;
     my $opt  = shift;
     require XML::Simple;
-    XML::Simple::XMLout(
+    return  XML::Simple::XMLout(
         $self->_dump_to_struct,
         RootName => 'ua',
         NoIndent => $opt->{format} ne 'pretty',
@@ -51,7 +54,7 @@ sub _dumper_yaml {
     my $self = shift;
     my $opt  = shift;
     require YAML;
-    YAML::Dump( $self->_dump_to_struct );
+    return  YAML::Dump( $self->_dump_to_struct );
 }
 
 sub _dumper_dumper {
@@ -62,10 +65,11 @@ sub _dumper_dumper {
     my $max  = 0;
     map { my $l = length $_; $max = $l if $l > $max; } @ids;
     my @titles = qw( FIELD VALUE );
-    my $buf  = sprintf "%s%s%s\n%s%s%s\n", $titles[0],
-                                   (' ' x (2 + $max - length $titles[0])),
-                                   $titles[1],
-                                   '-' x $max, ' ' x 2, '-' x ($max*2);
+    my $buf    = sprintf "%s%s%s\n%s%s%s\n",
+                        $titles[0],
+                        (' ' x (2 + $max - length $titles[0])),
+                        $titles[1],
+                        '-' x $max, ' ' x 2, '-' x ($max*2);
     require Data::Dumper;
     foreach my $id ( @ids ) {
         my $name = $args ? $id->{name} : $id;
