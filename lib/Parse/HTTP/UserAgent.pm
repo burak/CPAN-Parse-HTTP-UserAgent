@@ -93,8 +93,8 @@ sub _parse {
     }
     $self->[UA_EXTRAS] = [ @buf ];
 
-    if ( $self->[UA_TK] ) {
-        push @{ $self->[UA_TK] }, $self->_numify( $self->[UA_TK][1] );
+    if ( $self->[UA_TOOLKIT] ) {
+        push @{ $self->[UA_TOOLKIT] }, $self->_numify( $self->[UA_TOOLKIT][1] );
     }
 
     if( $self->[UA_MOZILLA] ) {
@@ -274,33 +274,8 @@ Returns a hash representation of the parsed structure.
 
 =head2 accessors
 
-Ther methods can be used to access the various parts of the parsed structure.
-
-=head3 dotnet
-
-=head3 extras
-
-=head3 generic
-
-=head3 lang
-
-=head3 mozilla
-
-=head3 name
-
-=head3 original_name
-
-=head3 original_version
-
-=head3 os
-
-=head3 robot
-
-=head3 toolkit
-
-=head3 unknown
-
-=head3 version
+See L<Parse::HTTP::UserAgent::Accessors> for the available accessors you can
+use on the parsed object.
 
 =head1 SEE ALSO
 

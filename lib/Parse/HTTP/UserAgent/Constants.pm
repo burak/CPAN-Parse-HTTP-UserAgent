@@ -13,7 +13,7 @@ use constant UA_VERSION_RAW      => ++$OID; # the parsed version
 use constant UA_VERSION          => ++$OID; # used for numerical ops. via qv()
 use constant UA_OS               => ++$OID; # Operating system
 use constant UA_LANG             => ++$OID; # the language of the ua interface
-use constant UA_TK               => ++$OID; # [Opera] ua toolkit
+use constant UA_TOOLKIT          => ++$OID; # [Opera] ua toolkit
 use constant UA_EXTRAS           => ++$OID; # Extra stuff (Toolbars?) non parsable junk
 use constant UA_DOTNET           => ++$OID; # [MSIE] List of .NET CLR versions
 use constant UA_STRENGTH         => ++$OID; # [MSIE] List of .NET CLR versions
@@ -61,7 +61,7 @@ BEGIN {
         UA_VERSION
         UA_OS
         UA_LANG
-        UA_TK
+        UA_TOOLKIT
         UA_EXTRAS
         UA_DOTNET
         UA_MOZILLA

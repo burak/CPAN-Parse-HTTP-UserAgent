@@ -30,8 +30,8 @@ sub mozilla {
 
 sub toolkit {
     my $self = shift;
-    return +() if ! $self->[UA_TK];
-    return @{ $self->[UA_TK] };
+    return +() if ! $self->[UA_TOOLKIT];
+    return @{ $self->[UA_TOOLKIT] };
 }
 
 sub extras {
@@ -56,3 +56,56 @@ sub dotnet {
 1;
 
 __END__
+
+=pod
+
+=head1 NAME
+
+Parse::HTTP::UserAgent::Accessors - Available accessors
+
+=head1 SYNOPSIS
+
+   use Parse::HTTP::UserAgent;
+   my $ua = Parse::HTTP::UserAgent->new( $str );
+   die "Unable to parse!" if $ua->unknown;
+   print $ua->name;
+   print $ua->version;
+   print $ua->os;
+   # or just dump for debugging:
+   print $ua->dumper;
+
+=head1 DESCRIPTION
+
+Ther methods can be used to access the various parts of the parsed structure.
+
+=head3 dotnet
+
+=head3 extras
+
+=head3 generic
+
+=head3 lang
+
+=head3 mozilla
+
+=head3 name
+
+=head3 original_name
+
+=head3 original_version
+
+=head3 os
+
+=head3 robot
+
+=head3 toolkit
+
+=head3 unknown
+
+=head3 version
+
+=head1 SEE ALSO
+
+L<Parse::HTTP::UserAgent>.
+
+=cut

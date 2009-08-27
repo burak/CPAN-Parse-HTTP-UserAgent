@@ -10,6 +10,7 @@ lib/Parse/HTTP/UserAgent/Constants.pm
 lib/Parse/HTTP/UserAgent/Dumper.pm
 lib/Parse/HTTP/UserAgent/IS.pm
 lib/Parse/HTTP/UserAgent/Parsers.pm
+lib/Parse/HTTP/UserAgent/Accessors.pm
 t/02-parser.t
 t/03-strings.t
 t/data/parse.dat

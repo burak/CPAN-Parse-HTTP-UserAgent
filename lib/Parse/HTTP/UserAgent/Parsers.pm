@@ -106,7 +106,7 @@ sub _parse_msie {
     my @buf;
     foreach my $e ( @{ $extras } ) {
         if ( $e =~ m{ \A (Trident) / (.+?) \z }xmsi ) {
-            $self->[UA_TK] = [ $1, $2 ];
+            $self->[UA_TOOLKIT] = [ $1, $2 ];
             next;
         }
         push @buf, $e;
@@ -130,7 +130,7 @@ sub _parse_safari {
     (undef, $version)        = split RE_SLASH, $version;
     $self->[UA_NAME]         = 'Safari';
     $self->[UA_VERSION_RAW]  = $version;
-    $self->[UA_TK]           = [ split RE_SLASH, $extra->[0] ];
+    $self->[UA_TOOLKIT]      = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_LANG]         = pop @{ $thing };
     $self->[UA_OS]           = length $thing->[-1] > 1 ? pop @{ $thing }
                                                        : shift @{$thing}
@@ -172,8 +172,8 @@ sub _parse_opera_pre {
     $self->[UA_LANG]      ||= pop @{$thing} if $faking_ff;
 
     if ( version->parse($version) >= 9 && $self->[UA_LANG] && length($self->[UA_LANG]) > 5 ) {
-        $self->[UA_TK]   = [ split RE_SLASH, $self->[UA_LANG] ];
-       ($self->[UA_LANG] = pop @{$thing}) =~ tr/[]//d if $extra;
+        $self->[UA_TOOLKIT] = [ split RE_SLASH, $self->[UA_LANG] ];
+       ($self->[UA_LANG]    = pop @{$thing}) =~ tr/[]//d if $extra;
     }
 
     $self->[UA_OS]     = $self->_is_strength($thing->[-1]) ? shift @{$thing}
@@ -205,7 +205,7 @@ sub _parse_mozilla_family {
                              :                                       $moz
                              ;
     $self->[UA_NAME]         = $name;
-    $self->[UA_TK]           = [ split RE_SLASH, $extra->[0] ];
+    $self->[UA_TOOLKIT]      = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_VERSION_RAW]  = $version;
 
     if ( index($thing->[-1], 'rv:') != -1 ) {
@@ -257,7 +257,7 @@ sub _parse_gecko {
         return 1 ;
     }
 
-    if ( $self->[UA_TK] && $self->[UA_TK][0] eq 'Gecko' ) {
+    if ( $self->[UA_TOOLKIT] && $self->[UA_TOOLKIT][0] eq 'Gecko' ) {
         ($self->[UA_NAME], $self->[UA_VERSION_RAW]) = split RE_SLASH, $moz;
         if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
             $self->[UA_PARSER] = 'mozilla_family:gecko';
