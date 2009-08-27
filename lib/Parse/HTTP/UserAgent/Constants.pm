@@ -29,13 +29,13 @@ use constant IS_PARSED           => ++$OID; # _parse() happened or not
 use constant IS_MAXTHON          => ++$OID; # Is this the dumb IE faker?
 use constant MAXID               =>   $OID;
 
-use constant RE_FIREFOX_NAMES => qr{Firefox|Iceweasel|Firebird|Phoenix}xms;
-use constant RE_DOTNET        => qr{ \A [.]NET \s+ CLR \s+ (.+?) \z }xms;
-use constant RE_WINDOWS_OS    => qr{ \A Win(dows|NT|[0-9]+)? }xmsi;
-use constant RE_SLASH         => qr{ / }xms;
-use constant RE_SPLIT_PARSE   => qr{ \s? [()] \s? }xms;
+use constant RE_FIREFOX_NAMES    => qr{Firefox|Iceweasel|Firebird|Phoenix }xms;
+use constant RE_DOTNET           => qr{ \A [.]NET \s+ CLR \s+ (.+?) \z    }xms;
+use constant RE_WINDOWS_OS       => qr{ \A Win(dows|NT|[0-9]+)?           }xmsi;
+use constant RE_SLASH            => qr{ /                                 }xms;
+use constant RE_SPLIT_PARSE      => qr{ \s? [()] \s?                      }xms;
 
-use constant LIST_ROBOTS      => qw(
+use constant LIST_ROBOTS         => qw(
     Wget
     curl
     libwww-perl
@@ -48,47 +48,47 @@ use constant LIST_ROBOTS      => qw(
 use Exporter ();
 
 BEGIN {
-@ISA         = qw( Exporter );
-%EXPORT_TAGS = (
-    object_ids => [qw(
-        IS_PARSED
-        IS_MAXTHON
-        UA_STRING
-        UA_UNKNOWN
-        UA_GENERIC
-        UA_NAME
-        UA_VERSION_RAW
-        UA_VERSION
-        UA_OS
-        UA_LANG
-        UA_TOOLKIT
-        UA_EXTRAS
-        UA_DOTNET
-        UA_MOZILLA
-        UA_STRENGTH
-        UA_ROBOT
-        UA_WAP
-        UA_MOBILE
-        UA_PARSER
-        UA_DEVICE
-        UA_ORIGINAL_NAME
-        UA_ORIGINAL_VERSION
-        MAXID
-    )],
-    re => [qw(
-        RE_FIREFOX_NAMES
-        RE_DOTNET
-        RE_WINDOWS_OS
-        RE_SLASH
-        RE_SPLIT_PARSE
-    )],
-    list => [qw(
-        LIST_ROBOTS
-    )],
-);
+    @ISA         = qw( Exporter );
+    %EXPORT_TAGS = (
+        object_ids => [qw(
+            IS_PARSED
+            IS_MAXTHON
+            UA_STRING
+            UA_UNKNOWN
+            UA_GENERIC
+            UA_NAME
+            UA_VERSION_RAW
+            UA_VERSION
+            UA_OS
+            UA_LANG
+            UA_TOOLKIT
+            UA_EXTRAS
+            UA_DOTNET
+            UA_MOZILLA
+            UA_STRENGTH
+            UA_ROBOT
+            UA_WAP
+            UA_MOBILE
+            UA_PARSER
+            UA_DEVICE
+            UA_ORIGINAL_NAME
+            UA_ORIGINAL_VERSION
+            MAXID
+        )],
+        re => [qw(
+            RE_FIREFOX_NAMES
+            RE_DOTNET
+            RE_WINDOWS_OS
+            RE_SLASH
+            RE_SPLIT_PARSE
+        )],
+        list => [qw(
+            LIST_ROBOTS
+        )],
+    );
 
-@EXPORT_OK        = map { @{ $_ } } values %EXPORT_TAGS;
-$EXPORT_TAGS{all} = [ @EXPORT_OK ];
+    @EXPORT_OK        = map { @{ $_ } } values %EXPORT_TAGS;
+    $EXPORT_TAGS{all} = [ @EXPORT_OK ];
 }
 
 1;
