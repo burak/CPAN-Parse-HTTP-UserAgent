@@ -171,7 +171,7 @@ sub _parse_opera_pre {
    ($self->[UA_LANG]        = pop @{$extra}) =~ tr/[]//d if $extra;
     $self->[UA_LANG]      ||= pop @{$thing} if $faking_ff;
 
-    if ( qv($version) >= 9 && $self->[UA_LANG] && length($self->[UA_LANG]) > 5 ) {
+    if ( version->parse($version) >= 9 && $self->[UA_LANG] && length($self->[UA_LANG]) > 5 ) {
         $self->[UA_TK]   = [ split RE_SLASH, $self->[UA_LANG] ];
        ($self->[UA_LANG] = pop @{$thing}) =~ tr/[]//d if $extra;
     }
