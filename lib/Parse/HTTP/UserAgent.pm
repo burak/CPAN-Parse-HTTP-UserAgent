@@ -133,6 +133,7 @@ sub _post_parse {
         }
         push @buf, $e;
     }
+
     $self->[UA_EXTRAS] = [ @buf ];
 
     if ( $self->[UA_TOOLKIT] ) {
@@ -149,11 +150,10 @@ sub _post_parse {
         $self->[UA_OS] = $OSFIX{ $self->[UA_OS] } || $self->[UA_OS];
     }
 
-    foreach my $robo ( LIST_ROBOTS ) {
-        if ( lc($robo) eq lc($self->[UA_NAME]) ) {
-            $self->[UA_ROBOT] = 1;
-            last;
-        }
+    foreach my $robo ( LIST_ROBOTS ) { # regex???
+        next if lc $robo ne lc $self->[UA_NAME];
+        $self->[UA_ROBOT] = 1;
+        last;
     }
     return;
 }
