@@ -5,10 +5,10 @@ use vars qw( $VERSION );
 $VERSION = '0.12';
 
 use base qw(
-    Parse::HTTP::UserAgent::IS
-    Parse::HTTP::UserAgent::Parsers
-    Parse::HTTP::UserAgent::Dumper
-    Parse::HTTP::UserAgent::Accessors
+    Parse::HTTP::UserAgent::Base::IS
+    Parse::HTTP::UserAgent::Base::Parsers
+    Parse::HTTP::UserAgent::Base::Dumper
+    Parse::HTTP::UserAgent::Base::Accessors
 );
 use overload '""',    => 'name',
              '0+',    => 'version',

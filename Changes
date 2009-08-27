@@ -5,6 +5,7 @@ Time zone is UTC+2.
 0.12 Thu Aug 27 06:55:49 2009
    => Use version->new() instead of qv().
    => Moved accessors into base class.
+   => Moved all base classes into ::Base::.
 
 0.11 Wed Aug 26 08:43:04 2009
    => Add Trident detection to msie parser. remove duplicate from maxthon.

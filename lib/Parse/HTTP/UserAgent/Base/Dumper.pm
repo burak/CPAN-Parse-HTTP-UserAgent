@@ -1,4 +1,4 @@
-package Parse::HTTP::UserAgent::Dumper;
+package Parse::HTTP::UserAgent::Base::Dumper;
 use strict;
 use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
