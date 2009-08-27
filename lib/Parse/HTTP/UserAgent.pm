@@ -27,6 +27,7 @@ my %OSFIX = (
     'WinNT'          => 'Windows NT',
     'Win95'          => 'Windows 95',
     'Win98'          => 'Windows 98',
+    'Win 9x 4.90'    => 'Windows Me',
     'Windows NT 5.0' => 'Windows 2000',
     'Windows NT 5.1' => 'Windows XP',
     'Windows NT 5.2' => 'Windows Server 2003',

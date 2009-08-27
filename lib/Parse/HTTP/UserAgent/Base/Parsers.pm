@@ -2,7 +2,6 @@ package Parse::HTTP::UserAgent::Base::Parsers;
 use strict;
 use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
-use version;
 use Carp qw(croak);
 
 $VERSION = '0.10';
@@ -168,17 +167,18 @@ sub _parse_opera_pre {
     my $faking_ff           = index($thing->[-1], "rv:") != -1 ? pop @{$thing} : 0;
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version;
-   ($self->[UA_LANG]        = pop @{$extra}) =~ tr/[]//d if $extra;
-    $self->[UA_LANG]      ||= pop @{$thing} if $faking_ff;
+   (my $lang                = pop @{$extra}) =~ tr/[]//d if $extra;
+    $lang                 ||= pop @{$thing} if $faking_ff;
 
-    if ( version->parse($version) >= 9 && $self->[UA_LANG] && length($self->[UA_LANG]) > 5 ) {
-        $self->[UA_TOOLKIT] = [ split RE_SLASH, $self->[UA_LANG] ];
-       ($self->[UA_LANG]    = pop @{$thing}) =~ tr/[]//d if $extra;
+    if ( $self->_numify( $version ) >= 9 && $lang && length( $lang ) > 5 ) {
+        $self->[UA_TOOLKIT] = [ split RE_SLASH, $lang ];
+       ($lang = pop @{$thing}) =~ tr/[]//d if $extra;
     }
 
-    $self->[UA_OS]     = $self->_is_strength($thing->[-1]) ? shift @{$thing}
-                       :                                     pop   @{$thing}
-                       ;
+    $self->[UA_LANG] = $lang;
+    $self->[UA_OS]   = $self->_is_strength($thing->[-1]) ? shift @{$thing}
+                     :                                     pop   @{$thing}
+                     ;
 
     $self->[UA_EXTRAS] = [ @{ $thing }, ( $extra ? @{$extra} : () ) ];
     return $self->_fix_opera;
