@@ -90,7 +90,7 @@ __END__
 
 =head1 NAME
 
-Parse::HTTP::UserAgent::IS - Base class
+Parse::HTTP::UserAgent::Base::IS - Base class
 
 =head1 DESCRIPTION
 

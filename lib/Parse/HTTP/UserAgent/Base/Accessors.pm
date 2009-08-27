@@ -60,7 +60,7 @@ __END__
 
 =head1 NAME
 
-Parse::HTTP::UserAgent::Accessors - Available accessors
+Parse::HTTP::UserAgent::Base::Accessors - Available accessors
 
 =head1 SYNOPSIS
 

@@ -392,7 +392,7 @@ __END__
 
 =head1 NAME
 
-Parse::HTTP::UserAgent::Parsers - Base class
+Parse::HTTP::UserAgent::Base::Parsers - Base class
 
 =head1 DESCRIPTION
 

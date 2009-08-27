@@ -99,7 +99,7 @@ __END__
 
 =head1 NAME
 
-Parse::HTTP::UserAgent::Dumper - Base class to dump parsed structure
+Parse::HTTP::UserAgent::Base::Dumper - Base class to dump parsed structure
 
 =head1 DESCRIPTION
 

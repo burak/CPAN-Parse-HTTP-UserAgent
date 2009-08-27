@@ -276,9 +276,13 @@ Trims the string.
 
 Returns a hash representation of the parsed structure.
 
+=head2 dumper
+
+See L<Parse::HTTP::UserAgent::Base::Dumper>.
+
 =head2 accessors
 
-See L<Parse::HTTP::UserAgent::Accessors> for the available accessors you can
+See L<Parse::HTTP::UserAgent::Base::Accessors> for the available accessors you can
 use on the parsed object.
 
 =head1 SEE ALSO
