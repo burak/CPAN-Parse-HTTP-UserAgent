@@ -2,7 +2,7 @@ package Parse::HTTP::UserAgent;
 use strict;
 use vars qw( $VERSION );
 
-$VERSION = '0.13';
+$VERSION = '0.14';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -285,6 +285,17 @@ See L<Parse::HTTP::UserAgent::Base::Dumper>.
 
 See L<Parse::HTTP::UserAgent::Base::Accessors> for the available accessors you can
 use on the parsed object.
+
+=head1 OVERLOADED INTERFACE
+
+The object returned, overloads stringification (C<name>) and numification
+(C<version>) operators. So that you can write this:
+
+    print 42 if $ua eq 'Opera' && $ua >= 9;
+
+instead of this
+
+    print 42 if $ua->name eq 'Opera' && $ua->version >= 9;
 
 =head1 SEE ALSO
 

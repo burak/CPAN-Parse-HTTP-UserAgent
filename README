@@ -30,7 +30,6 @@ This module requires these other modules:
 these modules are only required for testing:
 
    Test::More   0.40
-   File::Temp
 
 All are available on CPAN.
 
