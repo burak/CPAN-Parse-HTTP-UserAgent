@@ -18,7 +18,7 @@ my @tests = map { $_->{string} } database({ thaw => 1 });
 
 printf "*** The data integrity is not checked in this run.\n";
 printf "*** This is a benchmark for parser speeds.\n";
-printf "*** Testing %d User Agent strings on each module with $count iterations.\n\n", scalar @tests;
+printf "*** Testing %d User Agent strings on each module with $count iterations each.\n\n", scalar @tests;
 
 print "This may take a while. Please stand by ...\n\n";
 
