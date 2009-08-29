@@ -2,7 +2,6 @@ package Parse::HTTP::UserAgent::Base::Parsers;
 use strict;
 use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
-use Carp qw(croak);
 use constant ERROR_MAXTHON_VERSION => "Unable to extract Maxthon version from Maxthon UA-string";
 use constant ERROR_MAXTHON_MSIE    => "Unable to extract MSIE from Maxthon UA-string";
 
