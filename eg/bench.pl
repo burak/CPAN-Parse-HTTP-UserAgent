@@ -1,7 +1,10 @@
 use strict;
 use warnings;
+use Getopt::Long;
 
-my $count = 100;
+GetOptions(\my %opt, qw(
+    count=i
+));
 
 use HTTP::BrowserDetect;
 use Parse::HTTP::UserAgent;
@@ -14,6 +17,7 @@ our $SILENT = 1;
 
 require 't/db.pl';
 
+my $count = $opt{count} || 100;
 my @tests = map { $_->{string} } database({ thaw => 1 });
 
 printf "*** The data integrity is not checked in this run.\n";
