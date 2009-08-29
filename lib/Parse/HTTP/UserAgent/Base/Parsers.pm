@@ -3,6 +3,8 @@ use strict;
 use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
 use Carp qw(croak);
+use constant ERROR_MAXTHON_VERSION => "Unable to extract Maxthon version from Maxthon UA-string";
+use constant ERROR_MAXTHON_MSIE    => "Unable to extract MSIE from Maxthon UA-string";
 
 $VERSION = '0.10';
 
@@ -69,16 +71,26 @@ sub _parse_maxthon {
         push @buf, $e;
     }
 
-    # make this a warning after development?
-    croak "Unable to extract Maxthon version from Maxthon UA-string" if ! $maxthon;
-    croak "Unable to extract MSIE from Maxthon UA-string" if ! $msie;
+    if ( ! $maxthon ) {
+        warn ERROR_MAXTHON_VERSION;
+        $self->[UA_UNKNOWN] = 1;
+        return;
+    }
+
+    if ( ! $msie ) {
+        warn ERROR_MAXTHON_MSIE;
+        $self->[UA_UNKNOWN] = 1;
+        return;
+    }
 
     $self->_parse_msie($moz, [ undef, @buf ], undef, split /\s+/, $msie);
 
     my(undef, $mv) = split m{ \s+ }xms, $maxthon;
-    $self->[UA_ORIGINAL_VERSION] = $mv || (
-        $maxthon ? '1.0' : croak "Unable to extract Maxthon version?"
-    );
+    my $v = $mv      ? $mv
+          : $maxthon ? '1.0'
+          :            do { warn ERROR_MAXTHON_VERSION; 0 }
+          ;
+    $self->[UA_ORIGINAL_VERSION] = $v;
     $self->[UA_ORIGINAL_NAME] = 'Maxthon';
     return;
 }
