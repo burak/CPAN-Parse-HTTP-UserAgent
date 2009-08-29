@@ -5,6 +5,7 @@ Time zone is UTC+2.
 0.14 Fri Aug 28 10:30:49 2009
    => Pod updates.
    => Epiphany support.
+   => Add bench.pl to distro
 
 0.13 Thu Aug 27 07:19:32 2009
    => Monolithic version is now bundled.

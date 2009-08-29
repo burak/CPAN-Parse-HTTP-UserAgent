@@ -25,15 +25,28 @@ print "This may take a while. Please stand by ...\n\n";
 my $start = Benchmark->new;
 
 cmpthese( $count, {
-    'HTML::ParseBrowser'     => sub { foreach my $s (@tests) { my $ua = html_parsebrowser($s)    } },
-    'HTTP::BrowserDetect'    => sub { foreach my $s (@tests) { my $ua = http_browserdetect($s)   } },
-    'HTTP::DetectUserAgent'  => sub { foreach my $s (@tests) { my $ua = http_detectuseragent($s) } },
-    'Parse::HTTP::UserAgent' => sub { foreach my $s (@tests) { my $ua = parse_http_useragent($s) } },
+    'HTML'    => sub { foreach my $s (@tests) { my $ua = html_parsebrowser(     $s ) } },
+    'Browser' => sub { foreach my $s (@tests) { my $ua = http_browserdetect(    $s ) } },
+    'Detect'  => sub { foreach my $s (@tests) { my $ua = http_detectuseragent(  $s ) } },
+    'Parse'   => sub { foreach my $s (@tests) { my $ua = parse_http_useragent(  $s ) } },
+    'Parse2'  => sub { foreach my $s (@tests) { my $ua = parse_http_useragent2( $s ) } },
 });
 
 printf "\nThe code took: %s\n", timestr( timediff(Benchmark->new, $start) );
 
-sub html_parsebrowser    { my $ua = HTML::ParseBrowser->new(     shift ); $ua; }
-sub http_browserdetect   { my $ua = HTTP::BrowserDetect->new(    shift ); $ua; }
-sub http_detectuseragent { my $ua = HTTP::DetectUserAgent->new(  shift ); $ua; }
-sub parse_http_useragent { my $ua = Parse::HTTP::UserAgent->new( shift ); $ua; }
+print <<'KEYS';
+
+List of abbreviations:
+
+HTML      HTML::ParseBrowser
+Browser   HTTP::BrowserDetect
+Detect    HTTP::DetectUserAgent
+Parse     Parse::HTTP::UserAgent
+Parse2    Parse::HTTP::UserAgent (without extended probe)
+KEYS
+
+sub html_parsebrowser     { my $ua = HTML::ParseBrowser->new(     shift ); $ua; }
+sub http_browserdetect    { my $ua = HTTP::BrowserDetect->new(    shift ); $ua; }
+sub http_detectuseragent  { my $ua = HTTP::DetectUserAgent->new(  shift ); $ua; }
+sub parse_http_useragent  { my $ua = Parse::HTTP::UserAgent->new( shift ); $ua; }
+sub parse_http_useragent2 { my $ua = Parse::HTTP::UserAgent->new( shift, {extended=>0} ); $ua; }

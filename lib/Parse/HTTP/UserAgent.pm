@@ -285,6 +285,8 @@ is true. Set this to false to disable:
 
    $ua = Parse::HTTP::UserAgent->new( $str, { extended => 0 } );
 
+Can be used to speed up the parser by disabling detection of non-major browsers.
+
 =back
 
 =head2 trim STRING
