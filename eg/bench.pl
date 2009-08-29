@@ -11,20 +11,30 @@ use Parse::HTTP::UserAgent;
 use HTTP::DetectUserAgent;
 use HTML::ParseBrowser;
 use Benchmark qw( :all :hireswallclock );
-use lib qw( .. );
+use lib       qw( .. );
 
 our $SILENT = 1;
+
+sub html_parsebrowser     { my $ua = HTML::ParseBrowser->new(     shift ); $ua; }
+sub http_browserdetect    { my $ua = HTTP::BrowserDetect->new(    shift ); $ua; }
+sub http_detectuseragent  { my $ua = HTTP::DetectUserAgent->new(  shift ); $ua; }
+sub parse_http_useragent  { my $ua = Parse::HTTP::UserAgent->new( shift ); $ua; }
+sub parse_http_useragent2 { my $ua = Parse::HTTP::UserAgent->new( shift, {extended=>0} ); $ua; }
 
 require 't/db.pl';
 
 my $count = $opt{count} || 100;
 my @tests = map { $_->{string} } database({ thaw => 1 });
+my $total = @tests;
 
-printf "*** The data integrity is not checked in this run.\n";
-printf "*** This is a benchmark for parser speeds.\n";
-printf "*** Testing %d User Agent strings on each module with $count iterations each.\n\n", scalar @tests;
+print <<"ATTENTION";
+*** The data integrity is not checked in this run.
+*** This is a benchmark for parser speeds.
+*** Testing $total User Agent strings on each module with $count iterations each.
 
-print "This may take a while. Please stand by ...\n\n";
+This may take a while. Please stand by ...
+
+ATTENTION
 
 my $start = Benchmark->new;
 
@@ -36,9 +46,13 @@ cmpthese( $count, {
     'Parse2'  => sub { foreach my $s (@tests) { my $ua = parse_http_useragent2( $s ) } },
 });
 
-printf "\nThe code took: %s\n", timestr( timediff(Benchmark->new, $start) );
+my $runtime = timestr( timediff(Benchmark->new, $start) );
 
-print <<'KEYS';
+print <<"GOODBYE";
+
+The code took: $runtime 
+
+---------------------------------------------------------
 
 List of abbreviations:
 
@@ -47,10 +61,6 @@ Browser   HTTP::BrowserDetect
 Detect    HTTP::DetectUserAgent
 Parse     Parse::HTTP::UserAgent
 Parse2    Parse::HTTP::UserAgent (without extended probe)
-KEYS
+GOODBYE
 
-sub html_parsebrowser     { my $ua = HTML::ParseBrowser->new(     shift ); $ua; }
-sub http_browserdetect    { my $ua = HTTP::BrowserDetect->new(    shift ); $ua; }
-sub http_detectuseragent  { my $ua = HTTP::DetectUserAgent->new(  shift ); $ua; }
-sub parse_http_useragent  { my $ua = Parse::HTTP::UserAgent->new( shift ); $ua; }
-sub parse_http_useragent2 { my $ua = Parse::HTTP::UserAgent->new( shift, {extended=>0} ); $ua; }
+__END__
