@@ -8,12 +8,11 @@ $VERSION = '0.10';
 
 sub dumper {
     my $self = shift;
-    my %opt  = @_ % 2 ? () : (@_);
-    %opt = (
+    my %opt  = @_ % 2 ? () : (
         type      => 'dumper',
         format    => 'none',
         interpret => 0,
-        %opt
+        @_
     );
     my $meth = '_dumper_' . lc($opt{type});
     croak "Don't know how to dump with $opt{type}" if ! $self->can( $meth );
@@ -44,10 +43,10 @@ sub _dumper_xml {
     my $opt  = shift;
     require XML::Simple;
     return  XML::Simple::XMLout(
-        $self->_dump_to_struct,
-        RootName => 'ua',
-        NoIndent => $opt->{format} ne 'pretty',
-    );
+                $self->_dump_to_struct,
+                RootName => 'ua',
+                NoIndent => $opt->{format} ne 'pretty',
+            );
 }
 
 sub _dumper_yaml {
@@ -58,6 +57,7 @@ sub _dumper_yaml {
 }
 
 sub _dumper_dumper {
+    # yeah, I know. Fugly code here
     my $self = shift;
     my $opt  = shift;
     my @ids  = $opt->{args} ?  @{ $opt->{args} } : $self->_object_ids;
