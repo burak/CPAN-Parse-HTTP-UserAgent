@@ -90,16 +90,15 @@ sub _parse_maxthon {
           : $maxthon ? '1.0'
           :            do { warn ERROR_MAXTHON_VERSION; 0 }
           ;
+
     $self->[UA_ORIGINAL_VERSION] = $v;
-    $self->[UA_ORIGINAL_NAME] = 'Maxthon';
+    $self->[UA_ORIGINAL_NAME]    = 'Maxthon';
     return;
 }
 
 sub _parse_msie {
     my($self, $moz, $thing, $extra, $name, $version) = @_;
     my $junk = shift @{ $thing }; # already used
-    # "Microsoft Internet Explorer";
-
     my($extras,$dotnet) = $self->_extract_dotnet( $thing, $extra );
 
     if ( @{$extras} == 2 && index( $extras->[1], 'Lunascape' ) != -1 ) {

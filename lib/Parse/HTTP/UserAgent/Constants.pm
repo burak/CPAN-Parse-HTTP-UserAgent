@@ -27,6 +27,7 @@ use constant UA_ORIGINAL_NAME    => ++$OID; # original name if this is some vari
 use constant UA_ORIGINAL_VERSION => ++$OID; # original version if this is some variation
 use constant IS_PARSED           => ++$OID; # _parse() happened or not
 use constant IS_MAXTHON          => ++$OID; # Is this the dumb IE faker?
+use constant IS_EXTENDED         => ++$OID;
 use constant MAXID               =>   $OID;
 
 use constant RE_FIREFOX_NAMES    => qr{Firefox|Iceweasel|Firebird|Phoenix }xms;
@@ -53,6 +54,7 @@ BEGIN {
         object_ids => [qw(
             IS_PARSED
             IS_MAXTHON
+            IS_EXTENDED
             UA_STRING
             UA_UNKNOWN
             UA_GENERIC

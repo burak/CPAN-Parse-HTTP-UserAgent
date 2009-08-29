@@ -38,9 +38,12 @@ my %OSFIX = (
 sub new {
     my $class = shift;
     my $ua    = shift || croak "No user agent string specified";
+    my $opt   = shift || {};
+    croak "Options must be a hash reference" if ref $opt ne 'HASH';
     my $self  = [ map { undef } 0..MAXID ];
     bless $self, $class;
-    $self->[UA_STRING] = $ua;
+    $self->[UA_STRING]   = $ua;
+    $self->[IS_EXTENDED] = exists $opt->{extended} ? $opt->{extended} : 1;
     $self->_parse;
     return $self;
 }
@@ -114,8 +117,7 @@ sub _do_parse {
         return $self->$method( @{ $rv } );
     }
 
-    return $self->_extended_probe($m, $t, $e, $c, @o)
-                if $self->can('_extended_probe');
+    return $self->_extended_probe($m, $t, $e, $c, @o) if $self->[IS_EXTENDED];
 
     $self->[UA_UNKNOWN] = 1; # give up
     return;
