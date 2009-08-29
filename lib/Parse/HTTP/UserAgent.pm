@@ -268,10 +268,24 @@ also a structure dumper, useful for debugging.
 
 =head1 METHODS
 
-=head2 new STRING
+=head2 new STRING [, OPTIONS ]
 
 Constructor. Takes the user agent string as the only parameter and returns
 an object based on the parsed structure.
+
+The optional C<OPTIONS> parameter (must be a hashref) can be used to pass
+several parameters:
+
+=over 4
+
+=item *
+
+C<extended>: controls if the extended probe qill be used or not. Default
+is true. Set this to false to disable:
+
+   $ua = Parse::HTTP::UserAgent->new( $str, { extended => 0 } );
+
+=back
 
 =head2 trim STRING
 
@@ -300,6 +314,24 @@ The object returned, overloads stringification (C<name>) and numification
 instead of this
 
     print 42 if $ua->name eq 'Opera' && $ua->version >= 9;
+
+=head1 ERROR HANDLING
+
+=over 4
+
+=item *
+
+If you pass a false value to the constructor, it'll croak.
+
+=item *
+
+If you pass a non-hashref option to the constructor, it'll croak.
+
+=item *
+
+If you pass a wrong parameter to the dumper, it'll croak.
+
+=back
 
 =head1 SEE ALSO
 
