@@ -85,7 +85,7 @@ sub _pre_parse {
     my $ua = $self->[UA_STRING];
     my($moz, $thing, $extra, @others) = split RE_SPLIT_PARSE, $ua;
     $thing = $thing ? [ split m{;\s?}xms, $thing ] : [];
-    $extra = [ split m{ \s+}xms, $extra ] if $extra;
+    $extra = [ split RE_WHITESPACE, $extra ] if $extra;
     $self->_debug_pre_parse( $moz, $thing, $extra, @others ) if DEBUG;
     return $moz, $thing, $extra, @others;
 }
@@ -96,7 +96,7 @@ sub _do_parse {
     my $c = $t->[0] && $t->[0] eq 'compatible';
 
     if ( $c && shift @{$t} && ! $e && ! $self->[IS_MAXTHON] ) {
-        my($n, $v) = split /\s+/, $t->[0];
+        my($n, $v) = split RE_WHITESPACE, $t->[0];
         if ( $n eq 'MSIE' && index($m, ' ') == -1 ) {
             $self->[UA_PARSER] = 'msie';
             return $self->_parse_msie($m, $t, $e, $n, $v);

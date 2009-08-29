@@ -32,7 +32,7 @@ sub _fix_opera {
     return if ! $self->[UA_EXTRAS];
     my @buf;
     foreach my $e ( @{ $self->[UA_EXTRAS] } ) {
-        if ( $e =~ m{ \A (Opera \s+ Mini) / (.+?) \z }xms ) {
+        if ( $e =~ RE_OPERA_MINI ) {
             $self->[UA_ORIGINAL_NAME]    = $1;
             $self->[UA_ORIGINAL_VERSION] = $2;
             next;
@@ -61,9 +61,7 @@ sub _fix_generic {
 sub _parse_maxthon {
     my($self, $moz, $thing, $extra, @others) = @_;
     my @omap = grep { $_ } map { split m{;\s+?}xms, $_ } @others;
-    my($maxthon, $msie);
-
-    my @buf;
+    my($maxthon, $msie, @buf);
     foreach my $e ( @omap, @{$thing} ) { # $extra -> junk
         if ( index(uc $e, 'MAXTHON') != -1 ) { $maxthon = $e; next; }
         if ( index(uc $e, 'MSIE'   ) != -1 ) { $msie    = $e; next; }
@@ -82,9 +80,9 @@ sub _parse_maxthon {
         return;
     }
 
-    $self->_parse_msie($moz, [ undef, @buf ], undef, split /\s+/, $msie);
+    $self->_parse_msie($moz, [ undef, @buf ], undef, split RE_WHITESPACE, $msie);
 
-    my(undef, $mv) = split m{ \s+ }xms, $maxthon;
+    my(undef, $mv) = split RE_WHITESPACE, $maxthon;
     my $v = $mv      ? $mv
           : $maxthon ? '1.0'
           :            do { warn ERROR_MAXTHON_VERSION; 0 }
@@ -114,7 +112,7 @@ sub _parse_msie {
 
     my @buf;
     foreach my $e ( @{ $extras } ) {
-        if ( $e =~ m{ \A (Trident) / (.+?) \z }xmsi ) {
+        if ( $e =~ RE_TRIDENT ) {
             $self->[UA_TOOLKIT] = [ $1, $2 ];
             next;
         }
@@ -134,7 +132,7 @@ sub _parse_firefox {
 sub _parse_safari {
     my $self = shift;
     my($moz, $thing, $extra, @others) = @_;
-    my($version, @junk)     = split m{\s+}xms, pop @others;
+    my($version, @junk)     = split RE_WHITESPACE, pop @others;
     my $ep = $version && index( lc($version), 'epiphany' ) != -1;
     (undef, $version)       = split RE_SLASH, $version;
     $self->[UA_NAME]        = $ep ? 'Epiphany' : 'Safari';
@@ -258,7 +256,7 @@ sub _parse_gecko {
                 $self->[UA_LANG] = $e;
                 next;
             }
-            if ( $e =~ m{ \A (Epiphany) / (.+?) \z }xmsi ) {
+            if ( $e =~ RE_EPIPHANY_GECKO ) {
                 $self->[UA_NAME]        = $before = $1;
                 $self->[UA_VERSION_RAW] = $2;
             }
@@ -284,8 +282,8 @@ sub _parse_gecko {
 sub _parse_netscape {
     my $self            = shift;
     my($moz, $thing)    = @_;
-    my($mozx, $junk)    = split m{ \s+ }xms, $moz;
-    my(undef, $version) = split RE_SLASH, $mozx;
+    my($mozx, $junk)    = split RE_WHITESPACE, $moz;
+    my(undef, $version) = split RE_SLASH     , $mozx;
     my @buf;
     foreach my $e ( @{ $thing } ) {
         if ( my $s = $self->_is_strength($e) ) {

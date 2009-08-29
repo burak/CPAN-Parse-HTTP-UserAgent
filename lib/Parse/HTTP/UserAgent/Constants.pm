@@ -35,6 +35,10 @@ use constant RE_DOTNET           => qr{ \A [.]NET \s+ CLR \s+ (.+?) \z    }xms;
 use constant RE_WINDOWS_OS       => qr{ \A Win(dows|NT|[0-9]+)?           }xmsi;
 use constant RE_SLASH            => qr{ /                                 }xms;
 use constant RE_SPLIT_PARSE      => qr{ \s? [()] \s?                      }xms;
+use constant RE_OPERA_MINI       => qr{ \A (Opera \s+ Mini) / (.+?) \z    }xms;
+use constant RE_TRIDENT          => qr{ \A (Trident) / (.+?) \z           }xmsi;
+use constant RE_EPIPHANY_GECKO   => qr{ \A (Epiphany) / (.+?) \z          }xmsi;
+use constant RE_WHITESPACE       => qr{ \s+ }xms;
 
 use constant LIST_ROBOTS         => qw(
     Wget
@@ -83,6 +87,10 @@ BEGIN {
             RE_WINDOWS_OS
             RE_SLASH
             RE_SPLIT_PARSE
+            RE_OPERA_MINI
+            RE_TRIDENT
+            RE_EPIPHANY_GECKO
+            RE_WHITESPACE
         )],
         list => [qw(
             LIST_ROBOTS
