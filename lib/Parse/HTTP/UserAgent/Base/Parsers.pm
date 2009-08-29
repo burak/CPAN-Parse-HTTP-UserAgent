@@ -175,10 +175,22 @@ sub _parse_opera_pre {
     my $faking_ff           = index($thing->[-1], "rv:") != -1 ? pop @{$thing} : 0;
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version;
-   (my $lang                = pop @{$extra}) =~ tr/[]//d if $extra;
-    $lang                 ||= pop @{$thing} if $faking_ff;
+    my $ver = $self->_numify( $version );
+    my $lang;
 
-    if ( $self->_numify( $version ) >= 9 && $lang && length( $lang ) > 5 ) {
+    if ( $extra ) {
+        # http://dev.opera.com/articles/view/opera-ua-string-changes/
+        my $swap = index($extra->[-1], 'Version/') != -1; # damned 10.0 beta
+        ($lang = $swap ? shift @{$extra} : pop @{$extra}) =~ tr/[]//d;
+        if ( $swap ) {
+            my $vjunk = pop @{$extra};
+            $self->[UA_VERSION_RAW] = ( split RE_SLASH, $vjunk )[1] if $vjunk;
+        }
+    }
+
+    $lang ||= pop @{$thing} if $faking_ff;
+
+    if ( ! $self->[UA_TOOLKIT] && $ver >= 9 && $lang && length( $lang ) > 5 ) {
         $self->[UA_TOOLKIT] = [ split RE_SLASH, $lang ];
        ($lang = pop @{$thing}) =~ tr/[]//d if $extra;
     }
