@@ -25,8 +25,10 @@ BEGIN {
 my %OSFIX = (
     'WinNT4.0'       => 'Windows NT 4.0',
     'WinNT'          => 'Windows NT',
+    'Windows 4.0'    => 'Windows 95',
     'Win95'          => 'Windows 95',
     'Win98'          => 'Windows 98',
+    'Windows 4.10'   => 'Windows 98',
     'Win 9x 4.90'    => 'Windows Me',
     'Windows NT 5.0' => 'Windows 2000',
     'Windows NT 5.1' => 'Windows XP',

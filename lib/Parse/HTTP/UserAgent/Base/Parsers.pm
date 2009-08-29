@@ -135,10 +135,10 @@ sub _parse_firefox {
 sub _parse_safari {
     my $self = shift;
     my($moz, $thing, $extra, @others) = @_;
-    $self->[UA_NAME]        = 'Safari';
     my($version, @junk)     = split m{\s+}xms, pop @others;
+    my $ep = $version && index( lc($version), 'epiphany' ) != -1;
     (undef, $version)       = split RE_SLASH, $version;
-    $self->[UA_NAME]        = 'Safari';
+    $self->[UA_NAME]        = $ep ? 'Epiphany' : 'Safari';
     $self->[UA_VERSION_RAW] = $version;
     $self->[UA_TOOLKIT]     = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_LANG]        = pop @{ $thing };
@@ -258,6 +258,10 @@ sub _parse_gecko {
             if ( $e =~ m{ \A [a-z]{2} \z }xms ) {
                 $self->[UA_LANG] = $e;
                 next;
+            }
+            if ( $e =~ m{ \A (Epiphany) / (.+?) \z }xmsi ) {
+                $self->[UA_NAME]        = $before = $1;
+                $self->[UA_VERSION_RAW] = $2;
             }
             push @buf, $e;
         }
