@@ -2,7 +2,7 @@ package Parse::HTTP::UserAgent;
 use strict;
 use vars qw( $VERSION );
 
-$VERSION = '0.14';
+$VERSION = '0.15';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -84,7 +84,7 @@ sub _pre_parse {
     $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != -1;
     my $ua = $self->[UA_STRING];
     my($moz, $thing, $extra, @others) = split RE_SPLIT_PARSE, $ua;
-    $thing = $thing ? [ split m{;\s?}xms, $thing ] : [];
+    $thing = $thing ? [ split RE_SC_WS, $thing ] : [];
     $extra = [ split RE_WHITESPACE, $extra ] if $extra;
     $self->_debug_pre_parse( $moz, $thing, $extra, @others ) if DEBUG;
     return $moz, $thing, $extra, @others;
@@ -176,9 +176,10 @@ sub _extended_probe {
 }
 
 sub _object_ids {
-    return grep { m{ \A UA_ }xms } keys %Parse::HTTP::UserAgent::;
+    return grep { $_ =~ RE_OBJECT_ID } keys %Parse::HTTP::UserAgent::;
 }
-
+use constant RE_WARN_OVERFLOW => qr{Integer overflow in version};
+use constant RE_WARN_INVALID  => qr{Version string .+? contains invalid data; ignoring:};
 sub _numify {
     my $self = shift;
     my $v    = shift || return 0;
@@ -192,10 +193,7 @@ sub _numify {
     # Gecko revisions like: "20080915000512" will cause an
     #   integer overflow warning. use bigint?
     local $SIG{__WARN__} = sub {
-        my $w = shift;
-        my $ok = $w !~ m{Integer overflow in version} &&
-                 $w !~ m{Version string .+? contains invalid data; ignoring:};
-        warn $w if $ok;
+        warn $_[0] if $_[0] !~ RE_WARN_OVERFLOW && $_[0] !~ RE_WARN_INVALID;
     };
     my $rv = version->new("$v")->numify;
     return $rv;
@@ -339,13 +337,46 @@ If you pass a wrong parameter to the dumper, it'll croak.
 
 =head2 Similar Functionality
 
-L<HTTP::BrowserDetect>, L<HTML::ParseBrowser>, L<HTTP::DetectUserAgent>.
+=over 4
+
+=item *
+
+L<HTTP::BrowserDetect>
+
+=item *
+
+L<HTML::ParseBrowser>
+
+=item *
+
+L<HTTP::DetectUserAgent>
+
+=item *
+
+L<HTTP::MobileAgent>
+
+=back
 
 =head2 Resources
 
+=over 4
+
+=item *
+
 L<http://en.wikipedia.org/wiki/User_agent>,
+
+=item *
+
 L<http://www.zytrax.com/tech/web/browser_ids.htm>,
+
+=item *
+
 L<http://www.zytrax.com/tech/web/mobile_ids.html>,
+
+=item *
+
 L<http://www.webaim.org/blog/user-agent-string-history/>.
+
+=back
 
 =cut
