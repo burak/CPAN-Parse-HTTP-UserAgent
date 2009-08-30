@@ -78,6 +78,11 @@ sub _is_netscape {
     return $rv;
 }
 
+sub _is_docomo {
+    my($self, $moz) = @_;
+    return index(lc $moz, 'docomo') != -1;
+}
+
 sub _is_strength {
     my $self = shift;
     my $s    = shift || return;

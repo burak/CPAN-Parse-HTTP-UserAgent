@@ -382,9 +382,9 @@ sub _generic_compatible {
 
     if ( $name eq 'MSIE') {
         if ( $extra ) { # Sleipnir?
-            ($name, $version) = split RE_SLASH, pop @{$extra};
+            ($name, $version)   = split RE_SLASH, pop @{$extra};
             my($extras,$dotnet) = $self->_extract_dotnet( $thing, $extra );
-            $self->[UA_DOTNET] = [ @{$dotnet} ] if @{$dotnet};
+            $self->[UA_DOTNET]  = [ @{$dotnet} ] if @{$dotnet};
             @extras = (@{ $extras }, @others);
         }
         else {
@@ -405,6 +405,24 @@ sub _generic_compatible {
     $self->[UA_PARSER]      = 'generic_compatible';
 
     return 1;
+}
+
+sub _parse_docomo {
+    my $self = shift;
+    my($moz, $thing, $extra, $compatible, @others) = @_;
+    if ( $thing->[0] && index(lc $thing->[0], 'googlebot-mobile') != -1 ) {
+        my($name, $version) = split RE_SLASH, shift @{ $thing };
+        $self->[UA_NAME]        = $name;
+        $self->[UA_VERSION_RAW] = $version;
+        $self->[UA_EXTRAS]      = [ @{ $thing } ];
+        $self->[UA_MOBILE]      = 1;
+        $self->[UA_ROBOT]       = 1;
+        $self->[UA_PARSER]      = 'docomo';
+        return 1;
+    }
+    #$self->[UA_PARSER] = 'docomo';
+    #require Data::Dumper;warn "DoCoMo unsupported: ".Data::Dumper::Dumper( [ $moz, $thing, $extra, $compatible, \@others ] );
+    return;
 }
 
 1;

@@ -165,11 +165,11 @@ sub _post_parse {
 
 sub _extended_probe {
     my $self = shift;
-    my($moz, $thing, $extra, $compatible, @others) = @_;
 
-    return if $self->_is_gecko        && $self->_parse_gecko( @_ );
-    return if $self->_is_netscape(@_) && $self->_parse_netscape( @_ );
-    return if $self->_is_generic(@_);
+    return if $self->_is_gecko          && $self->_parse_gecko(    @_ );
+    return if $self->_is_netscape( @_ ) && $self->_parse_netscape( @_ );
+    return if $self->_is_docomo(   @_ ) && $self->_parse_docomo(   @_ );
+    return if $self->_is_generic(  @_ );
 
     $self->[UA_UNKNOWN] = 1;
     return;
