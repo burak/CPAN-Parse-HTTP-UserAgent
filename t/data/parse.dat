@@ -1742,11 +1742,20 @@ Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
 'version'          => '2.100',
 'name'             => 'Googlebot',
 'generic'          => 1,
-'robot'       => 1,
+'robot'            => 1,
 
 [AGENT]
 # googlebot mobile
-#TODO: DoCoMo/1.0/N505i/c20/TB/W20H10 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)
+
+DoCoMo/1.0/N505i/c20/TB/W20H10 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)
+
+'parser'           => 'docomo',
+'mobile'           => 1,
+'extras'           => [ '+http://www.google.com/bot.html' ],
+'version_raw'      => '2.1',
+'robot'            => 1,
+'version'          => '2.100',
+'name'             => 'Googlebot-Mobile',
 
 [AGENT]
 # Yahoo! Slurp
