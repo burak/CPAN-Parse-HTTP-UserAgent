@@ -259,411 +259,411 @@ Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 
 
 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022; InfoPath.2)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => [ 'InfoPath.2' ],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => [ 'InfoPath.2' ],
 'version_raw'      => '7.0',
-'version'     => '7.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.1.4322','2.0.50727','3.0.04506.30','3.0.04506.648','3.5.21022'],
+'version'          => '7.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.1.4322','2.0.50727','3.0.04506.30','3.0.04506.648','3.5.21022'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Q312461; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Alexa Toolbar)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['Q312461','Alexa Toolbar'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['Q312461','Alexa Toolbar'],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.0.3705','1.1.4322'],
+'version'          => '6.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.0.3705','1.1.4322'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; AOL 9.0; Windows NT 5.1; YComp 5.0.0.0; .NET CLR 1.0.3705)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['AOL 9.0','YComp 5.0.0.0'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['AOL 9.0','YComp 5.0.0.0'],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.0.3705'],
+'version'          => '6.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.0.3705'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; AOL 9.0; Windows NT 5.1; .NET CLR 1.0.3705)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['AOL 9.0'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['AOL 9.0'],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.0.3705'],
+'version'          => '6.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.0.3705'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; AT&T WNS5.0; AT&T CSM7.0)
 
-'parser'      => 'msie',
-'os'          => 'Windows 98',
-'extras'      => [ 'AT&T WNS5.0', 'AT&T CSM7.0' ],
+'parser'           => 'msie',
+'os'               => 'Windows 98',
+'extras'           => [ 'AT&T WNS5.0', 'AT&T CSM7.0' ],
 'version_raw'      => '5.5',
-'version'     => '5.500',
-'name'        => 'MSIE',
+'version'          => '5.500',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.0; Windows NT)
 
-'parser'      => 'msie',
-'os'          => 'Windows NT',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows NT',
+'extras'           => [],
 'version_raw'      => '5.0',
-'version'     => '5.000',
-'name'        => 'MSIE',
+'version'          => '5.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0; T312461; .NET CLR 1.0.3705)
 
-'parser'      => 'msie',
-'os'          => 'Windows 2000',
-'extras'      => [ 'T312461' ],
+'parser'           => 'msie',
+'os'               => 'Windows 2000',
+'extras'           => [ 'T312461' ],
 'version_raw'      => '5.5',
-'version'     => '5.500',
-'name'        => 'MSIE',
-'dotnet'      => [ '1.0.3705' ],
+'version'          => '5.500',
+'name'             => 'MSIE',
+'dotnet'           => [ '1.0.3705' ],
 
 [AGENT]
 
 Mozilla/2.0 (compatible; MSIE 3.01; Windows 95)
 
-'parser'      => 'msie',
-'os'          => 'Windows 95',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows 95',
+'extras'           => [],
 'version_raw'      => '3.01',
-'version'     => '3.010',
-'name'        => 'MSIE',
+'version'          => '3.010',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/2.0 (compatible; MSIE 3.01; Windows NT)
 
-'parser'      => 'msie',
-'os'          => 'Windows NT',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows NT',
+'extras'           => [],
 'version_raw'      => '3.01',
-'version'     => '3.010',
-'name'        => 'MSIE',
+'version'          => '3.010',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/2.0 (compatible; MSIE 3.0; AOL 3.0; Windows 95)
 
-'parser'      => 'msie',
-'os'          => 'Windows 95',
-'extras'      => [ 'AOL 3.0' ],
+'parser'           => 'msie',
+'os'               => 'Windows 95',
+'extras'           => [ 'AOL 3.0' ],
 'version_raw'      => '3.0',
-'version'     => '3.000',
-'name'        => 'MSIE',
+'version'          => '3.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/2.0 (compatible; MSIE 4.0; Windows 95)
 
-'parser'      => 'msie',
-'os'          => 'Windows 95',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows 95',
+'extras'           => [],
 'version_raw'      => '4.0',
-'version'     => '4.000',
-'name'        => 'MSIE',
+'version'          => '4.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/3.0 (compatible; MSIE 4.0; Windows 95)
 
-'parser'      => 'msie',
-'os'          => 'Windows 95',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows 95',
+'extras'           => [],
 'version_raw'      => '4.0',
-'version'     => '4.000',
-'name'        => 'MSIE',
+'version'          => '4.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 4.01; Windows 95)
 
-'parser'      => 'msie',
-'os'          => 'Windows 95',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows 95',
+'extras'           => [],
 'version_raw'      => '4.01',
-'version'     => '4.010',
-'name'        => 'MSIE',
+'version'          => '4.010',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.0b2; Windows NT)
 
-'parser'      => 'msie',
-'os'          => 'Windows NT',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows NT',
+'extras'           => [],
 'version_raw'      => '5.0b2',
-'version'     => '5.000',
-'name'        => 'MSIE',
+'version'          => '5.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)
 
-'parser'      => 'msie',
-'os'          => 'Windows NT',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows NT',
+'extras'           => [],
 'version_raw'      => '5.5',
-'version'     => '5.500',
-'name'        => 'MSIE',
+'version'          => '5.500',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)
 
-'parser'      => 'msie',
-'os'          => 'Windows 2000',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows 2000',
+'extras'           => [],
 'version_raw'      => '5.5',
-'version'     => '5.500',
-'name'        => 'MSIE',
+'version'          => '5.500',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.0; Win32)
 
-'parser'      => 'msie',
-'os'          => 'Win32',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Win32',
+'extras'           => [],
 'version_raw'      => '5.0',
-'version'     => '5.000',
-'name'        => 'MSIE',
+'version'          => '5.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.0b1; Windows NT 5.0)
 
-'parser'      => 'msie',
-'os'          => 'Windows 2000',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows 2000',
+'extras'           => [],
 'version_raw'      => '5.0b1',
-'version'     => '5.000',
-'name'        => 'MSIE',
+'version'          => '5.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.0; Mac_PowerPC)
 
-'parser'      => 'msie',
-'extras'      => [],
-'os'          => 'Mac_PowerPC',
+'parser'           => 'msie',
+'extras'           => [],
+'os'               => 'Mac_PowerPC',
 'version_raw'      => '5.0',
-'version'     => '5.000',
-'name'        => 'MSIE',
+'version'          => '5.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)
 
-'parser'      => 'msie',
-'os'          => 'Windows Vista / Server 2008',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows Vista / Server 2008',
+'extras'           => [],
 'version_raw'      => '8.0',
-'version'     => '8.000',
-'name'        => 'MSIE',
+'version'          => '8.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Google Wireless Transcoder;)
 
-'parser'      => 'msie',
-'os'          => 'Windows 2000',
-'extras'      => [ 'Google Wireless Transcoder' ],
+'parser'           => 'msie',
+'os'               => 'Windows 2000',
+'extras'           => [ 'Google Wireless Transcoder' ],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
+'version'          => '6.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; Tesco; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Media Center PC 4.0; .NET CLR 2.0.50727)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => [ 'SV1', 'Tesco', 'Media Center PC 4.0' ],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => [ 'SV1', 'Tesco', 'Media Center PC 4.0' ],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
-'dotnet'      => [ '1.0.3705', '1.1.4322', '2.0.50727' ],
+'version'          => '6.000',
+'name'             => 'MSIE',
+'dotnet'           => [ '1.0.3705', '1.1.4322', '2.0.50727' ],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Supplied by Tesco.net; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => [ 'Supplied by Tesco.net' ],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => [ 'Supplied by Tesco.net' ],
 'version_raw'      => '7.0',
-'version'     => '7.000',
-'name'        => 'MSIE',
-'dotnet'      => [ '1.1.4322', '2.0.50727' ],
+'version'          => '7.000',
+'name'             => 'MSIE',
+'dotnet'           => [ '1.1.4322', '2.0.50727' ],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tesco; .NET CLR 1.1.4322)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['Tesco'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['Tesco'],
 'version_raw'      => '7.0',
-'version'     => '7.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.1.4322'],
+'version'          => '7.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.1.4322'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Sky Broadband; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506; Tesco)
 
-'parser'      => 'msie',
-'os'          => 'Windows Vista / Server 2008',
-'extras'      => ['Sky Broadband','SLCC1','Media Center PC 5.0','Tesco'],
+'parser'           => 'msie',
+'os'               => 'Windows Vista / Server 2008',
+'extras'           => ['Sky Broadband','SLCC1','Media Center PC 5.0','Tesco'],
 'version_raw'      => '7.0',
-'version'     => '7.000',
-'name'        => 'MSIE',
-'dotnet'      => ['2.0.50727','3.0.04506'],
+'version'          => '7.000',
+'name'             => 'MSIE',
+'dotnet'           => ['2.0.50727','3.0.04506'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Supplied by Tesco.net; YPC 3.2.0; SV1; yplus 5.3.04b)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['Supplied by Tesco.net','YPC 3.2.0','SV1','yplus 5.3.04b'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['Supplied by Tesco.net','YPC 3.2.0','SV1','yplus 5.3.04b'],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
+'version'          => '6.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tesco; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['Tesco'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['Tesco'],
 'version_raw'      => '7.0',
-'version'     => '7.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.1.4322','2.0.50727'],
+'version'          => '7.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.1.4322','2.0.50727'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Supplied by Tesco.net)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['Supplied by Tesco.net'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['Supplied by Tesco.net'],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
+'version'          => '6.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tesco; YPC 3.2.0; .NET CLR 1.1.4322; yplus 5.3.04b)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['Tesco','YPC 3.2.0','yplus 5.3.04b'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['Tesco','YPC 3.2.0','yplus 5.3.04b'],
 'version_raw'      => '7.0',
-'version'     => '7.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.1.4322'],
+'version'          => '7.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.1.4322'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.21; Mac_PowerPC)
 
-'parser'      => 'msie',
-'extras'      => [],
-'os'          => 'Mac_PowerPC',
+'parser'           => 'msie',
+'extras'           => [],
+'os'               => 'Mac_PowerPC',
 'version_raw'      => '5.21',
-'version'     => '5.210',
-'name'        => 'MSIE',
+'version'          => '5.210',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 4.0; .NET CLR 1.0.3705)
 
-'parser'      => 'msie',
-'os'          => 'Windows NT 4.0',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows NT 4.0',
+'extras'           => [],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.0.3705'],
+'version'          => '6.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.0.3705'],
 
 [AGENT]
 
 Mozilla/2.0 (compatible; MSIE 3.0; Windows 3.1)
 
-'parser'      => 'msie',
-'os'          => 'Windows 3.1',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows 3.1',
+'extras'           => [],
 'version_raw'      => '3.0',
-'version'     => '3.000',
-'name'        => 'MSIE',
+'version'          => '3.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.0.3705; .NET CLR 1.1.4322)
 
-'parser'      => 'msie',
-'os'          => 'Windows 2000',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows 2000',
+'extras'           => [],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.0.3705','1.1.4322'],
+'version'          => '6.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.0.3705','1.1.4322'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => [],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
+'version'          => '6.000',
+'name'             => 'MSIE',
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => [],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => [],
 'version_raw'      => '6.0',
-'version'     => '6.000',
-'name'        => 'MSIE',
-'dotnet'      => ['1.1.4322'],
+'version'          => '6.000',
+'name'             => 'MSIE',
+'dotnet'           => ['1.1.4322'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.22; Mac_PowerPC)
 
-'parser'      => 'msie',
-'extras'      => [],
-'os'          => 'Mac_PowerPC',
+'parser'           => 'msie',
+'extras'           => [],
+'os'               => 'Mac_PowerPC',
 'version_raw'      => '5.22',
-'version'     => '5.220',
-'name'        => 'MSIE',
+'version'          => '5.220',
+'name'             => 'MSIE',
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Firefox
@@ -672,180 +672,180 @@ Mozilla/4.0 (compatible; MSIE 5.22; Mac_PowerPC)
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; tr; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3
 
-'parser'      => 'firefox',
-'os'          => 'Windows XP',
-'strength'    => 'U',
-'extras'      => ['Windows'],
+'parser'           => 'firefox',
+'os'               => 'Windows XP',
+'strength'         => 'U',
+'extras'           => ['Windows'],
 'version_raw'      => '3.0.3',
-'lang'        => 'tr',
-'version'     => '3.000003',
-'mozilla'     => ['1.9.0.3','1.009000003'],
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','2008092417','2008092417.000']
+'lang'             => 'tr',
+'version'          => '3.000003',
+'mozilla'          => ['1.9.0.3','1.009000003'],
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','2008092417','2008092417.000']
 
 [AGENT]
 
 Mozilla/5.0 (compatible; SnapPreviewBot; en-US; rv:1.8.0.9) Gecko/20061206 Firefox/1.5.0.9
 
-'parser'      => 'firefox',
-'os'          => 'SnapPreviewBot',
-'extras'      => [],
+'parser'           => 'firefox',
+'os'               => 'SnapPreviewBot',
+'extras'           => [],
 'version_raw'      => '1.5.0.9',
-'lang'        => 'en-US',
-'mozilla'     => ['1.8.0.9','1.008000009'],
-'version'     => '1.005000009',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20061206','20061206.000']
+'lang'             => 'en-US',
+'mozilla'          => ['1.8.0.9','1.008000009'],
+'version'          => '1.005000009',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20061206','20061206.000']
 
 [AGENT]
 
 Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.12) Gecko/20080129 Iceweasel/2.0.0.12 (Debian-2.0.0.12-1)
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Linux i686',
-'extras'      => ['X11','Debian-2.0.0.12-1'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Linux i686',
+'extras'           => ['X11','Debian-2.0.0.12-1'],
 'version_raw'      => '2.0.0.12',
-'lang'        => 'en-US',
-'mozilla'     => ['1.8.1.12','1.008001012'],
-'version'     => '2.000000012',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20080129','20080129.000']
+'lang'             => 'en-US',
+'mozilla'          => ['1.8.1.12','1.008001012'],
+'version'          => '2.000000012',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20080129','20080129.000']
 
 [AGENT]
 
 Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.7) Gecko/20040619 Firefox/0.9
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'FreeBSD i386',
-'extras'      => ['X11'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'FreeBSD i386',
+'extras'           => ['X11'],
 'version_raw'      => '0.9',
-'lang'        => 'en-US',
-'mozilla'     => ['1.7','1.700'],
-'version'     => '0.900',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20040619','20040619.000']
+'lang'             => 'en-US',
+'mozilla'          => ['1.7','1.700'],
+'version'          => '0.900',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20040619','20040619.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7) Gecko/20040614 Firefox/0.9
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows'],
 'version_raw'      => '0.9',
-'lang'        => 'en-US',
-'mozilla'     => ['1.7','1.700'],
-'version'     => '0.900',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20040614','20040614.000']
+'lang'             => 'en-US',
+'mozilla'          => ['1.7','1.700'],
+'version'          => '0.900',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20040614','20040614.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.8a) Gecko/20040416 Firefox/0.8.0+
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Windows 2000',
-'extras'      => ['Windows'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Windows 2000',
+'extras'           => ['Windows'],
 'version_raw'      => '0.8.0+',
-'lang'        => 'en-US',
-'mozilla'     => ['1.8','1.800'],
-'version'     => '0.008000',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20040416','20040416.000']
+'lang'             => 'en-US',
+'mozilla'          => ['1.8','1.800'],
+'version'          => '0.008000',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20040416','20040416.000']
 
 [AGENT]
 
 Mozilla/5.0 (X11; U; Linux i686; de-DE; rv:1.6) Gecko/20040207 Firefox/0.8
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Linux i686',
-'extras'      => ['X11'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Linux i686',
+'extras'           => ['X11'],
 'version_raw'      => '0.8',
-'lang'        => 'de-DE',
-'mozilla'     => ['1.6','1.600'],
-'version'     => '0.800',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20040207','20040207.000']
+'lang'             => 'de-DE',
+'mozilla'          => ['1.6','1.600'],
+'version'          => '0.800',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20040207','20040207.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.5) Gecko/20031007 Firebird/0.7
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows'],
 'version_raw'      => '0.7',
-'lang'        => 'fr',
-'mozilla'     => ['1.5','1.500'],
-'version'     => '0.700',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20031007','20031007.000']
+'lang'             => 'fr',
+'mozilla'          => ['1.5','1.500'],
+'version'          => '0.700',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20031007','20031007.000']
 
 [AGENT]
 
 Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.5a) Gecko/20031002 Mozilla Firebird/0.6.1
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Linux i686',
-'extras'      => ['X11'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Linux i686',
+'extras'           => ['X11'],
 'version_raw'      => '0.6.1',
-'lang'        => 'en-US',
-'mozilla'     => ['1.5','1.500'],
-'version'     => '0.006001',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20031002','20031002.000']
+'lang'             => 'en-US',
+'mozilla'          => ['1.5','1.500'],
+'version'          => '0.006001',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20031002','20031002.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; WinNT4.0; en-US; rv:1.3a) Gecko/20021207 Phoenix/0.5
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Windows NT 4.0',
-'extras'      => ['Windows'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Windows NT 4.0',
+'extras'           => ['Windows'],
 'version_raw'      => '0.5',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.3', '1.300'],
-'version'     => '0.500',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20021207','20021207.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.3', '1.300'],
+'version'          => '0.500',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20021207','20021207.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.2b) Gecko/20020923 Phoenix/0.1
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows'],
 'version_raw'      => '0.1',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.2','1.200'],
-'version'     => '0.100',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20020923','20020923.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.2','1.200'],
+'version'          => '0.100',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20020923','20020923.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.2b) Gecko/20021001 Phoenix/0.2
 
-'parser'      => 'firefox',
-'strength'    => 'U',
-'os'          => 'Windows 2000',
-'extras'      => ['Windows'],
+'parser'           => 'firefox',
+'strength'         => 'U',
+'os'               => 'Windows 2000',
+'extras'           => ['Windows'],
 'version_raw'      => '0.2',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.2','1.200'],
-'version'     => '0.200',
-'name'        => 'Firefox',
-'toolkit'     => ['Gecko','20021001','20021001.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.2','1.200'],
+'version'          => '0.200',
+'name'             => 'Firefox',
+'toolkit'          => ['Gecko','20021001','20021001.000']
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Netscape
@@ -854,285 +854,285 @@ Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.2b) Gecko/20021001 Phoenix/
 
 Mozilla/2.02Gold (WinNT; I)
 
-'parser'      => 'netscape',
-'strength'    => 'I',
-'os'          => 'Windows NT',
-'extras'      => [],
+'parser'           => 'netscape',
+'strength'         => 'I',
+'os'               => 'Windows NT',
+'extras'           => [],
 'version_raw'      => '2.02Gold',
-'version'     => '2.020',
-'name'        => 'Netscape'
+'version'          => '2.020',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/4.79 [en] (Win95; U)
 
-'parser'      => 'netscape',
-'strength'    => 'U',
-'os'          => 'Windows 95',
-'extras'      => [],
+'parser'           => 'netscape',
+'strength'         => 'U',
+'os'               => 'Windows 95',
+'extras'           => [],
 'version_raw'      => '4.79',
-'lang'        => 'en',
-'version'     => '4.790',
-'name'        => 'Netscape'
+'lang'             => 'en',
+'version'          => '4.790',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/4.08 [en] (WinNT; I ;Nav)
 
-'parser'      => 'netscape',
-'os'          => 'Windows NT',
-'extras'      => ['Nav'],
+'parser'           => 'netscape',
+'os'               => 'Windows NT',
+'extras'           => ['Nav'],
 'version_raw'      => '4.08',
-'lang'        => 'en',
-'strength'    => 'I',
-'version'     => '4.080',
-'name'        => 'Netscape'
+'lang'             => 'en',
+'strength'         => 'I',
+'version'          => '4.080',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/4.8 (Macintosh; U; PPC)
 
-'parser'      => 'netscape',
-'strength'    => 'U',
-'os'          => 'Macintosh',
-'extras'      => ['PPC'],
+'parser'           => 'netscape',
+'strength'         => 'U',
+'os'               => 'Macintosh',
+'extras'           => ['PPC'],
 'version_raw'      => '4.8',
-'version'     => '4.800',
-'name'        => 'Netscape'
+'version'          => '4.800',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/4.79 [en] (X11; U; Linux 2.4.18-4GB i686)
 
-'parser'      => 'netscape',
-'strength'    => 'U',
-'os'          => 'Linux 2.4.18-4GB i686',
-'extras'      => ['X11'],
+'parser'           => 'netscape',
+'strength'         => 'U',
+'os'               => 'Linux 2.4.18-4GB i686',
+'extras'           => ['X11'],
 'version_raw'      => '4.79',
-'lang'        => 'en',
-'version'     => '4.790',
-'name'        => 'Netscape'
+'lang'             => 'en',
+'version'          => '4.790',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/4.79 [en]C-CCK-MCD {SillyDog} (Windows NT 5.0; U)
 
-'parser'      => 'netscape',
-'strength'    => 'U',
-'os'          => 'Windows 2000',
-'extras'      => [],
+'parser'           => 'netscape',
+'strength'         => 'U',
+'os'               => 'Windows 2000',
+'extras'           => [],
 'version_raw'      => '4.79',
-'lang'        => 'en',
-'version'     => '4.790',
-'name'        => 'Netscape'
+'lang'             => 'en',
+'version'          => '4.790',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/1.1 (Windows 3.0; I)
 
-'parser'      => 'netscape',
-'strength'    => 'I',
-'os'          => 'Windows 3.0',
-'extras'      => [],
+'parser'           => 'netscape',
+'strength'         => 'I',
+'os'               => 'Windows 3.0',
+'extras'           => [],
 'version_raw'      => '1.1',
-'version'     => '1.100',
-'name'        => 'Netscape'
+'version'          => '1.100',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/1.1 (Windows 3.1; I)
 
-'parser'      => 'netscape',
-'strength'    => 'I',
-'os'          => 'Windows 3.1',
-'extras'      => [],
+'parser'           => 'netscape',
+'strength'         => 'I',
+'os'               => 'Windows 3.1',
+'extras'           => [],
 'version_raw'      => '1.1',
-'version'     => '1.100',
-'name'        => 'Netscape'
+'version'          => '1.100',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/2.0 (Win95; I)
 
-'parser'      => 'netscape',
-'strength'    => 'I',
-'os'          => 'Windows 95',
-'extras'      => [],
+'parser'           => 'netscape',
+'strength'         => 'I',
+'os'               => 'Windows 95',
+'extras'           => [],
 'version_raw'      => '2.0',
-'version'     => '2.000',
-'name'        => 'Netscape'
+'version'          => '2.000',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/3.0 (Macintosh; I; PPC)
 
-'parser'      => 'netscape',
-'strength'    => 'I',
-'os'          => 'Macintosh',
-'extras'      => ['PPC'],
+'parser'           => 'netscape',
+'strength'         => 'I',
+'os'               => 'Macintosh',
+'extras'           => ['PPC'],
 'version_raw'      => '3.0',
-'version'     => '3.000',
-'name'        => 'Netscape'
+'version'          => '3.000',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/4.06 [en] (Win98; I ;Nav)
 
-'parser'      => 'netscape',
-'strength'    => 'I',
-'os'          => 'Windows 98',
-'extras'      => ['Nav'],
+'parser'           => 'netscape',
+'strength'         => 'I',
+'os'               => 'Windows 98',
+'extras'           => ['Nav'],
 'version_raw'      => '4.06',
-'lang'        => 'en',
-'version'     => '4.060',
-'name'        => 'Netscape'
+'lang'             => 'en',
+'version'          => '4.060',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/4.5 [en] (X11; I; FreeBSD 2.2.7-RELEASE i386)
 
-'parser'      => 'netscape',
-'strength'    => 'I',
-'os'          => 'FreeBSD 2.2.7-RELEASE i386',
-'extras'      => ['X11'],
+'parser'           => 'netscape',
+'strength'         => 'I',
+'os'               => 'FreeBSD 2.2.7-RELEASE i386',
+'extras'           => ['X11'],
 'version_raw'      => '4.5',
-'lang'        => 'en',
-'version'     => '4.500',
-'name'        => 'Netscape'
+'lang'             => 'en',
+'version'          => '4.500',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/3.03Gold (Win95; I)
 
-'parser'      => 'netscape',
-'strength'    => 'I',
-'os'          => 'Windows 95',
-'extras'      => [],
+'parser'           => 'netscape',
+'strength'         => 'I',
+'os'               => 'Windows 95',
+'extras'           => [],
 'version_raw'      => '3.03Gold',
-'version'     => '3.030',
-'name'        => 'Netscape'
+'version'          => '3.030',
+'name'             => 'Netscape'
 
 [AGENT]
 
 Mozilla/9.876 (X11; U; Linux 2.2.12-20 i686, en) Gecko/25250101 Netscape/5.432b1 (C-MindSpring)
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'lang'        => 'en',
-'os'          => 'Linux 2.2.12-20 i686',
-'extras'      => ['X11','C-MindSpring'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'lang'             => 'en',
+'os'               => 'Linux 2.2.12-20 i686',
+'extras'           => ['X11','C-MindSpring'],
 'version_raw'      => '5.432b1',
-'version'     => '5.432',
-'name'        => 'Netscape',
-'toolkit'     => ['Gecko','25250101','25250101.000']
+'version'          => '5.432',
+'name'             => 'Netscape',
+'toolkit'          => ['Gecko','25250101','25250101.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0 (CK-SillyDog)
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows','CK-SillyDog'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows','CK-SillyDog'],
 'version_raw'      => '7.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.0.1','1.000001'],
-'version'     => '7.000',
-'name'        => 'Netscape',
-'toolkit'     => ['Gecko','20020823','20020823.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.0.1','1.000001'],
+'version'          => '7.000',
+'name'             => 'Netscape',
+'toolkit'          => ['Gecko','20020823','20020823.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:0.9.4) Gecko/20011128 Netscape6/6.2.1 (CK-SillyDog)
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows','CK-SillyDog'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows','CK-SillyDog'],
 'version_raw'      => '6.2.1',
-'lang'        => 'en-US',
-'mozilla'     => [ '0.9.4','0.009004'],
-'version'     => '6.002001',
-'name'        => 'Netscape',
-'toolkit'     => ['Gecko','20011128','20011128.000'],
+'lang'             => 'en-US',
+'mozilla'          => [ '0.9.4','0.009004'],
+'version'          => '6.002001',
+'name'             => 'Netscape',
+'toolkit'          => ['Gecko','20011128','20011128.000'],
 'original_name'    => 'Netscape6',
 
 [AGENT]
 
 Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.2) Gecko/20030208 Netscape/7.02
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'PPC Mac OS X',
-'extras'      => ['Macintosh'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'PPC Mac OS X',
+'extras'           => ['Macintosh'],
 'version_raw'      => '7.02',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.0.2', '1.000002'],
-'version'     => '7.020',
-'name'        => 'Netscape',
-'toolkit'     => ['Gecko','20030208','20030208.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.0.2', '1.000002'],
+'version'          => '7.020',
+'name'             => 'Netscape',
+'toolkit'          => ['Gecko','20030208','20030208.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.2) Gecko/20010726 Netscape6/6.1
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows 98',
-'extras'      => ['Windows'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows 98',
+'extras'           => ['Windows'],
 'version_raw'      => '6.1',
-'lang'        => 'en-US',
-'mozilla'     => [ '0.9.2','0.009002'],
-'version'     => '6.100',
-'name'        => 'Netscape',
-'toolkit'     => ['Gecko','20010726','20010726.000'],
+'lang'             => 'en-US',
+'mozilla'          => [ '0.9.2','0.009002'],
+'version'          => '6.100',
+'name'             => 'Netscape',
+'toolkit'          => ['Gecko','20010726','20010726.000'],
 'original_name'    => 'Netscape6',
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:0.9.4.1) Gecko/20020508 Netscape6/6.2.3
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows'],
 'version_raw'      => '6.2.3',
-'lang'        => 'en-US',
-'mozilla'     => [ '0.9.4.1','0.009004001'],
-'version'     => '6.002003',
-'name'        => 'Netscape',
-'toolkit'     => ['Gecko','20020508','20020508.000'],
+'lang'             => 'en-US',
+'mozilla'          => [ '0.9.4.1','0.009004001'],
+'version'          => '6.002003',
+'name'             => 'Netscape',
+'toolkit'          => ['Gecko','20020508','20020508.000'],
 'original_name'    => 'Netscape6',
 
 [AGENT]
 
 Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Linux i686',
-'extras'      => ['X11'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Linux i686',
+'extras'           => ['X11'],
 'version_raw'      => '7.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.0.1','1.000001'],
-'version'     => '7.000',
-'name'        => 'Netscape',
-'toolkit'     => ['Gecko','20020823','20020823.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.0.1','1.000001'],
+'version'          => '7.000',
+'name'             => 'Netscape',
+'toolkit'          => ['Gecko','20020823','20020823.000']
 
 [AGENT]
 
 Mozilla/5.0 (Macintosh; U; PPC; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'PPC',
-'extras'      => ['Macintosh'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'PPC',
+'extras'           => ['Macintosh'],
 'version_raw'      => '7.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.0.1','1.000001'],
-'version'     => '7.000',
-'name'        => 'Netscape',
-'toolkit'     => ['Gecko','20020823','20020823.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.0.1','1.000001'],
+'version'          => '7.000',
+'name'             => 'Netscape',
+'toolkit'          => ['Gecko','20020823','20020823.000']
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Mozilla]
@@ -1141,145 +1141,145 @@ Mozilla/5.0 (Macintosh; U; PPC; en-US; rv:1.0.1) Gecko/20020823 Netscape/7.0
 
 Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.1) Gecko/20020909
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'PPC Mac OS X',
-'extras'      => ['Macintosh'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'PPC Mac OS X',
+'extras'           => ['Macintosh'],
 'version_raw'      => '5.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.0.1','1.000001'],
-'version'     => '5.000',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20020909','20020909.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.0.1','1.000001'],
+'version'          => '5.000',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20020909','20020909.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.2a) Gecko/20020910
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows'],
 'version_raw'      => '5.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.2','1.200'],
-'version'     => '5.000',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20020910','20020910.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.2','1.200'],
+'version'          => '5.000',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20020910','20020910.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.1) Gecko/20020826
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows'],
 'version_raw'      => '5.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.1','1.100'],
-'version'     => '5.000',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20020826','20020826.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.1','1.100'],
+'version'          => '5.000',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20020826','20020826.000']
 
 [AGENT]
 
 Mozilla/5.0 (X11; U; Linux i686; en-US; SkipStone 0.8.3) Gecko/20020913
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Linux i686',
-'extras'      => ['X11','en-US','SkipStone 0.8.3'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Linux i686',
+'extras'           => ['X11','en-US','SkipStone 0.8.3'],
 'version_raw'      => '5.0',
-'version'     => '5.000',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20020913','20020913.000']
+'version'          => '5.000',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20020913','20020913.000']
 
 [AGENT]
 
 Mozilla/5.0 (X11; U; Linux 2.4.3-20mdk i586; en-US; rv:0.9.1) Gecko/20010611
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Linux 2.4.3-20mdk i586',
-'extras'      => ['X11'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Linux 2.4.3-20mdk i586',
+'extras'           => ['X11'],
 'version_raw'      => '5.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '0.9.1','0.009001'],
-'version'     => '5.000',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20010611','20010611.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '0.9.1','0.009001'],
+'version'          => '5.000',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20010611','20010611.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; WinNT4.0; en-US; rv:1.2a) Gecko/20020910
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows NT 4.0',
-'extras'      => ['Windows'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows NT 4.0',
+'extras'           => ['Windows'],
 'version_raw'      => '5.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.2','1.200'],
-'version'     => '5.000',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20020910','20020910.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.2','1.200'],
+'version'          => '5.000',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20020910','20020910.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; WinNT4.0; en-US; rv:1.0.1) Gecko/20020826
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows NT 4.0',
-'extras'      => ['Windows'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows NT 4.0',
+'extras'           => ['Windows'],
 'version_raw'      => '5.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.0.1','1.000001'],
-'version'     => '5.000',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20020826','20020826.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.0.1','1.000001'],
+'version'          => '5.000',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20020826','20020826.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Win95; en-US; rv:1.1b) Gecko/20020721
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Windows 95',
-'extras'      => ['Windows'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Windows 95',
+'extras'           => ['Windows'],
 'version_raw'      => '5.0',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.1','1.100'],
-'version'     => '5.000',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20020721','20020721.000'],
+'lang'             => 'en-US',
+'mozilla'          => [ '1.1','1.100'],
+'version'          => '5.000',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20020721','20020721.000'],
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; WinNT; en; Stable) Gecko/20020911 Beonex/0.8.1-stable
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'lang'        => 'en',
-'extras'      => ['Windows','WinNT','Stable'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'lang'             => 'en',
+'extras'           => ['Windows','WinNT','Stable'],
 'version_raw'      => '0.8.1-stable',
-'version'     => '0.008001',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','20020911','20020911.000'],
+'version'          => '0.008001',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','20020911','20020911.000'],
 'original_name'    => 'Beonex',
 
 [AGENT]
 
 Mozilla/5.001 (windows; U; NT4.0; en-us) Gecko/25250101
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'extras'      => ['windows','NT4.0','en-us'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'extras'           => ['windows','NT4.0','en-us'],
 'version_raw'      => '5.001',
-'version'     => '5.001',
-'name'        => 'Mozilla',
-'toolkit'     => ['Gecko','25250101','25250101.000']
+'version'          => '5.001',
+'name'             => 'Mozilla',
+'toolkit'          => ['Gecko','25250101','25250101.000']
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Seamonkey
@@ -1290,16 +1290,16 @@ Mozilla/5.001 (windows; U; NT4.0; en-us) Gecko/25250101
 
 Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1b1pre) Gecko/20080915000512 SeaMonkey/2.0a1pre
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Linux i686',
-'extras'      => ['X11'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Linux i686',
+'extras'           => ['X11'],
 'version_raw'      => '2.0a1pre',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.9.11', '1.009011'],
-'version'     => '2.000',
-'name'        => 'SeaMonkey',
-'toolkit'     => ['Gecko','20080915000512','2147483647.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.9.11', '1.009011'],
+'version'          => '2.000',
+'name'             => 'SeaMonkey',
+'toolkit'          => ['Gecko','20080915000512','2147483647.000']
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Opera Mini
@@ -1311,7 +1311,7 @@ Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/298; U; en)
 
 'original_name'    => 'Opera Mini',
 'parser'           => 'opera_pre',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'en',
 'extras'           => ['J2ME/MIDP'],
 'version_raw'      => '9.50',
@@ -1325,7 +1325,7 @@ Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/230; U; en
 
 'original_name'    => 'Opera Mini',
 'parser'           => 'opera_pre',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'en',
 'extras'           => ['J2ME/MIDP'],
 'version_raw'      => '9.50',
@@ -1339,7 +1339,7 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/2.0.4509/1378; nl; U; ssr)
 
 'original_name'    => 'Opera Mini',
 'parser'           => 'opera_pre',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'ssr',
 'extras'           => ['J2ME/MIDP','nl'],
 'version_raw'      => '8.01',
@@ -1353,7 +1353,7 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/1.1.2277/lofi/nordic/int; O2 Xda II; en; U; ss
 
 'original_name'    => 'Opera Mini',
 'parser'           => 'opera_pre',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'ssr',
 'extras'           => ['J2ME/MIDP','O2 Xda II','en'],
 'version_raw'      => '8.01',
@@ -1366,11 +1366,11 @@ Opera/9.60 (J2ME/MIDP; Opera Mini/4.2.13337/504; U; en) Presto/2.2.0
 
 'original_name'    => 'Opera Mini',
 'parser'           => 'opera_pre',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'J2ME/MIDP',
 'extras'           => [],
 'version_raw'      => '9.60',
-'lang' => 'en',
+'lang'             => 'en',
 'version'          => '9.600',
 'name'             => 'Opera',
 'original_version' => '4.2.13337/504',
@@ -1381,7 +1381,7 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/1.0.1479/HiFi; SonyEricsson P900; no; U; ssr)
 
 'original_name'    => 'Opera Mini',
 'parser'           => 'opera_pre',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'ssr',
 'extras'           => ['J2ME/MIDP','SonyEricsson P900','no'],
 'version_raw'      => '8.01',
@@ -1397,12 +1397,12 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/1.0.1479/HiFi; SonyEricsson P900; no; U; ssr)
 Opera/10.00 (Macintosh; Intel Mac OS X; U; en) Presto/2.2.0
 
 'parser'           => 'opera_pre',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'Macintosh',
 'extras'           => ['Intel Mac OS X'],
 'toolkit'          => ['Presto','2.2.0','2.002000'],
 'version_raw'      => '10.00',
-'lang' => 'en',
+'lang'             => 'en',
 'version'          => '10.000',
 'name'             => 'Opera',
 
@@ -1411,12 +1411,12 @@ Opera/10.00 (Macintosh; Intel Mac OS X; U; en) Presto/2.2.0
 Opera/9.80 (Macintosh; Intel Mac OS X; U; en) Presto/2.2.15 Version/10.00
 
 'parser'           => 'opera_pre',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'Macintosh',
 'extras'           => ['Intel Mac OS X'],
 'toolkit'          => ['Presto','2.2.15','2.002015'],
 'version_raw'      => '10.00',
-'lang' => 'en',
+'lang'             => 'en',
 'version'          => '10.000',
 'name'             => 'Opera',
 
@@ -1425,154 +1425,154 @@ Opera/9.80 (Macintosh; Intel Mac OS X; U; en) Presto/2.2.15 Version/10.00
 # edge case
 Mozilla/4.0 (compatible; Opera/3.0; Windows 4.10) 3.50
 
-'parser'      => 'generic_compatible',
-'os'          => 'Windows 98',
-'extras'      => [ '3.50' ],
+'parser'           => 'generic_compatible',
+'os'               => 'Windows 98',
+'extras'           => [ '3.50' ],
 'version_raw'      => '3.0',
-'version'     => '3.000',
-'name'        => 'Opera',
-'generic'     => 1,
+'version'          => '3.000',
+'name'             => 'Opera',
+'generic'          => 1,
 
 [AGENT]
 
 Opera/9.62 (Windows NT 5.1; U; tr) Presto/2.1.1
 
-'parser'      => 'opera_pre',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => [],
+'parser'           => 'opera_pre',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => [],
 'version_raw'      => '9.62',
-'lang'        => 'tr',
-'version'     => '9.620',
-'name'        => 'Opera',
-'toolkit'     => ['Presto','2.1.1','2.001001'],
+'lang'             => 'tr',
+'version'          => '9.620',
+'name'             => 'Opera',
+'toolkit'          => ['Presto','2.1.1','2.001001'],
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; X11; Linux i686) Opera 7.21 [pl]
 
-'parser'      => 'opera_post',
-'os'          => 'Linux i686',
-'extras'      => ['X11'],
+'parser'           => 'opera_post',
+'os'               => 'Linux i686',
+'extras'           => ['X11'],
 'version_raw'      => '7.21',
-'lang'        => 'pl',
-'version'     => '7.210',
-'name'        => 'Opera'
+'lang'             => 'pl',
+'version'          => '7.210',
+'name'             => 'Opera'
 
 [AGENT]
 
 Mozilla/5.0 (Windows 98; U) Opera 6.0 [en]
 
-'parser'      => 'opera_post',
-'strength'    => 'U',
-'os'          => 'Windows 98',
-'extras'      => [],
+'parser'           => 'opera_post',
+'strength'         => 'U',
+'os'               => 'Windows 98',
+'extras'           => [],
 'version_raw'      => '6.0',
-'lang'        => 'en',
-'version'     => '6.000',
-'name'        => 'Opera'
+'lang'             => 'en',
+'version'          => '6.000',
+'name'             => 'Opera'
 
 [AGENT]
 
 Opera/v5.12 (EPOC; U) [en]
 
-'parser'      => 'opera_pre',
-'strength'    => 'U',
-'os'          => 'EPOC',
-'extras'      => [],
+'parser'           => 'opera_pre',
+'strength'         => 'U',
+'os'               => 'EPOC',
+'extras'           => [],
 'version_raw'      => 'v5.12',
-'lang'        => 'en',
-'version'     => '5.012000',
-'name'        => 'Opera'
+'lang'             => 'en',
+'version'          => '5.012000',
+'name'             => 'Opera'
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 5.0; Windows XP) Opera 6.05 [en]
 
-'parser'      => 'opera_post',
-'os'          => 'Windows XP',
-'extras'      => [],
+'parser'           => 'opera_post',
+'os'               => 'Windows XP',
+'extras'           => [],
 'version_raw'      => '6.05',
-'lang'        => 'en',
-'version'     => '6.050',
-'name'        => 'Opera'
+'lang'             => 'en',
+'version'          => '6.050',
+'name'             => 'Opera'
 
 [AGENT]
 
 Mozilla/5.0 (Windows NT 6.0; U; en; rv:1.8.1) Gecko/20061208 Firefox/2.0.0 Opera 9.51
 
-'parser'      => 'opera_pre',
-'strength'    => 'U',
-'os'          => 'Windows Vista / Server 2008',
-'extras'      => [],
+'parser'           => 'opera_pre',
+'strength'         => 'U',
+'os'               => 'Windows Vista / Server 2008',
+'extras'           => [],
 'version_raw'      => '9.51',
-'lang'        => 'en',
-'version'     => '9.510',
-'name'        => 'Opera'
+'lang'             => 'en',
+'version'          => '9.510',
+'name'             => 'Opera'
 
 [AGENT]
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; en) Opera 9.51
 
-'parser'      => 'opera_post',
-'os'          => 'en',
-'extras'      => ['Windows NT 5.1'],
+'parser'           => 'opera_post',
+'os'               => 'en',
+'extras'           => ['Windows NT 5.1'],
 'version_raw'      => '9.51',
-'lang'        => '',
-'version'     => '9.510',
-'name'        => 'Opera'
+'lang'             => '',
+'version'          => '9.510',
+'name'             => 'Opera'
 
 [AGENT]
 
 Mozilla/4.78 (Windows XP; U) Opera 6.05 [en]
 
-'parser'      => 'opera_post',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => [],
+'parser'           => 'opera_post',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => [],
 'version_raw'      => '6.05',
-'lang'        => 'en',
-'version'     => '6.050',
-'name'        => 'Opera'
+'lang'             => 'en',
+'version'          => '6.050',
+'name'             => 'Opera'
 
 [AGENT]
 
 Mozilla/5.0 (Windows XP; U) Opera 6.05 [en]
 
-'parser'      => 'opera_post',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => [],
+'parser'           => 'opera_post',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => [],
 'version_raw'      => '6.05',
-'lang'        => 'en',
-'version'     => '6.050',
-'name'        => 'Opera'
+'lang'             => 'en',
+'version'          => '6.050',
+'name'             => 'Opera'
 
 [AGENT]
 
 Opera/6.05 (Windows XP; U) [en]
 
-'parser'      => 'opera_pre',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => [],
+'parser'           => 'opera_pre',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => [],
 'version_raw'      => '6.05',
-'lang'        => 'en',
-'version'     => '6.050',
-'name'        => 'Opera'
+'lang'             => 'en',
+'version'          => '6.050',
+'name'             => 'Opera'
 
 [AGENT]
 
 Opera/6.03 (Linux 2.4.18-4GB i686; U) [en]
 
-'parser'      => 'opera_pre',
-'strength'    => 'U',
-'os'          => 'Linux 2.4.18-4GB i686',
-'extras'      => [],
+'parser'           => 'opera_pre',
+'strength'         => 'U',
+'os'               => 'Linux 2.4.18-4GB i686',
+'extras'           => [],
 'version_raw'      => '6.03',
-'lang'        => 'en',
-'version'     => '6.030',
-'name'        => 'Opera'
+'lang'             => 'en',
+'version'          => '6.030',
+'name'             => 'Opera'
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Safari
@@ -1582,87 +1582,87 @@ Opera/6.03 (Linux 2.4.18-4GB i686; U) [en]
 # this is a mobile agent
 Mozilla/5.0 (SymbianOS/9.1; U; en-us) AppleWebKit/413 (KHTML, like Gecko) Safari/413 UP.Link/6.3.1.15.0
 
-'parser'      => 'safari',
-'strength'    => 'U',
-'os'          => 'SymbianOS/9.1',
-'extras'      => ['KHTML, like Gecko','UP.Link/6.3.1.15.0'],
+'parser'           => 'safari',
+'strength'         => 'U',
+'os'               => 'SymbianOS/9.1',
+'extras'           => ['KHTML, like Gecko','UP.Link/6.3.1.15.0'],
 'version_raw'      => '413',
-'lang'        => 'en-us',
-'version'     => '413.000',
-'name'        => 'Safari',
-'toolkit'     => ['AppleWebKit','413','413.000']
+'lang'             => 'en-us',
+'version'          => '413.000',
+'name'             => 'Safari',
+'toolkit'          => ['AppleWebKit','413','413.000']
 
 [AGENT]
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.27.1 (KHTML, like Gecko) Version/3.2.1 Safari/525.27.1
 
 
-'parser'      => 'safari',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows','KHTML, like Gecko','Safari/525.27.1'],
+'parser'           => 'safari',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows','KHTML, like Gecko','Safari/525.27.1'],
 'version_raw'      => '3.2.1',
-'lang'        => 'en-US',
-'version'     => '3.002001',
-'name'        => 'Safari',
-'toolkit'     => ['AppleWebKit','525.27.1','525.027001']
+'lang'             => 'en-US',
+'version'          => '3.002001',
+'name'             => 'Safari',
+'toolkit'          => ['AppleWebKit','525.27.1','525.027001']
 
 [AGENT]
 
 Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124 (KHTML, like Gecko) Safari/125.1
 
-'parser'      => 'safari',
-'strength'    => 'U',
-'os'          => 'PPC Mac OS X',
-'extras'      => ['Macintosh','KHTML, like Gecko'],
+'parser'           => 'safari',
+'strength'         => 'U',
+'os'               => 'PPC Mac OS X',
+'extras'           => ['Macintosh','KHTML, like Gecko'],
 'version_raw'      => '125.1',
-'lang'        => 'en',
-'version'     => '125.100',
-'name'        => 'Safari',
-'toolkit'     => ['AppleWebKit','124','124.000']
+'lang'             => 'en',
+'version'          => '125.100',
+'name'             => 'Safari',
+'toolkit'          => ['AppleWebKit','124','124.000']
 
 [AGENT]
 
 Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/106.2 (KHTML, like Gecko) Safari/100.1
 
-'parser'      => 'safari',
-'strength'    => 'U',
-'os'          => 'PPC Mac OS X',
-'extras'      => ['Macintosh','KHTML, like Gecko'],
+'parser'           => 'safari',
+'strength'         => 'U',
+'os'               => 'PPC Mac OS X',
+'extras'           => ['Macintosh','KHTML, like Gecko'],
 'version_raw'      => '100.1',
-'lang'        => 'en',
-'version'     => '100.100',
-'name'        => 'Safari',
-'toolkit'     => ['AppleWebKit','106.2','106.200']
+'lang'             => 'en',
+'version'          => '100.100',
+'name'             => 'Safari',
+'toolkit'          => ['AppleWebKit','106.2','106.200']
 
 [AGENT]
 
 Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/74 (KHTML, like Gecko) Safari/74
 
-'parser'      => 'safari',
-'strength'    => 'U',
-'os'          => 'PPC Mac OS X',
-'extras'      => ['Macintosh','KHTML, like Gecko'],
+'parser'           => 'safari',
+'strength'         => 'U',
+'os'               => 'PPC Mac OS X',
+'extras'           => ['Macintosh','KHTML, like Gecko'],
 'version_raw'      => '74',
-'lang'        => 'en-us',
-'version'     => '74.000',
-'name'        => 'Safari',
-'toolkit'     => ['AppleWebKit','74','74.000']
+'lang'             => 'en-us',
+'version'          => '74.000',
+'name'             => 'Safari',
+'toolkit'          => ['AppleWebKit','74','74.000']
 
 [AGENT]
 
 Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3
 
-'parser'      => 'safari',
-'strength'    => 'U',
-'os'          => 'CPU like Mac OS X',
-'extras'      => ['KHTML, like Gecko','Mobile/1A543a','Safari/419.3'],
+'parser'           => 'safari',
+'strength'         => 'U',
+'os'               => 'CPU like Mac OS X',
+'extras'           => ['KHTML, like Gecko','Mobile/1A543a','Safari/419.3'],
 'version_raw'      => '3.0',
-'lang'        => 'en',
-'version'     => '3.000',
-'name'        => 'Safari',
+'lang'             => 'en',
+'version'          => '3.000',
+'name'             => 'Safari',
 'device'      => 'iPhone',
-'toolkit'     => ['AppleWebKit','420+','420.000']
+'toolkit'          => ['AppleWebKit','420+','420.000']
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Chrome
@@ -1671,15 +1671,15 @@ Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gec
 
 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13
 
-'parser'      => 'chrome',
-'strength'    => 'U',
-'os'          => 'Windows XP',
-'extras'      => ['Windows','KHTML, like Gecko'],
+'parser'           => 'chrome',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows','KHTML, like Gecko'],
 'version_raw'      => '0.2.149.27',
-'lang'        => 'en-US',
-'version'     => '0.002149027',
-'name'        => 'Chrome',
-'toolkit'     => ['AppleWebKit','525.13','525.130']
+'lang'             => 'en-US',
+'version'          => '0.002149027',
+'name'             => 'Chrome',
+'toolkit'          => ['AppleWebKit','525.13','525.130']
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY:  TinyBrowser
@@ -1688,12 +1688,12 @@ Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like 
 
 TinyBrowser/2.0 (TinyBrowser Comment) Gecko/20201231
 
-'parser'      => 'mozilla_family:generic',
-'extras'      => ['TinyBrowser Comment'],
+'parser'           => 'mozilla_family:generic',
+'extras'           => ['TinyBrowser Comment'],
 'version_raw'      => '2.0',
-'version'     => '2.000',
-'name'        => 'TinyBrowser',
-'toolkit'     => ['Gecko','20201231','20201231.000']
+'version'          => '2.000',
+'name'             => 'TinyBrowser',
+'toolkit'          => ['Gecko','20201231','20201231.000']
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Camino
@@ -1702,28 +1702,28 @@ TinyBrowser/2.0 (TinyBrowser Comment) Gecko/20201231
 
 Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.7.2) Gecko/20040825 Camino/0.8.1
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'PPC Mac OS X Mach-O',
-'extras'      => ['Macintosh'],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'PPC Mac OS X Mach-O',
+'extras'           => ['Macintosh'],
 'version_raw'      => '0.8.1',
-'lang'        => 'en-US',
-'mozilla'     => [ '1.7.2','1.007002'],
-'version'     => '0.008001',
-'name'        => 'Camino',
-'toolkit'     => ['Gecko','20040825','20040825.000']
+'lang'             => 'en-US',
+'mozilla'          => [ '1.7.2','1.007002'],
+'version'          => '0.008001',
+'name'             => 'Camino',
+'toolkit'          => ['Gecko','20040825','20040825.000']
 
 [AGENT]
 
 Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en; rv:1.8.1.14) Gecko/20080409 Camino/1.6 (like Firefox/2.0.0.14)
 
 'parser'           => 'mozilla_family:generic',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'Intel Mac OS X',
 'extras'           => ['Macintosh','like Firefox/2.0.0.14'],
 'toolkit'          => ['Gecko','20080409','20080409.000'],
 'version_raw'      => '1.6',
-'lang' => 'en',
+'lang'             => 'en',
 'version'          => '1.600',
 'mozilla' => ['1.8.1.14','1.008001014'],
 'name'             => 'Camino',
@@ -1736,12 +1736,12 @@ Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en; rv:1.8.1.14) Gecko/20080409 Camin
 
 Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
 
-'parser'      => 'generic_compatible',
-'extras'      => ['http://www.google.com/bot.html'],
+'parser'           => 'generic_compatible',
+'extras'           => ['http://www.google.com/bot.html'],
 'version_raw'      => '2.1',
-'version'     => '2.100',
-'name'        => 'Googlebot',
-'generic'     => 1,
+'version'          => '2.100',
+'name'             => 'Googlebot',
+'generic'          => 1,
 'robot'       => 1,
 
 [AGENT]
@@ -1754,10 +1754,10 @@ Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slu
 
 'parser'           => 'generic_compatible',
 'extras'           => ['http://help.yahoo.com/help/us/ysearch/slurp'],
-'version_raw' => 0,
+'version_raw'      => 0,
 'name'             => 'Yahoo! Slurp',
-'generic' => 1,
-robot => 1,
+'generic'          => 1,
+'robot'            => 1,
 
 [AGENT]
 
@@ -1765,10 +1765,10 @@ Baiduspider+(+http://help.baidu.jp/system/05.html)
 
 'parser'           => 'generic_moz_thing',
 'extras'           => ['+http://help.baidu.jp/system/05.html'],
-'version_raw' => 0,
+'version_raw'      => 0,
 'name'             => 'Baiduspider+',
-'generic' => 1,
-robot => 1,
+'generic'          => 1,
+'robot'            => 1,
 
 [AGENT]
 msnbot/1.1 (+http://search.msn.com/msnbot.htm)
@@ -1778,8 +1778,8 @@ msnbot/1.1 (+http://search.msn.com/msnbot.htm)
 'version_raw'      => '1.1',
 'version'          => '1.100',
 'name'             => 'msnbot',
-'generic' => 1,
-robot => 1,
+'generic'          => 1,
+'robot'            => 1,
 
 [AGENT]
 
@@ -1789,24 +1789,24 @@ robot => 1,
 
 curl/7.13.0 (i686-suse-linux) libcurl/7.13.0 OpenSSL/0.9.7e zlib/1.2.2
 
-'parser'      => 'generic_moz_thing',
-'extras'      => [ 'i686-suse-linux', 'libcurl/7.13.0', 'OpenSSL/0.9.7e', 'zlib/1.2.2' ],
+'parser'           => 'generic_moz_thing',
+'extras'           => [ 'i686-suse-linux', 'libcurl/7.13.0', 'OpenSSL/0.9.7e', 'zlib/1.2.2' ],
 'version_raw'      => '7.13.0',
-'version'     => '7.013000',
-'name'        => 'curl',
-'generic'     => 1,
+'version'          => '7.013000',
+'name'             => 'curl',
+'generic'          => 1,
 'robot'       => 1,
 
 [AGENT]
 
 Links (2.1pre15; Linux 2.4.26-vc4 i586; x)
 
-'parser'      => 'generic_moz_thing',
-'extras'      => [ 'Linux 2.4.26-vc4 i586', 'x' ],
+'parser'           => 'generic_moz_thing',
+'extras'           => [ 'Linux 2.4.26-vc4 i586', 'x' ],
 'version_raw'      => '2.1pre15',
-'version'     => '2.115',
-'name'        => 'Links',
-'generic'     => 1,
+'version'          => '2.115',
+'name'             => 'Links',
+'generic'          => 1,
 
 [AGENT]
 
@@ -1817,8 +1817,8 @@ Wget/1.4.5
 'version_raw'      => '1.4.5',
 'version'          => '1.004005',
 'name'             => 'Wget',
-'generic' => 1,
-robot => 1,
+'generic'          => 1,
+'robot'            => 1,
 
 [AGENT]
 #TODO: W3C_Validator/1.183 libwww-perl/5.64
@@ -1832,8 +1832,8 @@ libwww-perl/5.11
 'version_raw'      => '5.11',
 'version'          => '5.110',
 'name'             => 'libwww-perl',
-'generic' => 1,
-robot => 1,
+'generic'          => 1,
+'robot'            => 1,
 
 [AGENT]
 
@@ -1844,8 +1844,8 @@ GetRight/3.2.1
 'version_raw'      => '3.2.1',
 'version'          => '3.002001',
 'name'             => 'GetRight',
-'generic' => 1,
-robot => 1,
+'generic'          => 1,
+'robot'            => 1,
 
 [AGENT]
 
@@ -1856,8 +1856,8 @@ Googlebot/1.0 (googlebot@googlebot.com http://googlebot.com/)
 'version_raw'      => '1.0',
 'version'          => '1.000',
 'name'             => 'Googlebot',
-'generic' => 1,
-robot => 1,
+'generic'          => 1,
+'robot'            => 1,
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Sleipnir
@@ -1866,15 +1866,15 @@ robot => 1,
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.1) Sleipnir/2.8.0
 
-'parser'      => 'generic_compatible',
-'os'          => 'Windows XP',
-'extras'      => ['SV1'],
+'parser'           => 'generic_compatible',
+'os'               => 'Windows XP',
+'extras'           => ['SV1'],
 'version_raw'      => '2.8.0',
-'lang'        => 'InfoPath.1',
-'version'     => '2.008000',
-'name'        => 'Sleipnir',
-'dotnet'      => ['1.1.4322','2.0.50727'],
-'generic'     => 1
+'lang'             => 'InfoPath.1',
+'version'          => '2.008000',
+'name'             => 'Sleipnir',
+'dotnet'           => ['1.1.4322','2.0.50727'],
+'generic'          => 1
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Lunascape
@@ -1883,13 +1883,13 @@ Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET 
 
 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; Lunascape 4.7.3)
 
-'parser'      => 'msie',
-'os'          => 'Windows XP',
-'extras'      => ['SV1'],
+'parser'           => 'msie',
+'os'               => 'Windows XP',
+'extras'           => ['SV1'],
 'version_raw'      => '4.7.3',
-'version'     => '4.007003',
-'name'        => 'Lunascape',
-'dotnet'      => ['1.1.4322','2.0.50727']
+'version'          => '4.007003',
+'name'             => 'Lunascape',
+'dotnet'           => ['1.1.4322','2.0.50727']
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Epiphany
@@ -1898,28 +1898,28 @@ Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET 
 
 Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.14eol) Gecko/20070505 (Debian-1.8.0.15~pre080323b-0etch2) Epiphany/2.14
 
-'parser'      => 'mozilla_family:generic',
-'strength'    => 'U',
-'os'          => 'Linux i686',
-'extras'      => [ 'X11', 'Debian-1.8.0.15~pre080323b-0etch2', 'Epiphany/2.14' ],
-'toolkit'     => [ 'Gecko', '20070505', '20070505.000' ],
+'parser'           => 'mozilla_family:generic',
+'strength'         => 'U',
+'os'               => 'Linux i686',
+'extras'           => [ 'X11', 'Debian-1.8.0.15~pre080323b-0etch2', 'Epiphany/2.14' ],
+'toolkit'          => [ 'Gecko', '20070505', '20070505.000' ],
 'version_raw'      => '2.14',
-'lang'        => 'en-US',
-'version'     => '2.140',
-'mozilla'     => ['1.8.0.14','1.008000014'],
-'name'        => 'Epiphany',
+'lang'             => 'en-US',
+'version'          => '2.140',
+'mozilla'          => ['1.8.0.14','1.008000014'],
+'name'             => 'Epiphany',
 
 [AGENT]
 
 Mozilla/5.0 (X11; U; Linux i686; en; rv:1.9.0.11) Gecko/20080528 Epiphany/2.22 Firefox/3.0
 
 'parser'           => 'mozilla_family:generic',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'Linux i686',
 'extras'           => ['X11'],
 'toolkit'          => ['Gecko','20080528','20080528.000'],
 'version_raw'      => '2.22',
-'lang' => 'en',
+'lang'             => 'en',
 'version'          => '2.220',
 'mozilla' => ['1.9.0.11','1.009000011'],
 'name'             => 'Epiphany',
@@ -1929,11 +1929,11 @@ Mozilla/5.0 (X11; U; Linux i686; en; rv:1.9.0.11) Gecko/20080528 Epiphany/2.22 F
 Mozilla/5.0 (X11; U; Linux x86_64; c) AppleWebKit/525.1+ (KHTML, like Gecko, Safari/525.1+) epiphany
 
 'parser'           => 'safari',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'Linux x86_64',
 'extras'           => ['X11','KHTML, like Gecko, Safari/525.1+'],
 'toolkit'          => ['AppleWebKit','525.1+','525.100'],
-'lang' => 'c',
+'lang'             => 'c',
 'name'             => 'Epiphany',
 
 [AGENT]
@@ -1941,11 +1941,11 @@ Mozilla/5.0 (X11; U; Linux x86_64; c) AppleWebKit/525.1+ (KHTML, like Gecko, Saf
 Mozilla/5.0 (X11; U; Linux i686; en-us) AppleWebKit/528.5+ (KHTML, like Gecko, Safari/528.5+) epiphany-browser
 
 'parser'           => 'safari',
-'strength' => 'U',
+'strength'         => 'U',
 'os'               => 'Linux i686',
 'extras'           => ['X11','KHTML, like Gecko, Safari/528.5+'],
 'toolkit'          => ['AppleWebKit','528.5+','528.500'],
-'lang' => 'en-us',
+'lang'             => 'en-us',
 'name'             => 'Epiphany',
 
 #------------------------------------------------------------------------------#
@@ -1955,74 +1955,74 @@ Mozilla/5.0 (X11; U; Linux i686; en-us) AppleWebKit/528.5+ (KHTML, like Gecko, S
 
 Mozilla/5.0 (compatible; Konqueror/3; Linux 2.4.18-4GB; X11; i686; en_US)
 
-'parser'      => 'generic_compatible',
-'os'          => 'Linux 2.4.18-4GB',
-'extras'      => ['X11','i686'],
+'parser'           => 'generic_compatible',
+'os'               => 'Linux 2.4.18-4GB',
+'extras'           => ['X11','i686'],
 'version_raw'      => '3',
-'lang'        => 'en_US',
-'version'     => '3.000',
-'name'        => 'Konqueror',
-'generic'     => 1
+'lang'             => 'en_US',
+'version'          => '3.000',
+'name'             => 'Konqueror',
+'generic'          => 1
 
 [AGENT]
 
 Mozilla/5.0 (compatible; Konqueror/3; Linux)
 
-'parser'      => 'generic_compatible',
-'os'          => 'Linux',
-'extras'      => [],
+'parser'           => 'generic_compatible',
+'os'               => 'Linux',
+'extras'           => [],
 'version_raw'      => '3',
-'version'     => '3.000',
-'name'        => 'Konqueror',
-'generic'     => 1
+'version'          => '3.000',
+'name'             => 'Konqueror',
+'generic'          => 1
 
 [AGENT]
 
 Mozilla/5.0 (compatible; Konqueror/2.2.2; Linux 2.4.18; X11; i686; en) LindowsOS (Lindows.com, Inc.)
 
-'parser'      => 'generic_compatible',
-'os'          => 'Linux 2.4.18',
-'extras'      => ['X11','i686','LindowsOS','Lindows.com, Inc.'],
+'parser'           => 'generic_compatible',
+'os'               => 'Linux 2.4.18',
+'extras'           => ['X11','i686','LindowsOS','Lindows.com, Inc.'],
 'version_raw'      => '2.2.2',
-'lang'        => 'en',
-'version'     => '2.002002',
-'name'        => 'Konqueror',
-'generic'     => 1
+'lang'             => 'en',
+'version'          => '2.002002',
+'name'             => 'Konqueror',
+'generic'          => 1
 
 [AGENT]
 
 Mozilla/5.0 (compatible; Konqueror/3; Darwin)
 
-'parser'      => 'generic_compatible',
-'os'          => 'Darwin',
-'extras'      => [],
+'parser'           => 'generic_compatible',
+'os'               => 'Darwin',
+'extras'           => [],
 'version_raw'      => '3',
-'version'     => '3.000',
-'name'        => 'Konqueror',
-'generic'     => 1
+'version'          => '3.000',
+'name'             => 'Konqueror',
+'generic'          => 1
 
 [AGENT]
 
 Konqueror/1.1.2
 
-'parser'      => 'generic_name_version',
-'extras'      => [],
+'parser'           => 'generic_name_version',
+'extras'           => [],
 'version_raw'      => '1.1.2',
-'version'     => '1.001002',
-'name'        => 'Konqueror',
-'generic'     => 1
+'version'          => '1.001002',
+'name'             => 'Konqueror',
+'generic'          => 1
 
 [AGENT]
 
 Links (0.96; Unix)
 
-'parser'      => 'generic_moz_thing',
-'os'          => 'Unix',
-'extras'      => [],
+'parser'           => 'generic_moz_thing',
+'os'               => 'Unix',
+'extras'           => [],
 'version_raw'      => '0.96',
-'version'     => '0.960',
-'name'        => 'Links',
-'generic'     => 1
+'version'          => '0.960',
+'name'             => 'Links',
+'generic'          => 1
 
 [AGENT]
 
@@ -2052,13 +2052,13 @@ Links (0.96; Unix)
 
 fetch/1.0 FreeBSD/4.0-CURRENT (i386)
 
-'parser'      => 'generic_moz_thing',
-'os'          => 'FreeBSD 4.0-CURRENT',
-'extras'      => ['i386'],
+'parser'           => 'generic_moz_thing',
+'os'               => 'FreeBSD 4.0-CURRENT',
+'extras'           => ['i386'],
 'version_raw'      => '1.0',
-'version'     => '1.000',
-'name'        => 'fetch',
-'generic'     => 1
+'version'          => '1.000',
+'name'             => 'fetch',
+'generic'          => 1
 
 [AGENT]
 
@@ -2066,45 +2066,45 @@ fetch/1.0 FreeBSD/4.0-CURRENT (i386)
 
 UP.Browser/4.1.2a-XXXX
 
-'parser'      => 'generic_name_version',
-'extras'      => [],
+'parser'           => 'generic_name_version',
+'extras'           => [],
 'version_raw'      => '4.1.2a-XXXX',
-'version'     => '4.001002',
-'name'        => 'UP.Browser',
-'generic'     => 1
+'version'          => '4.001002',
+'name'             => 'UP.Browser',
+'generic'          => 1
 
 [AGENT]
 
 Wapalizer/1.0
 
-'parser'      => 'generic_name_version',
-'extras'      => [],
+'parser'           => 'generic_name_version',
+'extras'           => [],
 'version_raw'      => '1.0',
-'version'     => '1.000',
-'name'        => 'Wapalizer',
-'generic'     => 1
+'version'          => '1.000',
+'name'             => 'Wapalizer',
+'generic'          => 1
 
 [AGENT]
 
 YourWap/1.16
 
-'parser'      => 'generic_name_version',
-'extras'      => [],
+'parser'           => 'generic_name_version',
+'extras'           => [],
 'version_raw'      => '1.16',
-'version'     => '1.160',
-'name'        => 'YourWap',
-'generic'     => 1
+'version'          => '1.160',
+'name'             => 'YourWap',
+'generic'          => 1
 
 [AGENT]
 
 Nokia-WAP-Toolkit/1.3beta
 
-'parser'      => 'generic_name_version',
-'extras'      => [],
+'parser'           => 'generic_name_version',
+'extras'           => [],
 'version_raw'      => '1.3beta',
-'version'     => '1.300',
-'name'        => 'Nokia-WAP-Toolkit',
-'generic'     => 1
+'version'          => '1.300',
+'name'             => 'Nokia-WAP-Toolkit',
+'generic'          => 1
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: name/version (foo)
@@ -2113,58 +2113,58 @@ Nokia-WAP-Toolkit/1.3beta
 
 AmigaVoyager/3.3.50 (AmigaOS/PPC)
 
-'parser'      => 'generic_moz_thing',
-'os'          => 'AmigaOS/PPC',
-'extras'      => [],
+'parser'           => 'generic_moz_thing',
+'os'               => 'AmigaOS/PPC',
+'extras'           => [],
 'version_raw'      => '3.3.50',
-'version'     => '3.003050',
-'name'        => 'AmigaVoyager',
-'generic'     => 1
+'version'          => '3.003050',
+'name'             => 'AmigaVoyager',
+'generic'          => 1
 
 [AGENT]
 
 AmigaVoyager (compatible; AmigaVoyager; AmigaOS)
 
-'parser'      => 'generic_compatible',
-'os'          => 'AmigaOS',
-'extras'      => [],
-'version_raw' => 0,
-'name'        => 'AmigaVoyager',
-'generic'     => 1
+'parser'           => 'generic_compatible',
+'os'               => 'AmigaOS',
+'extras'           => [],
+'version_raw'      => 0,
+'name'             => 'AmigaVoyager',
+'generic'          => 1
 
 [AGENT]
 
 AvantGo 3.2 (compatible; AvantGo 3.2)
 
-'parser'      => 'generic_compatible',
-'extras'      => [],
+'parser'           => 'generic_compatible',
+'extras'           => [],
 'version_raw'      => '3.2',
-'version'     => '3.200',
-'name'        => 'AvantGo',
-'generic'     => 1
+'version'          => '3.200',
+'name'             => 'AvantGo',
+'generic'          => 1
 
 [AGENT]
 
 Nokia7110/1.0 (30.05)
 
-'parser'      => 'generic_moz_thing',
-'extras'      => ['30.05'],
+'parser'           => 'generic_moz_thing',
+'extras'           => ['30.05'],
 'version_raw'      => '1.0',
-'version'     => '1.000',
-'name'        => 'Nokia7110',
-'generic'     => 1
+'version'          => '1.000',
+'name'             => 'Nokia7110',
+'generic'          => 1
 
 [AGENT]
 
 iCab/Pre2.0 (Macintosh; I; PPC)
 
-'parser'      => 'generic_moz_thing',
-'strength'    => 'I',
-'os'          => 'Macintosh',
-'extras'      => ['PPC'],
+'parser'           => 'generic_moz_thing',
+'strength'         => 'I',
+'os'               => 'Macintosh',
+'extras'           => ['PPC'],
 'version_raw'      => 'Pre2.0',
-'version'     => '2.000',
-'name'        => 'iCab',
-'generic'     => 1
+'version'          => '2.000',
+'name'             => 'iCab',
+'generic'          => 1
 
 #----------------------------------- THE END
