@@ -14,6 +14,8 @@ use overload '""',    => 'name',
              '0+',    => 'version',
              fallback => 1,
 ;
+use constant RE_WARN_OVERFLOW => qr{Integer overflow in version};
+use constant RE_WARN_INVALID  => qr{Version string .+? contains invalid data; ignoring:};
 use version;
 use Parse::HTTP::UserAgent::Constants qw(:all);
 use Carp qw( croak );
@@ -178,8 +180,7 @@ sub _extended_probe {
 sub _object_ids {
     return grep { $_ =~ RE_OBJECT_ID } keys %Parse::HTTP::UserAgent::;
 }
-use constant RE_WARN_OVERFLOW => qr{Integer overflow in version};
-use constant RE_WARN_INVALID  => qr{Version string .+? contains invalid data; ignoring:};
+
 sub _numify {
     my $self = shift;
     my $v    = shift || return 0;
