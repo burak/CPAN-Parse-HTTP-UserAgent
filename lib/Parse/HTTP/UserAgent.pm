@@ -196,6 +196,9 @@ sub _numify {
     local $SIG{__WARN__} = sub {
         warn $_[0] if $_[0] !~ RE_WARN_OVERFLOW && $_[0] !~ RE_WARN_INVALID;
     };
+    # if version::vpp is used it'll identify 420 as a v-string
+    # add a floating point to fool it
+    $v .= '.0' if index($v, '.') == -1;
     my $rv = version->new("$v")->numify;
     return $rv;
 }

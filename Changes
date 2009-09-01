@@ -4,6 +4,8 @@ Time zone is UTC+2.
 
 0.15 Sun Aug 30 03:09:49 2009
    => Opera 10 beta support.
+   => Work around for version::vpp bug which was causing regressions under
+      legacy perls (probably the xs version couldn't be installed on them).
 
 0.14 Fri Aug 28 10:30:49 2009
    => Pod updates.

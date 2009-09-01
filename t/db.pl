@@ -19,6 +19,7 @@ sub database {
     my $opt = shift || {};
     my @buf;
     my $tests = trim( slurp() );
+    my $id    = 0;
     foreach my $test ( split RE_SEPTOR, $tests ) {
         next if ! $test;
         my $raw = trim( strip_comments( $test ) ) || next;
@@ -26,6 +27,7 @@ sub database {
         push @buf, {
             string => $string,
             struct => $frozen && $opt->{thaw} ? { thaw( $frozen ) } : $frozen,
+            id     => ++$id,
         };
     }
     return @buf;
