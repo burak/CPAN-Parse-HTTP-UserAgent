@@ -139,8 +139,8 @@ sub _parse_safari {
     $self->[UA_VERSION_RAW] = $version;
     $self->[UA_TOOLKIT]     = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_LANG]        = pop @{ $thing };
-    $self->[UA_OS]          = length $thing->[-1] > 1 ? pop @{ $thing }
-                                                      : shift @{$thing}
+    $self->[UA_OS]          = length $thing->[-1] > 1 ? pop   @{ $thing }
+                                                      : shift @{ $thing }
                             ;
     $self->[UA_DEVICE]      = shift @{$thing} if $thing->[0] eq 'iPhone';
     $self->[UA_EXTRAS]      = [ @{$thing}, @others ];

@@ -59,7 +59,7 @@ sub _is_gecko {
 sub _is_generic { #TODO: this is actually a parser
     my $self = shift;
     return 1 if $self->_generic_name_version( @_ ) ||
-                $self->_generic_compatible(   @_ )   ||
+                $self->_generic_compatible(   @_ ) ||
                 $self->_generic_moz_thing(    @_ );
     return;
 }
