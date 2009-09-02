@@ -2,7 +2,7 @@ package Parse::HTTP::UserAgent;
 use strict;
 use vars qw( $VERSION );
 
-$VERSION = '0.15';
+$VERSION = '0.16';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -15,8 +15,8 @@ use overload '""',    => 'name',
              fallback => 1,
 ;
 use version;
-use Parse::HTTP::UserAgent::Constants qw(:all);
 use Carp qw( croak );
+use Parse::HTTP::UserAgent::Constants qw(:all);
 
 BEGIN {
     constant->import( DEBUG => 0 ) if not defined &DEBUG;
@@ -142,7 +142,8 @@ sub _post_parse {
     $self->[UA_EXTRAS] = [ @buf ];
 
     if ( $self->[UA_TOOLKIT] ) {
-        push @{ $self->[UA_TOOLKIT] }, $self->_numify( $self->[UA_TOOLKIT][1] );
+        push @{ $self->[UA_TOOLKIT] },
+             $self->_numify( $self->[UA_TOOLKIT][TK_ORIGINAL_VERSION] );
     }
 
     if( $self->[UA_MOZILLA] ) {

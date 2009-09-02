@@ -30,6 +30,10 @@ use constant IS_MAXTHON          => ++$OID; # Is this the dumb IE faker?
 use constant IS_EXTENDED         => ++$OID;
 use constant MAXID               =>   $OID;
 
+use constant TK_NAME             => 0;
+use constant TK_ORIGINAL_VERSION => 1;
+use constant TK_VERSION          => 2;
+
 use constant RE_FIREFOX_NAMES    => qr{Firefox|Iceweasel|Firebird|Phoenix }xms;
 use constant RE_DOTNET           => qr{ \A [.]NET \s+ CLR \s+ (.+?) \z    }xms;
 use constant RE_WINDOWS_OS       => qr{ \A Win(dows|NT|[0-9]+)?           }xmsi;
@@ -119,6 +123,11 @@ BEGIN {
         )],
         list => [qw(
             LIST_ROBOTS
+        )],
+        tk => [qw(
+            TK_NAME
+            TK_ORIGINAL_VERSION
+            TK_VERSION
         )],
     );
 

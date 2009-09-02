@@ -280,7 +280,7 @@ sub _parse_gecko {
         return 1 ;
     }
 
-    if ( $self->[UA_TOOLKIT] && $self->[UA_TOOLKIT][0] eq 'Gecko' ) {
+    if ( $self->[UA_TOOLKIT] && $self->[UA_TOOLKIT][TK_NAME] eq 'Gecko' ) {
         ($self->[UA_NAME], $self->[UA_VERSION_RAW]) = split RE_SLASH, $moz;
         if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
             $self->[UA_PARSER] = 'mozilla_family:gecko';
