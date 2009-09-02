@@ -50,6 +50,9 @@ use constant RE_COMMA            => qr{ [,] }xms;
 use constant RE_TWO_LETTER_LANG  => qr{ \A [a-z]{2} \z }xms;
 use constant RE_DIGIT_DOT_DIGIT  => qr{\d+[.]?\d};
 
+use constant RE_WARN_OVERFLOW => qr{Integer overflow in version};
+use constant RE_WARN_INVALID  => qr{Version string .+? contains invalid data; ignoring:};
+
 use constant LIST_ROBOTS         => qw(
     Wget
     curl
@@ -111,6 +114,8 @@ BEGIN {
             RE_COMMA
             RE_TWO_LETTER_LANG
             RE_DIGIT_DOT_DIGIT
+            RE_WARN_OVERFLOW
+            RE_WARN_INVALID
         )],
         list => [qw(
             LIST_ROBOTS
