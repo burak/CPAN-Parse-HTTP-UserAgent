@@ -15,7 +15,10 @@ use lib       qw( .. );
 
 our $SILENT = 1;
 
+my $HPB = my $ua = HTML::ParseBrowser->new;
+
 sub html_parsebrowser     { my $ua = HTML::ParseBrowser->new(     shift ); $ua; }
+sub html_parsebrowser2    { my $ua = $HPB->Parse(shift); $ua; }
 sub http_browserdetect    { my $ua = HTTP::BrowserDetect->new(    shift ); $ua; }
 sub http_detectuseragent  { my $ua = HTTP::DetectUserAgent->new(  shift ); $ua; }
 sub parse_http_useragent  { my $ua = Parse::HTTP::UserAgent->new( shift ); $ua; }
@@ -39,11 +42,12 @@ ATTENTION
 my $start = Benchmark->new;
 
 cmpthese( $count, {
-    'HTML'    => sub { foreach my $s (@tests) { my $ua = html_parsebrowser(     $s ) } },
-    'Browser' => sub { foreach my $s (@tests) { my $ua = http_browserdetect(    $s ) } },
-    'Detect'  => sub { foreach my $s (@tests) { my $ua = http_detectuseragent(  $s ) } },
-    'Parse'   => sub { foreach my $s (@tests) { my $ua = parse_http_useragent(  $s ) } },
-    'Parse2'  => sub { foreach my $s (@tests) { my $ua = parse_http_useragent2( $s ) } },
+    HTML    => sub { foreach my $s (@tests) { my $ua = html_parsebrowser(     $s ) } },
+    HTML2   => sub { foreach my $s (@tests) { my $ua = html_parsebrowser2(    $s ) } },
+    Browser => sub { foreach my $s (@tests) { my $ua = http_browserdetect(    $s ) } },
+    Detect  => sub { foreach my $s (@tests) { my $ua = http_detectuseragent(  $s ) } },
+    Parse   => sub { foreach my $s (@tests) { my $ua = parse_http_useragent(  $s ) } },
+    Parse2  => sub { foreach my $s (@tests) { my $ua = parse_http_useragent2( $s ) } },
 });
 
 my $runtime = timestr( timediff(Benchmark->new, $start) );
@@ -57,6 +61,7 @@ The code took: $runtime
 List of abbreviations:
 
 HTML      HTML::ParseBrowser
+HTML2     HTML::ParseBrowser (re-use the object)
 Browser   HTTP::BrowserDetect
 Detect    HTTP::DetectUserAgent
 Parse     Parse::HTTP::UserAgent
