@@ -60,12 +60,12 @@ The code took: $runtime
 
 List of abbreviations:
 
-HTML      HTML::ParseBrowser
-HTML2     HTML::ParseBrowser (re-use the object)
-Browser   HTTP::BrowserDetect
-Detect    HTTP::DetectUserAgent
-Parse     Parse::HTTP::UserAgent
-Parse2    Parse::HTTP::UserAgent (without extended probe)
+HTML      HTML::ParseBrowser v$HTML::ParseBrowser::VERSION
+HTML2     HTML::ParseBrowser v$HTML::ParseBrowser::VERSION (re-use the object)
+Browser   HTTP::BrowserDetect v$HTTP::BrowserDetect::VERSION
+Detect    HTTP::DetectUserAgent v$HTTP::DetectUserAgent::VERSION
+Parse     Parse::HTTP::UserAgent v$Parse::HTTP::UserAgent::VERSION
+Parse2    Parse::HTTP::UserAgent v$Parse::HTTP::UserAgent::VERSION (without extended probe)
 GOODBYE
 
 __END__
