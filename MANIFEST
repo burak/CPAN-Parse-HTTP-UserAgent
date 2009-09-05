@@ -6,6 +6,7 @@ README
 SPEC
 eg/dump.pl
 eg/bench.pl
+eg/accuracy.pl
 lib/Parse/HTTP/UserAgent.pm
 lib/Parse/HTTP/UserAgent/Constants.pm
 lib/Parse/HTTP/UserAgent/Base/Dumper.pm

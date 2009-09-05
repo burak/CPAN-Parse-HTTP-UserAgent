@@ -2,9 +2,9 @@ Revision history for Perl extension Parse::HTTP::UserAgent.
 
 Time zone is UTC+2.
 
-0.16 Wed Sep  2 06:32:43 2009
+0.16 Sat Sep  5 08:51:22 2009
    => Internal cleanup.
-   => 
+   => Parser fixes for os/lang fields.
 
 0.15 Sun Aug 30 03:09:49 2009
    => Opera 10 beta support.
