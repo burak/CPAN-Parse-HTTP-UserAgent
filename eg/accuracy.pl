@@ -63,7 +63,7 @@ foreach my $test ( @tests ) {
       $fail{'HTML::ParseBrowser'    }->{lang            }++ if $is_lang    && ! $hpb{lang};
       $fail{'HTTP::BrowserDetect'   }->{lang            }++ if $is_lang    && ! $hbd{lang};
 
-      $fail{'Parse::HTTP::UserAgent'}->{version         }++ if $is_version && ! $ok{version};
+      $fail{'Parse::HTTP::UserAgent'}->{version         }++ if $is_version && ! $ok{version} && _valid_v($is_version, $test->{string});
       $fail{'HTTP::DetectUserAgent' }->{version         }++ if $is_version && ! $hdua{version};
       $fail{'HTML::ParseBrowser'    }->{version         }++ if $is_version && ! $hpb{v};
       $fail{'HTTP::BrowserDetect'   }->{version         }++ if $is_version && ! $hbd{version};
@@ -140,6 +140,11 @@ print $tb->rule( '-', '+')
     . $tb->body
     . $tb->rule( '-', '+')
 ;
+
+sub _valid_v { # prevent false-positives
+    my($v, $str)= @_;
+    return $str !~ m{ \A Mozilla [/] $v \s }xms;
+}
 
 sub ratio {
     my $v   = shift;
