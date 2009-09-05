@@ -39,6 +39,8 @@ sub _fix_opera {
         }
         push @buf, $e;
     }
+    $self->_fix_os_lang;
+    $self->_fix_windows_nt('skip_os');
     $self->[UA_EXTRAS] = [ @buf ];
     return;
 }
@@ -264,6 +266,10 @@ sub _parse_gecko {
                 $self->[UA_LANG] = $self->trim($lang) if $lang;
                 next;
             }
+            if ( ! $self->[UA_OS] && $e =~ m{ Win(?:NT|dows) }xmsi ) {
+                $self->[UA_OS] = $e;
+                next;
+            }
             if ( $e =~ RE_TWO_LETTER_LANG ) {
                 $self->[UA_LANG] = $e;
                 next;
@@ -277,6 +283,7 @@ sub _parse_gecko {
 
         $self->[UA_EXTRAS]        = [ @buf ];
         $self->[UA_ORIGINAL_NAME] = $before if $before ne $self->[UA_NAME];
+        $self->_fix_windows_nt;
         return 1 ;
     }
 
@@ -288,6 +295,28 @@ sub _parse_gecko {
         }
     }
 
+    return;
+}
+
+sub _fix_os_lang {
+    my $self = shift;
+    if ( $self->[UA_OS] && length $self->[UA_OS] == 2 ) {
+        $self->[UA_LANG] = $self->[UA_OS];
+        $self->[UA_OS]   = undef;
+    }
+    return;
+}
+
+sub _fix_windows_nt {
+    my $self    = shift;
+    my $skip_os = shift; # ie os can be undef
+    my $os      = $self->[UA_OS] || '';
+    return if ( ! $os              && ! $skip_os )
+        ||    (   $os ne 'windows' && ! $skip_os )
+        ||      ! $self->[UA_EXTRAS][0]
+        ||        $self->[UA_EXTRAS][0] !~ m{ NT\s?(\d.*?) \z }xmsi;
+    $self->[UA_EXTRAS][0] = $self->[UA_OS]; # restore
+    $self->[UA_OS] = "Windows NT $1"; # fix
     return;
 }
 

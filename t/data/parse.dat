@@ -1262,12 +1262,13 @@ Mozilla/5.0 (Windows; U; WinNT; en; Stable) Gecko/20020911 Beonex/0.8.1-stable
 'parser'           => 'mozilla_family:generic',
 'strength'         => 'U',
 'lang'             => 'en',
-'extras'           => ['Windows','WinNT','Stable'],
+'extras'           => ['WinNT','Stable'],
 'version_raw'      => '0.8.1-stable',
 'version'          => '0.008001',
 'name'             => 'Mozilla',
 'toolkit'          => ['Gecko','20020911','20020911.000'],
 'original_name'    => 'Beonex',
+'os'               => 'Windows',
 
 [AGENT]
 
@@ -1275,10 +1276,11 @@ Mozilla/5.001 (windows; U; NT4.0; en-us) Gecko/25250101
 
 'parser'           => 'mozilla_family:generic',
 'strength'         => 'U',
-'extras'           => ['windows','NT4.0','en-us'],
+'extras'           => ['windows','en-us'],
 'version_raw'      => '5.001',
 'version'          => '5.001',
 'name'             => 'Mozilla',
+'os'               => 'Windows NT 4.0',
 'toolkit'          => ['Gecko','25250101','25250101.000']
 
 #------------------------------------------------------------------------------#
@@ -1312,7 +1314,7 @@ Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/298; U; en)
 'original_name'    => 'Opera Mini',
 'parser'           => 'opera_pre',
 'strength'         => 'U',
-'os'               => 'en',
+'lang'             => 'en',
 'extras'           => ['J2ME/MIDP'],
 'version_raw'      => '9.50',
 'version'          => '9.500',
@@ -1326,7 +1328,7 @@ Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/230; U; en
 'original_name'    => 'Opera Mini',
 'parser'           => 'opera_pre',
 'strength'         => 'U',
-'os'               => 'en',
+'lang'             => 'en',
 'extras'           => ['J2ME/MIDP'],
 'version_raw'      => '9.50',
 'version'          => '9.500',
@@ -1518,9 +1520,10 @@ Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; en) Opera 9.51
 'os'               => 'en',
 'extras'           => ['Windows NT 5.1'],
 'version_raw'      => '9.51',
-'lang'             => '',
+'lang'             => 'en',
 'version'          => '9.510',
-'name'             => 'Opera'
+'name'             => 'Opera',
+'os'               => 'Windows XP',
 
 [AGENT]
 
