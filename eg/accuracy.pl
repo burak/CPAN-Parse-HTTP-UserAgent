@@ -51,6 +51,8 @@ foreach my $test ( @tests ) {
     my $is_version = $ok{version} || $hpb{v}    || $hbd{version} || $hdua{version};
     my $is_os      = $ok{os}      || $hpb{os}   || $hbd{os}      || $hdua{os};
 
+    my $v_nok = $is_version && ! $ok{version} && _valid_v($is_version, $test->{string});
+
     ++$total{name}    if $is_name;
     ++$total{lang}    if $is_lang;
     ++$total{version} if $is_version;
@@ -63,7 +65,7 @@ foreach my $test ( @tests ) {
       $fail{'HTML::ParseBrowser'    }->{lang            }++ if $is_lang    && ! $hpb{lang};
       $fail{'HTTP::BrowserDetect'   }->{lang            }++ if $is_lang    && ! $hbd{lang};
 
-      $fail{'Parse::HTTP::UserAgent'}->{version         }++ if $is_version && ! $ok{version} && _valid_v($is_version, $test->{string});
+      $fail{'Parse::HTTP::UserAgent'}->{version         }++ if $v_nok;
       $fail{'HTTP::DetectUserAgent' }->{version         }++ if $is_version && ! $hdua{version};
       $fail{'HTML::ParseBrowser'    }->{version         }++ if $is_version && ! $hpb{v};
       $fail{'HTTP::BrowserDetect'   }->{version         }++ if $is_version && ! $hbd{version};
@@ -79,7 +81,7 @@ foreach my $test ( @tests ) {
     ++$fail{'HTTP::BrowserDetect'   }->{name}{ $is_name }   if $is_name    && ! $hbd{name};
 
     my $phua_fail = ( $is_lang    && ! $ok{lang}    ) ||
-                    ( $is_version && ! $ok{version} ) ||
+                      $v_nok ||
                     ( $is_os      && ! $ok{os}      ) ||
                     ( $is_name    && ! $ok{name}    );
 
@@ -93,7 +95,7 @@ foreach my $test ( @tests ) {
     if ( $opt{debug} && $phua_fail ) {
         print "$test->{string}\n";
         print "LANG   : $is_lang\n"    if $is_lang    && ! $ok{lang};
-        print "VERSION: $is_version\n" if $is_version && ! $ok{version};
+        print "VERSION: $is_version\n" if $v_nok;
         print "OS     : $is_os\n"      if $is_os      && ! $ok{os};
         print "NAME   : $is_name\n"    if $is_name    && ! $ok{name};
         print Dumper({
