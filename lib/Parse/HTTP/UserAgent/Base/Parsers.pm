@@ -121,6 +121,7 @@ sub _parse_msie {
         push @buf, $e;
     }
     $self->[UA_EXTRAS] = [ @buf ];
+    $self->[UA_PARSER] = 'msie';
     return;
 }
 
@@ -394,6 +395,7 @@ sub _generic_name_version {
 sub _generic_compatible {
     my $self = shift;
     my($moz, $thing, $extra, $compatible, @others) = @_;
+    my @orig_thing = @{ $thing }; # see edge case below
 
     return if ! ( $compatible && @{$thing} );
 
@@ -410,7 +412,21 @@ sub _generic_compatible {
     my @extras;
 
     if ( $name eq 'MSIE') {
-        if ( $extra ) { # Sleipnir?
+        my $bogus_ie = $extra
+                    && $extra->[0]
+                    && index( $extra->[0], 'compatible' ) != -1
+                    && $extra->[1]
+                    && $extra->[1] eq 'MSIE';
+        if ( $bogus_ie ) {
+            # edge case
+            my($n, $v) = split RE_WHITESPACE, shift @orig_thing;
+            my $e = [ split RE_SC_WS, join ' ', @{ $extra } ];
+            my $t = \@orig_thing;
+            push @{ $e }, grep { $_ } map { split RE_SC_WS, $_ } @others;
+            $self->_parse_msie( $moz, $thing, $e, $n, $v );
+            return 1;
+        }
+        elsif ( $extra ) { # Sleipnir?
             ($name, $version)   = split RE_SLASH, pop @{$extra};
             my($extras,$dotnet) = $self->_extract_dotnet( $thing, $extra );
             $self->[UA_DOTNET]  = [ @{$dotnet} ] if @{$dotnet};

@@ -98,7 +98,6 @@ sub _do_parse {
     if ( $c && shift @{$t} && ! $e && ! $self->[IS_MAXTHON] ) {
         my($n, $v) = split RE_WHITESPACE, $t->[0];
         if ( $n eq 'MSIE' && index($m, ' ') == -1 ) {
-            $self->[UA_PARSER] = 'msie';
             return $self->_parse_msie($m, $t, $e, $n, $v);
         }
     }
@@ -115,8 +114,9 @@ sub _do_parse {
     if ( $rv ) {
         my $pname  = shift( @{ $rv } );
         my $method = '_parse_' . $pname;
+        my $rv = $self->$method( @{ $rv } );
         $self->[UA_PARSER] = $pname;
-        return $self->$method( @{ $rv } );
+        return $rv;
     }
 
     return $self->_extended_probe($m, $t, $e, $c, @o) if $self->[IS_EXTENDED];
