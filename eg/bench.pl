@@ -19,7 +19,7 @@ our $SILENT = 1;
 my $HPB = my $ua = HTML::ParseBrowser->new;
 
 sub html_parsebrowser     { my $ua = HTML::ParseBrowser->new(     shift ); $ua; }
-sub html_parsebrowser2    { my $ua = $HPB->Parse(shift); $ua; }
+sub html_parsebrowser2    { my $ua = $HPB->Parse(                 shift ); $ua; }
 sub http_browserdetect    { my $ua = HTTP::BrowserDetect->new(    shift ); $ua; }
 sub http_detectuseragent  { my $ua = HTTP::DetectUserAgent->new(  shift ); $ua; }
 sub parse_http_useragent  { my $ua = Parse::HTTP::UserAgent->new( shift ); $ua; }
