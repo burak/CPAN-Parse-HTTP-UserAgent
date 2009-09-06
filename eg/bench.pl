@@ -4,6 +4,7 @@ use Getopt::Long;
 
 GetOptions(\my %opt, qw(
     count=i
+    single
 ));
 
 use HTTP::BrowserDetect;
@@ -26,10 +27,15 @@ sub parse_http_useragent2 { my $ua = Parse::HTTP::UserAgent->new( shift, {extend
 
 require 't/db.pl';
 
-my $count = $opt{count} || 100;
+my $count = $opt{single} ? 10_000
+          : $opt{count}  ? $opt{count}
+          :                100
+          ;
 my @tests = map { $_->{string} } database({ thaw => 1 });
+@tests = ( $tests[ rand @tests ] ) if $opt{single};
 my $total = @tests;
 
+print "*** WARNING !!! --single option is in effect!\n" if $opt{single};
 print <<"ATTENTION";
 *** The data integrity is not checked in this run.
 *** This is a benchmark for parser speeds.
