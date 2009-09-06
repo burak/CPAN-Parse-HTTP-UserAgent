@@ -35,6 +35,7 @@ sub _fix_opera {
         if ( $e =~ RE_OPERA_MINI ) {
             $self->[UA_ORIGINAL_NAME]    = $1;
             $self->[UA_ORIGINAL_VERSION] = $2;
+            $self->[UA_MOBILE]           = 1;
             next;
         }
         push @buf, $e;

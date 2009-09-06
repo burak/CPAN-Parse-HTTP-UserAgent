@@ -1333,7 +1333,8 @@ Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/298; U; en)
 'version_raw'      => '9.50',
 'version'          => '9.500',
 'name'             => 'Opera',
-'original_version' => '4.0.10031/298'
+'original_version' => '4.0.10031/298',
+'mobile'           => 1,
 
 [AGENT]
 
@@ -1347,7 +1348,8 @@ Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/230; U; en
 'version_raw'      => '9.50',
 'version'          => '9.500',
 'name'             => 'Opera',
-'original_version' => '4.0.10031/230'
+'original_version' => '4.0.10031/230',
+'mobile'           => 1,
 
 [AGENT]
 
@@ -1361,7 +1363,8 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/2.0.4509/1378; nl; U; ssr)
 'version_raw'      => '8.01',
 'version'          => '8.010',
 'name'             => 'Opera',
-'original_version' => '2.0.4509/1378'
+'original_version' => '2.0.4509/1378',
+'mobile'           => 1,
 
 [AGENT]
 
@@ -1375,7 +1378,8 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/1.1.2277/lofi/nordic/int; O2 Xda II; en; U; ss
 'version_raw'      => '8.01',
 'version'          => '8.010',
 'name'             => 'Opera',
-'original_version' => '1.1.2277/lofi/nordic/int'
+'original_version' => '1.1.2277/lofi/nordic/int',
+'mobile'           => 1,
 
 [AGENT]
 Opera/9.60 (J2ME/MIDP; Opera Mini/4.2.13337/504; U; en) Presto/2.2.0
@@ -1390,7 +1394,8 @@ Opera/9.60 (J2ME/MIDP; Opera Mini/4.2.13337/504; U; en) Presto/2.2.0
 'version'          => '9.600',
 'name'             => 'Opera',
 'original_version' => '4.2.13337/504',
-'toolkit'          => ['Presto','2.2.0','2.002000']
+'toolkit'          => ['Presto','2.2.0','2.002000'],
+'mobile'           => 1,
 
 [AGENT]
 Opera/8.01 (J2ME/MIDP; Opera Mini/1.0.1479/HiFi; SonyEricsson P900; no; U; ssr)
@@ -1403,7 +1408,8 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/1.0.1479/HiFi; SonyEricsson P900; no; U; ssr)
 'version_raw'      => '8.01',
 'version'          => '8.010',
 'name'             => 'Opera',
-'original_version' => '1.0.1479/HiFi'
+'original_version' => '1.0.1479/HiFi',
+'mobile'           => 1,
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Opera
