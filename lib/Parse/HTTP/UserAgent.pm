@@ -1,8 +1,9 @@
 package Parse::HTTP::UserAgent;
 use strict;
+use warnings;
 use vars qw( $VERSION );
 
-$VERSION = '0.16';
+$VERSION = '0.17';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -39,9 +40,9 @@ my %OSFIX = (
 
 sub new {
     my $class = shift;
-    my $ua    = shift || croak "No user agent string specified";
+    my $ua    = shift || croak 'No user agent string specified';
     my $opt   = shift || {};
-    croak "Options must be a hash reference" if ref $opt ne 'HASH';
+    croak 'Options must be a hash reference' if ref $opt ne 'HASH';
     my $self  = [ map { undef } 0..MAXID ];
     bless $self, $class;
     $self->[UA_STRING]   = $ua;
@@ -51,13 +52,12 @@ sub new {
 }
 
 sub as_hash {
-    my $self   = shift;
-    my @ids    = $self->_object_ids;
-    my %struct = map {
-                    my $id = $_;
-                    $id =~ s{ \A UA_ }{}xms;
-                    lc $id, $self->[ $self->$_() ]
-                 } @ids;
+    my $self = shift;
+    my %struct;
+    foreach my $id ( $self->_object_ids ) {
+        (my $name = $id) =~ s{ \A UA_ }{}xms;
+        $struct{ lc $name } = $self->[ $self->$id() ];
+    }
     return %struct;
 }
 
@@ -81,7 +81,7 @@ sub _parse {
 
 sub _pre_parse {
     my $self = shift;
-    $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != -1;
+    $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != MINUS_ONE;
     my $ua = $self->[UA_STRING];
     my($moz, $thing, $extra, @others) = split RE_SPLIT_PARSE, $ua;
     $thing = $thing ? [ split RE_SC_WS, $thing ] : [];
@@ -91,13 +91,12 @@ sub _pre_parse {
 }
 
 sub _do_parse {
-    my $self = shift;
-    my($m, $t, $e, @o) = @_;
+    my($self, $m, $t, $e, @o) = @_;
     my $c = $t->[0] && $t->[0] eq 'compatible';
 
     if ( $c && shift @{$t} && ! $e && ! $self->[IS_MAXTHON] ) {
         my($n, $v) = split RE_WHITESPACE, $t->[0];
-        if ( $n eq 'MSIE' && index($m, ' ') == -1 ) {
+        if ( $n eq 'MSIE' && index($m, q{ }) == MINUS_ONE ) {
             return $self->_parse_msie($m, $t, $e, $n, $v);
         }
     }
@@ -112,11 +111,11 @@ sub _do_parse {
             : undef;
 
     if ( $rv ) {
-        my $pname  = shift( @{ $rv } );
+        my $pname  = shift @{ $rv };
         my $method = '_parse_' . $pname;
-        my $rv = $self->$method( @{ $rv } );
+        my $rvx    = $self->$method( @{ $rv } );
         $self->[UA_PARSER] = $pname;
-        return $rv;
+        return $rvx;
     }
 
     return $self->_extended_probe($m, $t, $e, $c, @o) if $self->[IS_EXTENDED];
@@ -165,12 +164,12 @@ sub _post_parse {
 }
 
 sub _extended_probe {
-    my $self = shift;
+    my($self, @args) = @_;
 
-    return if $self->_is_gecko          && $self->_parse_gecko(    @_ );
-    return if $self->_is_netscape( @_ ) && $self->_parse_netscape( @_ );
-    return if $self->_is_docomo(   @_ ) && $self->_parse_docomo(   @_ );
-    return if $self->_is_generic(  @_ );
+    return if $self->_is_gecko             && $self->_parse_gecko(    @args );
+    return if $self->_is_netscape( @args ) && $self->_parse_netscape( @args );
+    return if $self->_is_docomo(   @args ) && $self->_parse_docomo(   @args );
+    return if $self->_is_generic(  @args );
 
     $self->[UA_UNKNOWN] = 1;
     return;
@@ -185,26 +184,29 @@ sub _numify {
     my $v    = shift || return 0;
     $v    =~ s{
                 pre      |
+                alpha    |
+                beta     |
                 \-stable |
                 gold     |
                 [ab]\d+  |
+                a\-XXXX  |
                 \+
                 }{}xmsig;
     # Gecko revisions like: "20080915000512" will cause an
     #   integer overflow warning. use bigint?
     local $SIG{__WARN__} = sub {
-        warn $_[0] if $_[0] !~ RE_WARN_OVERFLOW && $_[0] !~ RE_WARN_INVALID;
+        my $msg = shift;
+        warn "$msg\n" if $msg !~ RE_WARN_OVERFLOW && $msg !~ RE_WARN_INVALID;
     };
     # if version::vpp is used it'll identify 420 as a v-string
     # add a floating point to fool it
-    $v .= '.0' if index($v, '.') == -1;
+    $v .= q{.0} if index($v, q{.}) == MINUS_ONE;
     my $rv = version->new("$v")->numify;
     return $rv;
 }
 
 sub _debug_pre_parse {
-    my $self = shift;
-    my($moz, $thing, $extra, @others) = @_;
+    my($self, $moz, $thing, $extra, @others) = @_;
 
     my $raw = [
                 { qw/ name moz    value / => $moz     },
@@ -212,9 +214,9 @@ sub _debug_pre_parse {
                 { qw/ name extra  value / => $extra   },
                 { qw/ name others value / => \@others },
             ];
-    print "-------------- PRE PARSE DUMP --------------\n"
-        . $self->dumper(args => $raw)
-        . "--------------------------------------------\n";
+    my $pok = print "-------------- PRE PARSE DUMP --------------\n"
+                  . $self->dumper(args => $raw)
+                  . "--------------------------------------------\n";
     return;
 }
 

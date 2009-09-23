@@ -1,13 +1,15 @@
 package Parse::HTTP::UserAgent::Base::IS;
 use strict;
+use warnings;
 use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
+use constant OPERA_FAKER_EXTRA_SIZE => 4;
 
 $VERSION = '0.10';
 
 sub _is_opera_pre {
     my($self, $moz) = @_;
-    return index( $moz, 'Opera') != -1;
+    return index( $moz, 'Opera') != MINUS_ONE;
 }
 
 sub _is_opera_post {
@@ -17,17 +19,17 @@ sub _is_opera_post {
 
 sub _is_opera_ff { # opera faking as firefox
     my($self, $extra) = @_;
-    return $extra && @{$extra} == 4 && $extra->[2] eq 'Opera';
+    return $extra && @{$extra} == OPERA_FAKER_EXTRA_SIZE && $extra->[2] eq 'Opera';
 }
 
 sub _is_safari {
     my($self, $extra, $others) = @_;
     my $str = $self->[UA_STRING];
     # epiphany?
-    return                index( $str         , 'Chrome'     ) != -1 ? 0 # faker
-          :    $extra  && index( $extra->[0]  , 'AppleWebKit') != -1 ? 1
-          : @{$others} && index( $others->[-1], 'Safari'     ) != -1 ? 1
-          :                                                            0
+    return                index( $str         , 'Chrome'       ) != MINUS_ONE ? 0 # faker
+          :    $extra  && index( $extra->[0]  , 'AppleWebKit'  ) != MINUS_ONE ? 1
+          : @{$others} && index( $others->[MINUS_ONE], 'Safari') != MINUS_ONE ? 1
+          :                                                                     0
           ;
 }
 
@@ -37,9 +39,9 @@ sub _is_chrome {
     my($chrome, $safari) = split RE_WHITESPACE, $chx;
     return if ! ( $chrome && $safari);
 
-    return              index( $chrome    , 'Chrome'     ) != -1 &&
-                        index( $safari    , 'Safari'     ) != -1 &&
-           ( $extra  && index( $extra->[0], 'AppleWebKit') != -1);
+    return              index( $chrome    , 'Chrome'     ) != MINUS_ONE &&
+                        index( $safari    , 'Safari'     ) != MINUS_ONE &&
+           ( $extra  && index( $extra->[0], 'AppleWebKit') != MINUS_ONE);
 }
 
 sub _is_ff {
@@ -53,34 +55,34 @@ sub _is_ff {
 }
 
 sub _is_gecko {
-    return index(shift->[UA_STRING], 'Gecko/') != -1;
+    return index(shift->[UA_STRING], 'Gecko/') != MINUS_ONE;
 }
 
 sub _is_generic { #TODO: this is actually a parser
-    my $self = shift;
-    return 1 if $self->_generic_name_version( @_ ) ||
-                $self->_generic_compatible(   @_ ) ||
-                $self->_generic_moz_thing(    @_ );
+    my($self, @args) = @_;
+    return 1 if $self->_generic_name_version( @args ) ||
+                $self->_generic_compatible(   @args ) ||
+                $self->_generic_moz_thing(    @args );
     return;
 }
 
 sub _is_netscape {
     my($self, $moz, $thing, $extra, $compatible, @others) = @_;
 
-    my $rv = index($moz, 'Mozilla/') != -1 &&
+    my $rv = index($moz, 'Mozilla/') != MINUS_ONE &&
              $moz ne 'Mozilla/4.0'         &&
              ! $compatible                 &&
              ! $extra                      &&
              ! @others                     &&
-             $thing->[-1] ne 'Sun'         && # hotjava
-             index($thing->[0], 'http://') == -1 # robot
+             $thing->[MINUS_ONE] ne 'Sun'  && # hotjava
+             index($thing->[0], 'http://') == MINUS_ONE # robot
              ;
     return $rv;
 }
 
 sub _is_docomo {
     my($self, $moz) = @_;
-    return index(lc $moz, 'docomo') != -1;
+    return index(lc $moz, 'docomo') != MINUS_ONE;
 }
 
 sub _is_strength {
@@ -88,6 +90,16 @@ sub _is_strength {
     my $s    = shift || return;
        $s    = $self->trim( $s );
     return $s if $s eq 'U' || $s eq 'I' || $s eq 'N';
+    return;
+}
+
+sub _is_generic_bogus_ie {
+    my($self, $extra) = @_;
+    return $extra
+        && $extra->[0]
+        && index( $extra->[0], 'compatible' ) != MINUS_ONE
+        && $extra->[1]
+        && $extra->[1] eq 'MSIE';
 }
 
 1;

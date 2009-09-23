@@ -1,11 +1,13 @@
 #!/usr/bin/env perl -w
 use strict;
+use warnings;
 use vars qw( $VERSION $SILENT );
 use Test::More qw( no_plan );
 use File::Spec;
 use Data::Dumper;
 use Getopt::Long;
 use Parse::HTTP::UserAgent;
+use Carp qw( croak );
 
 GetOptions(\my %opt, qw(
     ids=i@
@@ -14,7 +16,7 @@ GetOptions(\my %opt, qw(
 
 require_ok( File::Spec->catfile( t => 'db.pl' ) );
 
-my %wanted = $opt{ids} ? map { $_, $_ } @{ $opt{ids} } : ();
+my %wanted = $opt{ids} ? map { ( $_, $_ ) } @{ $opt{ids} } : ();
 
 sub ok_to_test {
     my $id = shift;
@@ -25,15 +27,15 @@ sub ok_to_test {
 my %seen;
 foreach my $test ( database({ thaw => 1 }) ) {
     next if ! ok_to_test( $test->{id} );
-    die "No user-agent string defined?"     if ! $test->{string};
-    die "Already tested '$test->{string}'!" if   $seen{ $test->{string} }++;
+    die "No user-agent string defined?\n"     if ! $test->{string};
+    die "Already tested '$test->{string}'!\n" if   $seen{ $test->{string} }++;
     my $parsed = Parse::HTTP::UserAgent->new( $test->{string} );
     my %got    = $parsed->as_hash;
 
     if ( ! $test->{struct} ) {
-       die "No data in the test result set? Expected something matches "
-          ."with these:\n$test->{string}\n\n"
-          . do { delete $got{string}; Dumper(\%got) };
+        croak 'No data in the test result set? Expected something matches '
+            . "with these:\n$test->{string}\n\n"
+            . do { delete $got{string}; Dumper(\%got) };
     }
 
     is( delete $got{string}, $test->{string}, "Ok got the string back for $got{name}" );
@@ -42,7 +44,7 @@ foreach my $test ( database({ thaw => 1 }) ) {
     is_deeply( \%got, $test->{struct},
                "Frozen data matches parse result for '$test->{string}' -> $got{parser} -> $test->{id}" );
     if ( $opt{dump} ) {
-        diag "GOT:".Dumper(\%got) . "\nEXPECTED:". Dumper($test->{struct});
+        diag 'GOT:'.Dumper(\%got) . "\nEXPECTED:". Dumper($test->{struct});
     }
 }
 

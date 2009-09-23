@@ -1,3 +1,5 @@
+#!/usr/bin/env perl
+# (c) 2009 Burak Gursoy. Distributed under the Perl License.
 use strict;
 use warnings;
 use Getopt::Long;
@@ -18,25 +20,27 @@ our $SILENT = 1;
 
 my $HPB = my $ua = HTML::ParseBrowser->new;
 
-sub html_parsebrowser     { my $ua = HTML::ParseBrowser->new(     shift ); $ua; }
-sub html_parsebrowser2    { my $ua = $HPB->Parse(                 shift ); $ua; }
-sub http_browserdetect    { my $ua = HTTP::BrowserDetect->new(    shift ); $ua; }
-sub http_detectuseragent  { my $ua = HTTP::DetectUserAgent->new(  shift ); $ua; }
-sub parse_http_useragent  { my $ua = Parse::HTTP::UserAgent->new( shift ); $ua; }
-sub parse_http_useragent2 { my $ua = Parse::HTTP::UserAgent->new( shift, {extended=>0} ); $ua; }
+sub html_parsebrowser     { my $ua = HTML::ParseBrowser->new(     shift ); return $ua; }
+sub html_parsebrowser2    { my $ua = $HPB->Parse(                 shift ); return $ua; }
+sub http_browserdetect    { my $ua = HTTP::BrowserDetect->new(    shift ); return $ua; }
+sub http_detectuseragent  { my $ua = HTTP::DetectUserAgent->new(  shift ); return $ua; }
+sub parse_http_useragent  { my $ua = Parse::HTTP::UserAgent->new( shift ); return $ua; }
+sub parse_http_useragent2 { my $ua = Parse::HTTP::UserAgent->new( shift, {extended=>0} ); return $ua; }
 
-require 't/db.pl';
+do 't/db.pl';
 
-my $count = $opt{single} ? 10_000
+my $count = $opt{single} ? '10000'
           : $opt{count}  ? $opt{count}
-          :                100
+          :                '100'
           ;
 my @tests = map { $_->{string} } database({ thaw => 1 });
 @tests = ( $tests[ rand @tests ] ) if $opt{single};
 my $total = @tests;
 
-print "*** WARNING !!! --single option is in effect!\n" if $opt{single};
-print <<"ATTENTION";
+my $pok;
+
+$pok = print "*** WARNING !!! --single option is in effect!\n" if $opt{single};
+$pok = print <<"ATTENTION";
 *** The data integrity is not checked in this run.
 *** This is a benchmark for parser speeds.
 *** Testing $total User Agent strings on each module with $count iterations each.
@@ -58,7 +62,7 @@ cmpthese( $count, {
 
 my $runtime = timestr( timediff(Benchmark->new, $start) );
 
-print <<"GOODBYE";
+$pok = print <<"GOODBYE";
 
 The code took: $runtime 
 
@@ -73,5 +77,7 @@ Detect    HTTP::DetectUserAgent v$HTTP::DetectUserAgent::VERSION
 Parse     Parse::HTTP::UserAgent v$Parse::HTTP::UserAgent::VERSION
 Parse2    Parse::HTTP::UserAgent v$Parse::HTTP::UserAgent::VERSION (without extended probe)
 GOODBYE
+
+1;
 
 __END__

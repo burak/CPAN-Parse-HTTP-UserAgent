@@ -9,9 +9,9 @@ use lib qw( ../lib lib );
 our $VERSION = '0.10';
 
 BEGIN {
-    sub Parse::HTTP::UserAgent::DEBUG { 1 }
+    *Parse::HTTP::UserAgent::DEBUG = sub () { 1 }
 }
 
 use Parse::HTTP::UserAgent -all;
 
-print Parse::HTTP::UserAgent->new( shift || die "UserAgent?" )->dumper;
+my $pok = print Parse::HTTP::UserAgent->new( shift || die "UserAgent?\n" )->dumper;

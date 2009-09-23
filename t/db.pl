@@ -1,16 +1,18 @@
 use strict;
+use warnings;
 use vars qw( $SILENT );
 use IO::File;
 use File::Spec;
 use constant DATABASE  => File::Spec->catfile(qw( t data parse.dat ));
 use constant RE_SEPTOR => qr{ \Q[AGENT]\E }xms;
 use Test::More;
+use Carp qw(croak);
 
 my @todo;
 
 END {
     if ( @todo && ! $SILENT ) {
-        diag( "Tests marked as TODO are listed below" );
+        diag( 'Tests marked as TODO are listed below' );
         diag("'$_'") for @todo;
     }
 }
@@ -34,10 +36,10 @@ sub database {
 }
 
 sub thaw {
-    my $s = shift || die "Frozen?";
+    my $s = shift || die "Frozen?\n";
     my %rv;
-    eval "\%rv = (\n $s \n);";
-    die "Can not restore data: $@" if $@;
+    my $eok = eval "\%rv = (\n $s \n);";
+    die "Can not restore data: $@\n" if $@ || ! $eok;
     return %rv;
 }
 
@@ -52,7 +54,7 @@ sub trim {
 sub strip_comments {
     my $s = shift;
     return $s if ! $s;
-    my $buf = '';
+    my $buf = q{};
     foreach my $line ( split m{ \n }xms, $s ) {
         chomp $line;
         next if ! $line;
@@ -70,7 +72,7 @@ sub strip_comments {
 sub slurp {
     my $FH = IO::File->new;
     $FH->open( DATABASE, 'r')
-        or die sprintf("Can not open DB @ %s: %s", DATABASE, $!);
+        or croak sprintf 'Can not open DB @ %s: %s', DATABASE, $!;
     my $rv = do { local $/; my $s = <$FH>; $s };
     $FH->close;
     return $rv;
