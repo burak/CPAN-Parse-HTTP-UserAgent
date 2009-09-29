@@ -2,10 +2,15 @@ package Parse::HTTP::UserAgent::Constants;
 use strict;
 use warnings;
 use vars qw( $VERSION $OID @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS );
-use constant MINUS_ONE => -1;
+
 $VERSION = '0.10';
 
+use constant MINUS_ONE           => -1;
+use constant NO_IMATCH           => -1; # for index()
+use constant LAST_ELEMENT        => -1;
+
 BEGIN { $OID = MINUS_ONE }
+
 use constant UA_STRING           => ++$OID; # just for information
 use constant UA_UNKNOWN          => ++$OID; # failed to detect?
 use constant UA_GENERIC          => ++$OID; # parsed with a generic parser.
@@ -130,7 +135,8 @@ BEGIN {
             TK_VERSION
         )],
         etc => [qw(
-            MINUS_ONE
+            NO_IMATCH
+            LAST_ELEMENT
         )],
     );
 

@@ -81,7 +81,7 @@ sub _parse {
 
 sub _pre_parse {
     my $self = shift;
-    $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != MINUS_ONE;
+    $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != NO_IMATCH;
     my $ua = $self->[UA_STRING];
     my($moz, $thing, $extra, @others) = split RE_SPLIT_PARSE, $ua;
     $thing = $thing ? [ split RE_SC_WS, $thing ] : [];
@@ -96,7 +96,7 @@ sub _do_parse {
 
     if ( $c && shift @{$t} && ! $e && ! $self->[IS_MAXTHON] ) {
         my($n, $v) = split RE_WHITESPACE, $t->[0];
-        if ( $n eq 'MSIE' && index($m, q{ }) == MINUS_ONE ) {
+        if ( $n eq 'MSIE' && index($m, q{ }) == NO_IMATCH ) {
             return $self->_parse_msie($m, $t, $e, $n, $v);
         }
     }
@@ -200,7 +200,7 @@ sub _numify {
     };
     # if version::vpp is used it'll identify 420 as a v-string
     # add a floating point to fool it
-    $v .= q{.0} if index($v, q{.}) == MINUS_ONE;
+    $v .= q{.0} if index($v, q{.}) == NO_IMATCH;
     my $rv = version->new("$v")->numify;
     return $rv;
 }

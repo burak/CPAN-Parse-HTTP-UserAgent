@@ -9,7 +9,7 @@ $VERSION = '0.10';
 
 sub _is_opera_pre {
     my($self, $moz) = @_;
-    return index( $moz, 'Opera') != MINUS_ONE;
+    return index( $moz, 'Opera') != NO_IMATCH;
 }
 
 sub _is_opera_post {
@@ -26,9 +26,9 @@ sub _is_safari {
     my($self, $extra, $others) = @_;
     my $str = $self->[UA_STRING];
     # epiphany?
-    return                index( $str         , 'Chrome'       ) != MINUS_ONE ? 0 # faker
-          :    $extra  && index( $extra->[0]  , 'AppleWebKit'  ) != MINUS_ONE ? 1
-          : @{$others} && index( $others->[MINUS_ONE], 'Safari') != MINUS_ONE ? 1
+    return                index( $str                   , 'Chrome'       ) != NO_IMATCH ? 0 # faker
+          :    $extra  && index( $extra->[0]            , 'AppleWebKit'  ) != NO_IMATCH ? 1
+          : @{$others} && index( $others->[LAST_ELEMENT], 'Safari'       ) != NO_IMATCH ? 1
           :                                                                     0
           ;
 }
@@ -39,9 +39,9 @@ sub _is_chrome {
     my($chrome, $safari) = split RE_WHITESPACE, $chx;
     return if ! ( $chrome && $safari);
 
-    return              index( $chrome    , 'Chrome'     ) != MINUS_ONE &&
-                        index( $safari    , 'Safari'     ) != MINUS_ONE &&
-           ( $extra  && index( $extra->[0], 'AppleWebKit') != MINUS_ONE);
+    return              index( $chrome    , 'Chrome'     ) != NO_IMATCH &&
+                        index( $safari    , 'Safari'     ) != NO_IMATCH &&
+           ( $extra  && index( $extra->[0], 'AppleWebKit') != NO_IMATCH);
 }
 
 sub _is_ff {
@@ -55,7 +55,7 @@ sub _is_ff {
 }
 
 sub _is_gecko {
-    return index(shift->[UA_STRING], 'Gecko/') != MINUS_ONE;
+    return index(shift->[UA_STRING], 'Gecko/') != NO_IMATCH;
 }
 
 sub _is_generic { #TODO: this is actually a parser
@@ -69,20 +69,20 @@ sub _is_generic { #TODO: this is actually a parser
 sub _is_netscape {
     my($self, $moz, $thing, $extra, $compatible, @others) = @_;
 
-    my $rv = index($moz, 'Mozilla/') != MINUS_ONE &&
-             $moz ne 'Mozilla/4.0'         &&
-             ! $compatible                 &&
-             ! $extra                      &&
-             ! @others                     &&
-             $thing->[MINUS_ONE] ne 'Sun'  && # hotjava
-             index($thing->[0], 'http://') == MINUS_ONE # robot
+    my $rv = index($moz, 'Mozilla/') != NO_IMATCH &&
+             $moz ne 'Mozilla/4.0'            &&
+             ! $compatible                    &&
+             ! $extra                         &&
+             ! @others                        &&
+             $thing->[LAST_ELEMENT] ne 'Sun'  && # hotjava
+             index($thing->[0], 'http://') == NO_IMATCH # robot
              ;
     return $rv;
 }
 
 sub _is_docomo {
     my($self, $moz) = @_;
-    return index(lc $moz, 'docomo') != MINUS_ONE;
+    return index(lc $moz, 'docomo') != NO_IMATCH;
 }
 
 sub _is_strength {
@@ -97,7 +97,7 @@ sub _is_generic_bogus_ie {
     my($self, $extra) = @_;
     return $extra
         && $extra->[0]
-        && index( $extra->[0], 'compatible' ) != MINUS_ONE
+        && index( $extra->[0], 'compatible' ) != NO_IMATCH
         && $extra->[1]
         && $extra->[1] eq 'MSIE';
 }

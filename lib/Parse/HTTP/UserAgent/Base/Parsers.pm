@@ -69,8 +69,8 @@ sub _parse_maxthon {
     my @omap = grep { $_ } map { split RE_SC_WS_MULTI, $_ } @others;
     my($maxthon, $msie, @buf);
     foreach my $e ( @omap, @{$thing} ) { # $extra -> junk
-        if ( index(uc $e, 'MAXTHON') != MINUS_ONE ) { $maxthon = $e; next; }
-        if ( index(uc $e, 'MSIE'   ) != MINUS_ONE ) { $msie    = $e; next; }
+        if ( index(uc $e, 'MAXTHON') != NO_IMATCH ) { $maxthon = $e; next; }
+        if ( index(uc $e, 'MSIE'   ) != NO_IMATCH ) { $msie    = $e; next; }
         push @buf, $e;
     }
 
@@ -104,7 +104,7 @@ sub _parse_msie {
     my $junk = shift @{ $thing }; # already used
     my($extras,$dotnet) = $self->_extract_dotnet( $thing, $extra );
 
-    if ( @{$extras} == 2 && index( $extras->[1], 'Lunascape' ) != MINUS_ONE ) {
+    if ( @{$extras} == 2 && index( $extras->[1], 'Lunascape' ) != NO_IMATCH ) {
         ($name, $version) = split RE_CHAR_SLASH_WS, pop @{ $extras };
     }
 
@@ -139,14 +139,15 @@ sub _parse_firefox {
 sub _parse_safari {
     my($self, $moz, $thing, $extra, @others) = @_;
     my($version, @junk)     = split RE_WHITESPACE, pop @others;
-    my $ep = $version && index( lc($version), 'epiphany' ) != MINUS_ONE;
+    my $ep = $version && index( lc($version), 'epiphany' ) != NO_IMATCH;
     (undef, $version)       = split RE_SLASH, $version;
     $self->[UA_NAME]        = $ep ? 'Epiphany' : 'Safari';
     $self->[UA_VERSION_RAW] = $version;
     $self->[UA_TOOLKIT]     = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_LANG]        = pop @{ $thing };
-    $self->[UA_OS]          = length $thing->[MINUS_ONE] > 1 ? pop   @{ $thing }
-                                                      : shift @{ $thing }
+    $self->[UA_OS]          = length $thing->[LAST_ELEMENT] > 1
+                            ? pop   @{ $thing }
+                            : shift @{ $thing }
                             ;
     $self->[UA_DEVICE]      = shift @{$thing} if $thing->[0] eq 'iPhone';
     $self->[UA_EXTRAS]      = [ @{$thing}, @others ];
@@ -177,7 +178,7 @@ sub _parse_opera_pre {
     # opera 5,9
     my($self, $moz, $thing, $extra) = @_;
     my($name, $version)     = split RE_SLASH, $moz;
-    my $faking_ff           = index($thing->[MINUS_ONE], 'rv:') != MINUS_ONE ? pop @{$thing} : 0;
+    my $faking_ff           = index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ? pop @{$thing} : 0;
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version;
     my $ver = $self->_numify( $version );
@@ -185,7 +186,7 @@ sub _parse_opera_pre {
 
     if ( $extra ) {
         # http://dev.opera.com/articles/view/opera-ua-string-changes/
-        my $swap = index($extra->[MINUS_ONE], 'Version/') != MINUS_ONE; # damned 10.0 beta
+        my $swap = index($extra->[LAST_ELEMENT], 'Version/') != NO_IMATCH; # damned 10.0 beta
         ($lang = $swap ? shift @{$extra} : pop @{$extra}) =~ tr/[]//d;
         if ( $swap ) {
             my $vjunk = pop @{$extra};
@@ -201,8 +202,9 @@ sub _parse_opera_pre {
     }
 
     $self->[UA_LANG] = $lang;
-    $self->[UA_OS]   = $self->_is_strength($thing->[MINUS_ONE]) ? shift @{$thing}
-                     :                                     pop   @{$thing}
+    $self->[UA_OS]   = $self->_is_strength( $thing->[LAST_ELEMENT] )
+                     ? shift @{$thing}
+                     : pop   @{$thing}
                      ;
 
     $self->[UA_EXTRAS] = [ @{ $thing }, ( $extra ? @{$extra} : () ) ];
@@ -216,8 +218,9 @@ sub _parse_opera_post {
     $self->[UA_NAME]        = shift @{$extra};
     $self->[UA_VERSION_RAW] = shift @{$extra};
    ($self->[UA_LANG]        = shift @{$extra} || q{}) =~ tr/[]//d;
-    $self->[UA_OS]          = $self->_is_strength($thing->[MINUS_ONE]) ? shift @{$thing}
-                            :                                     pop   @{$thing}
+    $self->[UA_OS]          = $self->_is_strength($thing->[LAST_ELEMENT])
+                            ? shift @{$thing}
+                            : pop   @{$thing}
                             ;
     $self->[UA_EXTRAS]      = [ @{ $thing }, ( $extra ? @{$extra} : () ) ];
     return $self->_fix_opera;
@@ -233,7 +236,7 @@ sub _parse_mozilla_family {
     $self->[UA_TOOLKIT]      = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_VERSION_RAW]  = $version;
 
-    if ( index($thing->[MINUS_ONE], 'rv:') != MINUS_ONE ) {
+    if ( index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ) {
         $self->[UA_MOZILLA]  = pop @{ $thing };
         $self->[UA_LANG]     = pop @{ $thing };
         $self->[UA_OS]       = pop @{ $thing };
@@ -424,7 +427,7 @@ sub _generic_compatible {
             @extras = (@{ $extras }, @others);
         }
         else {
-            return if index($moz, q{ }) != MINUS_ONE; # WebTV
+            return if index($moz, q{ }) != NO_IMATCH; # WebTV
         }
     }
 
@@ -445,7 +448,7 @@ sub _generic_compatible {
 
 sub _parse_docomo {
     my($self, $moz, $thing, $extra, $compatible, @others) = @_;
-    if ( $thing->[0] && index(lc $thing->[0], 'googlebot-mobile') != MINUS_ONE ) {
+    if ( $thing->[0] && index(lc $thing->[0], 'googlebot-mobile') != NO_IMATCH ) {
         my($name, $version) = split RE_SLASH, shift @{ $thing };
         $self->[UA_NAME]        = $name;
         $self->[UA_VERSION_RAW] = $version;
