@@ -74,7 +74,7 @@ sub _is_netscape {
              ! $compatible                    &&
              ! $extra                         &&
              ! @others                        &&
-             $thing->[LAST_ELEMENT] ne 'Sun'  && # hotjava
+             ( @{$thing} && $thing->[LAST_ELEMENT] ne 'Sun' )  && # hotjava
              index($thing->[0], 'http://') == NO_IMATCH # robot
              ;
     return $rv;

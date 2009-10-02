@@ -145,7 +145,7 @@ sub _parse_safari {
     $self->[UA_VERSION_RAW] = $version;
     $self->[UA_TOOLKIT]     = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_LANG]        = pop @{ $thing };
-    $self->[UA_OS]          = length $thing->[LAST_ELEMENT] > 1
+    $self->[UA_OS]          = @{$thing} && length $thing->[LAST_ELEMENT] > 1
                             ? pop   @{ $thing }
                             : shift @{ $thing }
                             ;
@@ -178,7 +178,10 @@ sub _parse_opera_pre {
     # opera 5,9
     my($self, $moz, $thing, $extra) = @_;
     my($name, $version)     = split RE_SLASH, $moz;
-    my $faking_ff           = index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ? pop @{$thing} : 0;
+    my $faking_ff           = @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH
+                            ? pop @{$thing}
+                            : 0
+                            ;
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version;
     my $ver = $self->_numify( $version );
@@ -186,7 +189,7 @@ sub _parse_opera_pre {
 
     if ( $extra ) {
         # http://dev.opera.com/articles/view/opera-ua-string-changes/
-        my $swap = index($extra->[LAST_ELEMENT], 'Version/') != NO_IMATCH; # damned 10.0 beta
+        my $swap = @{$extra} && index($extra->[LAST_ELEMENT], 'Version/') != NO_IMATCH; # damned 10.0 beta
         ($lang = $swap ? shift @{$extra} : pop @{$extra}) =~ tr/[]//d;
         if ( $swap ) {
             my $vjunk = pop @{$extra};
@@ -218,7 +221,7 @@ sub _parse_opera_post {
     $self->[UA_NAME]        = shift @{$extra};
     $self->[UA_VERSION_RAW] = shift @{$extra};
    ($self->[UA_LANG]        = shift @{$extra} || q{}) =~ tr/[]//d;
-    $self->[UA_OS]          = $self->_is_strength($thing->[LAST_ELEMENT])
+    $self->[UA_OS]          = @{$thing} && $self->_is_strength($thing->[LAST_ELEMENT])
                             ? shift @{$thing}
                             : pop   @{$thing}
                             ;
@@ -236,7 +239,7 @@ sub _parse_mozilla_family {
     $self->[UA_TOOLKIT]      = [ split RE_SLASH, $extra->[0] ];
     $self->[UA_VERSION_RAW]  = $version;
 
-    if ( index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ) {
+    if ( @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ) {
         $self->[UA_MOZILLA]  = pop @{ $thing };
         $self->[UA_LANG]     = pop @{ $thing };
         $self->[UA_OS]       = pop @{ $thing };
