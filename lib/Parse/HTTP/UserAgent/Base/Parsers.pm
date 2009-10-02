@@ -202,7 +202,7 @@ sub _parse_opera_pre {
     }
 
     $self->[UA_LANG] = $lang;
-    $self->[UA_OS]   = $self->_is_strength( $thing->[LAST_ELEMENT] )
+    $self->[UA_OS]   = @{$thing} && $self->_is_strength( $thing->[LAST_ELEMENT] )
                      ? shift @{$thing}
                      : pop   @{$thing}
                      ;

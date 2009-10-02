@@ -4,6 +4,7 @@ Time zone is UTC+2.
 
 0.17 Wed Sep 23 20:55:50 2009
    => Perl::Critic refactoring
+   => Fix _parse_opera_pre() to prevent die()ing. Reported by: Jim Butler
 
 0.16 Sat Sep  5 08:51:22 2009
    => Internal cleanup.

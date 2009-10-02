@@ -1411,6 +1411,9 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/1.0.1479/HiFi; SonyEricsson P900; no; U; ssr)
 'original_version' => '1.0.1479/HiFi',
 'mobile'           => 1,
 
+[AGENT]
+#TODO: SAMSUNG-SGH-i900/1.0 Opera 9.5
+
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Opera
 
