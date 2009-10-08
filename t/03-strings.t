@@ -42,6 +42,8 @@ sub run {
         }
     }
 
+    _tests();
+
     return;
 }
 
