@@ -3,10 +3,11 @@
 # Enables internal pre-parsed structure dumper and then dumps
 #    the parsed structure.
 use strict;
+use vars qw( $VERSION );
 use warnings;
 use lib qw( ../lib lib );
 
-our $VERSION = '0.10';
+$VERSION = '0.10';
 
 BEGIN {
     *Parse::HTTP::UserAgent::DEBUG = sub () { 1 }
