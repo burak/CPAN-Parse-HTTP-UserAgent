@@ -86,7 +86,9 @@ sub _parse_maxthon {
         return;
     }
 
-    $self->_parse_msie($moz, [ undef, @buf ], undef, split RE_WHITESPACE, $msie);
+    $self->_parse_msie(
+        $moz, [ undef, @buf ], undef, split RE_WHITESPACE, $msie
+    );
 
     my(undef, $mv) = split RE_WHITESPACE, $maxthon;
     my $v = $mv      ? $mv
@@ -143,7 +145,7 @@ sub _parse_safari {
     (undef, $version)       = split RE_SLASH, $version;
     $self->[UA_NAME]        = $ep ? 'Epiphany' : 'Safari';
     $self->[UA_VERSION_RAW] = $version;
-    $self->[UA_TOOLKIT]     = [ split RE_SLASH, $extra->[0] ];
+    $self->[UA_TOOLKIT]     = $extra ? [ split RE_SLASH, $extra->[0] ] : [];
     $self->[UA_LANG]        = pop @{ $thing };
     $self->[UA_OS]          = @{$thing} && length $thing->[LAST_ELEMENT] > 1
                             ? pop   @{ $thing }
@@ -177,19 +179,19 @@ sub _parse_chrome {
 sub _parse_opera_pre {
     # opera 5,9
     my($self, $moz, $thing, $extra) = @_;
+    my $ffaker = @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH
+               ? pop @{$thing}
+               : 0;
     my($name, $version)     = split RE_SLASH, $moz;
-    my $faking_ff           = @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH
-                            ? pop @{$thing}
-                            : 0
-                            ;
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version;
-    my $ver = $self->_numify( $version );
     my $lang;
 
     if ( $extra ) {
+        # opera changed version string to workaround lame browser sniffers
         # http://dev.opera.com/articles/view/opera-ua-string-changes/
-        my $swap = @{$extra} && index($extra->[LAST_ELEMENT], 'Version/') != NO_IMATCH; # damned 10.0 beta
+        my $swap = @{$extra}
+                   && index($extra->[LAST_ELEMENT], 'Version/') != NO_IMATCH;
         ($lang = $swap ? shift @{$extra} : pop @{$extra}) =~ tr/[]//d;
         if ( $swap ) {
             my $vjunk = pop @{$extra};
@@ -197,9 +199,14 @@ sub _parse_opera_pre {
         }
     }
 
-    $lang ||= pop @{$thing} if $faking_ff;
+    $lang ||= pop @{$thing} if $ffaker;
 
-    if ( ! $self->[UA_TOOLKIT] && $ver >= OPERA9 && $lang && length( $lang ) > OPERA_TK_LENGTH ) {
+    my $tk_parsed_as_lang = ! $self->[UA_TOOLKIT]
+                            && $self->_numify( $version ) >= OPERA9
+                            && $lang
+                            && length( $lang ) > OPERA_TK_LENGTH;
+
+    if ( $tk_parsed_as_lang ) {
         $self->[UA_TOOLKIT] = [ split RE_SLASH, $lang ];
        ($lang = pop @{$thing}) =~ tr/[]//d if $extra;
     }
@@ -236,7 +243,7 @@ sub _parse_mozilla_family {
                              :                                       $moz
                              ;
     $self->[UA_NAME]         = $name;
-    $self->[UA_TOOLKIT]      = [ split RE_SLASH, $extra->[0] ];
+    $self->[UA_TOOLKIT]      = $extra ? [ split RE_SLASH, $extra->[0] ] : [];
     $self->[UA_VERSION_RAW]  = $version;
 
     if ( @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ) {
