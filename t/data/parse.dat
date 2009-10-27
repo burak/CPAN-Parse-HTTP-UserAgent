@@ -1412,7 +1412,14 @@ Opera/8.01 (J2ME/MIDP; Opera Mini/1.0.1479/HiFi; SonyEricsson P900; no; U; ssr)
 'mobile'           => 1,
 
 [AGENT]
-#TODO: SAMSUNG-SGH-i900/1.0 Opera 9.5
+
+SAMSUNG-SGH-i900/1.0 Opera 9.5
+
+'parser'      => 'moz_only',
+'extras'      => [ 'Opera', '9.5' ],
+'version_raw' => '1.0',
+'version'     => '1.000',
+'name'        => 'SAMSUNG-SGH-i900',
 
 #------------------------------------------------------------------------------#
 # ----[ CATEGORY: Opera
@@ -1856,7 +1863,14 @@ Wget/1.4.5
 'robot'            => 1,
 
 [AGENT]
-#TODO: W3C_Validator/1.183 libwww-perl/5.64
+
+W3C_Validator/1.183 libwww-perl/5.64
+
+'parser'      => 'moz_only',
+'extras'      => ['libwww-perl/5.64'],
+'version_raw' => '1.183',
+'version'     => '1.183',
+'name'        => 'W3C_Validator',
 
 [AGENT]
 
@@ -2061,27 +2075,76 @@ Links (0.96; Unix)
 
 [AGENT]
 
-#TODO: Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)
+Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)
+
+'parser'           => 'moz_only',
+'extras'           => [],
+'version_raw'      => '2.6',
+'version'          => '2.600',
+'name'             => 'WebTV',
 
 [AGENT]
 
-#TODO: Lynx/2.8.4rel.1 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.6c
+Lynx/2.8.4rel.1 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.6c
+
+'parser'           => 'moz_only',
+'extras'           => [ 'libwww-FM/2.14', 'SSL-MM/1.4.1', 'OpenSSL/0.9.6c' ],
+'version_raw'      => '2.8.4rel.1',
+'version'          => '2.008004001',
+'name'             => 'Lynx',
 
 [AGENT]
 
-#TODO: Lynx/2.8.3rel.1 libwww-FM/2.14
+Lynx/2.8.3rel.1 libwww-FM/2.14
+
+'parser'           => 'moz_only',
+'extras'           => [ 'libwww-FM/2.14' ],
+'version_raw'      => '2.8.3rel.1',
+'version'          => '2.008003001',
+'name'             => 'Lynx',
 
 [AGENT]
 # HotJava
-#TODO: Mozilla/3.0 (x86 [en] Windows NT 5.1; Sun)
+
+Mozilla/3.0 (x86 [en] Windows NT 5.1; Sun)
+
+'os'               => 'Windows XP',
+'extras'           => ['x86'],
+'version_raw'      => '3.0',
+'lang'             => 'en',
+'version'          => '3.000',
+'name'             => 'HotJava',
 
 [AGENT]
 
-#TODO: BlackBerry7730/3.7.1 UP.Link/5.1.2.5
+BlackBerry7730/3.7.1 UP.Link/5.1.2.5
+
+'parser'           => 'moz_only',
+'extras'           => [ 'UP.Link/5.1.2.5' ],
+'version_raw'      => '3.7.1',
+'version'          => '3.007001',
+'name'             => 'BlackBerry7730',
 
 [AGENT]
 
-#TODO: Emacs-W3/2.1.105 URL/1.267 ((Unix?) ; TTY ; sparc-sun-solaris2.3)
+Emacs-W3/2.1.105 URL/1.267 ((Unix?) ; TTY ; sparc-sun-solaris2.3)
+
+'parser'           => 'emacs',
+'extras'           => [ 'URL/1.267', 'Unix?', 'TTY', 'sparc-sun-solaris2.3' ],
+'version_raw'      => '2.1.105',
+'version'          => '2.001105',
+'name'             => 'Emacs-W3',
+
+[AGENT]
+
+Emacs-W3/4.0pre.46 URL/p4.0pre.46 (i686-pc-linux; X11)
+
+'parser'           => 'emacs',
+'os'               => 'i686-pc-linux',
+'extras'           => ['X11', 'URL/p4.0pre.46' ],
+'version_raw'      => '4.0pre.46',
+'version'          => '4.000046',
+'name'             => 'Emacs-W3',
 
 [AGENT]
 

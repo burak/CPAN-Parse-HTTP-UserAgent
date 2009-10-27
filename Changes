@@ -2,6 +2,9 @@ Revision history for Perl extension Parse::HTTP::UserAgent.
 
 Time zone is UTC+2.
 
+0.20 Tue Oct 27 05:32:45 2009
+   => New parsers for Emacs, HotJava and a generic parser for robot types.
+
 0.17 Wed Sep 23 20:55:50 2009
    => Perl::Critic refactoring
    => Fix _parse_opera_pre() to prevent die()ing. Reported by: Jim Butler

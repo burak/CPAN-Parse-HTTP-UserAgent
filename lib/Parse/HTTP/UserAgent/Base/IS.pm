@@ -93,6 +93,22 @@ sub _is_strength {
     return;
 }
 
+sub _is_emacs {
+    my($self, $moz) = @_;
+    return index( $moz, 'Emacs-W3/') != NO_IMATCH;
+}
+
+sub _is_moz_only {
+    my($self, $moz, $thing, $extra, $compatible, @others) = @_;
+    return $moz && ! @{ $thing } && ! $extra && ! @others;
+}
+
+sub _is_hotjava {
+    my($self, $moz, $thing, $extra, $compatible, @others) = @_;
+    my @hot = @{ $thing };
+    return @hot == 2 && $hot[1] eq 'Sun';
+}
+
 sub _is_generic_bogus_ie {
     my($self, $extra) = @_;
     return $extra

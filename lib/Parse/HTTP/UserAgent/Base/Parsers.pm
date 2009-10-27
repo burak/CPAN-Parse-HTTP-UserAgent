@@ -32,7 +32,7 @@ sub _extract_dotnet {
 
 sub _fix_opera {
     my $self = shift;
-    return if ! $self->[UA_EXTRAS];
+    return 1 if ! $self->[UA_EXTRAS];
     my @buf;
     foreach my $e ( @{ $self->[UA_EXTRAS] } ) {
         if ( $e =~ RE_OPERA_MINI ) {
@@ -46,7 +46,7 @@ sub _fix_opera {
     $self->_fix_os_lang;
     $self->_fix_windows_nt('skip_os');
     $self->[UA_EXTRAS] = [ @buf ];
-    return;
+    return 1;
 }
 
 sub _fix_generic {
@@ -98,7 +98,7 @@ sub _parse_maxthon {
 
     $self->[UA_ORIGINAL_VERSION] = $v;
     $self->[UA_ORIGINAL_NAME]    = 'Maxthon';
-    return;
+    return 1;
 }
 
 sub _parse_msie {
@@ -128,14 +128,14 @@ sub _parse_msie {
     }
     $self->[UA_EXTRAS] = [ @buf ];
     $self->[UA_PARSER] = 'msie';
-    return;
+    return 1;
 }
 
 sub _parse_firefox {
     my($self, @args) = @_;
     $self->_parse_mozilla_family( @args );
     $self->[UA_NAME] = 'Firefox';
-    return;
+    return 1;
 }
 
 sub _parse_safari {
@@ -161,7 +161,7 @@ sub _parse_safari {
 
     push @{$self->[UA_EXTRAS]}, @junk if @junk;
 
-    return;
+    return 1;
 }
 
 sub _parse_chrome {
@@ -173,7 +173,7 @@ sub _parse_chrome {
     my($name, $version)      = split RE_SLASH, $chrome;
     $self->[UA_NAME]         = $name;
     $self->[UA_VERSION_RAW]  = $version;
-    return;
+    return 1;
 }
 
 sub _parse_opera_pre {
@@ -183,6 +183,7 @@ sub _parse_opera_pre {
                ? pop @{$thing}
                : 0;
     my($name, $version)     = split RE_SLASH, $moz;
+    return if $name ne 'Opera';
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version;
     my $lang;
@@ -253,7 +254,7 @@ sub _parse_mozilla_family {
     }
 
     $self->[UA_EXTRAS] = [ @{ $thing }, @extras ];
-    return;
+    return 1;
 }
 
 sub _parse_gecko {
@@ -363,7 +364,7 @@ sub _generic_moz_thing {
     my($self, $moz, $t, $extra, $compatible, @others) = @_;
     return if ! @{ $t };
     my($mname, $mversion, @rest) = split RE_CHAR_SLASH_WS, $moz;
-    return if $mname eq 'Mozilla';
+    return if $mname eq 'Mozilla' || $mname eq 'Emacs-W3';
 
     $self->[UA_NAME]        = $mname;
     $self->[UA_VERSION_RAW] = $mversion || ( $mname eq 'Links' ? shift @{$t} : 0 );
@@ -371,7 +372,6 @@ sub _generic_moz_thing {
                    : $t->[0] && $t->[0] !~ RE_DIGIT_DOT_DIGIT  ? shift @{$t}
                    :                                             undef;
     my @extras = (@{$t}, $extra ? @{$extra} : (), @others );
-
 
     $self->_fix_generic(
         \$self->[UA_OS], \$self->[UA_NAME], \$self->[UA_VERSION_RAW], \@extras
@@ -456,10 +456,60 @@ sub _generic_compatible {
     return 1;
 }
 
+sub _parse_emacs {
+    my($self, $moz, $thing, $extra, $compatible, @others) = @_;
+    my @moz = split RE_WHITESPACE, $moz;
+    my $emacs = shift @moz;
+    my($name, $version) = split RE_SLASH, $emacs;
+    $self->[UA_NAME]        = $name;
+    $self->[UA_VERSION_RAW] = $version || 0;
+    $self->[UA_OS]          = shift @{ $thing };
+    my @rest = (  @{ $thing }, @moz );
+    push @rest, @{ $extra } if $extra && ref $extra eq 'ARRAY';
+    push @rest, ( map { split RE_SC_WS, $_ } @others ) if @others;
+    $self->[UA_EXTRAS]      = [ grep { $_ } map { $self->trim( $_ ) } @rest ];
+    $self->[UA_PARSER]      = 'emacs';
+    return 1;
+}
+
+sub _parse_moz_only {
+    my($self, $moz) = @_;
+    my @parts = split RE_WHITESPACE, $moz;
+    my $id = shift @parts;
+    my($name, $version) = split RE_SLASH, $id;
+    if ( $name eq 'Mozilla' && @parts ) {
+        ($name, $version) = split RE_SLASH, shift @parts;
+        return if ! $name || ! $version;
+    }
+    $self->[UA_NAME]        = $name;
+    $self->[UA_VERSION_RAW] = $version || 0;
+    $self->[UA_EXTRAS]      = [ @parts ];
+    $self->[UA_PARSER]      = 'moz_only';
+    return 1;
+}
+
+sub _parse_hotjava {
+    my($self, $moz, $thing, $extra, $compatible, @others) = @_;
+    my $parsable            = shift @{ $thing };
+    my($name, $version)     = split RE_SLASH, $moz;
+    $self->[UA_NAME]        = 'HotJava';
+    $self->[UA_VERSION_RAW] = $version || 0;
+    if ( $parsable ) {
+        my @parts = split m{[\[\]]}xms, $parsable;
+        if ( @parts > 2 ) {
+            @parts = map { $self->trim( $_ ) } @parts;
+            $self->[UA_OS]     = pop @parts;
+            $self->[UA_LANG]   = pop @parts;
+            $self->[UA_EXTRAS] = [ @parts ];
+        }
+    }
+    return 1;
+}
+
 sub _parse_docomo {
     my($self, $moz, $thing, $extra, $compatible, @others) = @_;
     if ( $thing->[0] && index(lc $thing->[0], 'googlebot-mobile') != NO_IMATCH ) {
-        my($name, $version) = split RE_SLASH, shift @{ $thing };
+        my($name, $version)     = split RE_SLASH, shift @{ $thing };
         $self->[UA_NAME]        = $name;
         $self->[UA_VERSION_RAW] = $version;
         $self->[UA_EXTRAS]      = [ @{ $thing } ];

@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 
-$VERSION = '0.17';
+$VERSION = '0.20';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -114,8 +114,10 @@ sub _do_parse {
         my $pname  = shift @{ $rv };
         my $method = '_parse_' . $pname;
         my $rvx    = $self->$method( @{ $rv } );
-        $self->[UA_PARSER] = $pname;
-        return $rvx;
+        if ( $rvx ) {
+            $self->[UA_PARSER] = $pname;
+            return $rvx;
+        }
     }
 
     return $self->_extended_probe($m, $t, $e, $c, @o) if $self->[IS_EXTENDED];
@@ -170,6 +172,9 @@ sub _extended_probe {
     return if $self->_is_netscape( @args ) && $self->_parse_netscape( @args );
     return if $self->_is_docomo(   @args ) && $self->_parse_docomo(   @args );
     return if $self->_is_generic(  @args );
+    return if $self->_is_emacs(    @args ) && $self->_parse_emacs(    @args );
+    return if $self->_is_moz_only( @args ) && $self->_parse_moz_only( @args );
+    return if $self->_is_hotjava(  @args ) && $self->_parse_hotjava(  @args );
 
     $self->[UA_UNKNOWN] = 1;
     return;
@@ -184,6 +189,7 @@ sub _numify {
     my $v    = shift || return 0;
     $v    =~ s{
                 pre      |
+                rel      |
                 alpha    |
                 beta     |
                 \-stable |
