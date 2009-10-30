@@ -9,7 +9,7 @@ $VERSION = '0.10';
 
 sub dumper {
     my($self, @args) = @_;
-    my %opt  = @args % 2 ? () : (
+    my %opt = @args % 2 ? () : (
         type      => 'dumper',
         format    => 'none',
         interpret => 0,
@@ -73,6 +73,7 @@ sub _dumper_dumper {
                         $titles[1],
                         q{-} x $max, q{ } x 2, q{-} x ($max*2);
     require Data::Dumper;
+    my @buf;
     foreach my $id ( @ids ) {
         my $name = $args ? $id->{name} : $id;
         my $val  = $args ? $id->{value} : $self->[ $self->$id() ];
@@ -84,11 +85,14 @@ sub _dumper_dumper {
                     $rv =~ s{ ; }{}xms;
                     $rv eq '[]' ? q{} : $rv;
                 } if $val && ref $val;
-        $buf .= sprintf "%s%s%s\n",
+        push @buf, [
                         $name,
                         (q{ } x (2 + $max - length $name)),
                         defined $val ? $val : q{}
-                        ;
+                    ];
+    }
+    foreach my $row ( sort { lc $a->[0] cmp lc $b->[0] } @buf ) {
+        $buf .= sprintf "%s%s%s\n", @{ $row };
     }
     return $buf;
 }
