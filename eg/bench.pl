@@ -7,6 +7,7 @@ use Getopt::Long;
 GetOptions(\my %opt, qw(
     count=i
     single
+    timethese
 ));
 
 use HTTP::BrowserDetect;
@@ -15,6 +16,7 @@ use HTTP::DetectUserAgent;
 use HTML::ParseBrowser;
 use Benchmark qw( :all :hireswallclock );
 use lib       qw( .. );
+use constant COLUMN => q{-} x 80;
 
 our $SILENT = 1;
 
@@ -51,22 +53,31 @@ ATTENTION
 
 my $start = Benchmark->new;
 
-cmpthese( $count, {
+my $test = {
     HTML    => sub { foreach my $s (@tests) { my $ua = html_parsebrowser(     $s ) } },
     HTML2   => sub { foreach my $s (@tests) { my $ua = html_parsebrowser2(    $s ) } },
     Browser => sub { foreach my $s (@tests) { my $ua = http_browserdetect(    $s ) } },
     Detect  => sub { foreach my $s (@tests) { my $ua = http_detectuseragent(  $s ) } },
     Parse   => sub { foreach my $s (@tests) { my $ua = parse_http_useragent(  $s ) } },
     Parse2  => sub { foreach my $s (@tests) { my $ua = parse_http_useragent2( $s ) } },
-});
+};
+
+cmpthese( $count, $test );
+if ( $opt{timethese} ) {
+    $pok = print COLUMN, "\n";
+    timethese($count, $test );
+}
 
 my $runtime = timestr( timediff(Benchmark->new, $start) );
 
+my $dashes = COLUMN;
 $pok = print <<"GOODBYE";
+
+$dashes
 
 The code took: $runtime 
 
----------------------------------------------------------
+$dashes
 
 List of abbreviations:
 
