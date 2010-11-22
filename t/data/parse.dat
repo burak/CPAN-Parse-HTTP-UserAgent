@@ -2269,3 +2269,188 @@ iCab/Pre2.0 (Macintosh; I; PPC)
 #TODO: Nokia6630/1.0 (3.45.113) SymbianOS/8.0 Series60/2.6 Profile/MIDP-2.0 Configuration/CLDC-1.1
 
 #----------------------------------- THE END
+
+# New!
+
+
+[AGENT]
+
+#TODO: Mozilla/4.0 (compatible; http://search.thunderstone.com/texis/websearch/about.html)
+
+[AGENT]
+
+#TODO: DoCoMo/2.0 N905i(c100;TB;W24H16) (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)
+
+[AGENT]
+
+#TODO: Mozilla/5.0 (Linux; U; Android 2.2; tr-tr; GT-I9000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+
+[AGENT]
+
+#TODO: Mozilla/5.0 (compatible; FriendFeedBot/0.1; +Http://friendfeed.com/about/bot; 179 subscribers; feed-id=1001488174509690116)
+
+[AGENT]
+
+#TODO: Mozilla/5.0 (compatible; Yahoo! Slurp China; http://misc.yahoo.com.cn/help.html)
+
+[AGENT]
+
+#TODO: Mozilla/5.0 (compatible; Yahoo! Slurp/3.0; http://help.yahoo.com/help/us/ysearch/slurp)
+
+[AGENT]
+
+#TODO: Mozilla/5.0 (compatible; YandexBot/3.0; MirrorDetector; +http://yandex.com/bots)
+
+[AGENT]
+
+#TODO: Nokia6682/2.0 (3.01.1) SymbianOS/8.0 Series60/2.6 Profile/MIDP-2.0 configuration/CLDC-1.1 UP.Link/6.3.0.0.0 (compatible;YahooSeeker/M1A1-R2D2; http://help.yahoo.com/help/us/ysearch/crawling/crawling-01.html)
+
+[AGENT]
+
+#TODO: SAMSUNG-SGH-E250/1.0 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)
+
+[AGENT]
+
+#TODO: Sogou web spider/4.0(+http://www.sogou.com/docs/help/webmasters.htm#07)
+
+[AGENT]
+
+#TODO: Sogou-Test-Spider/4.0 (compatible; MSIE 5.5; Windows 98)
+
+[AGENT]
+
+Gigabot/3.0 (http://www.gigablast.com/spider.html)
+
+[AGENT]
+
+Java/1.6.0_21
+
+[AGENT]
+
+MLBot (www.metadatalabs.com/mlbot)
+
+[AGENT]
+
+Mail.Ru/1.0
+
+[AGENT]
+
+Mozilla/0.91 Beta (Windows)
+
+[AGENT]
+
+Mozilla/2.0 (compatible; MSIE 3.02; Windows CE; 240x320)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 4.0)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; America Online Browser 1.1; Windows NT 5.1; SV1; YPC 3.2.0)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Deepnet Explorer 1.5.0; .NET CLR 1.0.3705)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; YPC 3.0.2; .NET CLR 1.1.4322; yplus 4.4.02b)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; acc=jocker)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; ru) Opera 8.01
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; sbcydsl 3.12; InfoPath.1)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; {0B6660AB-643B-4F5D-8ECF-2DA8B9759F4C}; .NET CLR 1.1.4322)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; BT Openworld Broadband; .NET CLR 1.1.4322)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; yie5.5_SBCDSL; SU 3.005; .NET CLR 1.0.3705)
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3
+
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/532.5 (KHTML, like Gecko) Chrome/4.0.249.11 Safari/532.5
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Exabot/3.0 (BiggerBetter); +http://www.exabot.com/go/robot)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; MJ12bot/v1.3.3; http://www.majestic12.co.uk/bot.php?+)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; ScoutJet; +http://www.scoutjet.com/)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)
+
+[AGENT]
+
+Mozilla/5.0 (compatible; YoudaoBot/1.0; http://www.youdao.com/help/webmaster/spider/; )
+
+[AGENT]
+
+Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)
+
+[AGENT]
+
+Opera/9.80 (Windows NT 6.0; U; tr) Presto/2.6.30 Version/10.63
+
+[AGENT]
+
+Opera/9.80 (X11; Linux i686; U; en) Presto/2.6.30 Version/10.63
+
+[AGENT]
+
+Sosospider+(+http://help.soso.com/webspider.htm)
+
+[AGENT]
+
+Yeti/1.0 (NHN Corp.; http://help.naver.com/robots/)
+[AGENT]
+

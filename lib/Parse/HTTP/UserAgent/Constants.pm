@@ -71,6 +71,7 @@ use constant LIST_ROBOTS         => qw(
     Googlebot
     Baiduspider+
     msnbot
+    bingbot
 ), 'Yahoo! Slurp';
 
 use base qw( Exporter );

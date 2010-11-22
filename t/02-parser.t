@@ -33,9 +33,10 @@ foreach my $test ( database({ thaw => 1 }) ) {
     my %got    = $parsed->as_hash;
 
     if ( ! $test->{struct} ) {
-        croak 'No data in the test result set? Expected something matches '
+        fail 'No data in the test result set? Expected something matching '
             . "with these:\n$test->{string}\n\n"
             . do { delete $got{string}; Dumper(\%got) };
+        next;
     }
 
     is( delete $got{string}, $test->{string}, "Ok got the string back for $got{name}" );
