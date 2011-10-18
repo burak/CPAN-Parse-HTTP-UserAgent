@@ -2266,6 +2266,7 @@ iCab/Pre2.0 (Macintosh; I; PPC)
 'generic'          => 1
 
 [AGENT]
+
 #TODO: Nokia6630/1.0 (3.45.113) SymbianOS/8.0 Series60/2.6 Profile/MIDP-2.0 Configuration/CLDC-1.1
 
 #----------------------------------- THE END
@@ -2319,138 +2320,144 @@ iCab/Pre2.0 (Macintosh; I; PPC)
 
 [AGENT]
 
-Gigabot/3.0 (http://www.gigablast.com/spider.html)
+#TODO: Gigabot/3.0 (http://www.gigablast.com/spider.html)
 
 [AGENT]
 
 Java/1.6.0_21
 
-[AGENT]
-
-MLBot (www.metadatalabs.com/mlbot)
-
-[AGENT]
-
-Mail.Ru/1.0
-
-[AGENT]
-
-Mozilla/0.91 Beta (Windows)
+parser      => 'generic_name_version',
+version_raw => '1.6.0_21',
+version     => '1.006000_021',
+name        => 'Java',
+generic     => 1,
+extras      => [],
 
 [AGENT]
 
-Mozilla/2.0 (compatible; MSIE 3.02; Windows CE; 240x320)
+#TODO: MLBot (www.metadatalabs.com/mlbot)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 4.0)
+#TODO: Mail.Ru/1.0
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; America Online Browser 1.1; Windows NT 5.1; SV1; YPC 3.2.0)
+#TODO: Mozilla/0.91 Beta (Windows)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)
+#TODO: Mozilla/2.0 (compatible; MSIE 3.02; Windows CE; 240x320)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+#TODO: Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 4.0)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Deepnet Explorer 1.5.0; .NET CLR 1.0.3705)
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; America Online Browser 1.1; Windows NT 5.1; SV1; YPC 3.2.0)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; YPC 3.0.2; .NET CLR 1.1.4322; yplus 4.4.02b)
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; acc=jocker)
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; ru) Opera 8.01
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Deepnet Explorer 1.5.0; .NET CLR 1.0.3705)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; sbcydsl 3.12; InfoPath.1)
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; YPC 3.0.2; .NET CLR 1.1.4322; yplus 4.4.02b)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; {0B6660AB-643B-4F5D-8ECF-2DA8B9759F4C}; .NET CLR 1.1.4322)
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; acc=jocker)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; ru) Opera 8.01
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; BT Openworld Broadband; .NET CLR 1.1.4322)
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; sbcydsl 3.12; InfoPath.1)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; yie5.5_SBCDSL; SU 3.005; .NET CLR 1.0.3705)
+#TODO: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; {0B6660AB-643B-4F5D-8ECF-2DA8B9759F4C}; .NET CLR 1.1.4322)
 
 [AGENT]
 
-Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)
+#TODO: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
 
 [AGENT]
 
-Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3
+#TODO: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; BT Openworld Broadband; .NET CLR 1.1.4322)
 
 [AGENT]
 
-Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/532.5 (KHTML, like Gecko) Chrome/4.0.249.11 Safari/532.5
+#TODO: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; yie5.5_SBCDSL; SU 3.005; .NET CLR 1.0.3705)
 
 [AGENT]
 
-Mozilla/5.0 (compatible; Exabot/3.0 (BiggerBetter); +http://www.exabot.com/go/robot)
+#TODO: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)
 
 [AGENT]
 
-Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+#TODO: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3
 
 [AGENT]
 
-Mozilla/5.0 (compatible; MJ12bot/v1.3.3; http://www.majestic12.co.uk/bot.php?+)
+#TODO: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/532.5 (KHTML, like Gecko) Chrome/4.0.249.11 Safari/532.5
 
 [AGENT]
 
-Mozilla/5.0 (compatible; ScoutJet; +http://www.scoutjet.com/)
+#TODO: Mozilla/5.0 (compatible; Exabot/3.0 (BiggerBetter); +http://www.exabot.com/go/robot)
 
 [AGENT]
 
-Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
+#TODO: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
 
 [AGENT]
 
-Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)
+#TODO: Mozilla/5.0 (compatible; MJ12bot/v1.3.3; http://www.majestic12.co.uk/bot.php?+)
 
 [AGENT]
 
-Mozilla/5.0 (compatible; YoudaoBot/1.0; http://www.youdao.com/help/webmaster/spider/; )
+#TODO: Mozilla/5.0 (compatible; ScoutJet; +http://www.scoutjet.com/)
 
 [AGENT]
 
-Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)
+#TODO: Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
 
 [AGENT]
 
-Opera/9.80 (Windows NT 6.0; U; tr) Presto/2.6.30 Version/10.63
+#TODO: Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)
 
 [AGENT]
 
-Opera/9.80 (X11; Linux i686; U; en) Presto/2.6.30 Version/10.63
+#TODO: Mozilla/5.0 (compatible; YoudaoBot/1.0; http://www.youdao.com/help/webmaster/spider/; )
 
 [AGENT]
 
-Sosospider+(+http://help.soso.com/webspider.htm)
+#TODO: Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)
 
 [AGENT]
 
-Yeti/1.0 (NHN Corp.; http://help.naver.com/robots/)
+#TODO: Opera/9.80 (Windows NT 6.0; U; tr) Presto/2.6.30 Version/10.63
+
 [AGENT]
+
+#TODO: Opera/9.80 (X11; Linux i686; U; en) Presto/2.6.30 Version/10.63
+
+[AGENT]
+
+#TODO: Sosospider+(+http://help.soso.com/webspider.htm)
+
+[AGENT]
+
+#TODO: Yeti/1.0 (NHN Corp.; http://help.naver.com/robots/)
 
