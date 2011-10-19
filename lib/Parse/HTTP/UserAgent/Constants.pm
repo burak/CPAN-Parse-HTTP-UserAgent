@@ -40,6 +40,8 @@ use constant TK_NAME             => 0;
 use constant TK_ORIGINAL_VERSION => 1;
 use constant TK_VERSION          => 2;
 
+use constant INSIDE_UNIT_TEST    => $ENV{PARSE_HTTP_USERAGENT_TEST_SUITE};
+use constant INSIDE_VERBOSE_TEST => INSIDE_UNIT_TEST && $ENV{HARNESS_IS_VERBOSE};
 use constant RE_FIREFOX_NAMES    => qr{Firefox|Iceweasel|Firebird|Phoenix }xms;
 use constant RE_DOTNET           => qr{ \A [.]NET \s+ CLR \s+ (.+?) \z    }xms;
 use constant RE_WINDOWS_OS       => qr{ \A Win(dows|NT|[0-9]+)?           }xmsi;
@@ -138,6 +140,8 @@ BEGIN {
         etc => [qw(
             NO_IMATCH
             LAST_ELEMENT
+            INSIDE_UNIT_TEST
+            INSIDE_VERBOSE_TEST
         )],
     );
 
