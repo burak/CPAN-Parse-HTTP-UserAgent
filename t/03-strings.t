@@ -2,6 +2,11 @@
 use strict;
 use warnings;
 use vars qw( $VERSION $SILENT );
+
+BEGIN {
+    $ENV{PARSE_HTTP_USERAGENT_TEST_SUITE} = 1;
+}
+
 use constant TERMINAL_WIDTH => 80;
 use Test::More qw( no_plan );
 use File::Spec;
