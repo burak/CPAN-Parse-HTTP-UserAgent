@@ -2,12 +2,19 @@
 use strict;
 use warnings;
 use vars qw( $VERSION $SILENT );
+
+BEGIN {
+    $ENV{PARSE_HTTP_USERAGENT_TEST_SUITE} = 1;
+}
+
 use Test::More qw( no_plan );
 use File::Spec;
 use Data::Dumper;
 use Getopt::Long;
 use Parse::HTTP::UserAgent;
 use Carp qw( croak );
+
+$SILENT = 1 if ! $ENV{HARNESS_IS_VERBOSE};
 
 GetOptions(\my %opt, qw(
     ids=i@
@@ -42,8 +49,10 @@ foreach my $test ( database({ thaw => 1 }) ) {
     is( delete $got{string}, $test->{string}, "Ok got the string back for $got{name}" );
     # remove undefs, so that we can extend the test data with less headache
     %got = map { $_ => $got{ $_ } } grep { defined $got{$_} } keys %got;
+    my $parser = $got{parser} || '???';
+
     is_deeply( \%got, $test->{struct},
-               "Frozen data matches parse result for '$test->{string}' -> $got{parser} -> $test->{id}" );
+               "Frozen data matches parse result for '$test->{string}' -> $parser -> $test->{id}" );
     if ( $opt{dump} ) {
         diag 'GOT:'.Dumper(\%got) . "\nEXPECTED:". Dumper($test->{struct});
     }
