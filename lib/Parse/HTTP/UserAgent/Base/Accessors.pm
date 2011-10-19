@@ -32,6 +32,7 @@ BEGIN {
         dotnet
     );
 
+    ## no critic (TestingAndDebugging::ProhibitNoStrict)
     no strict qw(refs);
     foreach my $name ( @simple ) {
         my $id = 'UA_' . uc $name;
