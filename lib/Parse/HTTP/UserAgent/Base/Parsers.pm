@@ -20,9 +20,11 @@ sub _extract_dotnet {
             push @dotnet, $match[0];
             next;
         }
-        if ( $e =~ RE_WINDOWS_OS && $1 ne '64' ) {
-            $self->[UA_OS] = $e;
-            next;
+        if ( $e =~ RE_WINDOWS_OS ) {
+            if ( $1 && $1 ne '64' ) {
+                $self->[UA_OS] = $e;
+                next;
+            }
         }
         push @extras, $e;
     }
@@ -151,7 +153,9 @@ sub _parse_safari {
                             ? pop   @{ $thing }
                             : shift @{ $thing }
                             ;
-    $self->[UA_DEVICE]      = shift @{$thing} if $thing->[0] eq 'iPhone';
+    if ( $thing->[0] && $thing->[0] eq 'iPhone' ) {
+        $self->[UA_DEVICE]  = shift @{$thing};
+    }
     $self->[UA_EXTRAS]      = [ @{$thing}, @others ];
 
     if ( length($self->[UA_OS]) == 1 ) {
