@@ -3,10 +3,10 @@ use warnings;
 use vars qw( $SILENT );
 use IO::File;
 use File::Spec;
-use constant DATABASE  => File::Spec->catfile(qw( t data parse.dat ));
 use constant RE_SEPTOR => qr{ \Q[AGENT]\E }xms;
 use Test::More;
-use Carp qw(croak);
+use Carp       qw( croak );
+use File::Find qw( find  );
 
 my @todo;
 
@@ -20,7 +20,7 @@ END {
 sub database {
     my $opt = shift || {};
     my @buf;
-    my $tests = trim( slurp() );
+    my $tests = merge_files();
     my $id    = 0;
     foreach my $test ( split RE_SEPTOR, $tests ) {
         next if ! $test;
@@ -33,6 +33,37 @@ sub database {
         };
     }
     return @buf;
+}
+
+sub merge_files {
+    my $base = 't/data';
+    local *DIR;
+    opendir DIR, $base or die "Can't opendir($base): $!";
+    my %base_file;
+    while ( my $file = readdir DIR ) {
+        my $exact = join q{/}, $base, $file;
+        next if $file eq '.' || $file eq '..' || -d $exact;
+        $base_file{ $exact } = 1;
+    }
+    closedir DIR;
+    my @files;
+    my $probe = sub {
+        return if -d;
+        return if $base_file{ $_ };
+        push @files, $_;
+    };
+    find {
+        no_chdir => 1,
+        wanted   => $probe,
+    }, $base;
+
+    my $raw = q{};
+    foreach my $file ( @files ) {
+        $raw .= qq{\n\n# Adding $file\n\n} . slurp( $file );
+    }
+
+    return $raw;
+
 }
 
 sub thaw {
@@ -70,9 +101,10 @@ sub strip_comments {
 }
 
 sub slurp {
+    my $file = shift;
     my $FH = IO::File->new;
-    $FH->open( DATABASE, 'r')
-        or croak sprintf 'Can not open DB @ %s: %s', DATABASE, $!;
+    $FH->open( $file, 'r')
+        or croak sprintf 'Can not open DB @ %s: %s', $file, $!;
     my $rv = do { local $/; my $s = <$FH>; $s };
     $FH->close;
     return $rv;

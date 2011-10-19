@@ -1,0 +1,13 @@
+[AGENT]
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13
+
+'parser'           => 'chrome',
+'strength'         => 'U',
+'os'               => 'Windows XP',
+'extras'           => ['Windows','KHTML, like Gecko'],
+'version_raw'      => '0.2.149.27',
+'lang'             => 'en-US',
+'version'          => '0.002149027',
+'name'             => 'Chrome',
+'toolkit'          => ['AppleWebKit','525.13','525.130']
