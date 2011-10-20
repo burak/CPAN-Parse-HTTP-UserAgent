@@ -196,7 +196,7 @@ sub _numify {
                 gold     |
                 [ab]\d+  |
                 a\-XXXX  |
-                \+
+                [+]
                )}{}xmsig;
 
     if ( INSIDE_VERBOSE_TEST ) {
@@ -224,15 +224,15 @@ sub _numify {
             if ( INSIDE_VERBOSE_TEST ) {
                 Test::More::diag( "[FATAL] _numify: version said: $error" );
                 Test::More::diag(
-                    sprintf "[FATAL] _numify: UA with bogus version (%s) is: %s",
+                    sprintf '[FATAL] _numify: UA with bogus version (%s) is: %s',
                                 $v, $self->[UA_STRING]
                 );
                 Test::More::diag( '[FATAL] _numify: ' . $self->dumper );
             }
-            die $error;
+            croak $error;
         }
         else {
-            die $error;
+            croak $error;
         }
     };
     return $rv;

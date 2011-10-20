@@ -32,8 +32,7 @@ BEGIN {
         dotnet
     );
 
-    ## no critic (TestingAndDebugging::ProhibitNoStrict)
-    no strict qw(refs);
+    no strict qw(refs); ## no critic (TestingAndDebugging::ProhibitNoStrict)
     foreach my $name ( @simple ) {
         my $id = 'UA_' . uc $name;
         $id = __PACKAGE__->$id();

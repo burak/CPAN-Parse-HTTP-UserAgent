@@ -3,6 +3,7 @@ use warnings;
 use vars qw( $SILENT );
 use IO::File;
 use File::Spec;
+use File::Basename;
 use constant RE_SEPTOR => qr{ \Q[AGENT]\E }xms;
 use Test::More;
 use Carp       qw( croak );
@@ -49,6 +50,7 @@ sub merge_files {
     my @files;
     my $probe = sub {
         return if -d;
+        return if basename( $_ ) =~ m{ \A [.] }xms;
         return if $base_file{ $_ };
         push @files, $_;
     };
@@ -70,7 +72,7 @@ sub thaw {
     my $s = shift || die "Frozen?\n";
     my %rv;
     my $eok = eval "\%rv = (\n $s \n);";
-    die "Can not restore data: $@\n" if $@ || ! $eok;
+    die "Can not restore data: $@\n\t>> $s <<" if $@ || ! $eok;
     return %rv;
 }
 
