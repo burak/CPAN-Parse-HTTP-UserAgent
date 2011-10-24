@@ -4,17 +4,19 @@ use vars qw( $SILENT );
 use IO::File;
 use File::Spec;
 use File::Basename;
+use constant SEPTOR    => q{[AGENT]};
 use constant RE_SEPTOR => qr{ \Q[AGENT]\E }xms;
 use Test::More;
 use Carp       qw( croak );
 use File::Find qw( find  );
 
+my $COMMENT = q{Parse::HTTP::UserAgent test file};
 my @todo;
 
 END {
     if ( @todo && ! $SILENT ) {
         diag( 'Tests marked as TODO are listed below' );
-        diag("'$_'") for @todo;
+        diag("$_->[0]: '$_->[1]'") for @todo;
     }
 }
 
@@ -61,11 +63,11 @@ sub merge_files {
 
     my $raw = q{};
     foreach my $file ( @files ) {
-        $raw .= qq{\n\n# Adding $file\n\n} . slurp( $file );
+        my @raw = split RE_SEPTOR, slurp( $file );
+        $raw .= join SEPTOR, map { qq{\n\n#$COMMENT $file\n\n$_} } @raw;
     }
 
     return $raw;
-
 }
 
 sub thaw {
@@ -88,17 +90,22 @@ sub strip_comments {
     my $s = shift;
     return $s if ! $s;
     my $buf = q{};
+    my $file;
     foreach my $line ( split m{ \n }xms, $s ) {
         chomp $line;
         next if ! $line;
         if ( my @m = $line =~ m{ \A [#] (.+?) \z }xms ) {
+            if ( my @f = $m[0] =~ m{ \A \Q$COMMENT\E (.+?) \z }xms ) {
+                $file = trim( $f[0] );
+            }
             if ( my @n = $m[0] =~ m{ \A TODO: \s? (.+?) \z }xms ) {
-                push @todo, $n[0];
+                push @todo, [ $file, $n[0] ];
             }
             next;
         }
         $buf .= $line . "\n";
     }
+
     return $buf;
 }
 
