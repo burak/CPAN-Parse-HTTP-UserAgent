@@ -27,6 +27,7 @@ sub _is_safari {
     my $str = $self->[UA_STRING];
     # epiphany?
     return                index( $str                   , 'Chrome'       ) != NO_IMATCH ? 0 # faker
+          :               index( $str                   , 'Android'      ) != NO_IMATCH ? 0 # faker
           :    $extra  && index( $extra->[0]            , 'AppleWebKit'  ) != NO_IMATCH ? 1
           : @{$others} && index( $others->[LAST_ELEMENT], 'Safari'       ) != NO_IMATCH ? 1
           :                                                                     0
@@ -42,6 +43,13 @@ sub _is_chrome {
     return              index( $chrome    , 'Chrome'     ) != NO_IMATCH &&
                         index( $safari    , 'Safari'     ) != NO_IMATCH &&
            ( $extra  && index( $extra->[0], 'AppleWebKit') != NO_IMATCH);
+}
+
+sub _is_android {
+    my($self, $thing, $others) = @_;
+    my $has_android = grep { index( lc $_, 'android' ) != NO_IMATCH  } @{ $thing  };
+    my $has_safari  = grep { index( lc $_, 'safari'  ) != NO_IMATCH  } @{ $others };
+    return $has_android && $has_safari;
 }
 
 sub _is_ff {

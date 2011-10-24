@@ -180,3 +180,43 @@ Opera/6.03 (Linux 2.4.18-4GB i686; U) [en]
 'lang'             => 'en',
 'version'          => '6.030',
 'name'             => 'Opera'
+
+[AGENT]
+
+Opera/9.80 (Windows NT 6.0; U; tr) Presto/2.6.30 Version/10.63
+
+parser      => 'opera_pre',
+strength    => 'U',
+os          => 'Windows Vista / Server 2008',
+extras      => [],
+toolkit     => [ 'Presto', '2.6.30', '2.006030' ],
+version_raw => '10.63',
+lang        => 'tr',
+version     => '10.630',
+name        => 'Opera',
+
+[AGENT]
+
+Opera/9.80 (X11; Linux i686; U; en) Presto/2.6.30 Version/10.63
+
+parser      => 'opera_pre',
+strength    => 'U',
+os          => 'X11',
+extras      => ['Linux i686'],
+toolkit     => [ 'Presto','2.6.30','2.006030'],
+version_raw => '10.63',
+lang        => 'en',
+version     => '10.630',
+name        => 'Opera',
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; ru) Opera 8.01
+
+parser      => 'opera_post',
+os          => 'Windows XP',
+extras      => ['Windows NT 5.1'],
+version_raw => '8.01',
+lang        => 'ru',
+version     => '8.010',
+name        => 'Opera',

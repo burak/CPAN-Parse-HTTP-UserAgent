@@ -32,6 +32,13 @@ t/data/desktop/safari/1
 t/data/desktop/seamonkey/1
 t/data/desktop/sleipnir/1
 t/data/desktop/tinybrowser/1
+t/data/mobile/android/1
+t/data/mobile/android/dell
+t/data/mobile/android/google
+t/data/mobile/android/htc
+t/data/mobile/android/motorola
+t/data/mobile/android/samsung
+t/data/mobile/android/sony
 t/data/mobile/opera/1
 t/data/robot/1
 t/data/various/1

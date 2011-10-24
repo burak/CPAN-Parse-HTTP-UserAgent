@@ -26,7 +26,8 @@ use constant UA_STRENGTH         => ++$OID; # [MSIE] List of .NET CLR versions
 use constant UA_MOZILLA          => ++$OID; # [Firefox] Mozilla revision
 use constant UA_ROBOT            => ++$OID; # Is this a robot?
 use constant UA_WAP              => ++$OID; # unimplemented
-use constant UA_MOBILE           => ++$OID; # unimplemented
+use constant UA_MOBILE           => ++$OID; # partially implemented
+use constant UA_TABLET           => ++$OID; # partially implemented
 use constant UA_PARSER           => ++$OID; # the parser name
 use constant UA_DEVICE           => ++$OID; # the name of the mobile device
 use constant UA_ORIGINAL_NAME    => ++$OID; # original name if this is some variation
@@ -100,6 +101,7 @@ BEGIN {
             UA_ROBOT
             UA_WAP
             UA_MOBILE
+            UA_TABLET
             UA_PARSER
             UA_DEVICE
             UA_ORIGINAL_NAME

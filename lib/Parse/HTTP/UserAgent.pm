@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 
-$VERSION = '0.22';
+$VERSION = '0.30';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -107,6 +107,7 @@ sub _do_parse {
             : $self->_is_ff($e)          ? [firefox    => $m, $t, $e, @o       ]
             : $self->_is_safari($e, \@o) ? [safari     => $m, $t, $e, @o       ]
             : $self->_is_chrome($e, \@o) ? [chrome     => $m, $t, $e, @o       ]
+            : $self->_is_android($t,\@o) ? [android    => $m, $t, $e, @o       ]
             : $self->[IS_MAXTHON]        ? [maxthon    => $m, $t, $e, @o       ]
             : undef;
 

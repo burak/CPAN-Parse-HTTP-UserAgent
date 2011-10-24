@@ -153,7 +153,12 @@ sub _parse_safari {
                             ? pop   @{ $thing }
                             : shift @{ $thing }
                             ;
-    if ( $thing->[0] && $thing->[0] eq 'iPhone' ) {
+    if ( $self->[UA_OS] && lc $self->[UA_OS] eq 'macintosh' ) {
+        $self->[UA_OS]   = $self->[UA_LANG];
+        $self->[UA_LANG] = undef;
+    }
+
+    if ( $thing->[0] && lc $thing->[0] eq 'iphone' ) {
         $self->[UA_DEVICE]  = shift @{$thing};
     }
     $self->[UA_EXTRAS]      = [ @{$thing}, @others ];
@@ -177,6 +182,59 @@ sub _parse_chrome {
     my($name, $version)      = split RE_SLASH, $chrome;
     $self->[UA_NAME]         = $name;
     $self->[UA_VERSION_RAW]  = $version;
+    return 1;
+}
+
+sub _parse_android {
+    my($self, $moz, $thing, $extra, @others) = @_;
+    (undef, @{$self}[UA_STRENGTH, UA_OS, UA_LANG, UA_DEVICE]) = @{ $thing };
+    $self->[UA_TOOLKIT] = [ split RE_SLASH, $extra->[0] ] if $extra;
+    my(@extras, $is_phone);
+
+    my @junkions = map { split m{\s+}xms } @others;
+    foreach my $junk ( @junkions ) {
+        if ( $junk eq 'Mobile' ) {
+            $is_phone = 1;
+            next;
+        }
+        if ( index( $junk, 'Version' ) != NO_IMATCH ) {
+            my(undef, $v) = split RE_SLASH, $junk;
+            $self->[UA_VERSION_RAW] = $v; # looks_like_number?
+            next;
+        }
+        push @extras, $junk;
+    }
+
+    if ( $self->[UA_DEVICE] ) {
+        my @build = split RE_WHITESPACE, $self->[UA_DEVICE];
+        my @btest;
+        while ( @build && index($build[-1], 'Build') == NO_IMATCH ) {
+            unshift @btest, pop @build;
+        }
+        unshift @btest, pop @build if @build;
+        my $device = @build ? join ' ', @build : undef;
+        my $build  = shift @btest;
+
+        if ( $device && $build ) {
+            $build =~ s{ Build/ }{}xms;
+            my $os = $self->[UA_OS] || 'Android';
+            $self->[UA_DEVICE] = $device;
+            $self->[UA_OS]     = "$os ($build)";
+            if ( @btest ) {
+                $self->[UA_TOOLKIT] = [ split RE_SLASH, $btest[0] ];
+            }
+        }
+    }
+
+    if ( @extras >= 3 && $extras[0] && $extras[0] eq 'KHTML,') {
+        unshift @extras, join ' ', map { shift @extras } 1..3;
+    }
+
+    $self->[UA_NAME]   = 'Android';
+    $self->[UA_MOBILE] = 1;
+    $self->[UA_TABLET] = $is_phone ? undef : 1;
+    $self->[UA_EXTRAS] = [ @extras ];
+
     return 1;
 }
 
