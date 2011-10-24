@@ -22,8 +22,8 @@ t/data/desktop/chrome/todo
 t/data/desktop/epiphany/1
 t/data/desktop/firefox/1
 t/data/desktop/lunascape/1
-t/data/desktop/maxthon/v1/1
-t/data/desktop/maxthon/v2/1
+t/data/desktop/maxthon/1x
+t/data/desktop/maxthon/2x
 t/data/desktop/mozilla/1
 t/data/desktop/msie/3x
 t/data/desktop/msie/4x
