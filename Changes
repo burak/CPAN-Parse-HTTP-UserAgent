@@ -5,7 +5,7 @@ Time zone is UTC+2.
 0.30 Tue Oct 25 01:11:53 2011
    => Update test suite strings.
    => Internal cleanup.
-   => Android suport (+Tablet).
+   => Android support (+Tablet).
 
 0.21 Wed Oct 19 02:13:29 2011
    => Data::Dumper dumps are now sorted.

@@ -25,7 +25,12 @@ t/data/desktop/lunascape/1
 t/data/desktop/maxthon/v1/1
 t/data/desktop/maxthon/v2/1
 t/data/desktop/mozilla/1
-t/data/desktop/msie/1
+t/data/desktop/msie/3x
+t/data/desktop/msie/4x
+t/data/desktop/msie/5x
+t/data/desktop/msie/6x
+t/data/desktop/msie/7x
+t/data/desktop/msie/8x
 t/data/desktop/netscape/1
 t/data/desktop/opera/1
 t/data/desktop/safari/1
