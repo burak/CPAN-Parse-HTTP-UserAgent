@@ -18,7 +18,6 @@ t/03-strings.t
 t/db.pl
 t/data/desktop/camino/1
 t/data/desktop/chrome/1
-t/data/desktop/chrome/todo
 t/data/desktop/epiphany/1
 t/data/desktop/firefox/1
 t/data/desktop/lunascape/1
