@@ -1,49 +1,5 @@
 [AGENT]
 
-Mozilla/5.0 (Windows; U; Windows NT 5.1; tr; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3
-
-'parser'           => 'firefox',
-'os'               => 'Windows XP',
-'strength'         => 'U',
-'extras'           => ['Windows'],
-'version_raw'      => '3.0.3',
-'lang'             => 'tr',
-'version'          => '3.000003',
-'mozilla'          => ['1.9.0.3','1.009000003'],
-'name'             => 'Firefox',
-'toolkit'          => ['Gecko','2008092417','2008092417.000']
-
-[AGENT]
-
-Mozilla/5.0 (compatible; SnapPreviewBot; en-US; rv:1.8.0.9) Gecko/20061206 Firefox/1.5.0.9
-
-'parser'           => 'firefox',
-'os'               => 'SnapPreviewBot',
-'extras'           => [],
-'version_raw'      => '1.5.0.9',
-'lang'             => 'en-US',
-'mozilla'          => ['1.8.0.9','1.008000009'],
-'version'          => '1.005000009',
-'name'             => 'Firefox',
-'toolkit'          => ['Gecko','20061206','20061206.000']
-
-[AGENT]
-
-Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.12) Gecko/20080129 Iceweasel/2.0.0.12 (Debian-2.0.0.12-1)
-
-'parser'           => 'firefox',
-'strength'         => 'U',
-'os'               => 'Linux i686',
-'extras'           => ['X11','Debian-2.0.0.12-1'],
-'version_raw'      => '2.0.0.12',
-'lang'             => 'en-US',
-'mozilla'          => ['1.8.1.12','1.008001012'],
-'version'          => '2.000000012',
-'name'             => 'Firefox',
-'toolkit'          => ['Gecko','20080129','20080129.000']
-
-[AGENT]
-
 Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.7) Gecko/20040619 Firefox/0.9
 
 'parser'           => 'firefox',
