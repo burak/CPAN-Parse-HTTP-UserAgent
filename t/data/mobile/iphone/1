@@ -1,0 +1,14 @@
+[AGENT]
+
+Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3
+
+'parser'           => 'safari',
+'strength'         => 'U',
+'os'               => 'CPU like Mac OS X',
+'extras'           => ['KHTML, like Gecko','Mobile/1A543a','Safari/419.3'],
+'version_raw'      => '3.0',
+'lang'             => 'en',
+'version'          => '3.000',
+'name'             => 'Safari',
+'device'           => 'iPhone',
+'toolkit'          => ['AppleWebKit','420+','420.000']

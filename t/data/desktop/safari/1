@@ -72,15 +72,12 @@ Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/74 (KHTML, like Geck
 
 [AGENT]
 
-Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22
 
-'parser'           => 'safari',
-'strength'         => 'U',
-'os'               => 'CPU like Mac OS X',
-'extras'           => ['KHTML, like Gecko','Mobile/1A543a','Safari/419.3'],
-'version_raw'      => '3.0',
-'lang'             => 'en',
-'version'          => '3.000',
-'name'             => 'Safari',
-'device'      => 'iPhone',
-'toolkit'          => ['AppleWebKit','420+','420.000']
+'parser'      => 'safari',
+'os'          => 'Intel Mac OS X 10_6_8',
+'extras'      => ['KHTML, like Gecko', 'Safari/534.51.22'],
+'toolkit'     => ['AppleWebKit','534.51.22','534.051022'],
+'version_raw' => '5.1.1',
+'version'     => '5.001001',
+'name'        => 'Safari',
