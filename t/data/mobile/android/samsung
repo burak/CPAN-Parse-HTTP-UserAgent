@@ -1,5 +1,21 @@
 [AGENT]
 
+Mozilla/5.0 (Linux; U; Android 2.3.3; tr-tr; GT-I9000 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+
+'parser'      => 'android',
+'mobile'      => 1,
+'strength'    => 'U',
+'os'          => 'Android 2.3.3 (GINGERBREAD)',
+'extras'      => ['KHTML, like Gecko','Safari/533.1'],
+'toolkit'     => ['AppleWebKit','533.1','533.100'],
+'version_raw' => '4.0',
+'lang'        => 'tr-tr',
+'version'     => '4.000',
+'name'        => 'Android',
+'device'      => 'GT-I9000',
+
+[AGENT]
+
 Mozilla/5.0 (Linux; U; Android 2.2; tr-tr; GT-I9000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
 
 'parser'      => 'android',
