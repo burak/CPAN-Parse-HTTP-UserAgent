@@ -23,6 +23,8 @@ t/data/desktop/firefox/0x
 t/data/desktop/firefox/1x
 t/data/desktop/firefox/2x
 t/data/desktop/firefox/3x
+t/data/desktop/firefox/6x
+t/data/desktop/firefox/7x
 t/data/desktop/lunascape/1
 t/data/desktop/maxthon/1x
 t/data/desktop/maxthon/2x
@@ -34,7 +36,14 @@ t/data/desktop/msie/6x
 t/data/desktop/msie/7x
 t/data/desktop/msie/8x
 t/data/desktop/netscape/1
-t/data/desktop/opera/1
+t/data/desktop/opera/03x
+t/data/desktop/opera/05x
+t/data/desktop/opera/06x
+t/data/desktop/opera/07x
+t/data/desktop/opera/08x
+t/data/desktop/opera/09x
+t/data/desktop/opera/10x
+t/data/desktop/opera/11x
 t/data/desktop/safari/1
 t/data/desktop/seamonkey/1
 t/data/desktop/sleipnir/1

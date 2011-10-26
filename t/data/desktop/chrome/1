@@ -37,3 +37,15 @@ version_raw => '4.0.249.11',
 lang        => 'en-US',
 version     => '4.000249011',
 name        => 'Chrome',
+
+[AGENT]
+
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.202 Safari/535.1
+
+'parser'      => 'chrome',
+'os'          => 'Intel Mac OS X 10_6_8',
+'extras'      => ['KHTML, like Gecko'],
+'toolkit'     => ['AppleWebKit','535.1','535.100'],
+'version_raw' => '14.0.835.202',
+'version'     => '14.000835202',
+'name'        => 'Chrome',
