@@ -311,8 +311,17 @@ sub _parse_mozilla_family {
 
     if ( @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ) {
         $self->[UA_MOZILLA]  = pop @{ $thing };
-        $self->[UA_LANG]     = pop @{ $thing };
-        $self->[UA_OS]       = pop @{ $thing };
+        if ( @{ $thing } <= 3 ) {
+            $self->[UA_OS] = shift @{ $thing };
+            if ( $self->[UA_OS] && $self->[UA_OS] eq 'Macintosh' ) {
+                $self->[UA_OS] = shift @{ $thing };
+            }
+            $self->[UA_LANG] = pop @{ $thing } if @{ $thing };
+        }
+        else {
+            $self->[UA_LANG]     = pop @{ $thing };
+            $self->[UA_OS]       = pop @{ $thing };
+        }
     }
 
     $self->[UA_EXTRAS] = [ @{ $thing }, @extras ];
