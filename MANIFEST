@@ -26,6 +26,8 @@ t/data/desktop/firefox/2x
 t/data/desktop/firefox/3x
 t/data/desktop/firefox/6x
 t/data/desktop/firefox/7x
+t/data/desktop/konqueror/3x
+t/data/desktop/konqueror/4x
 t/data/desktop/lunascape/1
 t/data/desktop/maxthon/1x
 t/data/desktop/maxthon/2x
