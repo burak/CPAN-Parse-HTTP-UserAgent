@@ -200,6 +200,16 @@ sub _numify {
                 [+]
                )}{}xmsig;
 
+    $v =~ s{
+                (?:[^0-9]+)? # usually dash
+                rc           # nonsense
+                [\-_.]?      # usually dash
+                ([0-9])      # teh candidate revision
+            }{.0.$1}xmsi;    # yeah, hacky
+
+    # workaround another stupidity (1.2.3-4)
+    $v =~ tr/-/./;
+
     if ( INSIDE_VERBOSE_TEST ) {
         if ( $1 ) {
             Test::More::diag("[DEBUG] _numify: removed '$1' from version string");
@@ -217,7 +227,8 @@ sub _numify {
     $v .= q{.0} if index($v, q{.}) == NO_IMATCH;
     my $rv;
     eval {
-        $rv = version->new("$v")->numify; 1
+        $rv = version->new("$v")->numify;
+        1;
     } or do {
         my $error = $@ || '[unknown error while parsing version]';
         if ( INSIDE_UNIT_TEST ) {
@@ -381,11 +392,11 @@ If you pass a wrong parameter to the dumper, it'll croak.
 
 =item *
 
-L<HTTP::BrowserDetect>
+L<HTML::ParseBrowser>
 
 =item *
 
-L<HTML::ParseBrowser>
+L<HTTP::BrowserDetect>
 
 =item *
 
@@ -394,6 +405,10 @@ L<HTTP::DetectUserAgent>
 =item *
 
 L<HTTP::MobileAgent>
+
+=item *
+
+L<Mobile::UserAgent>
 
 =back
 
@@ -416,6 +431,23 @@ L<http://www.zytrax.com/tech/web/mobile_ids.html>,
 =item *
 
 L<http://www.webaim.org/blog/user-agent-string-history/>.
+
+=back
+
+=head2 Module Reviews
+
+=over 4
+
+=item *
+
+CPAN modules for parsing User-Agent strings by B<Neil Bowers>:
+L<http://blogs.perl.org/users/neilb/2011/10/cpan-modules-for-parsing-user-agent-strings.html>
+(23 October 2011).
+
+=item *
+
+Parse::HTTP::UserAgent: yet another user agent string parser by B<Burak Gursoy>:
+L<http://use.perl.org/~Burak/journal/39577> (4 September 2009).
 
 =back
 
