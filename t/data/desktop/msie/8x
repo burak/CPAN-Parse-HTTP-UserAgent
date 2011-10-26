@@ -34,3 +34,15 @@ Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 
 'version'     => '8.000',
 'name'        => 'MSIE',
 'dotnet'      => ['2.0.50727','3.5.30729','3.0.30729'],
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)
+
+dotnet      => [ '2.0.50727' ],
+extras      => [ 'SV1' ],
+name        => 'MSIE',
+os          => 'Windows XP',
+parser      => 'msie',
+version     => '8.000',
+version_raw => '8.0',

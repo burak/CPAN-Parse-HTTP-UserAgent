@@ -83,3 +83,39 @@ Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tesco; YPC 3.2.0; .NET CLR 1.
 'version'          => '7.000',
 'name'             => 'MSIE',
 'dotnet'           => ['1.1.4322'],
+
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
+
+extras      => [],
+name        => 'MSIE',
+os          => 'Windows XP',
+parser      => 'msie',
+version     => '7.000',
+version_raw => '7.0',
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; BT Openworld Broadband; .NET CLR 1.1.4322)
+
+dotnet      => [ '1.1.4322' ],
+extras      => [ 'BT Openworld Broadband' ],
+name        => 'MSIE',
+os          => 'Windows XP',
+parser      => 'msie',
+version     => '7.000',
+version_raw => '7.0',
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; yie5.5_SBCDSL; SU 3.005; .NET CLR 1.0.3705)
+
+dotnet      => [ '1.0.3705' ],
+extras      => [ 'yie5.5_SBCDSL', 'SU 3.005' ],
+name        => 'MSIE',
+os          => 'Windows XP',
+parser      => 'msie',
+version     => '7.000',
+version_raw => '7.0',

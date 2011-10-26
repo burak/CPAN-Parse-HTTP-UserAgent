@@ -120,3 +120,14 @@ Mozilla/4.0 (compatible; MSIE 5.22; Mac_PowerPC)
 'version_raw'      => '5.22',
 'version'          => '5.220',
 'name'             => 'MSIE',
+
+[AGENT]
+
+Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 4.0)
+
+'parser'      => 'msie',
+'os'          => 'Windows NT 4.0',
+'extras'      => [],
+'version_raw' => '5.5',
+'version'     => '5.500',
+'name'        => 'MSIE',
