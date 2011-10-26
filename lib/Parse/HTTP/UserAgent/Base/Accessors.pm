@@ -27,7 +27,6 @@ BEGIN {
 
     my @multi = qw(
         mozilla
-        toolkit
         extras
         dotnet
     );
@@ -55,6 +54,39 @@ sub version {
     my $self = shift;
     my $type = shift || q{};
     return $self->[ $type eq 'raw' ? UA_VERSION_RAW : UA_VERSION ] || 0;
+}
+
+sub toolkit {
+    my $self = shift;
+    return Parse::HTTP::UserAgent::Base::Accessors::toolkit->new(
+                $self->[UA_TOOLKIT]
+            );
+}
+
+package Parse::HTTP::UserAgent::Base::Accessors::toolkit;
+use strict;
+use warnings;
+use overload '""',    => 'name',
+             '0+',    => 'version',
+             fallback => 1,
+;
+use constant ID_NAME        => 0;
+use constant ID_VERSION_RAW => 1;
+use constant ID_VERSION     => 2;
+
+sub new {
+    my($class, $tk) = @_;
+    return bless \@{ $tk }, $class;
+}
+
+sub name {
+    return shift->[ID_NAME];
+}
+
+sub version {
+    my $self = shift;
+    my $type = shift || q{};
+    return $self->[ $type eq 'raw' ? ID_VERSION_RAW : ID_VERSION ] || 0;
 }
 
 1;
