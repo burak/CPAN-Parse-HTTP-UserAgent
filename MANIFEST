@@ -16,6 +16,7 @@ lib/Parse/HTTP/UserAgent/Base/Accessors.pm
 t/02-parser.t
 t/03-strings.t
 t/db.pl
+t/data/README
 t/data/desktop/camino/1
 t/data/desktop/chrome/1
 t/data/desktop/epiphany/1
@@ -61,4 +62,3 @@ t/data/robot/1
 t/data/various/1
 t/data/various/2
 t/data/various/todo
-t/data/README
