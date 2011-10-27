@@ -6,6 +6,7 @@ Time zone is UTC+2.
    => Update test suite strings.
    => Internal cleanup.
    => Android support (+Tablet).
+   => Konqueror support.
    => Overhaul test suite.
    => New test strings.
 
