@@ -1,13 +1,15 @@
 use strict;
 use warnings;
 use vars qw( $SILENT );
-use IO::File;
-use File::Spec;
-use File::Basename;
+
 use constant SEPTOR    => q{[AGENT]};
 use constant RE_SEPTOR => qr{ \Q[AGENT]\E }xms;
+
+use Carp qw( croak );
+use File::Spec;
+use File::Basename;
+use IO::File;
 use Test::More;
-use Carp       qw( croak );
 use File::Find qw( find  );
 
 my $COMMENT = q{Parse::HTTP::UserAgent test file};
