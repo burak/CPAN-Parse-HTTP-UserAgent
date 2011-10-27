@@ -76,7 +76,7 @@ use constant ID_VERSION     => 2;
 
 sub new {
     my($class, $tk) = @_;
-    return bless [ @{ $tk } ], $class;
+    return bless [ $tk ? @{ $tk } : (undef) x 3 ], $class;
 }
 
 sub name {
