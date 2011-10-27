@@ -1,21 +1,23 @@
 #!/usr/bin/env perl
-# (c) 2009 Burak Gursoy. Distributed under the Perl License.
+# (c) Burak Gursoy. Distributed under the Perl License.
 use strict;
 use warnings;
+use subs qw(_p);
+use lib  qw( .. );
+use constant HUNDRED => 100;
+
+use Carp qw( croak );
+use Data::Dumper;
 use Getopt::Long;
+use HTTP::BrowserDetect;
+use HTTP::DetectUserAgent;
+use HTML::ParseBrowser;
+use Parse::HTTP::UserAgent;
+use Text::Table;
 
 GetOptions(\my %opt, qw(
     debug
 ));
-
-use HTTP::BrowserDetect;
-use Parse::HTTP::UserAgent;
-use HTTP::DetectUserAgent;
-use HTML::ParseBrowser;
-use Data::Dumper;
-use Text::Table;
-use constant HUNDRED => 100;
-use lib qw( .. );
 
 our $SILENT = 1;
 
@@ -25,15 +27,15 @@ run();
 
 sub run {
     my @tests = database({ thaw => 1 });
-    my $pok;
 
     welcome( scalar @tests );
 
-    my %fail = (
-        'Parse::HTTP::UserAgent' => { name => {}, version => 0, os => 0, lang => 0 },
-        'HTML::ParseBrowser'     => { name => {}, version => 0, os => 0, lang => 0 },
-        'HTTP::DetectUserAgent'  => { name => {}, version => 0, os => 0, lang => 0 },
-        'HTTP::BrowserDetect'    => { name => {}, version => 0, os => 0, lang => 0 },
+    my @fail_common = map { $_ => 0 } qw( lang os version  );
+    my %fail        = (
+        'Parse::HTTP::UserAgent' => { name => {}, @fail_common },
+        'HTML::ParseBrowser'     => { name => {}, @fail_common },
+        'HTTP::DetectUserAgent'  => { name => {}, @fail_common },
+        'HTTP::BrowserDetect'    => { name => {}, @fail_common },
     );
 
     my %total;
@@ -42,40 +44,34 @@ sub run {
         my %hdua = http_detectuseragent( $test->{string} );
         my %hpb  = html_parsebrowser(    $test->{string} );
         my %hbd  = http_browserdetect(   $test->{string} );
-        my %is   = set_is(\%ok, \%hpb, \%hbd, \%hdua, $test->{string});
+        my %is   = set_is( \%ok, \%hpb, \%hbd, \%hdua, $test->{string} );
 
-        ++$total{name}    if $is{name};
-        ++$total{lang}    if $is{lang};
-        ++$total{version} if $is{version};
-        ++$total{os}      if $is{os};
+        foreach my $adjust ( qw( name lang version os ) ) {
+            ++$total{ $adjust } if $is{ $adjust };
+        }
 
         $hdua{name} = q{} if $hdua{name} && $hdua{name} eq 'Unknown';
 
-        failures(\%fail, \%is, \%ok, \%hdua, \%hbd, \%hpb);
+        failures( \%fail, \%is, \%ok, \%hdua, \%hbd, \%hpb );
 
         my $phua_fail = ( $is{lang}  && ! $ok{lang} ) ||
-                          $is{v_nok}                     ||
+                          $is{v_nok}                  ||
                         ( $is{os}    && ! $ok{os}   ) ||
                         ( $is{name}  && ! $ok{name} );
 
-        #print <<"FOO";
-        #$ok{name} $ok{version} $ok{os}
-        #$hpb{name} $hpb{v} $hpb{os}
-        #$hdua{name} $hdua{version} $hdua{os}
-        #
-        #FOO
-
         if ( $opt{debug} && $phua_fail ) {
-            debug_fail(\%is, \%ok, \%hdua, \%hpb, \%hbd, $test->{string});
+            debug_fail( \%is, \%ok, \%hdua, \%hpb, \%hbd, $test->{string} );
         }
     }
-    results(\%fail, \%total);
+
+    results( \%fail, \%total );
+
     return;
 }
 
 sub welcome {
     my $total = shift;
-    my $pok   = print <<"ATTENTION";
+    return _p <<"ATTENTION";
 *** This is a test to compare the accuracy of the parsers.
 *** The data set is from the test suite. There are $total UA strings
 *** Parse::HTTP::UserAgent will detect all of them
@@ -85,49 +81,53 @@ sub welcome {
 This may take a while. Please stand by ...
 
 ATTENTION
-    return;
 }
 
 sub set_is {
     my($ok, $hpb, $hbd, $hdua, $string) = @_;
-    my %is;
-    $is{name}    = $ok->{name}    || $hpb->{name} || $hbd->{name}    || $hdua->{name};
-    $is{lang}    = $ok->{lang}    || $hpb->{lang} || $hbd->{lang}    || $hdua->{lang};
-    $is{version} = $ok->{version} || $hpb->{v}    || $hbd->{version} || $hdua->{version};
-    $is{os}      = $ok->{os}      || $hpb->{os}   || $hbd->{os}      || $hdua->{os};
-    $is{v_nok}   = $is{version} && ! $ok->{version} && _valid_v($is{version}, $string);
+    my $fetch = sub {
+        my($field, @slots) = @_;
+        my @rv = grep { $_ }
+                 map  { $_->{ $field } }
+                    $ok, $hpb, $hbd, $hdua;
+        return $rv[0];
+    };
+
+    my %is = map { $_ => $fetch->( $_ ) } qw( name lang version os );
+
+    $is{v_nok} = $is{version}
+                    && ! $ok->{version}
+                    && _valid_v( $is{version}, $string );
     return %is;
 }
 
 sub debug_fail {
     my($is, $ok, $hdua, $hpb, $hbd, $string) = @_;
-    my $pok;
-    $pok = print "$string\n",
-    $pok = print "LANG   : $is->{lang}\n"    if $is->{lang}    && ! $ok->{lang};
-    $pok = print "VERSION: $is->{version}\n" if $is->{v_nok};
-    $pok = print "OS     : $is->{os}\n"      if $is->{os}      && ! $ok->{os};
-    $pok = print "NAME   : $is->{name}\n"    if $is->{name}    && ! $ok->{name};
-    $pok = print Dumper({
+    _p "$string\n",
+    _p "LANG   : $is->{lang}\n"    if $is->{lang}   && ! $ok->{lang};
+    _p "VERSION: $is->{version}\n" if $is->{v_nok};
+    _p "OS     : $is->{os}\n"      if $is->{os}     && ! $ok->{os};
+    _p "NAME   : $is->{name}\n"    if $is->{name}   && ! $ok->{name};
+    _p Dumper({
         parse_http_useragent => $ok,
         http_detectuseragent => $hdua,
         html_parsebrowser    => $hpb,
         http_browserdetect   => $hbd,
     });
-    $pok = print q{-} x '80', "\n";
+    _p q{-} x '80', "\n";
     return;
 }
 
 sub results {
     my($fail, $total) = @_;
-    my $pok;
     my $tb = Text::Table->new(
-        q{|}, 'Parser',
-        q{|}, 'Name FAILS',
-        q{|}, 'Version FAILS',
-        q{|}, 'Language FAILS',
-        q{|}, 'OS FAILS',
-        q{|},
-    );
+                q{|}, 'Parser',
+                q{|}, 'Name FAILS',
+                q{|}, 'Version FAILS',
+                q{|}, 'Language FAILS',
+                q{|}, 'OS FAILS',
+                q{|},
+            );
 
     foreach my $parser ( keys %{$fail} ) {
         my $all = $fail->{$parser}{name};
@@ -148,12 +148,13 @@ sub results {
         ]);
     }
 
-    $pok = print $tb->rule( qw( - + ) )
+    _p    $tb->rule( qw( - + ) )
         . $tb->title
         . $tb->rule( qw( - + ) )
         . $tb->body
         . $tb->rule( qw( - + ) )
     ;
+
     return;
 }
 
@@ -173,7 +174,6 @@ sub parse_http_useragent {
 
 sub html_parsebrowser {
     my $ua = HTML::ParseBrowser->new( shift );
-    # !!! version() returns a hash. you'll want v()
     my %rv = map { $_ => $ua->$_() } qw(
         user_agent
         languages
@@ -193,6 +193,9 @@ sub html_parsebrowser {
         osvers
         osarc
     );
+    # version is a hash with major/minor crap
+    $rv{_version} = delete $rv{version};
+    $rv{version}  = $rv{v};
     return %rv;
 }
 
@@ -213,10 +216,12 @@ sub http_detectuseragent  {
 
 sub failures {
     my($fail, $is, $ok, $hdua, $hbd, $hpb) = @_;
-    _fail_lang(    $fail, $is, $ok, $hdua, $hbd, $hpb );
-    _fail_version( $fail, $is, $ok, $hdua, $hbd, $hpb );
-    _fail_os(      $fail, $is, $ok, $hdua, $hbd, $hpb );
-    _fail_name(    $fail, $is, $ok, $hdua, $hbd, $hpb );
+    no strict qw( refs );
+    foreach my $name ( qw( lang version os name ) ) {
+        &{ '_fail_' . $name }(
+            $fail, $is, $ok, $hdua, $hbd, $hpb
+        );
+    }
     return;
 }
 
@@ -263,6 +268,10 @@ sub _fail_name {
 sub _valid_v { # prevent false-positives
     my($v, $str)= @_;
     return $str !~ m{ \A Mozilla [/] $v \s }xms;
+}
+
+sub _p {
+    print {*STDOUT} @_ or croak "Can't print: $!";
 }
 
 1;
