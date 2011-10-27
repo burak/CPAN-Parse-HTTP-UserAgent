@@ -429,19 +429,27 @@ L<Mobile::UserAgent>
 
 =item *
 
-L<http://en.wikipedia.org/wiki/User_agent>,
+L<http://en.wikipedia.org/wiki/User_agent>
 
 =item *
 
-L<http://www.zytrax.com/tech/web/browser_ids.htm>,
+L<http://www.zytrax.com/tech/web/browser_ids.htm>
 
 =item *
 
-L<http://www.zytrax.com/tech/web/mobile_ids.html>,
+L<http://www.zytrax.com/tech/web/mobile_ids.html>
 
 =item *
 
-L<http://www.webaim.org/blog/user-agent-string-history/>.
+L<http://www.webaim.org/blog/user-agent-string-history/>
+
+=item *
+
+L<https://developer.mozilla.org/en/Gecko_user_agent_string_reference>
+
+=item *
+
+L<http://www.useragentstring.com>
 
 =back
 

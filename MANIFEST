@@ -58,6 +58,7 @@ t/data/mobile/android/htc
 t/data/mobile/android/motorola
 t/data/mobile/android/samsung
 t/data/mobile/android/sony
+t/data/mobile/firefox
 t/data/mobile/iphone/1
 t/data/mobile/symbian/nokia
 t/data/mobile/opera/1
