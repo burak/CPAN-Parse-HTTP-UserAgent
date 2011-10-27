@@ -188,7 +188,10 @@ sub _object_ids {
 sub _numify {
     my $self = shift;
     my $v    = shift || return 0;
-    $v    =~ s{(
+    my @removed;
+
+    if (
+        $v =~ s{(
                 pre      |
                 rel      |
                 alpha    |
@@ -198,21 +201,29 @@ sub _numify {
                 [ab]\d+  |
                 a\-XXXX  |
                 [+]
-               )}{}xmsig;
+               )}{}xmsig
+    ){
+        push @removed, $1 if INSIDE_VERBOSE_TEST;
+    }
 
-    $v =~ s{
+    if (
+        $v =~ s{(
                 (?:[^0-9]+)? # usually dash
                 rc           # nonsense
                 [\-_.]?      # usually dash
                 ([0-9])      # teh candidate revision
-            }{.0.$1}xmsi;    # yeah, hacky
+            )}{.0.$2}xmsi    # yeah, hacky
+    ) {
+        push @removed, $1 if INSIDE_VERBOSE_TEST;
+    }
 
     # workaround another stupidity (1.2.3-4)
     $v =~ tr/-/./;
 
     if ( INSIDE_VERBOSE_TEST ) {
-        if ( $1 ) {
-            Test::More::diag("[DEBUG] _numify: removed '$1' from version string");
+        if ( @removed ) {
+            my $r = join q{','}, @removed;
+            Test::More::diag("[DEBUG] _numify: removed '$r' from version string");
         }
     }
 
@@ -234,7 +245,7 @@ sub _numify {
         if ( INSIDE_UNIT_TEST ) {
             chomp $error;
             if ( INSIDE_VERBOSE_TEST ) {
-                Test::More::diag( "[FATAL] _numify: version said: $error" );
+                Test::More::diag( "[FATAL] _numify: version said: $error for '$v'" );
                 Test::More::diag(
                     sprintf '[FATAL] _numify: UA with bogus version (%s) is: %s',
                                 $v, $self->[UA_STRING]
