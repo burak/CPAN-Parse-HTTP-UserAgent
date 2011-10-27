@@ -304,8 +304,8 @@ depending on the vendor's (or the user's) choice. Also, it is not dependable
 since it is some arbitrary identification string. Any user agent can fake
 another. So, why deal with such a useless mess? You may want to see the choice
 of your visitors and can get some reliable data (even if some are fake) and
-generate some nice charts out of them or just want to send a C<HttpOnly> cookie
-if the user agent seem to support it (and send a normal one if this is not the
+generate some nice charts out of them or just want to send an C<HttpOnly> cookie
+if the user agent seems to support it (and send a normal one if this is not the
 case). However, browser sniffing for client-side coding is considered a bad
 habit.
 
