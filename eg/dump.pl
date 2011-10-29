@@ -7,12 +7,15 @@ use vars qw( $VERSION );
 use warnings;
 use lib qw( ../lib lib );
 
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 BEGIN {
     *Parse::HTTP::UserAgent::DEBUG = sub () { 1 }
 }
 
-use Parse::HTTP::UserAgent -all;
+use Parse::HTTP::UserAgent;
 
-my $pok = print Parse::HTTP::UserAgent->new( shift || die "UserAgent?\n" )->dumper;
+print Parse::HTTP::UserAgent
+        ->new( shift || die "UserAgent?\n" )
+        ->dumper
+    or die "Unable to print: $!";
