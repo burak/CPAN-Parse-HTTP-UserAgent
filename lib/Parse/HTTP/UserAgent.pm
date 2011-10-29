@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 
-$VERSION = '0.30';
+$VERSION = '0.31';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -219,6 +219,7 @@ sub _numify {
 
     # workaround another stupidity (1.2.3-4)
     $v =~ tr/-/./;
+    $v =~ tr/_/./;
 
     if ( INSIDE_VERBOSE_TEST ) {
         if ( @removed ) {
@@ -226,6 +227,9 @@ sub _numify {
             Test::More::diag("[DEBUG] _numify: removed '$r' from version string");
         }
     }
+
+    # Finally, be aggressive to prevent dying on bogus stuff
+    $v =~ s{[^0-9.]}{}xmsg;
 
     # Gecko revisions like: "20080915000512" will cause an
     #   integer overflow warning. use bigint?
