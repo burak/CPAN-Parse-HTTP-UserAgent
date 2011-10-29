@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
-use constant OPERA_FAKER_EXTRA_SIZE => 4;
 
 $VERSION = '0.10';
 
@@ -19,18 +18,20 @@ sub _is_opera_post {
 
 sub _is_opera_ff { # opera faking as firefox
     my($self, $extra) = @_;
-    return $extra && @{$extra} == OPERA_FAKER_EXTRA_SIZE && $extra->[2] eq 'Opera';
+    return $extra
+            && @{$extra}    ==  OPERA_FAKER_EXTRA_SIZE
+            &&  $extra->[2] eq 'Opera';
 }
 
 sub _is_safari {
     my($self, $extra, $others) = @_;
     my $str = $self->[UA_STRING];
     # epiphany?
-    return                index( $str                   , 'Chrome'       ) != NO_IMATCH ? 0 # faker
-          :               index( $str                   , 'Android'      ) != NO_IMATCH ? 0 # faker
-          :    $extra  && index( $extra->[0]            , 'AppleWebKit'  ) != NO_IMATCH ? 1
-          : @{$others} && index( $others->[LAST_ELEMENT], 'Safari'       ) != NO_IMATCH ? 1
-          :                                                                     0
+    return                index( $str                   , 'Chrome'      ) != NO_IMATCH ? 0 # faker
+          :               index( $str                   , 'Android'     ) != NO_IMATCH ? 0 # faker
+          :    $extra  && index( $extra->[0]            , 'AppleWebKit' ) != NO_IMATCH ? 1
+          : @{$others} && index( $others->[LAST_ELEMENT], 'Safari'      ) != NO_IMATCH ? 1
+          :                                                                              0
           ;
 }
 

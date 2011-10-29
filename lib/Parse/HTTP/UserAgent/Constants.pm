@@ -66,6 +66,12 @@ use constant RE_DIGIT_DOT_DIGIT  => qr{\d+[.]?\d}xms;
 use constant RE_WARN_OVERFLOW => qr{\QInteger overflow in version\E}xms;
 use constant RE_WARN_INVALID  => qr{\QVersion string .+? contains invalid data; ignoring:\E}xms;
 
+use constant ERROR_MAXTHON_VERSION  => 'Unable to extract Maxthon version from Maxthon UA-string';
+use constant ERROR_MAXTHON_MSIE     => 'Unable to extract MSIE from Maxthon UA-string';
+use constant OPERA9                 => 9;
+use constant OPERA_TK_LENGTH        => 5;
+use constant OPERA_FAKER_EXTRA_SIZE => 4;
+
 use constant LIST_ROBOTS         => qw(
     Wget
     curl
@@ -144,6 +150,15 @@ BEGIN {
             LAST_ELEMENT
             INSIDE_UNIT_TEST
             INSIDE_VERBOSE_TEST
+        )],
+        error => [qw(
+            ERROR_MAXTHON_VERSION
+            ERROR_MAXTHON_MSIE
+        )],
+        opera => [qw(
+            OPERA9
+            OPERA_TK_LENGTH
+            OPERA_FAKER_EXTRA_SIZE
         )],
     );
 

@@ -3,10 +3,6 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
-use constant ERROR_MAXTHON_VERSION => 'Unable to extract Maxthon version from Maxthon UA-string';
-use constant ERROR_MAXTHON_MSIE    => 'Unable to extract MSIE from Maxthon UA-string';
-use constant OPERA9                => 9;
-use constant OPERA_TK_LENGTH       => 5;
 
 $VERSION = '0.10';
 
