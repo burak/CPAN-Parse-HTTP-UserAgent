@@ -62,6 +62,7 @@ t/data/mobile/firefox
 t/data/mobile/iphone/1
 t/data/mobile/symbian/nokia
 t/data/mobile/opera/1
+t/data/mobile/tablet/ipad/1
 t/data/robot/1
 t/data/various/1
 t/data/various/2
