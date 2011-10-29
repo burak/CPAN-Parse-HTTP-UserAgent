@@ -10,6 +10,7 @@ $VERSION = '0.11';
 #wap
 #mobile
 #device
+#tablet
 
 BEGIN {
     my @simple = qw(
