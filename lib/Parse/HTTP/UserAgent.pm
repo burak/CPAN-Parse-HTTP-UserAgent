@@ -218,7 +218,9 @@ sub _numify {
     }
 
     # workaround another stupidity (1.2.3-4)
-    $v =~ tr/-/./;
+    if ( my $rc = $v =~ tr/-/./ ) {
+        push @removed, '-' x $rc if INSIDE_VERBOSE_TEST;
+    }
 
     # Finally, be aggressive to prevent dying on bogus stuff.
     # It's interesting how people provide highly stupid version "numbers".
