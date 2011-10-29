@@ -59,6 +59,12 @@ foreach my $test ( database({ thaw => 1 }) ) {
             grep { defined $got{$_} }
             keys %got;
 
+    # also get rid of empty lists
+    my @empty = grep {
+                    ref $got{$_} eq 'ARRAY' && @{ $got{$_} } == 0
+                } keys %got;
+    delete @got{ @empty };
+
     is_deeply(
         \%got,
         $test->{struct},

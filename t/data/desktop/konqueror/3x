@@ -2,7 +2,6 @@
 
 Mozilla/5.0 (compatible; Konqueror/3.1-rc6; i686 Linux; 20020607)
 
-extras      => [],
 generic     => 1,
 lang        => '20020607',
 name        => 'Konqueror',
@@ -15,7 +14,6 @@ version_raw => '3.1-rc6',
 
 Mozilla/5.0 (compatible; Konqueror/3.0.0; Linux)
 
-extras      => [],
 generic     => 1,
 name        => 'Konqueror',
 os          => 'Linux',
@@ -27,7 +25,6 @@ version_raw => '3.0.0',
 
 Mozilla/5.0 (compatible; Konqueror/3.0.0-10; Linux)
 
-extras      => [],
 generic     => 1,
 name        => 'Konqueror',
 os          => 'Linux',
@@ -39,7 +36,6 @@ version_raw => '3.0.0-10',
 
 Mozilla/5.0 (compatible; Konqueror/3.0; i686 Linux; 20020423)
 
-extras      => [],
 generic     => 1,
 lang        => '20020423',
 name        => 'Konqueror',
@@ -110,3 +106,38 @@ os          => 'Linux',
 parser      => 'generic_compatible',
 version     => '3.500',
 version_raw => '3.5',
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Konqueror/3; Linux 2.4.18-4GB; X11; i686; en_US)
+
+'parser'           => 'generic_compatible',
+'os'               => 'Linux 2.4.18-4GB',
+'extras'           => ['X11','i686'],
+'version_raw'      => '3',
+'lang'             => 'en_US',
+'version'          => '3.000',
+'name'             => 'Konqueror',
+'generic'          => 1
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Konqueror/3; Linux)
+
+'parser'           => 'generic_compatible',
+'os'               => 'Linux',
+'version_raw'      => '3',
+'version'          => '3.000',
+'name'             => 'Konqueror',
+'generic'          => 1
+
+[AGENT]
+
+Mozilla/5.0 (compatible; Konqueror/3; Darwin)
+
+'parser'           => 'generic_compatible',
+'os'               => 'Darwin',
+'version_raw'      => '3',
+'version'          => '3.000',
+'name'             => 'Konqueror',
+'generic'          => 1

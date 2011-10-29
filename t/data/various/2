@@ -7,7 +7,6 @@ AmigaVoyager/3.3.50 (AmigaOS/PPC)
 
 'parser'           => 'generic_moz_thing',
 'os'               => 'AmigaOS/PPC',
-'extras'           => [],
 'version_raw'      => '3.3.50',
 'version'          => '3.003050',
 'name'             => 'AmigaVoyager',
@@ -19,7 +18,6 @@ AmigaVoyager (compatible; AmigaVoyager; AmigaOS)
 
 'parser'           => 'generic_compatible',
 'os'               => 'AmigaOS',
-'extras'           => [],
 'version_raw'      => 0,
 'name'             => 'AmigaVoyager',
 'generic'          => 1
@@ -29,7 +27,6 @@ AmigaVoyager (compatible; AmigaVoyager; AmigaOS)
 AvantGo 3.2 (compatible; AvantGo 3.2)
 
 'parser'           => 'generic_compatible',
-'extras'           => [],
 'version_raw'      => '3.2',
 'version'          => '3.200',
 'name'             => 'AvantGo',

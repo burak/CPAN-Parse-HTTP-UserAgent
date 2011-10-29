@@ -33,7 +33,6 @@ Opera/9.80 (Windows NT 6.0; U; tr) Presto/2.6.30 Version/10.63
 parser      => 'opera_pre',
 strength    => 'U',
 os          => 'Windows Vista / Server 2008',
-extras      => [],
 toolkit     => [ 'Presto', '2.6.30', '2.006030' ],
 version_raw => '10.63',
 lang        => 'tr',

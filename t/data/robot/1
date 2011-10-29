@@ -89,7 +89,6 @@ Links (2.1pre15; Linux 2.4.26-vc4 i586; x)
 Wget/1.4.5
 
 'parser'           => 'generic_name_version',
-'extras'           => [],
 'version_raw'      => '1.4.5',
 'version'          => '1.004005',
 'name'             => 'Wget',
@@ -111,7 +110,6 @@ W3C_Validator/1.183 libwww-perl/5.64
 libwww-perl/5.11
 
 'parser'           => 'generic_name_version',
-'extras'           => [],
 'version_raw'      => '5.11',
 'version'          => '5.110',
 'name'             => 'libwww-perl',
@@ -123,7 +121,6 @@ libwww-perl/5.11
 GetRight/3.2.1
 
 'parser'           => 'generic_name_version',
-'extras'           => [],
 'version_raw'      => '3.2.1',
 'version'          => '3.002001',
 'name'             => 'GetRight',
@@ -183,7 +180,6 @@ version_raw => '1.6.0_21',
 version     => '1.006000_021',
 name        => 'Java',
 generic     => 1,
-extras      => [],
 
 [AGENT]
 

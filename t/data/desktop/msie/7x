@@ -89,7 +89,6 @@ Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Tesco; YPC 3.2.0; .NET CLR 1.
 
 Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)
 
-extras      => [],
 name        => 'MSIE',
 os          => 'Windows XP',
 parser      => 'msie',

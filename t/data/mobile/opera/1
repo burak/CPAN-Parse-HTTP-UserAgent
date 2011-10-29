@@ -66,7 +66,6 @@ Opera/9.60 (J2ME/MIDP; Opera Mini/4.2.13337/504; U; en) Presto/2.2.0
 'parser'           => 'opera_pre',
 'strength'         => 'U',
 'os'               => 'J2ME/MIDP',
-'extras'           => [],
 'version_raw'      => '9.60',
 'lang'             => 'en',
 'version'          => '9.600',

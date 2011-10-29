@@ -4,7 +4,6 @@ Mozilla/2.0 (compatible; MSIE 4.0; Windows 95)
 
 'parser'           => 'msie',
 'os'               => 'Windows 95',
-'extras'           => [],
 'version_raw'      => '4.0',
 'version'          => '4.000',
 'name'             => 'MSIE',
@@ -15,7 +14,6 @@ Mozilla/3.0 (compatible; MSIE 4.0; Windows 95)
 
 'parser'           => 'msie',
 'os'               => 'Windows 95',
-'extras'           => [],
 'version_raw'      => '4.0',
 'version'          => '4.000',
 'name'             => 'MSIE',
@@ -26,7 +24,6 @@ Mozilla/4.0 (compatible; MSIE 4.01; Windows 95)
 
 'parser'           => 'msie',
 'os'               => 'Windows 95',
-'extras'           => [],
 'version_raw'      => '4.01',
 'version'          => '4.010',
 'name'             => 'MSIE',

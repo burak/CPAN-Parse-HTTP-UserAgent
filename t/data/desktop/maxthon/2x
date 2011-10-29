@@ -34,7 +34,6 @@ Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.2; Trident/4.0; MAXTHON 2.0)
 'original_name'    => 'Maxthon',
 'parser'           => 'maxthon',
 'os'               => 'Windows Server 2003',
-'extras'           => [],
 'version_raw'      => '8.0',
 'version'          => '8.000',
 'name'             => 'MSIE',

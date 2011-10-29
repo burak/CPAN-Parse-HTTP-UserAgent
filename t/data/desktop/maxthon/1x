@@ -46,7 +46,6 @@ Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.507
 'original_name'    => 'Maxthon',
 'parser'           => 'maxthon',
 'os'               => 'Windows XP',
-'extras'           => [],
 'version_raw'      => '7.0',
 'version'          => '7.000',
 'name'             => 'MSIE',

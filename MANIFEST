@@ -26,6 +26,8 @@ t/data/desktop/firefox/2x
 t/data/desktop/firefox/3x
 t/data/desktop/firefox/6x
 t/data/desktop/firefox/7x
+t/data/desktop/konqueror/1x
+t/data/desktop/konqueror/2x
 t/data/desktop/konqueror/3x
 t/data/desktop/konqueror/4x
 t/data/desktop/lunascape/1
@@ -38,7 +40,13 @@ t/data/desktop/msie/5x
 t/data/desktop/msie/6x
 t/data/desktop/msie/7x
 t/data/desktop/msie/8x
-t/data/desktop/netscape/1
+t/data/desktop/netscape/1x
+t/data/desktop/netscape/2x
+t/data/desktop/netscape/3x
+t/data/desktop/netscape/4x
+t/data/desktop/netscape/5x
+t/data/desktop/netscape/6x
+t/data/desktop/netscape/7x
 t/data/desktop/opera/03x
 t/data/desktop/opera/05x
 t/data/desktop/opera/06x
