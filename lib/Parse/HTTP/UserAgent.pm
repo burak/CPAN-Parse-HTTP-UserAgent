@@ -220,18 +220,23 @@ sub _numify {
     # workaround another stupidity (1.2.3-4)
     $v =~ tr/-/./;
 
+    # Finally, be aggressive to prevent dying on bogus stuff.
+    # It's interesting how people provide highly stupid version "numbers".
+    # Version parameters are probably more stupid than the UA string itself.
+    if ( $v =~ s<([^0-9._v])><.>xmsg ) {
+        push @removed, $1 if INSIDE_VERBOSE_TEST;
+    }
+
+    if ( $v =~ s<([.]{2,})><.>xmsg ) {
+        push @removed, $1 if INSIDE_VERBOSE_TEST;
+    }
+
     if ( INSIDE_VERBOSE_TEST ) {
         if ( @removed ) {
             my $r = join q{','}, @removed;
             Test::More::diag("[DEBUG] _numify: removed '$r' from version string");
         }
     }
-
-    # Finally, be aggressive to prevent dying on bogus stuff.
-    # It's intersting how people provide highly stupid version "numbers".
-    # Version parameters are probably more stupid than the UA string itself.
-    $v =~ s<[^0-9._v]><.>xmsg;
-    $v =~ s<[.]{2,}><.>xmsg;
 
     # Gecko revisions like: "20080915000512" will cause an
     #   integer overflow warning. use bigint?
