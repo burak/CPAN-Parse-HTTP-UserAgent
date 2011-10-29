@@ -219,7 +219,6 @@ sub _numify {
 
     # workaround another stupidity (1.2.3-4)
     $v =~ tr/-/./;
-    $v =~ tr/_/./;
 
     if ( INSIDE_VERBOSE_TEST ) {
         if ( @removed ) {
@@ -228,8 +227,11 @@ sub _numify {
         }
     }
 
-    # Finally, be aggressive to prevent dying on bogus stuff
-    $v =~ s{[^0-9.]}{}xmsg;
+    # Finally, be aggressive to prevent dying on bogus stuff.
+    # It's intersting how people provide highly stupid version "numbers".
+    # Version parameters are probably more stupid than the UA string itself.
+    $v =~ s<[^0-9._v]><.>xmsg;
+    $v =~ s<[.]{2,}><.>xmsg;
 
     # Gecko revisions like: "20080915000512" will cause an
     #   integer overflow warning. use bigint?
