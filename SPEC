@@ -3,10 +3,6 @@
     requires       => {
         'version'  => 0,
     },
-    build_requires => {
-        'Test::More' => '0.40',
-    },
-    recommends => {},
     meta_merge => {
         resources => {
             repository => 'http://bitbucket.org/burak/cpan-parse-http-useragent/',
