@@ -159,7 +159,11 @@ sub _parse_safari {
                             :         'Safari';
     $self->[UA_VERSION_RAW] = $vx;
     $self->[UA_TOOLKIT]     = $extra ? [ split RE_SLASH, $extra->[0] ] : [];
-    $self->[UA_LANG]        = pop @{ $thing };
+    if ( $thing->[-1] && length($thing->[LAST_ELEMENT]) <= 5 ) {
+        # todo: $self->_is_lang_field($junk)
+        # in here or in _post_parse()
+        $self->[UA_LANG]    = pop @{ $thing };
+    }
     $self->[UA_OS]          = @{$thing} && length $thing->[LAST_ELEMENT] > 1
                             ? pop   @{ $thing }
                             : shift @{ $thing }
@@ -174,8 +178,8 @@ sub _parse_safari {
     }
     $self->[UA_EXTRAS]      = [ @{$thing}, @others ];
 
-    if ( length($self->[UA_OS]) == 1 ) {
-        push @{$self->[UA_EXTRAS]}, $self->[UA_EXTRAS];
+    if ( $self->[UA_OS] && length($self->[UA_OS]) == 1 ) {
+        push @{$self->[UA_EXTRAS]}, $self->[UA_OS];
         $self->[UA_OS] = undef;
     }
 

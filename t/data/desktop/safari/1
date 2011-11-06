@@ -76,7 +76,7 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.51.22 (KHTML, lik
 
 'parser'      => 'safari',
 'os'          => 'Intel Mac OS X 10_6_8',
-'extras'      => ['KHTML, like Gecko', 'Safari/534.51.22'],
+'extras'      => ['Macintosh','KHTML, like Gecko', 'Safari/534.51.22'],
 'toolkit'     => ['AppleWebKit','534.51.22','534.051022'],
 'version_raw' => '5.1.1',
 'version'     => '5.001001',

@@ -1,7 +1,8 @@
 Revision history for Perl extension Parse::HTTP::UserAgent
 
-0.32 Sun Oct 30 01:52:48 2011
+0.32 Sun Nov  6 00:55:40 2011
    => Internal cleanup.
+   => Fixed RT#72159 (Arsen Shirokov).
 
 0.31 Sat Oct 29 19:47:01 2011
    => Version parsing fix for RT#71999.

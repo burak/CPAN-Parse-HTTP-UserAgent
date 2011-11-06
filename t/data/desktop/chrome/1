@@ -18,7 +18,7 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_1) AppleWebKit/535.2 (KHTML, like Ge
 
 parser      => 'chrome',
 os          => 'Intel Mac OS X 10_7_1',
-extras      => [ 'KHTML, like Gecko' ],
+extras      => [ 'Macintosh', 'KHTML, like Gecko' ],
 toolkit     => [ 'AppleWebKit', '535.2', '535.200' ],
 version_raw => '15.0.874.54',
 version     => '15.000874054',
@@ -44,8 +44,20 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Ge
 
 'parser'      => 'chrome',
 'os'          => 'Intel Mac OS X 10_6_8',
-'extras'      => ['KHTML, like Gecko'],
+'extras'      => ['Macintosh','KHTML, like Gecko'],
 'toolkit'     => ['AppleWebKit','535.1','535.100'],
 'version_raw' => '14.0.835.202',
 'version'     => '14.000835202',
 'name'        => 'Chrome',
+
+[AGENT]
+
+Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.106 Safari/535.2
+
+extras      => [ 'KHTML, like Gecko' ],
+name        => 'Chrome',
+os          => 'Windows XP',
+parser      => 'chrome',
+toolkit     => [ 'AppleWebKit', '535.2', '535.200' ],
+version     => '15.000874106',
+version_raw => '15.0.874.106',
