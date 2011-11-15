@@ -121,14 +121,14 @@ sub _do_parse {
         }
     }
 
-    my $rv =  $self->_is_opera_pre($m)   ? [opera_pre  => $m, $t, $e           ]
+    my $rv =  $self->[IS_MAXTHON]        ? [maxthon    => $m, $t, $e, @o       ]
+            : $self->_is_opera_pre($m)   ? [opera_pre  => $m, $t, $e           ]
             : $self->_is_opera_post($e)  ? [opera_post => $m, $t, $e, $c       ]
             : $self->_is_opera_ff($e)    ? [opera_pre  => "$e->[2]/$e->[3]", $t]
             : $self->_is_ff($e)          ? [firefox    => $m, $t, $e, @o       ]
             : $self->_is_safari($e, \@o) ? [safari     => $m, $t, $e, @o       ]
             : $self->_is_chrome($e, \@o) ? [chrome     => $m, $t, $e, @o       ]
             : $self->_is_android($t,\@o) ? [android    => $m, $t, $e, @o       ]
-            : $self->[IS_MAXTHON]        ? [maxthon    => $m, $t, $e, @o       ]
             : undef;
 
     if ( $rv ) {
