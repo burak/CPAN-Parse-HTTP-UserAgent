@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 
-$VERSION = '0.33';
+$VERSION = '0.34';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -45,8 +45,9 @@ sub new {
     croak 'Options must be a hash reference' if ref $opt ne 'HASH';
     my $self  = [ map { undef } 0..MAXID ];
     bless $self, $class;
-    $self->[UA_STRING]   = $ua;
+    @{ $self }[ UA_STRING, UA_STRING_ORIGINAL ] = ($ua) x 2;
     $self->[IS_EXTENDED] = exists $opt->{extended} ? $opt->{extended} : 1;
+    $self->_normalize( $opt->{normalize} ) if $opt->{normalize};
     $self->_parse;
     return $self;
 }
@@ -68,6 +69,25 @@ sub trim {
     $s =~ s{ \A \s+    }{}xms;
     $s =~ s{    \s+ \z }{}xms;
     return $s;
+}
+
+sub _normalize {
+    my $self = shift;
+    my $nopt = shift;
+    my $type = ref $nopt;
+
+    my @o = ! $type            ? ':all'
+          :   $type eq 'ARRAY' ? @{ $nopt }
+          :                      croak "Normalization option $nopt is invalid";
+
+    my %mode      = map { $_ => 1 } @o;
+    my @all       = qw( plus_to_space trim_spaces );
+    @mode{ @all } = (1) x @all if delete $mode{':all'};
+
+    my $s = \$self->[UA_STRING];
+    ${$s} =~ s{[+]}{ }xmsg if $mode{plus_to_space};
+    ${$s} =~ s<\s+>< >xmsg if $mode{trim_spaces};
+    return;
 }
 
 sub _parse {

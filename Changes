@@ -1,5 +1,8 @@
 Revision history for Perl extension Parse::HTTP::UserAgent
 
+0.34 Tue Nov 15 06:41:45 2011
+   => "normalize" option.
+
 0.33 Tue Nov 15 05:22:15 2011
    => Fix version warning regex.
 
