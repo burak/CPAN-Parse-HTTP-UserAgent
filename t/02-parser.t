@@ -54,6 +54,11 @@ foreach my $test ( database({ thaw => 1 }) ) {
         "Ok got the string back for $got{name}"
     );
 
+    ok(
+        delete $got{string_original},
+        "Ok got the original string back for $got{name}"
+    );
+
     # remove undefs, so that we can extend the test data with less headache
     %got =  map  { $_ => $got{ $_ } }
             grep { defined $got{$_} }
