@@ -174,9 +174,27 @@ sub _parse_safari {
     }
 
     if ( $thing->[0] && lc $thing->[0] eq 'iphone' ) {
-        $self->[UA_DEVICE]  = shift @{$thing};
+        $self->[UA_MOBILE] = 1;
+        $self->[UA_DEVICE] = shift @{$thing};
+        my $check_os       = $thing->[LAST_ELEMENT];
+
+        if ( $check_os && index( $check_os, 'Mac OS X' ) != NO_IMATCH ) {
+            if ( $self->[UA_OS] ) {
+                push @{$self->[UA_EXTRAS]}, $self->[UA_OS];
+            }
+            $self->[UA_OS] = pop @{ $thing };
+            # Another oddity: tk as "AppleWebKit/en_SG"
+            if ( ! $self->[UA_LANG] && $self->[UA_TOOLKIT] ) {
+                my $v = $self->[UA_TOOLKIT][TK_ORIGINAL_VERSION];
+                if ( $v && $v =~ m< [a-zA-Z]{2}_[a-zA-Z]{2} >xms ) {
+                    $self->[UA_LANG] = $v;
+                    $self->[UA_TOOLKIT][TK_ORIGINAL_VERSION] = undef;
+                }
+            }
+        }
     }
-    $self->[UA_EXTRAS]      = [ @{$thing}, @others ];
+
+    $self->[UA_EXTRAS] = [ @{$thing}, @others ];
 
     if ( $self->[UA_OS] && length($self->[UA_OS]) == 1 ) {
         push @{$self->[UA_EXTRAS]}, $self->[UA_OS];

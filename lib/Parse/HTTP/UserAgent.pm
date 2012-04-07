@@ -164,8 +164,8 @@ sub _post_parse {
     $self->[UA_EXTRAS] = [ @buf ];
 
     if ( $self->[UA_TOOLKIT] ) {
-        push @{ $self->[UA_TOOLKIT] },
-             $self->_numify( $self->[UA_TOOLKIT][TK_ORIGINAL_VERSION] );
+        my $v = $self->[UA_TOOLKIT][TK_ORIGINAL_VERSION];
+        push @{ $self->[UA_TOOLKIT] }, defined $v ? $self->_numify( $v ) : 0;
     }
 
     if( $self->[UA_MOZILLA] ) {
@@ -269,6 +269,8 @@ sub _numify {
     # if version::vpp is used it'll identify 420 as a v-string
     # add a floating point to fool it
     $v .= q{.0} if index($v, q{.}) == NO_IMATCH;
+    (my $check = $v) =~ tr/0-9//cd;
+    return 0 if ! $check; # A string parsed as version (i.e.: AppleWebKit/en_SG)
     my $rv;
     eval {
         $rv = version->new("$v")->numify;
