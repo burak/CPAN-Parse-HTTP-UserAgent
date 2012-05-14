@@ -149,6 +149,22 @@ sub _parse_msie {
 sub _parse_firefox {
     my($self, @args) = @_;
     $self->_parse_mozilla_family( @args );
+    my $e = $self->[UA_EXTRAS];
+    if ( ref $e eq 'ARRAY'
+        && @{ $e } > 0
+        && index( lc $e->[-1], 'fennec' ) != NO_IMATCH
+    ) {
+        my($name, $version) = split RE_SLASH, pop @{ $e };
+        $self->[UA_ORIGINAL_NAME]    = $name;
+        $self->[UA_ORIGINAL_VERSION] = $version;
+        $self->[UA_MOBILE]           = 1;
+        if ( $self->[UA_LANG]
+            && index( $self->[UA_LANG], q{ } ) != NO_IMATCH
+        ) {
+            push @{ $self->[UA_EXTRAS] }, $self->[UA_LANG];
+            $self->[UA_LANG] = undef;
+        }
+    }
     $self->[UA_NAME] = 'Firefox';
     return 1;
 }

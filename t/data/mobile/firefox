@@ -1,15 +1,63 @@
 [AGENT]
 
-#TODO: Mozilla/5.0 (Android; Linux armv7l; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 Fennec/10.0.1
+Mozilla/5.0 (Android; Linux armv7l; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 Fennec/10.0.1
+
+extras           => [ 'Linux armv7l' ],
+mobile           => 1,
+mozilla          => [ '10.0.1', '10.000001' ],
+name             => 'Firefox',
+original_name    => 'Fennec',
+original_version => '10.0.1',
+os               => 'Android',
+parser           => 'firefox',
+toolkit          => [ 'Gecko', '20100101', '20100101.000' ],
+version          => '10.000001',
+version_raw      => '10.0.1',
 
 [AGENT]
 
-#TODO: Mozilla/5.0 (Maemo; Linux armv7l; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 Fennec/10.0.1
+Mozilla/5.0 (Maemo; Linux armv7l; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 Fennec/10.0.1
+
+extras           => [ 'Linux armv7l' ],
+mobile           => 1,
+mozilla          => [ '10.0.1', '10.000001' ],
+name             => 'Firefox',
+original_name    => 'Fennec',
+original_version => '10.0.1',
+os               => 'Maemo',
+parser           => 'firefox',
+toolkit          => [ 'Gecko', '20100101', '20100101.000' ],
+version          => '10.000001',
+version_raw      => '10.0.1',
 
 [AGENT]
 
-#TODO: Mozilla/5.0 (X11; Linux armv7l; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 Fennec/10.0.1
+Mozilla/5.0 (X11; Linux armv7l; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 Fennec/10.0.1
+
+extras           => [ 'Linux armv7l' ],
+mobile           => 1,
+mozilla          => [ '10.0.1', '10.000001' ],
+name             => 'Firefox',
+original_name    => 'Fennec',
+original_version => '10.0.1',
+os               => 'X11',
+parser           => 'firefox',
+toolkit          => [ 'Gecko', '20100101', '20100101.000' ],
+version          => '10.000001',
+version_raw      => '10.0.1',
 
 [AGENT]
 
-#TODO: Mozilla/5.0 (X11; Linux i686; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 Fennec/10.0.1
+Mozilla/5.0 (X11; Linux i686; rv:10.0.1) Gecko/20100101 Firefox/10.0.1 Fennec/10.0.1
+
+extras           => [ 'Linux i686' ],
+mobile           => 1,
+mozilla          => [ '10.0.1', '10.000001' ],
+name             => 'Firefox',
+original_name    => 'Fennec',
+original_version => '10.0.1',
+os               => 'X11',
+parser           => 'firefox',
+toolkit          => [ 'Gecko', '20100101', '20100101.000' ],
+version          => '10.000001',
+version_raw      => '10.0.1',

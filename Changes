@@ -7,6 +7,7 @@ Revision history for Perl extension Parse::HTTP::UserAgent
    => Fixes for Maxthon and Android stupidities.
    => Fix for emacs parser.
    => Fix mozilla parser.
+   => Fennec suport.
 
 0.34 Sun Apr  8 00:08:41 2012
    => "normalize" option.
