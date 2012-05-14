@@ -357,14 +357,20 @@ sub _parse_opera_post {
 }
 
 sub _parse_mozilla_family {
-    my($self, $moz, $thing, $extra, @extras) = @_;
+    my($self, $moz, $thing, $extra, @others) = @_;
     # firefox variation or just mozilla itself
     my($name, $version)      = split RE_SLASH, defined $extra->[1] ? $extra->[1]
                              :                                       $moz
                              ;
+    if ( $version ) {
+        $extra->[1] = '';
+    }
     $self->[UA_NAME]         = $name;
-    $self->[UA_TOOLKIT]      = $extra ? [ split RE_SLASH, $extra->[0] ] : [];
     $self->[UA_VERSION_RAW]  = $version;
+    $self->[UA_TOOLKIT]      = $extra->[0]
+                             ? [ split RE_SLASH, shift @{ $extra } ]
+                             : []
+                             ;
 
     if ( @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ) {
         $self->[UA_MOZILLA]  = pop @{ $thing };
@@ -381,7 +387,12 @@ sub _parse_mozilla_family {
         }
     }
 
-    $self->[UA_EXTRAS] = [ @{ $thing }, @extras ];
+    $self->[UA_EXTRAS] = [
+        grep { $_ }
+        @{ $thing },
+        @others,
+        $extra ? @{ $extra } : (),
+    ];
     return 1;
 }
 

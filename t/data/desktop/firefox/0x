@@ -80,7 +80,7 @@ Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.5a) Gecko/20031002 Mozilla Firebird
 'parser'           => 'firefox',
 'strength'         => 'U',
 'os'               => 'Linux i686',
-'extras'           => ['X11'],
+'extras'           => ['X11','Firebird/0.6.1'],
 'version_raw'      => '0.6.1',
 'lang'             => 'en-US',
 'mozilla'          => ['1.5','1.500'],
