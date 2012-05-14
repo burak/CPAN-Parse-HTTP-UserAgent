@@ -64,11 +64,12 @@ BlackBerry7730/3.7.1 UP.Link/5.1.2.5
 
 Emacs-W3/2.1.105 URL/1.267 ((Unix?) ; TTY ; sparc-sun-solaris2.3)
 
-'parser'           => 'emacs',
-'extras'           => [ 'URL/1.267', 'Unix?', 'TTY', 'sparc-sun-solaris2.3' ],
-'version_raw'      => '2.1.105',
-'version'          => '2.001105',
-'name'             => 'Emacs-W3',
+parser           => 'emacs',
+extras           => [ 'TTY','sparc-sun-solaris2.3','URL/1.267' ],
+version_raw      => '2.1.105',
+version          => '2.001105',
+name             => 'Emacs-W3',
+os               => 'Unix?',
 
 [AGENT]
 

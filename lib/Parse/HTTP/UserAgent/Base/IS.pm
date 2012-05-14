@@ -50,7 +50,23 @@ sub _is_android {
     my($self, $thing, $others) = @_;
     my $has_android = grep { index( lc $_, 'android' ) != NO_IMATCH  } @{ $thing  };
     my $has_safari  = grep { index( lc $_, 'safari'  ) != NO_IMATCH  } @{ $others };
-    return $has_android && $has_safari;
+    if ( $has_android && $has_safari ) {
+        return 1;
+    }
+    if (   @{ $others } == 0
+        && @{ $thing  }  > 0
+        && $thing->[-1]
+        && index( $thing->[-1], 'AppleWebKit' ) != NO_IMATCH
+    ) {
+        # More stupidity: ua string is missing a closing paren
+        my($part, @rest) = split m{(AppleWebKit)}xms, $thing->[-1];
+        $thing->[-1] = $part;
+        @{ $others } =  map   { $self->trim( $_ ) }
+                        split m{ (\QKHTML, like Gecko\E) }xms,
+                        join  q{}, @rest;
+        return 1;
+    }
+    return;
 }
 
 sub _is_ff {

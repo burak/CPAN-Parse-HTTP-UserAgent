@@ -6,7 +6,7 @@ Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE
 
 'parser'           => 'msie',
 'os'               => 'Windows XP',
-'extras'           => [ 'compatible', 'MSIE 6.0','SV1','InfoPath.1','Zune 2.5','WWTClient2','MS-RTC LM 8'],
+'extras'           => ['MSIE 6.0','SV1','InfoPath.1','Zune 2.5','WWTClient2','MS-RTC LM 8'],
 'version_raw'      => '7.0',
 'version'          => '7.000',
 'name'             => 'MSIE',

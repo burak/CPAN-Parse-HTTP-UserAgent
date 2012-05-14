@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 
-$VERSION = '0.34';
+$VERSION = '0.35';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -103,9 +103,32 @@ sub _pre_parse {
     my $self = shift;
     $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != NO_IMATCH;
     my $ua = $self->[UA_STRING];
-    my($moz, $thing, $extra, @others) = split RE_SPLIT_PARSE, $ua;
+
+    my @parts;
+    my $i     = 0;
+    my $depth = 0;
+    foreach my $token ( split RE_SPLIT_PARSE, $ua ) {
+        if ( $token eq '(' ) {
+            $i++ if ++$depth == 1;
+            next;
+        }
+        if ( $token eq ')' ) {
+            $i++ if --$depth == 0;
+            next;
+        }
+        push @{ $parts[$i] ||= [] }, $token;
+    }
+
+    # Hopefully the above code was successful and now we can set the actual
+    # tokens to use inside parsers.
+    my($moz)    = join ' ', @{ shift(@parts) || []  };
+    my($thing)  = join ' ', @{ shift(@parts) || []  };
+    my($extra)  = join ' ', @{ shift(@parts) || []  };
+    my(@others) = map { @{ $_ } } @parts;
+
     $thing = $thing ? [ split RE_SC_WS, $thing ] : [];
     $extra = [ split RE_WHITESPACE, $extra ] if $extra;
+
     $self->_debug_pre_parse( $moz, $thing, $extra, @others ) if DEBUG;
     return $moz, $thing, $extra, @others;
 }
@@ -136,7 +159,7 @@ sub _do_parse {
         my $method = '_parse_' . $pname;
         my $rvx    = $self->$method( @{ $rv } );
         if ( $rvx ) {
-            $self->[UA_PARSER] = $pname;
+            $self->[UA_PARSER] ||= $pname;
             return $rvx;
         }
     }

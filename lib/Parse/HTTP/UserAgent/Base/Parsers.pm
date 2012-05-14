@@ -18,7 +18,8 @@ sub _extract_dotnet {
         }
         if ( $e =~ RE_WINDOWS_OS ) {
             if ( $1 && $1 ne '64' ) {
-                $self->[UA_OS] = $e;
+                # Maxthon stupidity: multiple OS definitions
+                $self->[UA_OS] ||= $e;
                 next;
             }
         }
@@ -66,9 +67,17 @@ sub _parse_maxthon {
     my($self, $moz, $thing, $extra, @others) = @_;
     my @omap = grep { $_ } map { split RE_SC_WS_MULTI, $_ } @others;
     my($maxthon, $msie, @buf);
+
     foreach my $e ( @omap, @{$thing} ) { # $extra -> junk
-        if ( index(uc $e, 'MAXTHON') != NO_IMATCH ) { $maxthon = $e; next; }
-        if ( index(uc $e, 'MSIE'   ) != NO_IMATCH ) { $msie    = $e; next; }
+        if ( index(uc $e, 'MAXTHON') != NO_IMATCH ) {
+            $maxthon = $e;
+            next;
+        }
+        if ( index(uc $e, 'MSIE' ) != NO_IMATCH ) {
+            # Maxthon stupidity: multiple MSIE strings
+            $msie ||= $e;
+            next;
+        }
         push @buf, $e;
     }
 
@@ -96,6 +105,7 @@ sub _parse_maxthon {
 
     $self->[UA_ORIGINAL_VERSION] = $v;
     $self->[UA_ORIGINAL_NAME]    = 'Maxthon';
+    $self->[UA_PARSER]           = 'maxthon';
     return 1;
 }
 
@@ -124,8 +134,15 @@ sub _parse_msie {
         }
         push @buf, $e;
     }
-    $self->[UA_EXTRAS] = [ @buf ];
+
+    $self->[UA_EXTRAS] = [
+        map  { $self->trim( $_ ) }
+        grep { $_ !~ m{ \s+ compatible \z }xms }
+        @buf
+    ];
+
     $self->[UA_PARSER] = 'msie';
+
     return 1;
 }
 
@@ -221,6 +238,13 @@ sub _parse_chrome {
 sub _parse_android {
     my($self, $moz, $thing, $extra, @others) = @_;
     (undef, @{$self}[UA_STRENGTH, UA_OS, UA_LANG, UA_DEVICE]) = @{ $thing };
+    if ( ! $extra
+        && $others[0]
+        && index( $others[0], 'AppleWebKit' ) != NO_IMATCH
+    ) {
+        $extra = [ shift @others ];
+        $self->[UA_PARSER] = 'android:paren_fixer';
+    }
     $self->[UA_TOOLKIT] = [ split RE_SLASH, $extra->[0] ] if $extra;
     my(@extras, $is_phone);
 
@@ -266,7 +290,7 @@ sub _parse_android {
     $self->[UA_NAME]   = 'Android';
     $self->[UA_MOBILE] = 1;
     $self->[UA_TABLET] = $is_phone ? undef : 1;
-    $self->[UA_EXTRAS] = [ @extras ];
+    $self->[UA_EXTRAS] = [ grep { $_ } @extras ];
 
     return 1;
 }
@@ -568,6 +592,7 @@ sub _parse_emacs {
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version || 0;
     $self->[UA_OS]          = shift @{ $thing };
+    $self->[UA_OS]          = $self->trim( $self->[UA_OS] ) if $self->[UA_OS];
     my @rest = (  @{ $thing }, @moz );
     push @rest, @{ $extra } if $extra && ref $extra eq 'ARRAY';
     push @rest, ( map { split RE_SC_WS, $_ } @others ) if @others;
