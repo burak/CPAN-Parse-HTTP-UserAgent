@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 
-$VERSION = '0.36';
+$VERSION = '0.37';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS

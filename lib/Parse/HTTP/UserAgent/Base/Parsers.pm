@@ -208,7 +208,7 @@ sub _parse_safari {
                             : $ipad ? 'iPad'
                             :         'Safari';
     $self->[UA_VERSION_RAW] = $vx;
-    $self->[UA_TOOLKIT]     = $extra ? [ split RE_SLASH, $extra->[0] ] : [];
+    $self->[UA_TOOLKIT]     = $extra ? [ split RE_SLASH, shift @{ $extra } ] : [];
     if ( $thing->[-1] && length($thing->[LAST_ELEMENT]) <= 5 ) {
         # todo: $self->_is_lang_field($junk)
         # in here or in _post_parse()
@@ -252,18 +252,29 @@ sub _parse_safari {
     }
 
     push @{$self->[UA_EXTRAS]}, @junk if @junk;
+    push @{$self->[UA_EXTRAS]}, @{$extra} if $extra;
 
     return 1;
 }
 
 sub _parse_chrome {
     my($self, $moz, $thing, $extra, @others) = @_;
-    my $chx                  = pop @others;
-    my($chrome, $safari)     = split RE_WHITESPACE, $chx;
-    push @others, $safari;
+    my $chx = pop @others;
+    my($chrome, $safari, @rest) = split RE_WHITESPACE, $chx;
+    my $opera;
+    if ( $rest[0] && index( $rest[0], 'OPR/', 0) != NO_IMATCH ) {
+        $opera = shift @rest;
+        if ( ref $extra eq 'ARRAY' ) {
+            unshift @{ $extra }, $chrome;
+        }
+        push @others, @rest, $safari;
+    }
+    else {
+        push @others, $safari;
+    }
     $self->_parse_safari($moz, $thing, $extra, @others);
-    my($name, $version)      = split RE_SLASH, $chrome;
-    $self->[UA_NAME]         = $name;
+    my($name, $version)      = split RE_SLASH, $opera || $chrome;
+    $self->[UA_NAME]         = $opera ? 'Opera' : $name;
     $self->[UA_VERSION_RAW]  = $version;
     return 1;
 }
