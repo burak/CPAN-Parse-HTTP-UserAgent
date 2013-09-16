@@ -64,7 +64,8 @@ sub toolkit {
             );
 }
 
-package Parse::HTTP::UserAgent::Base::Accessors::toolkit;
+package
+Parse::HTTP::UserAgent::Base::Accessors::toolkit;
 use strict;
 use warnings;
 use overload '""',    => 'name',

@@ -1,5 +1,8 @@
 Revision history for Perl extension Parse::HTTP::UserAgent
 
+0.38 Mon Sep 16 07:45:22 2013
+    => Fix packaging issue.
+
 0.37 Thu Sep 12 15:09:15 2013
     => Support new Opera
     => Fix RT#80323
