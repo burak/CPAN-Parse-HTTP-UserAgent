@@ -65,8 +65,30 @@ sub _fix_generic {
 
 sub _parse_maxthon {
     my($self, $moz, $thing, $extra, @others) = @_;
-    my @omap = grep { $_ } map { split RE_SC_WS_MULTI, $_ } @others;
+    my $is_30 =    $extra
+                && $extra->[0]
+                && index( $extra->[0], 'AppleWebKit' ) != NO_IMATCH;
     my($maxthon, $msie, @buf);
+
+    if ( $is_30 ) {
+        # yay, new nonsense with the new version
+        my @new;
+        for my $i (0..$#others) {
+            if ( index( $others[$i], 'Maxthon') != NO_IMATCH ) {
+                @new        = split m{\s+}xms, $others[$i];
+                $maxthon    = shift @new;
+                $extra    ||= [];
+                unshift @{ $extra }, shift @new;
+                $others[$i] = '';
+                last;
+            }
+        }
+        @others = grep { $_ } @others, @new;
+        $self->_parse_safari( $moz, $thing, $extra, @others );
+        $self->[UA_NAME] = 'Maxthon';
+    }
+    else {
+    my @omap = grep { $_ } map { split RE_SC_WS_MULTI, $_ } @others;
 
     foreach my $e ( @omap, @{$thing} ) { # $extra -> junk
         if ( index(uc $e, 'MAXTHON') != NO_IMATCH ) {
@@ -80,6 +102,7 @@ sub _parse_maxthon {
         }
         push @buf, $e;
     }
+    }
 
     if ( ! $maxthon ) {
         warn ERROR_MAXTHON_VERSION . "\n";
@@ -87,17 +110,24 @@ sub _parse_maxthon {
         return;
     }
 
-    if ( ! $msie ) {
-        warn ERROR_MAXTHON_MSIE . "\n";
-        $self->[UA_UNKNOWN] = 1;
-        return;
+    if ( $is_30 ) {
+        if ( $self->[UA_LANG] ) {
+            push @{ $self->[UA_EXTRAS] }, $self->[UA_LANG];
+            $self->[UA_LANG] = undef;
+        }
+    }
+    else {
+        if ( ! $msie ) {
+            warn ERROR_MAXTHON_MSIE . "\n";
+            $self->[UA_UNKNOWN] = 1;
+            return;
+        }
+        $self->_parse_msie(
+            $moz, [ undef, @buf ], undef, split RE_WHITESPACE, $msie
+        );
     }
 
-    $self->_parse_msie(
-        $moz, [ undef, @buf ], undef, split RE_WHITESPACE, $msie
-    );
-
-    my(undef, $mv) = split RE_WHITESPACE, $maxthon;
+    my(undef, $mv) = split $is_30 ? RE_SLASH : RE_WHITESPACE, $maxthon;
     my $v = $mv      ? $mv
           : $maxthon ? '1.0'
           :            do { warn ERROR_MAXTHON_VERSION . "\n"; 0 }
