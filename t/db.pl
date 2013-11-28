@@ -96,7 +96,8 @@ sub strip_comments {
     foreach my $line ( split m{ \n }xms, $s ) {
         chomp $line;
         next if ! $line;
-        if ( my @m = $line =~ m{ \A [#] (.+?) \z }xms ) {
+        if ( my @m = $line =~ m{ \A [#] (.+?)? \z }xms ) {
+            next if ! $m[0]; # line only had a hash and nothing else
             if ( my @f = $m[0] =~ m{ \A \Q$COMMENT\E (.+?) \z }xms ) {
                 $file = trim( $f[0] );
             }
