@@ -244,6 +244,7 @@ sub _numify {
                 gold     |
                 [ab]\d+  |
                 a\-XXXX  |
+                dev      |
                 [+]
                )}{}xmsig
     ){
@@ -280,6 +281,7 @@ sub _numify {
     if ( INSIDE_VERBOSE_TEST ) {
         if ( @removed ) {
             my $r = join q{','}, @removed;
+            require Test::More;
             Test::More::diag("[DEBUG] _numify: removed '$r' from version string");
         }
     }
