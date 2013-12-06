@@ -1,79 +1,13 @@
 package Parse::HTTP::UserAgent::Constants;
 use strict;
 use warnings;
-use vars qw( $VERSION $OID @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS );
+use base qw( Exporter );
 
-$VERSION = '0.10';
+our $VERSION = '0.40';
 
-use constant INIT_FIELD_COUNTER  => -1;
-use constant NO_IMATCH           => -1; # for index()
-use constant LAST_ELEMENT        => -1;
+our(@EXPORT, @EXPORT_OK, %EXPORT_TAGS);
 
-BEGIN { $OID = INIT_FIELD_COUNTER }
-
-use constant UA_STRING           => ++$OID; # just for information
-use constant UA_STRING_ORIGINAL  => ++$OID; # just for information
-use constant UA_UNKNOWN          => ++$OID; # failed to detect?
-use constant UA_GENERIC          => ++$OID; # parsed with a generic parser.
-use constant UA_NAME             => ++$OID; # The identifier of the ua
-use constant UA_VERSION_RAW      => ++$OID; # the parsed version
-use constant UA_VERSION          => ++$OID; # used for numerical ops. via qv()
-use constant UA_OS               => ++$OID; # Operating system
-use constant UA_LANG             => ++$OID; # the language of the ua interface
-use constant UA_TOOLKIT          => ++$OID; # [Opera] ua toolkit
-use constant UA_EXTRAS           => ++$OID; # Extra stuff (Toolbars?) non parsable junk
-use constant UA_DOTNET           => ++$OID; # [MSIE] List of .NET CLR versions
-use constant UA_STRENGTH         => ++$OID; # [MSIE] List of .NET CLR versions
-use constant UA_MOZILLA          => ++$OID; # [Firefox] Mozilla revision
-use constant UA_ROBOT            => ++$OID; # Is this a robot?
-use constant UA_WAP              => ++$OID; # unimplemented
-use constant UA_MOBILE           => ++$OID; # partially implemented
-use constant UA_TABLET           => ++$OID; # partially implemented
-use constant UA_PARSER           => ++$OID; # the parser name
-use constant UA_DEVICE           => ++$OID; # the name of the mobile device
-use constant UA_ORIGINAL_NAME    => ++$OID; # original name if this is some variation
-use constant UA_ORIGINAL_VERSION => ++$OID; # original version if this is some variation
-use constant IS_PARSED           => ++$OID; # _parse() happened or not
-use constant IS_MAXTHON          => ++$OID; # Is this the dumb IE faker?
-use constant IS_EXTENDED         => ++$OID;
-use constant MAXID               =>   $OID;
-
-use constant TK_NAME             => 0;
-use constant TK_ORIGINAL_VERSION => 1;
-use constant TK_VERSION          => 2;
-
-use constant INSIDE_UNIT_TEST    => $ENV{PARSE_HTTP_USERAGENT_TEST_SUITE};
-use constant INSIDE_VERBOSE_TEST => INSIDE_UNIT_TEST && $ENV{HARNESS_IS_VERBOSE};
-use constant RE_FIREFOX_NAMES    => qr{Firefox|Iceweasel|Firebird|Phoenix }xms;
-use constant RE_DOTNET           => qr{ \A [.]NET (?: \s+ CLR \s+ )? (.+?) \z    }xms;
-use constant RE_WINDOWS_OS       => qr{ \A Win(dows|NT|[0-9]+)?           }xmsi;
-use constant RE_SLASH            => qr{ /                                 }xms;
-use constant RE_SPLIT_PARSE      => qr{ \s? ([()]) \s?                    }xms;
-use constant RE_OPERA_MINI       => qr{ \A (Opera \s+ Mini) / (.+?) \z    }xms;
-use constant RE_TRIDENT          => qr{ \A (Trident) / (.+?) \z           }xmsi;
-use constant RE_EPIPHANY_GECKO   => qr{ \A (Epiphany) / (.+?) \z          }xmsi;
-use constant RE_WHITESPACE       => qr{ \s+ }xms;
-use constant RE_SC_WS            => qr{;\s?}xms;
-use constant RE_SC_WS_MULTI      => qr{;\s+?}xms;
-use constant RE_HTTP             => qr{ http:// }xms;
-use constant RE_DIGIT            => qr{[0-9]}xms;
-use constant RE_IX86             => qr{ \s i\d86 }xms;
-use constant RE_OBJECT_ID        => qr{ \A UA_ }xms;
-use constant RE_CHAR_SLASH_WS    => qr{[/\s]}xms;
-use constant RE_COMMA            => qr{ [,] }xms;
-use constant RE_TWO_LETTER_LANG  => qr{ \A [a-z]{2} \z }xms;
-use constant RE_DIGIT_DOT_DIGIT  => qr{\d+[.]?\d}xms;
-
-use constant RE_WARN_OVERFLOW => qr{\QInteger overflow in version\E}xms;
-use constant RE_WARN_INVALID  => qr{\QVersion string\E .+? \Qcontains invalid data; ignoring:\E}xms;
-
-use constant ERROR_MAXTHON_VERSION  => 'Unable to extract Maxthon version from Maxthon UA-string';
-use constant ERROR_MAXTHON_MSIE     => 'Unable to extract MSIE from Maxthon UA-string';
-use constant OPERA9                 => 9;
-use constant OPERA_TK_LENGTH        => 5;
-use constant OPERA_FAKER_EXTRA_SIZE => 4;
-
-use constant LIST_ROBOTS         => qw(
+use constant LIST_ROBOTS => qw(
     Wget
     curl
     libwww-perl
@@ -84,7 +18,84 @@ use constant LIST_ROBOTS         => qw(
     bingbot
 ), 'Yahoo! Slurp';
 
-use base qw( Exporter );
+BEGIN {
+    my @fields = (
+        'UA_STRING',            # just for information
+        'UA_STRING_ORIGINAL',   # just for information
+        'UA_UNKNOWN',           # failed to detect?
+        'UA_GENERIC',           # parsed with a generic parser.
+        'UA_NAME',              # The identifier of the ua
+        'UA_VERSION_RAW',       # the parsed version
+        'UA_VERSION',           # used for numerical ops. via qv()
+        'UA_OS',                # Operating system
+        'UA_LANG',              # the language of the ua interface
+        'UA_TOOLKIT',           # [Opera] ua toolkit
+        'UA_EXTRAS',            # Extra stuff (Toolbars?) non parsable junk
+        'UA_DOTNET',            # [MSIE] List of .NET CLR versions
+        'UA_STRENGTH',          # [MSIE] List of .NET CLR versions
+        'UA_MOZILLA',           # [Firefox] Mozilla revision
+        'UA_ROBOT',             # Is this a robot?
+        'UA_WAP',               # unimplemented
+        'UA_MOBILE',            # partially implemented
+        'UA_TABLET',            # partially implemented
+        'UA_PARSER',            # the parser name
+        'UA_DEVICE',            # the name of the mobile device
+        'UA_ORIGINAL_NAME',     # original name if this is some variation
+        'UA_ORIGINAL_VERSION',  # original version if this is some variation
+        'IS_PARSED',            # _parse() happened or not
+        'IS_MAXTHON',           # Is this the dumb IE faker?
+        'IS_EXTENDED',
+    );
+
+    my $oid   = -1;
+    my %field = map { $_ => ++$oid } @fields;
+    my %const = (
+        %field,
+        LAST_ELEMENT           => -1,
+        MAXID                  => $oid,
+        NO_IMATCH              => -1, # for index()
+
+        RE_CHAR_SLASH_WS       => qr{ [/\s]                                 }xms,
+        RE_COMMA               => qr{ [,]                                   }xms,
+        RE_DIGIT               => qr{ [0-9]                                 }xms,
+        RE_DIGIT_DOT_DIGIT     => qr{ \d+ [.]? \d                           }xms,
+        RE_DOTNET              => qr{ \A [.]NET (?: \s+ CLR \s+ )? (.+?) \z }xms,
+        RE_EPIPHANY_GECKO      => qr{ \A (Epiphany) / (.+?) \z              }xmsi,
+        RE_FIREFOX_NAMES       => qr{ Firefox|Iceweasel|Firebird|Phoenix    }xms,
+        RE_HTTP                => qr{ http://                               }xms,
+        RE_IX86                => qr{ \s i\d86                              }xms,
+        RE_OBJECT_ID           => qr{ \A UA_                                }xms,
+        RE_OPERA_MINI          => qr{ \A (Opera \s+ Mini) / (.+?) \z        }xms,
+        RE_SC_WS               => qr{ ; \s?                                 }xms,
+        RE_SC_WS_MULTI         => qr{ ; \s+?                                }xms,
+        RE_SLASH               => qr{ /                                     }xms,
+        RE_SPLIT_PARSE         => qr{ \s? ([()]) \s?                        }xms,
+        RE_TRIDENT             => qr{ \A (Trident) / (.+?) \z               }xmsi,
+        RE_TWO_LETTER_LANG     => qr{ \A [a-z]{2} \z                        }xms,
+        RE_WARN_INVALID        => qr{ \QVersion string\E .+? \Qcontains invalid data; ignoring:\E}xms,
+        RE_WARN_OVERFLOW       => qr{ \QInteger overflow in version\E       }xms,
+        RE_WHITESPACE          => qr{ \s+ }xms,
+        RE_WINDOWS_OS          => qr{ \A Win(dows|NT|[0-9]+)?               }xmsi,
+
+        ERROR_MAXTHON_MSIE     => 'Unable to extract MSIE from Maxthon UA-string',
+        ERROR_MAXTHON_VERSION  => 'Unable to extract Maxthon version from Maxthon UA-string',
+
+        OPERA9                 => 9,
+        OPERA_FAKER_EXTRA_SIZE => 4,
+        OPERA_TK_LENGTH        => 5,
+
+        TK_NAME                => 0,
+        TK_ORIGINAL_VERSION    => 1,
+        TK_VERSION             => 2,
+    );
+
+    $const{INSIDE_UNIT_TEST}    = $ENV{PARSE_HTTP_USERAGENT_TEST_SUITE} ? 1 : 0;
+    $const{INSIDE_VERBOSE_TEST} = $const{INSIDE_UNIT_TEST}
+                                    && $ENV{HARNESS_IS_VERBOSE} ? 1 : 0;
+
+    require constant;
+    constant->import( \%const );
+}
 
 BEGIN {
     %EXPORT_TAGS = (

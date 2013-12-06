@@ -1,11 +1,10 @@
 package Parse::HTTP::UserAgent::Base::Dumper;
 use strict;
 use warnings;
-use vars qw( $VERSION );
 use Carp qw( croak );
 use Parse::HTTP::UserAgent::Constants qw(:all);
 
-$VERSION = '0.10';
+our $VERSION = '0.10';
 
 sub dumper {
     my($self, @args) = @_;

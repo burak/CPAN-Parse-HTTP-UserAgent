@@ -1,9 +1,8 @@
 package Parse::HTTP::UserAgent;
 use strict;
 use warnings;
-use vars qw( $VERSION );
 
-$VERSION = '0.39';
+our $VERSION = '0.40_01';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS
@@ -11,10 +10,12 @@ use base qw(
     Parse::HTTP::UserAgent::Base::Dumper
     Parse::HTTP::UserAgent::Base::Accessors
 );
+
 use overload '""',    => 'name',
              '0+',    => 'version',
              fallback => 1,
 ;
+
 use version;
 use Carp qw( croak );
 use Parse::HTTP::UserAgent::Constants qw(:all);

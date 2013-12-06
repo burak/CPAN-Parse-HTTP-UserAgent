@@ -1,10 +1,9 @@
 package Parse::HTTP::UserAgent::Base::Accessors;
 use strict;
 use warnings;
-use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
 
-$VERSION = '0.11';
+our $VERSION = '0.11';
 
 #TODO: new accessors
 #wap

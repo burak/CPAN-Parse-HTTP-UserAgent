@@ -1,10 +1,9 @@
 package Parse::HTTP::UserAgent::Base::IS;
 use strict;
 use warnings;
-use vars qw( $VERSION );
 use Parse::HTTP::UserAgent::Constants qw(:all);
 
-$VERSION = '0.10';
+our $VERSION = '0.40';
 
 sub _is_opera_pre {
     my($self, $moz) = @_;
