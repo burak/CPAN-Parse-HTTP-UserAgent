@@ -104,15 +104,17 @@ sub _parse {
 }
 
 sub _pre_parse {
-    my $self = shift;
-    my $UA   = uc $self->[UA_STRING];
-    $self->[IS_MAXTHON] = index($UA, 'MAXTHON')  != NO_IMATCH;
-    $self->[IS_TRIDENT] = index($UA, 'TRIDENT/') != NO_IMATCH;
-    my $ua = $self->[UA_STRING];
+    my $self  = shift;
+    my $ua    = $self->[UA_STRING];
+    my $uc_ua = uc $ua;
+
+    $self->[IS_MAXTHON] = index($uc_ua, 'MAXTHON')  != NO_IMATCH;
+    $self->[IS_TRIDENT] = index($uc_ua, 'TRIDENT/') != NO_IMATCH;
 
     my @parts;
     my $i     = 0;
     my $depth = 0;
+
     foreach my $token ( split RE_SPLIT_PARSE, $ua ) {
         if ( $token eq '(' ) {
             $i++ if ++$depth == 1;
@@ -144,7 +146,11 @@ sub _do_parse {
 
     my $c = $t->[0] && $t->[0] eq 'compatible';
 
-    if ( $c && shift @{$t} && ( ! $e || $self->[IS_TRIDENT] ) && ! $self->[IS_MAXTHON] ) {
+    if ( $c
+        && shift @{$t}                     # just inline removal of "compatible"
+        && ( ! $e || $self->[IS_TRIDENT] ) # older versions don't have junk outside, while newer might have
+        && ! $self->[IS_MAXTHON]           # be sure that this is not the faker
+    ) {
         my($n, $v) = split RE_WHITESPACE, $t->[0];
         if ( $n eq 'MSIE' && index($m, q{ }) == NO_IMATCH ) {
             return $self->_parse_msie($m, $t, $e, $n, $v);
@@ -162,7 +168,7 @@ sub _do_parse {
 
         if ( keys %msie11 == 3 ){
             return $self->_parse_msie_11($m, $t, $e);
-        }    
+        }
     }
 
     my $rv =  $self->[IS_MAXTHON]        ? [maxthon    => $m, $t, $e, @o       ]
