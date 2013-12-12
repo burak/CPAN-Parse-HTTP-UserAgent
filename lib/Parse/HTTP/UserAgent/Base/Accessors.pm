@@ -10,6 +10,7 @@ our $VERSION = '0.11';
 #mobile
 #device
 #tablet
+#touch
 
 BEGIN {
     my @simple = qw(

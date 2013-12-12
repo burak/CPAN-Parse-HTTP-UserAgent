@@ -38,6 +38,7 @@ BEGIN {
         'UA_WAP',               # unimplemented
         'UA_MOBILE',            # partially implemented
         'UA_TABLET',            # partially implemented
+        'UA_TOUCH',             # windows only?
         'UA_PARSER',            # the parser name
         'UA_DEVICE',            # the name of the mobile device
         'UA_ORIGINAL_NAME',     # original name if this is some variation
@@ -121,6 +122,7 @@ BEGIN {
             UA_WAP
             UA_MOBILE
             UA_TABLET
+            UA_TOUCH
             UA_PARSER
             UA_DEVICE
             UA_ORIGINAL_NAME

@@ -155,23 +155,72 @@ sub _parse_msie {
         $self->[UA_OS] = shift @{ $extras };
     }
 
+    my $real_version;
     my @buf;
     foreach my $e ( @{ $extras } ) {
         if ( $e =~ RE_TRIDENT ) {
-            $self->[UA_TOOLKIT] = [ $1, $2 ];
+            my($tk_name, $tk_version) = ($1, $2);
+            $self->[UA_TOOLKIT] = [ $tk_name, $tk_version ];
+            if ( $tk_name eq 'Trident' && $tk_version ) {
+                if ( $tk_version eq '7.0' && $self->[UA_VERSION_RAW] ne '11.0' ) {
+                    # more stupidity (compat mode)
+                    $self->[UA_ORIGINAL_NAME]    = 'MSIE';
+                    $self->[UA_ORIGINAL_VERSION] = 11;
+                }
+                elsif ( $tk_version eq '6.0' && $self->[UA_VERSION_RAW] ne '10.0') {
+                    # more stupidity (compat mode)
+                    $self->[UA_ORIGINAL_NAME]    = 'MSIE';
+                    $self->[UA_ORIGINAL_VERSION] = 10;
+                }
+                else {
+                    # must be the real version or some other stupidity
+                }
+            }
             next;
         }
         push @buf, $e;
     }
 
-    $self->[UA_EXTRAS] = [
-        map  { $self->trim( $_ ) }
+    my @extras =
+        map  {
+            my $thing = $self->trim( $_ );
+            lc($thing) eq 'touch'
+                ? do { $self->[UA_TOUCH] = 1; () }
+                : $thing
+                ;
+        }
         grep { $_ !~ m{ \s+ compatible \z }xms }
         @buf
-    ];
+    ;
 
+    $self->[UA_EXTRAS] = [ @extras ];
     $self->[UA_PARSER] = 'msie';
 
+    return 1;
+}
+
+sub _parse_msie_11 {
+    my($self, $moz, $thing, $extra) = @_;
+
+    if ( ref $extra eq 'ARRAY' ) {
+        # remove junk
+        @{$extra} = grep { $_ ne 'like' && $_ ne 'Gecko' } @{ $extra };
+    }
+    else {
+        $extra = [];
+    }
+
+    my($version);
+    while ( my $e = shift @{ $thing } ) {
+        if (  index($e, 'rv:' ) != NO_IMATCH ) {
+            $version = (split m{rv:}xms, $e )[1] ;
+            next;
+        }
+        push @{ $extra }, $e;
+    }
+
+    $self->_parse_msie( undef, $thing, $extra, 'MSIE', $version) || return;
+    $self->[UA_PARSER] = 'msie11';
     return 1;
 }
 
@@ -698,6 +747,7 @@ sub _parse_moz_only {
     $self->[UA_VERSION_RAW] = $version || 0;
     $self->[UA_EXTRAS]      = [ @parts ];
     $self->[UA_PARSER]      = 'moz_only';
+    $self->[UA_ROBOT]       = 1 if ! $self->[UA_VERSION_RAW];
     return 1;
 }
 

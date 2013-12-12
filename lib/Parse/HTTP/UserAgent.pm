@@ -34,9 +34,12 @@ my %OSFIX = (
     'Win 9x 4.90'    => 'Windows Me',
     'Windows NT 5.0' => 'Windows 2000',
     'Windows NT 5.1' => 'Windows XP',
+    'Windows XP 5.1' => 'Windows XP', # huh?
     'Windows NT 5.2' => 'Windows Server 2003',
     'Windows NT 6.0' => 'Windows Vista / Server 2008',
     'Windows NT 6.1' => 'Windows 7',
+    'Windows NT 6.2' => 'Windows 8',
+    'Windows NT 6.3' => 'Windows 8.1',
 );
 
 sub new {
@@ -136,6 +139,7 @@ sub _pre_parse {
 
 sub _do_parse {
     my($self, $m, $t, $e, @o) = @_;
+
     my $c = $t->[0] && $t->[0] eq 'compatible';
 
     if ( $c && shift @{$t} && ! $e && ! $self->[IS_MAXTHON] ) {
@@ -143,6 +147,18 @@ sub _do_parse {
         if ( $n eq 'MSIE' && index($m, q{ }) == NO_IMATCH ) {
             return $self->_parse_msie($m, $t, $e, $n, $v);
         }
+    }
+
+    # http://blogs.msdn.com/b/ieinternals/archive/2013/09/21/internet-explorer-11-user-agent-string-ua-string-sniffing-compatibility-with-gecko-webkit.aspx
+    my %msie11 = map {
+          index( $_, 'Windows')  != NO_IMATCH ? ( windows => 1 )
+        : index( $_, 'Trident/') != NO_IMATCH ? ( trident => 1 )
+        : index( $_, 'rv:')      != NO_IMATCH ? ( version => 1 )
+        : ()
+    } @{ $t };
+
+    if ( keys %msie11 == 3 ){
+        return $self->_parse_msie_11($m, $t, $e);
     }
 
     my $rv =  $self->[IS_MAXTHON]        ? [maxthon    => $m, $t, $e, @o       ]
