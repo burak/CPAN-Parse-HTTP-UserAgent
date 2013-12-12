@@ -158,8 +158,8 @@ sub _parse_msie {
     my $real_version;
     my @buf;
     foreach my $e ( @{ $extras } ) {
-        if ( $e =~ RE_TRIDENT ) {
-            my($tk_name, $tk_version) = ($1, $2);
+        if ( index( $e, 'Trident/' ) != NO_IMATCH ) {
+            my($tk_name, $tk_version) = split m{[/]}xms, $e, 2;
             $self->[UA_TOOLKIT] = [ $tk_name, $tk_version ];
             if ( $tk_name eq 'Trident' && $tk_version ) {
                 if ( $tk_version eq '7.0' && $self->[UA_VERSION_RAW] ne '11.0' ) {

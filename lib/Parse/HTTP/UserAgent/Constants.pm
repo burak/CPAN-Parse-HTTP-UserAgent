@@ -45,6 +45,7 @@ BEGIN {
         'UA_ORIGINAL_VERSION',  # original version if this is some variation
         'IS_PARSED',            # _parse() happened or not
         'IS_MAXTHON',           # Is this the dumb IE faker?
+        'IS_TRIDENT',           # Thanks to Microsoft, this now has a meaning
         'IS_EXTENDED',
     );
 
@@ -71,7 +72,6 @@ BEGIN {
         RE_SC_WS_MULTI         => qr{ ; \s+?                                }xms,
         RE_SLASH               => qr{ /                                     }xms,
         RE_SPLIT_PARSE         => qr{ \s? ([()]) \s?                        }xms,
-        RE_TRIDENT             => qr{ \A (Trident) / (.+?) \z               }xmsi,
         RE_TWO_LETTER_LANG     => qr{ \A [a-z]{2} \z                        }xms,
         RE_WARN_INVALID        => qr{ \QVersion string\E .+? \Qcontains invalid data; ignoring:\E}xms,
         RE_WARN_OVERFLOW       => qr{ \QInteger overflow in version\E       }xms,
@@ -103,6 +103,7 @@ BEGIN {
         object_ids => [qw(
             IS_PARSED
             IS_MAXTHON
+            IS_TRIDENT
             IS_EXTENDED
             UA_STRING
             UA_STRING_ORIGINAL
@@ -136,7 +137,6 @@ BEGIN {
             RE_SLASH
             RE_SPLIT_PARSE
             RE_OPERA_MINI
-            RE_TRIDENT
             RE_EPIPHANY_GECKO
             RE_WHITESPACE
             RE_SC_WS

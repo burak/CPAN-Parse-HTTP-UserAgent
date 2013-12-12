@@ -7,6 +7,7 @@ Revision history for Perl extension Parse::HTTP::UserAgent
     => New TOUCH property.
     => Support new windows versions in the OS name fixer.
     => New test strings (mostly TODO).
+    => Always check the existance of Trident.
 
 0.39 Mon Dec  2 02:20:23 2013
     => Fix for RT#89274

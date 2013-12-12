@@ -105,7 +105,9 @@ sub _parse {
 
 sub _pre_parse {
     my $self = shift;
-    $self->[IS_MAXTHON] = index(uc $self->[UA_STRING], 'MAXTHON') != NO_IMATCH;
+    my $UA   = uc $self->[UA_STRING];
+    $self->[IS_MAXTHON] = index($UA, 'MAXTHON')  != NO_IMATCH;
+    $self->[IS_TRIDENT] = index($UA, 'TRIDENT/') != NO_IMATCH;
     my $ua = $self->[UA_STRING];
 
     my @parts;
@@ -142,23 +144,25 @@ sub _do_parse {
 
     my $c = $t->[0] && $t->[0] eq 'compatible';
 
-    if ( $c && shift @{$t} && ! $e && ! $self->[IS_MAXTHON] ) {
+    if ( $c && shift @{$t} && ( ! $e || $self->[IS_TRIDENT] ) && ! $self->[IS_MAXTHON] ) {
         my($n, $v) = split RE_WHITESPACE, $t->[0];
         if ( $n eq 'MSIE' && index($m, q{ }) == NO_IMATCH ) {
             return $self->_parse_msie($m, $t, $e, $n, $v);
         }
     }
 
-    # http://blogs.msdn.com/b/ieinternals/archive/2013/09/21/internet-explorer-11-user-agent-string-ua-string-sniffing-compatibility-with-gecko-webkit.aspx
-    my %msie11 = map {
-          index( $_, 'Windows')  != NO_IMATCH ? ( windows => 1 )
-        : index( $_, 'Trident/') != NO_IMATCH ? ( trident => 1 )
-        : index( $_, 'rv:')      != NO_IMATCH ? ( version => 1 )
-        : ()
-    } @{ $t };
+    if ( $self->[IS_TRIDENT] ) {
+        # http://blogs.msdn.com/b/ieinternals/archive/2013/09/21/internet-explorer-11-user-agent-string-ua-string-sniffing-compatibility-with-gecko-webkit.aspx
+        my %msie11 = map {
+              index( $_, 'Windows')  != NO_IMATCH ? ( windows => 1 )
+            : index( $_, 'Trident/') != NO_IMATCH ? ( trident => 1 )
+            : index( $_, 'rv:')      != NO_IMATCH ? ( version => 1 )
+            : ()
+        } @{ $t };
 
-    if ( keys %msie11 == 3 ){
-        return $self->_parse_msie_11($m, $t, $e);
+        if ( keys %msie11 == 3 ){
+            return $self->_parse_msie_11($m, $t, $e);
+        }    
     }
 
     my $rv =  $self->[IS_MAXTHON]        ? [maxthon    => $m, $t, $e, @o       ]
