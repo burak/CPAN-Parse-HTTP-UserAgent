@@ -43,6 +43,7 @@ version_raw     => '10.0',
 Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; Touch)
 
 name            => 'MSIE',
+mobile          => 1,
 os              => 'Windows 8',
 parser          => 'msie',
 toolkit         => [ 'Trident', '6.0', '6.000' ],

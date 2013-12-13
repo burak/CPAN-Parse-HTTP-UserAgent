@@ -185,7 +185,11 @@ sub _parse_msie {
         map  {
             my $thing = $self->trim( $_ );
             lc($thing) eq 'touch'
-                ? do { $self->[UA_TOUCH] = 1; () }
+                ? do {
+                    $self->[UA_TOUCH]  = 1;
+                    $self->[UA_MOBILE] = 1;
+                    ();
+                  }
                 : $thing
                 ;
         }
@@ -193,7 +197,7 @@ sub _parse_msie {
         @buf
     ;
 
-    $self->[UA_EXTRAS] = [ @extras ];
+    $self->[UA_EXTRAS] = [ @extras ] if @extras;
     $self->[UA_PARSER] = 'msie';
 
     return 1;
@@ -220,6 +224,21 @@ sub _parse_msie_11 {
     }
 
     $self->_parse_msie( undef, $thing, $extra, 'MSIE', $version) || return;
+
+    if ( $self->[UA_TOUCH] && $self->[UA_EXTRAS] ) {
+        # version 10+
+        $self->[UA_EXTRAS] = [
+            map {
+                $_ eq 'ARM'
+                    ? do {
+                        $self->[UA_DEVICE] = $_;
+                        ()
+                      }
+                    : $_
+            } @{ $self->[UA_EXTRAS] }
+        ];
+    }
+
     $self->[UA_PARSER] = 'msie11';
     return 1;
 }

@@ -5,25 +5,23 @@ use Parse::HTTP::UserAgent::Constants qw(:all);
 
 our $VERSION = '0.11';
 
-#TODO: new accessors
-#wap
-#mobile
-#device
-#tablet
-#touch
-
 BEGIN {
     my @simple = qw(
-        name
-        unknown
+        device
         generic
-        os
         lang
-        strength
-        parser
+        mobile
+        name
         original_name
         original_version
+        os
+        parser
         robot
+        strength
+        tablet
+        touch
+        unknown
+        wap
     );
 
     my @multi = qw(
@@ -118,6 +116,8 @@ Ther methods can be used to access the various parts of the parsed structure.
 
 The parts of the parsed structure can be accessed using these methods:
 
+=head2 device
+
 =head2 dotnet
 
 =head2 extras
@@ -125,6 +125,8 @@ The parts of the parsed structure can be accessed using these methods:
 =head2 generic
 
 =head2 lang
+
+=head2 mobile
 
 =head2 mozilla
 
@@ -142,11 +144,17 @@ The parts of the parsed structure can be accessed using these methods:
 
 =head2 strength
 
+=head2 tablet
+
+=head2 touch
+
 =head2 toolkit
 
 =head2 unknown
 
 =head2 version
+
+=head2 wap
 
 =head1 SEE ALSO
 

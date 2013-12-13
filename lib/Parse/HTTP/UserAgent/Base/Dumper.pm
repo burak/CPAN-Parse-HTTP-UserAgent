@@ -76,19 +76,19 @@ sub _dumper_dumper {
     foreach my $id ( @ids ) {
         my $name = $args ? $id->{name} : $id;
         my $val  = $args ? $id->{value} : $self->[ $self->$id() ];
-        $val = do {
-                    my $d = Data::Dumper->new([$val]);
-                    $d->Indent(0);
-                    my $rv = $d->Dump;
-                    $rv =~ s{ \$VAR1 \s+ = \s+ }{}xms;
-                    $rv =~ s{ ; }{}xms;
-                    $rv eq '[]' ? q{} : $rv;
-                } if $val && ref $val;
+        if ( $val && ref $val ) {
+            my $d = Data::Dumper->new([$val]);
+            $d->Indent(0);
+            my $rv = $d->Dump;
+            $rv =~ s{ \$VAR1 \s+ = \s+ }{}xms;
+            $rv =~ s{ ; }{}xms;
+            $val = $rv eq '[]' ? q{} : $rv;
+        }
         push @buf, [
-                        $name,
-                        (q{ } x (2 + $max - length $name)),
-                        defined $val ? $val : q{}
-                    ];
+            $name,
+            (q{ } x (2 + $max - length $name)),
+            defined $val ? $val : q{}
+        ];
     }
     foreach my $row ( sort { lc $a->[0] cmp lc $b->[0] } @buf ) {
         $buf .= sprintf "%s%s%s\n", @{ $row };
