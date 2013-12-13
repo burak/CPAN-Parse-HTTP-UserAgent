@@ -141,6 +141,7 @@ sub _parse_maxthon {
 sub _parse_msie {
     my($self, $moz, $thing, $extra, $name, $version) = @_;
     my $junk = shift @{ $thing }; # already used
+
     my($extras,$dotnet) = $self->_extract_dotnet( $thing, $extra );
 
     if ( @{$extras} == 2 && index( $extras->[1], 'Lunascape' ) != NO_IMATCH ) {
@@ -719,8 +720,8 @@ sub _generic_compatible {
         if ( $self->_is_generic_bogus_ie( $extra ) ) {
             # edge case
             my($n, $v) = split RE_WHITESPACE, shift @orig_thing;
-            my $e = [ split RE_SC_WS, join q{ }, @{ $extra } ];
-            my $t = \@orig_thing;
+            my $e      = [ split RE_SC_WS, join q{ }, @{ $extra } ];
+            my $t      = \@orig_thing;
             push @{ $e }, grep { $_ } map { split RE_SC_WS, $_ } @others;
             $self->_parse_msie( $moz, $thing, $e, $n, $v );
             return 1;
@@ -737,6 +738,15 @@ sub _generic_compatible {
     }
 
     @extras = (@{$thing}, $extra ? @{$extra} : (), @others ) if ! @extras;
+
+    if ( $lang && index( $lang, 'MSIE ') != NO_IMATCH ) {
+        return $self->_parse_msie(
+                    $moz,
+                    [],
+                    [$os, "$name/$version", @extras], # junk
+                    split( m{[\s]+}xms, $lang, 2 ),   # name, version
+                );
+    }
 
     $self->_fix_generic( \$os, \$name, \$version, \@extras );
 
