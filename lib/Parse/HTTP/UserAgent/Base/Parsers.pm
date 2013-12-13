@@ -646,6 +646,21 @@ sub _generic_moz_thing {
     my($mname, $mversion, @rest) = split RE_CHAR_SLASH_WS, $moz;
     return if $mname eq 'Mozilla' || $mname eq 'Emacs-W3';
 
+    if ( index( $mname, 'Nokia' ) != NO_IMATCH ) {
+        my($device, $num, $os, $series, @junk) = split m{[\s]+}xms,
+                                                    $self->[UA_STRING_ORIGINAL];
+        if (   $device
+            && $num
+            && $os
+            && $series
+            && index( $os, 'SymbianOS' ) != NO_IMATCH
+        ) {
+            return $self->_parse_symbian(
+                        join ';', $os, "$series $device", join(q{ }, @junk, $num)
+                    );
+        }
+    }
+
     $self->[UA_NAME]        = $mname;
     $self->[UA_VERSION_RAW] = $mversion || ( $mname eq 'Links' ? shift @{$t} : 0 );
     $self->[UA_OS] = @rest                                     ? join(q{ }, @rest)
@@ -754,19 +769,47 @@ sub _parse_emacs {
 }
 
 sub _parse_moz_only {
-    my($self, $moz) = @_;
+    my $self  = shift;
+    my($moz)  = @_;
     my @parts = split RE_WHITESPACE, $moz;
     my $id = shift @parts;
     my($name, $version) = split RE_SLASH, $id;
+
+    if ( index( $name, 'Symbian' ) != NO_IMATCH ) {
+        return $self->_parse_symbian( $moz );
+    }
+
     if ( $name eq 'Mozilla' && @parts ) {
         ($name, $version) = split RE_SLASH, shift @parts;
         return if ! $name || ! $version;
     }
+
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version || 0;
     $self->[UA_EXTRAS]      = [ @parts ];
     $self->[UA_PARSER]      = 'moz_only';
     $self->[UA_ROBOT]       = 1 if ! $self->[UA_VERSION_RAW];
+
+    return 1;
+}
+
+sub _parse_symbian {
+    my($self, $raw) = @_;
+    my($os, $series_device, @rest) = split m{[;]\s?}xms, $raw;
+
+    return if ! $os || ! $series_device;
+
+    my($series, $device) = split m{[\s]+}xms, $series_device;
+
+    return if ! $device;
+
+    @{ $self }[ UA_NAME, UA_VERSION_RAW ] = split RE_SLASH, $series, 2;
+    $self->[UA_OS]     = $os;
+    $self->[UA_DEVICE] = $device;
+    $self->[UA_EXTRAS] = [ map { split m{[\s]+}xms, $_ } @rest ];
+    $self->[UA_MOBILE] = 1;
+    $self->[UA_PARSER] = 'symbian';
+
     return 1;
 }
 

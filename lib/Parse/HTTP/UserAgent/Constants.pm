@@ -20,33 +20,33 @@ use constant LIST_ROBOTS => qw(
 
 BEGIN {
     my @fields = (
-        'UA_STRING',            # just for information
-        'UA_STRING_ORIGINAL',   # just for information
-        'UA_UNKNOWN',           # failed to detect?
-        'UA_GENERIC',           # parsed with a generic parser.
-        'UA_NAME',              # The identifier of the ua
-        'UA_VERSION_RAW',       # the parsed version
-        'UA_VERSION',           # used for numerical ops. via qv()
-        'UA_OS',                # Operating system
-        'UA_LANG',              # the language of the ua interface
-        'UA_TOOLKIT',           # [Opera] ua toolkit
-        'UA_EXTRAS',            # Extra stuff (Toolbars?) non parsable junk
-        'UA_DOTNET',            # [MSIE] List of .NET CLR versions
-        'UA_STRENGTH',          # [MSIE] List of .NET CLR versions
-        'UA_MOZILLA',           # [Firefox] Mozilla revision
-        'UA_ROBOT',             # Is this a robot?
-        'UA_WAP',               # unimplemented
-        'UA_MOBILE',            # partially implemented
-        'UA_TABLET',            # partially implemented
-        'UA_TOUCH',             # windows only?
-        'UA_PARSER',            # the parser name
+        'IS_EXTENDED',
+        'IS_MAXTHON',           # Is this the dumb IE faker?
+        'IS_PARSED',            # _parse() happened or not
+        'IS_TRIDENT',           # Thanks to Microsoft, this now has a meaning
         'UA_DEVICE',            # the name of the mobile device
+        'UA_DOTNET',            # [MSIE] List of .NET CLR versions
+        'UA_EXTRAS',            # Extra stuff (Toolbars?) non parsable junk
+        'UA_GENERIC',           # parsed with a generic parser.
+        'UA_LANG',              # the language of the ua interface
+        'UA_MOBILE',            # partially implemented
+        'UA_MOZILLA',           # [Firefox] Mozilla revision
+        'UA_NAME',              # The identifier of the ua
         'UA_ORIGINAL_NAME',     # original name if this is some variation
         'UA_ORIGINAL_VERSION',  # original version if this is some variation
-        'IS_PARSED',            # _parse() happened or not
-        'IS_MAXTHON',           # Is this the dumb IE faker?
-        'IS_TRIDENT',           # Thanks to Microsoft, this now has a meaning
-        'IS_EXTENDED',
+        'UA_OS',                # Operating system
+        'UA_PARSER',            # the parser name
+        'UA_ROBOT',             # Is this a robot?
+        'UA_STRENGTH',          # [MSIE] List of .NET CLR versions
+        'UA_STRING',            # just for information
+        'UA_STRING_ORIGINAL',   # just for information
+        'UA_TABLET',            # partially implemented
+        'UA_TOOLKIT',           # [Opera] ua toolkit
+        'UA_TOUCH',             # windows only?
+        'UA_UNKNOWN',           # failed to detect?
+        'UA_VERSION',           # used for numerical ops. via qv()
+        'UA_VERSION_RAW',       # the parsed version
+        'UA_WAP',               # unimplemented
     );
 
     my $oid   = -1;
