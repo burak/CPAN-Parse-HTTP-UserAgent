@@ -33,3 +33,29 @@ toolkit          => [ 'Trident', '7.0', '7.000' ],
 version          => '7.000',
 version_raw      => '7.0',
 
+[AGENT]
+
+Mozilla/5.0 (MSIE 9.0; qdesk 2.4.1263.203; Windows NT 6.1; WOW64; Trident/7.0; rv:11.0; QQBrowser/7.5.17872.400) like Gecko
+
+extras          => [ 'MSIE 9.0', 'qdesk 2.4.1263.203', 'WOW64', 'QQBrowser/7.5.17872.400' ],
+name            => 'MSIE',
+os              => 'Windows 7',
+parser          => 'msie11',
+toolkit         => [ 'Trident', '7.0', '7.000' ],
+version         => '11.000',
+version_raw     => '11.0',
+
+[AGENT]
+
+#virus: http://systemexplorer.net/file-database/file/2345explorer-exe
+
+Mozilla/5.0 (MSIE 9.0; Windows NT 6.1; Trident/7.0; rv:11.0; like Gecko; 2345Explorer)
+
+extras          => [ 'MSIE 9.0', 'like Gecko', '2345Explorer' ],
+name            => 'MSIE',
+os              => 'Windows 7',
+parser          => 'msie11',
+toolkit         => [ 'Trident', '7.0', '7.000' ],
+version         => '11.000',
+version_raw     => '11.0',
+

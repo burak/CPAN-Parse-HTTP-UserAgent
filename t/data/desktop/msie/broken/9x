@@ -2,15 +2,3 @@
 
 #TODO: Mozilla/5.0 ( ; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)
 
-[AGENT]
-
-#virus: http://systemexplorer.net/file-database/file/2345explorer-exe
-#TODO: Mozilla/5.0 (MSIE 9.0; Windows NT 6.1; Trident/7.0; rv:11.0; like Gecko; 2345Explorer)
-
-[AGENT]
-
-# robot? mobile agent? fake?
-# qqbrowser
-
-#TODO: Mozilla/5.0 (MSIE 9.0; qdesk 2.4.1263.203; Windows NT 6.1; WOW64; Trident/7.0; rv:11.0; QQBrowser/7.5.17872.400) like Gecko
-
