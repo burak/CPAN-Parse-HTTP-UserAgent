@@ -5,7 +5,7 @@
     },
     meta_merge => {
         resources => {
-            repository => 'http://bitbucket.org/burak/cpan-parse-http-useragent/',
+            repository => 'http://github.com/burak/cpan-parse-http-useragent/',
         },
     },
     BUILDER => {
