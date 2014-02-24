@@ -260,6 +260,18 @@ sub _parse_firefox {
     return 1;
 }
 
+sub _parse_ff_suspect {
+    my($self, $moz, $thing, $extra, @others) = @_;
+    # fool the moz parser
+    unshift @{ $extra }, '';
+
+    $self->_parse_mozilla_family( $moz, $thing, $extra, @others );
+
+    $self->[UA_PARSER] = 'ff_suspect';
+
+    return 1;
+}
+
 sub _fix_fennec {
     my($self, $e) = @_;
     my($name, $version) = split RE_SLASH, pop @{ $e };
@@ -534,7 +546,7 @@ sub _parse_mozilla_family {
     $self->[UA_VERSION_RAW]  = $version;
     $self->[UA_TOOLKIT]      = $extra->[0]
                              ? [ split RE_SLASH, shift @{ $extra } ]
-                             : []
+                             : undef
                              ;
 
     if ( @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ) {
@@ -642,7 +654,7 @@ sub _parse_gecko {
         return 1 ;
     }
 
-    if ( $self->[UA_TOOLKIT] && $self->[UA_TOOLKIT][TK_NAME] eq 'Gecko' ) {
+    if ( ref $self->[UA_TOOLKIT] eq 'ARRAY' && $self->[UA_TOOLKIT][TK_NAME] eq 'Gecko' ) {
         ($self->[UA_NAME], $self->[UA_VERSION_RAW]) = split RE_SLASH, $moz;
         if ( $self->[UA_NAME] && $self->[UA_VERSION_RAW] ) {
             $self->[UA_PARSER] = 'mozilla_family:gecko';

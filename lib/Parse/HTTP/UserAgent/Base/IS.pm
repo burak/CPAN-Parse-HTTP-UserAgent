@@ -78,6 +78,14 @@ sub _is_ff {
     ;
 }
 
+sub _is_suspicious_ff {
+    my($self, $extra) = @_;
+    return if  ref $extra ne 'ARRAY'
+            || @{ $extra } != 1
+            || index( lc $extra->[0], 'firefox/' ) == NO_IMATCH;
+    return 1;
+}
+
 sub _is_gecko {
     return index(shift->[UA_STRING], 'Gecko/') != NO_IMATCH;
 }
