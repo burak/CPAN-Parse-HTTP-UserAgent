@@ -135,11 +135,12 @@ sub _is_hotjava {
 
 sub _is_generic_bogus_ie {
     my($self, $extra) = @_;
-    return $extra
+    my $rv = $extra
         && $extra->[0]
         && index( $extra->[0], 'compatible' ) != NO_IMATCH
         && $extra->[1]
         && $extra->[1] eq 'MSIE';
+    return $rv;
 }
 
 1;

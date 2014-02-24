@@ -51,3 +51,13 @@ touch           => 1,
 version         => '10.000',
 version_raw     => '10.0',
 
+[AGENT]
+
+Mozilla/5.0 (compatible;FW 2.0.4857.p; MSIE 10.0; Windows NT 6.1; Trident/6.0)
+
+name            => 'MSIE',
+os              => 'Windows 7',
+parser          => 'msie',
+toolkit         => [ 'Trident', '6.0', '6.000' ],
+version         => '10.000',
+version_raw     => '10.0',

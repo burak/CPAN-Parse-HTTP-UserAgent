@@ -43,7 +43,7 @@ sub _fix_opera {
     }
     $self->_fix_os_lang;
     $self->_fix_windows_nt('skip_os');
-    $self->[UA_EXTRAS] = [ @buf ];
+    $self->[UA_EXTRAS] = @buf ? [ @buf ] : undef;
     return 1;
 }
 
@@ -111,7 +111,7 @@ sub _parse_maxthon {
 
     if ( $is_30 ) {
         if ( $self->[UA_LANG] ) {
-            push @{ $self->[UA_EXTRAS] }, $self->[UA_LANG];
+            push @{ $self->[UA_EXTRAS] ||= [] }, $self->[UA_LANG];
             $self->[UA_LANG] = undef;
         }
     }
@@ -198,7 +198,7 @@ sub _parse_msie {
         @buf
     ;
 
-    $self->[UA_EXTRAS] = [ @extras ] if @extras;
+    $self->[UA_EXTRAS] = @extras ? [ @extras ] : undef;
     $self->[UA_PARSER] = 'msie';
 
     return 1;
@@ -228,16 +228,15 @@ sub _parse_msie_11 {
 
     if ( $self->[UA_TOUCH] && $self->[UA_EXTRAS] ) {
         # version 10+
-        $self->[UA_EXTRAS] = [
-            map {
-                $_ eq 'ARM'
-                    ? do {
-                        $self->[UA_DEVICE] = $_;
-                        ()
-                      }
-                    : $_
-            } @{ $self->[UA_EXTRAS] }
-        ];
+        my @extras = map {
+            $_ eq 'ARM'
+                ? do {
+                    $self->[UA_DEVICE] = $_;
+                    ()
+                  }
+                : $_
+        } @{ $self->[UA_EXTRAS] };
+        $self->[UA_EXTRAS] = @extras ? [ @extras ] : undef;
     }
 
     $self->[UA_PARSER] = 'msie11';
@@ -274,7 +273,7 @@ sub _fix_fennec {
         $self->[UA_LANG]   = undef;
     }
     elsif ( index( $self->[UA_LANG], q{ } ) != NO_IMATCH ) {
-        push @{ $self->[UA_EXTRAS] }, $self->[UA_LANG];
+        push @{ $self->[UA_EXTRAS] ||= [] }, $self->[UA_LANG];
         $self->[UA_LANG] = undef;
     }
     else {
@@ -328,7 +327,7 @@ sub _parse_safari {
 
         if ( $check_os && index( $check_os, 'Mac OS X' ) != NO_IMATCH ) {
             if ( $self->[UA_OS] ) {
-                push @{$self->[UA_EXTRAS]}, $self->[UA_OS];
+                push @{ $self->[UA_EXTRAS] ||= [] }, $self->[UA_OS];
             }
             $self->[UA_OS] = pop @{ $thing };
             # Another oddity: tk as "AppleWebKit/en_SG"
@@ -342,21 +341,24 @@ sub _parse_safari {
         }
     }
 
-    $self->[UA_EXTRAS] = [ @{$thing}, @others ];
+    my @extras;
+    push @extras, @{$thing}, @others;
 
     if ( $self->[UA_OS] && length($self->[UA_OS]) == 1 ) {
-        push @{$self->[UA_EXTRAS]}, $self->[UA_OS];
+        push @extras, $self->[UA_OS];
         $self->[UA_OS] = undef;
     }
 
     if ( $self->[UA_LANG] && $self->[UA_LANG] !~ m{[a-zA-Z]+}xmsg ) {
         # some junk like "6.0" -- more stupidity
-        push @{ $self->[UA_EXTRAS] }, $self->[UA_LANG];
+        push @extras, $self->[UA_LANG];
         $self->[UA_LANG] = undef;
     }
 
-    push @{ $self->[UA_EXTRAS] }, @junk     if @junk;
-    push @{ $self->[UA_EXTRAS] }, @{$extra} if $extra;
+    push @extras, @junk     if @junk;
+    push @extras, @{$extra} if $extra;
+
+    $self->[UA_EXTRAS] = @extras ? [ @extras ] : undef;
 
     return 1;
 }
@@ -435,10 +437,12 @@ sub _parse_android {
         unshift @extras, join ' ', map { shift @extras } 1..3;
     }
 
+    my @extras_final = grep { $_ } @extras;
+
     $self->[UA_NAME]   = 'Android';
     $self->[UA_MOBILE] = 1;
     $self->[UA_TABLET] = $is_phone ? undef : 1;
-    $self->[UA_EXTRAS] = [ grep { $_ } @extras ];
+    $self->[UA_EXTRAS] = @extras_final ? [ @extras_final ] : undef;
 
     return 1;
 }
@@ -480,12 +484,19 @@ sub _parse_opera_pre {
     }
 
     $self->[UA_LANG] = $lang;
-    $self->[UA_OS]   = @{$thing} && $self->_is_strength( $thing->[LAST_ELEMENT] )
-                     ? shift @{$thing}
-                     : pop   @{$thing}
-                     ;
 
-    $self->[UA_EXTRAS] = [ @{ $thing }, ( $extra ? @{$extra} : () ) ];
+    if ( @{$thing} && $self->_is_strength( $thing->[LAST_ELEMENT] ) ) {
+        $self->[UA_STRENGTH] = pop   @{ $thing };
+        $self->[UA_OS]       = shift @{ $thing };
+    }
+    else {
+        $self->[UA_OS]       = pop   @{ $thing };
+    }
+
+    my @extras =  ( @{ $thing }, ( $extra ? @{$extra} : () ) );
+
+    $self->[UA_EXTRAS] = @extras ? [ @extras ] : undef;
+
     return $self->_fix_opera;
 }
 
@@ -496,11 +507,17 @@ sub _parse_opera_post {
     $self->[UA_NAME]        = shift @{$extra};
     $self->[UA_VERSION_RAW] = shift @{$extra};
    ($self->[UA_LANG]        = shift @{$extra} || q{}) =~ tr/[]//d;
-    $self->[UA_OS]          = @{$thing} && $self->_is_strength($thing->[LAST_ELEMENT])
-                            ? shift @{$thing}
-                            : pop   @{$thing}
-                            ;
-    $self->[UA_EXTRAS]      = [ @{ $thing }, ( $extra ? @{$extra} : () ) ];
+
+    if ( @{$thing} && $self->_is_strength( $thing->[LAST_ELEMENT] ) ) {
+        $self->[UA_STRENGTH] = pop   @{ $thing };
+        $self->[UA_OS]       = shift @{ $thing };
+    }
+    else {
+        $self->[UA_OS]       = pop   @{ $thing };
+    }
+
+    my @extras = ( @{ $thing }, ( $extra ? @{$extra} : () ) );
+    $self->[UA_EXTRAS]      = @extras ? [ @extras ] : undef;
     return $self->_fix_opera;
 }
 
@@ -568,12 +585,14 @@ sub _parse_mozilla_family {
         }
     }
 
-    $self->[UA_EXTRAS] = [
-        grep { $_ }
+    my @extras = grep { $_ }
         @{ $thing },
         @others,
         $extra ? @{ $extra } : (),
-    ];
+    ;
+
+    $self->[UA_EXTRAS] = @extras ? [ @extras ] : undef;
+
     return 1;
 }
 
@@ -617,7 +636,7 @@ sub _parse_gecko {
             push @buf, $e;
         }
 
-        $self->[UA_EXTRAS]        = [ @buf ];
+        $self->[UA_EXTRAS]        = @buf ? [ @buf ] : undef;
         $self->[UA_ORIGINAL_NAME] = $before if $before ne $self->[UA_NAME];
         $self->_fix_windows_nt;
         return 1 ;
@@ -649,10 +668,12 @@ sub _fix_windows_nt {
     my $os      = $self->[UA_OS] || q{};
     return if ( ! $os              && ! $skip_os )
         ||    (   $os ne 'windows' && ! $skip_os )
+        ||    ref $self->[UA_EXTRAS] ne 'ARRAY'
         ||      ! $self->[UA_EXTRAS][0]
-        ||        $self->[UA_EXTRAS][0] !~ m{ NT\s?(\d.*?) \z }xmsi;
+        ||        $self->[UA_EXTRAS][0] !~ m{ NT\s?(\d.*?) \z }xmsi
+    ;
     $self->[UA_EXTRAS][0] = $self->[UA_OS]; # restore
-    $self->[UA_OS] = "Windows NT $1"; # fix
+    $self->[UA_OS]        = "Windows NT $1"; # fix
     return;
 }
 
@@ -671,7 +692,7 @@ sub _parse_netscape {
     $self->[UA_VERSION_RAW] = $version;
     $self->[UA_OS]          = $buf[0] eq 'X11' ? pop @buf : shift @buf;
     $self->[UA_NAME]        = 'Netscape';
-    $self->[UA_EXTRAS]      = [ @buf ];
+    $self->[UA_EXTRAS]      = @buf ? [ @buf ] : undef;
     if ( $junk ) {
         $junk =~ s{ \[ (.+?) \] .* \z}{$1}xms;
         $self->[UA_LANG] = $junk if $junk;
@@ -712,7 +733,7 @@ sub _generic_moz_thing {
         \$self->[UA_OS], \$self->[UA_NAME], \$self->[UA_VERSION_RAW], \@extras
     );
 
-    $self->[UA_EXTRAS]      = [ @extras ] if @extras;
+    $self->[UA_EXTRAS]      = @extras ? [ @extras ] : undef;
     $self->[UA_GENERIC]     = 1;
     $self->[UA_PARSER]      = 'generic_moz_thing';
 
@@ -793,7 +814,7 @@ sub _generic_compatible {
     $self->[UA_VERSION_RAW] = $version || 0;
     $self->[UA_OS]          = $os;
     $self->[UA_LANG]        = $lang;
-    $self->[UA_EXTRAS]      = [ @extras ] if @extras;
+    $self->[UA_EXTRAS]      = @extras ? [ @extras ] : undef;
     $self->[UA_GENERIC]     = 1;
     $self->[UA_PARSER]      = 'generic_compatible';
 
@@ -812,7 +833,8 @@ sub _parse_emacs {
     my @rest = (  @{ $thing }, @moz );
     push @rest, @{ $extra } if $extra && ref $extra eq 'ARRAY';
     push @rest, ( map { split RE_SC_WS, $_ } @others ) if @others;
-    $self->[UA_EXTRAS]      = [ grep { $_ } map { $self->trim( $_ ) } @rest ];
+    my @extras = grep { $_ } map { $self->trim( $_ ) } @rest;
+    $self->[UA_EXTRAS]      = @extras ? [ @extras ] : undef;
     $self->[UA_PARSER]      = 'emacs';
     return 1;
 }
@@ -835,7 +857,7 @@ sub _parse_moz_only {
 
     $self->[UA_NAME]        = $name;
     $self->[UA_VERSION_RAW] = $version || 0;
-    $self->[UA_EXTRAS]      = [ @parts ];
+    $self->[UA_EXTRAS]      = @parts ? [ @parts ] : undef;
     $self->[UA_PARSER]      = 'moz_only';
     $self->[UA_ROBOT]       = 1 if ! $self->[UA_VERSION_RAW];
 
@@ -852,10 +874,12 @@ sub _parse_symbian {
 
     return if ! $device;
 
+    my @extras = map { split m{[\s]+}xms, $_ } @rest;
+
     @{ $self }[ UA_NAME, UA_VERSION_RAW ] = split RE_SLASH, $series, 2;
     $self->[UA_OS]     = $os;
     $self->[UA_DEVICE] = $device;
-    $self->[UA_EXTRAS] = [ map { split m{[\s]+}xms, $_ } @rest ];
+    $self->[UA_EXTRAS] = @extras ? [ @extras ] : undef;
     $self->[UA_MOBILE] = 1;
     $self->[UA_PARSER] = 'symbian';
 
@@ -874,7 +898,7 @@ sub _parse_hotjava {
             @parts = map { $self->trim( $_ ) } @parts;
             $self->[UA_OS]     = pop @parts;
             $self->[UA_LANG]   = pop @parts;
-            $self->[UA_EXTRAS] = [ @parts ];
+            $self->[UA_EXTRAS] = @parts ? [ @parts ] : undef;
         }
     }
     return 1;
@@ -886,7 +910,7 @@ sub _parse_docomo {
         my($name, $version)     = split RE_SLASH, shift @{ $thing };
         $self->[UA_NAME]        = $name;
         $self->[UA_VERSION_RAW] = $version;
-        $self->[UA_EXTRAS]      = [ @{ $thing } ];
+        $self->[UA_EXTRAS]      = @{ $thing } > 0 ? [ @{ $thing } ] : undef;
         $self->[UA_MOBILE]      = 1;
         $self->[UA_ROBOT]       = 1;
         $self->[UA_PARSER]      = 'docomo';

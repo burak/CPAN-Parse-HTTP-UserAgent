@@ -70,7 +70,7 @@ foreach my $test ( database({ thaw => 1 }) ) {
                 } keys %got;
     delete @got{ @empty };
 
-    is_deeply(
+    my $is_eq = is_deeply(
         \%got,
         $test->{struct},
         sprintf q{Frozen data matches parse result for '%s' -> %s -> %s},
@@ -79,7 +79,7 @@ foreach my $test ( database({ thaw => 1 }) ) {
                     $test->{id}
     );
 
-    if ( $opt{dump} ) {
+    if ( ! $is_eq || $opt{dump} ) {
         diag sprintf "GOT: %s\nEXPECTED: %s\n",
                         Dumper( \%got ),
                         Dumper( $test->{struct} );

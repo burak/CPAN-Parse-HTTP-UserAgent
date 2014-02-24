@@ -165,10 +165,26 @@ sub _do_parse {
             : index( $_, 'rv:')      != NO_IMATCH ? ( version => 1 )
             : ()
         } @{ $t };
+        my $msie_matched = keys %msie11;
 
-        if ( keys %msie11 == 3 ){
+        if ( $msie_matched == 3 ){
             return $self->_parse_msie_11($m, $t, $e);
         }
+        elsif ( ! $self->[IS_MAXTHON] && $msie_matched == 2 && ! $msie11{version} ) {
+            # another weird case. robot?
+            my(@buf, $vstr);
+            for my $junk ( @{ $t } ) {
+                if ( index( $junk, 'MSIE') != NO_IMATCH ) {
+                    $vstr = $junk;
+                    next;
+                }
+                push @buf, $junk;
+            }
+
+            my $rv = $self->_parse_msie($m, \@buf, $e, split( RE_WHITESPACE, $vstr ) );
+            return $rv;
+        }
+        # fall back to the dispatch table below
     }
 
     my $rv =  $self->[IS_MAXTHON]        ? [maxthon    => $m, $t, $e, @o       ]
@@ -211,7 +227,7 @@ sub _post_parse {
         push @buf, $e;
     }
 
-    $self->[UA_EXTRAS] = [ @buf ];
+    $self->[UA_EXTRAS] = @buf ? [ @buf ] : undef;
 
     if ( $self->[UA_TOOLKIT] ) {
         my $v = $self->[UA_TOOLKIT][TK_ORIGINAL_VERSION];
