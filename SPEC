@@ -2,6 +2,7 @@
     module_name    => 'Parse::HTTP::UserAgent',
     requires       => {
         'version'  => 0,
+        'constant' => '1.11',
     },
     meta_merge => {
         resources => {
