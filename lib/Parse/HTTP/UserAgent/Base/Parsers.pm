@@ -584,7 +584,9 @@ sub _parse_mozilla_family {
             }
             else {
                 if ( $len_thing > 1 ) {
-                    $self->[UA_LANG] = pop @{ $thing };
+                    if ( $thing->[-1] ne 'WOW64' ) {
+                        $self->[UA_LANG] = pop @{ $thing };
+                    }
                 }
                 else {
                     $self->[UA_OS]   = pop @{ $thing };
@@ -592,6 +594,7 @@ sub _parse_mozilla_family {
             }
         }
         else {
+
             $self->[UA_LANG]     = pop @{ $thing };
             $self->[UA_OS]       = pop @{ $thing };
         }
