@@ -349,8 +349,14 @@ sub _parse_safari {
         $self->[UA_OS] = undef;
     }
 
-    push @{$self->[UA_EXTRAS]}, @junk if @junk;
-    push @{$self->[UA_EXTRAS]}, @{$extra} if $extra;
+    if ( $self->[UA_LANG] && $self->[UA_LANG] !~ m{[a-zA-Z]+}xmsg ) {
+        # some junk like "6.0" -- more stupidity
+        push @{ $self->[UA_EXTRAS] }, $self->[UA_LANG];
+        $self->[UA_LANG] = undef;
+    }
+
+    push @{ $self->[UA_EXTRAS] }, @junk     if @junk;
+    push @{ $self->[UA_EXTRAS] }, @{$extra} if $extra;
 
     return 1;
 }
@@ -516,12 +522,45 @@ sub _parse_mozilla_family {
 
     if ( @{$thing} && index($thing->[LAST_ELEMENT], 'rv:') != NO_IMATCH ) {
         $self->[UA_MOZILLA]  = pop @{ $thing };
-        if ( @{ $thing } <= 3 ) {
+        my $len_thing = @{ $thing };
+        if ( $len_thing == 3 ) {
             $self->[UA_OS] = shift @{ $thing };
             if ( $self->[UA_OS] && $self->[UA_OS] eq 'Macintosh' ) {
                 $self->[UA_OS] = shift @{ $thing };
             }
             $self->[UA_LANG] = pop @{ $thing } if @{ $thing };
+        }
+        elsif ( $len_thing <= 2 ) {
+            if (   $thing->[0] eq 'X11'
+                || index( $thing->[-1], 'Intel' ) != NO_IMATCH
+            ) {
+                if ( index( lc $thing->[-1], 'linux arm') != NO_IMATCH ) {
+                    $self->[UA_DEVICE] = pop @{ $thing };
+                    $self->[UA_OS]     = 'Linux'; # Android? huh?
+                }
+                else {
+                    $self->[UA_OS]   = pop @{ $thing };
+                }
+            }
+            elsif (
+                   index( lc $thing->[0], 'android' ) != NO_IMATCH
+                || index( lc $thing->[0], 'maemo'   ) != NO_IMATCH
+            ) {
+                # mobile? tablet?
+                $self->[UA_OS]     = shift @{ $thing };
+                $self->[UA_DEVICE] = shift @{ $thing };
+                if ( lc $self->[UA_DEVICE] eq 'tablet' ) {
+                    $self->[UA_TABLET] = 1;
+                }
+            }
+            else {
+                if ( $len_thing > 1 ) {
+                    $self->[UA_LANG] = pop @{ $thing };
+                }
+                else {
+                    $self->[UA_OS]   = pop @{ $thing };
+                }
+            }
         }
         else {
             $self->[UA_LANG]     = pop @{ $thing };
