@@ -177,7 +177,7 @@ Java/1.6.0_21
 
 parser      => 'generic_name_version',
 version_raw => '1.6.0_21',
-version     => '1.006000_021',
+version     => '1.006000021',
 name        => 'Java',
 generic     => 1,
 
