@@ -21,6 +21,13 @@ GetOptions(\my %opt, qw(
     dump
 ));
 
+# Work-around for the removal of "." from @INC in Perl 5.26
+if (! grep { $_ eq '.' } @INC) {
+    require FindBin;
+    no warnings 'once';
+    push @INC, $FindBin::Bin . '/..';
+}
+
 require_ok( File::Spec->catfile( t => 'db.pl' ) );
 
 my %wanted = $opt{ids} ? map { ( $_, $_ ) } @{ $opt{ids} } : ();
