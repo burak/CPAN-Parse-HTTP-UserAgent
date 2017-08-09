@@ -1,5 +1,8 @@
 Revision history for Perl extension Parse::HTTP::UserAgent
 
+0.40_02 Wed Aug  9 15:14:35 2017
+    => RT#112106 Nigel Gregoire / Slaven Resic
+
 0.40_01 Fri Dec  6 15:38:22 2013
     => Get rid of pre5.6-isms.
     => Refactor constant definitions.
