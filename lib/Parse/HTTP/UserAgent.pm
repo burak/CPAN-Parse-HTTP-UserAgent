@@ -310,6 +310,13 @@ sub _numify {
         push @removed, '-' x $rc if INSIDE_VERBOSE_TEST;
     }
 
+    # convert _ to .
+    # version.pm has changed its interpretation of versions with underlines
+    # cf. https://bugs.debian.org/825611
+    if ( my $rc = $v =~ tr/_/./ ) {
+        push @removed, '-' x $rc if INSIDE_VERBOSE_TEST;
+    }
+
     # Finally, be aggressive to prevent dying on bogus stuff.
     # It's interesting how people provide highly stupid version "numbers".
     # Version parameters are probably more stupid than the UA string itself.
