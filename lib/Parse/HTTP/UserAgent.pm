@@ -1,8 +1,7 @@
 package Parse::HTTP::UserAgent;
+
 use strict;
 use warnings;
-
-our $VERSION = '0.40_01';
 
 use base qw(
     Parse::HTTP::UserAgent::Base::IS

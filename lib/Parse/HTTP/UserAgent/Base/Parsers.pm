@@ -1,9 +1,8 @@
 package Parse::HTTP::UserAgent::Base::Parsers;
+
 use strict;
 use warnings;
 use Parse::HTTP::UserAgent::Constants qw(:all);
-
-our $VERSION = '0.40';
 
 sub _extract_dotnet {
     my($self, @args) = @_;

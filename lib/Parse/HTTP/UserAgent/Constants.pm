@@ -1,9 +1,8 @@
 package Parse::HTTP::UserAgent::Constants;
+
 use strict;
 use warnings;
 use base qw( Exporter );
-
-our $VERSION = '0.40';
 
 our(@EXPORT, @EXPORT_OK, %EXPORT_TAGS);
 
