@@ -1,9 +1,8 @@
 package Parse::HTTP::UserAgent::Base::Accessors;
+
 use strict;
 use warnings;
 use Parse::HTTP::UserAgent::Constants qw(:all);
-
-our $VERSION = '0.11';
 
 BEGIN {
     my @simple = qw(

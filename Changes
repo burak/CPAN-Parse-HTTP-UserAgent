@@ -1,6 +1,7 @@
 Revision history for Perl extension Parse::HTTP::UserAgent
 
 {{$NEXT}}
+    - Re-release after distro fixes.
 
 0.41 2017-11-20 BURAK
     - New tests for new browsers
