@@ -1,6 +1,7 @@
 Revision history for Perl extension Parse::HTTP::UserAgent
 
 {{$NEXT}}
+    - New tests for new browsers
 
 0.40_02 2017-08-09 BURAK
     - RT#112106 Nigel Gregoire / Slaven Resic
