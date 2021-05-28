@@ -3,7 +3,7 @@ package Parse::HTTP::UserAgent;
 use strict;
 use warnings;
 
-use base qw(
+use parent qw(
     Parse::HTTP::UserAgent::Base::IS
     Parse::HTTP::UserAgent::Base::Parsers
     Parse::HTTP::UserAgent::Base::Dumper
