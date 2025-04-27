@@ -945,6 +945,10 @@ __END__
 
 Parse::HTTP::UserAgent::Base::Parsers - Base class
 
+=head1 DEPRECATION NOTICE
+
+This module is B<DEPRECATED>. Please use L<HTTP::BrowserDetect> instead.
+
 =head1 DESCRIPTION
 
 Internal module.

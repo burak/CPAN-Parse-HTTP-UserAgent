@@ -190,6 +190,10 @@ __END__
 
 Parse::HTTP::UserAgent::Constants - Various constants
 
+=head1 DEPRECATION NOTICE
+
+This module is B<DEPRECATED>. Please use L<HTTP::BrowserDetect> instead.
+
 =head1 DESCRIPTION
 
 Internal module

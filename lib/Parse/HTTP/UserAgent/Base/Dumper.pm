@@ -105,6 +105,10 @@ __END__
 
 Parse::HTTP::UserAgent::Base::Dumper - Base class to dump parsed structure
 
+=head1 DEPRECATION NOTICE
+
+This module is B<DEPRECATED>. Please use L<HTTP::BrowserDetect> instead.
+
 =head1 DESCRIPTION
 
 The parsed structure can be dumped to a text table for debugging.

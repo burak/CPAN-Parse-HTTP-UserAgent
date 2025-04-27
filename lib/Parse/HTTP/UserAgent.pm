@@ -396,6 +396,10 @@ __END__
 
 Parse::HTTP::UserAgent - Parser for the User Agent string
 
+=head1 DEPRECATION NOTICE
+
+This module is B<DEPRECATED>. Please use L<HTTP::BrowserDetect> instead.
+
 =head1 SYNOPSIS
 
    use Parse::HTTP::UserAgent;
@@ -506,6 +510,8 @@ If you pass a wrong parameter to the dumper, it'll croak.
 =back
 
 =head1 SEE ALSO
+
+This module is B<DEPRECATED>. Please use L<HTTP::BrowserDetect> instead.
 
 =head2 Similar Functionality
 
