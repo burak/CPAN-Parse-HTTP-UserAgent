@@ -323,6 +323,11 @@ sub _numify {
         push @removed, $1 if INSIDE_VERBOSE_TEST;
     }
 
+    # Remove any subsequent "v"s from the string.
+    if ( $v =~ s{(?<!^)v}{.}xmsg ) {
+        push @removed, $1 if INSIDE_VERBOSE_TEST;
+    }
+
     if ( $v =~ s<([.]{2,})><.>xmsg ) {
         push @removed, $1 if INSIDE_VERBOSE_TEST;
     }

@@ -43,3 +43,17 @@ strength        => 'U',
 toolkit         => [ 'AppleWebKit', undef, 0 ],
 version         => '8.148',
 version_raw     => '8C148',
+
+[AGENT]
+
+Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Mobile/15A372kalturaNativeCordovaPlayer
+
+device          => 'iPhone',
+extras          => [ 'KHTML, like Gecko' ],
+mobile          => 1,
+name            => 'Safari',
+os              => 'CPU iPhone OS 11_0 like Mac OS X',
+parser          => 'safari',
+toolkit         => [ 'AppleWebKit', '604.1.38', '604.001038' ],
+version         => '15.000',
+version_raw     => '15A372kalturaNativeCordovaPlayer',
